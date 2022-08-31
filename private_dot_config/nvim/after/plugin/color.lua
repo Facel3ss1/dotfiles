@@ -13,6 +13,10 @@ hl("Normal", {
 })
 
 -- Change to comment color
-hl("LineNr", {
-    fg = "#5c6773",
+-- hl("LineNr", {
+--     link = "Comment",
+-- })
+
+hl("SignColumn", {
+    link = "Normal",
 })

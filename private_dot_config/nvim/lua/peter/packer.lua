@@ -28,6 +28,10 @@ return require("packer").startup(function(use)
 
     use "jeffkreeftmeijer/vim-numbertoggle"
     use "lukas-reineke/indent-blankline.nvim"
+    use {
+        "lewis6991/gitsigns.nvim",
+        config = function() require("gitsigns").setup() end
+    }
 
     use {"kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons"}
     use {"nvim-lualine/lualine.nvim", requires = "kyazdani42/nvim-web-devicons"}
