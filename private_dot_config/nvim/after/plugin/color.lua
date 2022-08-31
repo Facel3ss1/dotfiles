@@ -9,14 +9,9 @@ end
 -- Remove background
 hl("Normal", {
     bg = "none",
-    ctermbg = "none",
 })
 
 -- Change to comment color
 -- hl("LineNr", {
 --     link = "Comment",
 -- })
-
-hl("SignColumn", {
-    link = "Normal",
-})
