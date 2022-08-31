@@ -1,17 +1,22 @@
-vim.opt.mouse = "a"
+local o = vim.opt
+
+o.mouse = "a"
 
 -- Relative numbers will be handled by the vim-numbertoggle plugin
-vim.opt.number = true
-vim.opt.wrap = false
+o.number = true
+o.wrap = false
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+o.tabstop = 4
+o.softtabstop = 4
+o.shiftwidth = 4
+o.expandtab = true
 
-vim.opt.smartindent = true
+o.smartindent = true
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+o.hlsearch = false
+o.incsearch = true
 
-vim.opt.colorcolumn = "80"
+o.colorcolumn = "80"
+
+-- o.splitbelow = true
+o.splitright = true
