@@ -12,6 +12,9 @@ require("nvim-tree").setup {
             quit_on_open = true,
         },
     },
+    filters = {
+        custom = {"^\\.git$"},
+    },
     renderer = {
         group_empty = true,
         indent_markers = {
@@ -21,6 +24,7 @@ require("nvim-tree").setup {
             },
         },
         icons = {
+            git_placement = "after",
             show = {
                 folder_arrow = false,
             },
