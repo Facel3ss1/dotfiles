@@ -1,4 +1,6 @@
-local hl = require("peter.highlight").hl
+local highlight = require("peter.highlight")
+local hl = highlight.hl
+local fg_bg = highlight.fg_bg
 
 vim.opt.termguicolors = true
 vim.g.ayucolor = "mirage"
@@ -13,3 +15,18 @@ hl("Normal", {
 -- hl("LineNr", {
 --     link = "Comment",
 -- })
+
+-- Fix diff colors
+hl("DiffDelete", fg_bg("WarningMsg", "DiffAdd"))
+
+hl("diffAdded", {
+    link = "DiffAdd"
+})
+
+hl("diffChanged", {
+    link = "DiffChange"
+})
+
+hl("diffRemoved", {
+    link = "DiffDelete"
+})
