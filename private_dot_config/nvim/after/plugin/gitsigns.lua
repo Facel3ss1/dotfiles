@@ -24,7 +24,9 @@ require("gitsigns").setup {
         nnoremap("<leader>hr", ":Gitsigns reset_hunk<CR>")
         vnoremap("<leader>hr", ":Gitsigns reset_hunk<CR>")
 
+        nnoremap("<leader>hS", gs.stage_buffer)
         nnoremap("<leader>hu", gs.undo_stage_hunk)
+        nnoremap("<leader>hR", gs.reset_buffer)
         nnoremap("<leader>hp", gs.preview_hunk)
 
         -- Fix gitsigns background
