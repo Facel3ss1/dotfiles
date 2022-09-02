@@ -8,7 +8,7 @@ end
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
-    use "ayu-theme/ayu-vim"
+    use "Shatur/neovim-ayu"
 
     -- use "tpope/vim-sensible"
     -- use "tpope/vim-surround"

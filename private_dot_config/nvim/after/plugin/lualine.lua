@@ -2,6 +2,7 @@ vim.opt.showmode = false
 
 require("lualine").setup {
     options = {
+        theme = "ayu",
         section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },
     },
