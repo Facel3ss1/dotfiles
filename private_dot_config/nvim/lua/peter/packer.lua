@@ -26,7 +26,6 @@ return require("packer").startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
-    use "jeffkreeftmeijer/vim-numbertoggle"
     use "lukas-reineke/indent-blankline.nvim"
 
     use "lewis6991/gitsigns.nvim"

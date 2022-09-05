@@ -18,3 +18,26 @@ autocmd("BufWritePost", {
         end
     end
 })
+
+-- https://jeffkreeftmeijer.com/vim-number/#automatic-toggling-between-line-number-modes
+local numbertoggle_group = augroup("NumberToggle", { clear = true })
+
+autocmd({"BufEnter", "FocusGained", "InsertLeave", "WinEnter"}, {
+    group = numbertoggle_group,
+    pattern = "*",
+    callback = function()
+        if vim.o.number and vim.fn.mode() ~= "i" then
+            vim.opt.relativenumber = true
+        end
+    end
+})
+
+autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave"}, {
+    group = numbertoggle_group,
+    pattern = "*",
+    callback = function()
+        if vim.o.number then
+            vim.opt.relativenumber = false
+        end
+    end
+})
