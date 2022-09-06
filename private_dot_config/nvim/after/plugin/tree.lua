@@ -1,10 +1,15 @@
+local ok, nvim_tree = pcall(require, "nvim-tree")
+if not ok then
+    return
+end
+
 local nt_api = require("nvim-tree.api")
 local nnoremap = require("peter.keymap").nnoremap
 
 -- nnoremap("<leader>nt", nt_api.tree.focus)
 nnoremap("<leader>nt", function() nt_api.tree.toggle(false, false) end)
 
-require("nvim-tree").setup {
+nvim_tree.setup {
     hijack_cursor = true,
     sort_by = "extension",
     actions = {

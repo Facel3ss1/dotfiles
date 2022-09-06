@@ -1,6 +1,12 @@
+local ok, lualine = pcall(require, "lualine")
+if not ok then
+    return
+end
+
 vim.opt.showmode = false
 
-require("lualine").setup {
+-- TODO: Add global statusline and winbar in nvim 0.8
+lualine.setup {
     options = {
         theme = "ayu",
         section_separators = { left = "", right = "" },

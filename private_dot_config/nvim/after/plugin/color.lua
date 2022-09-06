@@ -1,4 +1,9 @@
-require("ayu").setup {
+local ok, ayu = pcall(require, "ayu")
+if not ok then
+    return
+end
+
+ayu.setup {
     mirage = true,
     overrides = {
         Normal = { bg = "none" },
@@ -6,4 +11,4 @@ require("ayu").setup {
     },
 }
 
-require("ayu").colorscheme()
+ayu.colorscheme()
