@@ -1,6 +1,3 @@
-[python]
-python_binary = ["python3.10", "python", "python3", "python2"]
-
 [git_branch]
 symbol = " "
 
