@@ -6,8 +6,10 @@ end
 local nt_api = require("nvim-tree.api")
 local nnoremap = require("peter.keymap").nnoremap
 
+-- TODO: Refresh nvim-tree on neogit status update
+
 -- nnoremap("<leader>nt", nt_api.tree.focus)
-nnoremap("<leader>nt", function() nt_api.tree.toggle(false, false) end)
+nnoremap("<leader>nt", function() nt_api.tree.toggle(false, false) end, {desc = "Toggle file tree"})
 
 nvim_tree.setup {
     hijack_cursor = true,

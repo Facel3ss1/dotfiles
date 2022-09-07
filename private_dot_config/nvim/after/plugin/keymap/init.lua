@@ -11,10 +11,10 @@ nnoremap("k", "gk")
 nnoremap("£", "#")
 
 -- Alt+J and Alt+K for moving lines up and down
-vnoremap("<M-j>", ":m '>+1<CR>gv=gv")
-vnoremap("<M-k>", ":m '<-2<CR>gv=gv")
-nnoremap("<M-j>", ":.m .+1<CR>==", {silent = true})
-nnoremap("<M-k>", ":.m .-2<CR>==", {silent = true})
+vnoremap("<M-j>", ":m '>+1<CR>gv=gv", {desc = "Move line up"})
+vnoremap("<M-k>", ":m '<-2<CR>gv=gv", {desc = "Move line down"})
+nnoremap("<M-j>", ":.m .+1<CR>==", {desc = "Move line up", silent = true})
+nnoremap("<M-k>", ":.m .-2<CR>==", {desc = "Move line down", silent = true})
 
 -- Recenter screen after certain movements
 nnoremap("n", "nzz")

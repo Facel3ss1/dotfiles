@@ -16,22 +16,22 @@ gitsigns.setup {
             if vim.wo.diff then return "]c" end
             vim.schedule(function() gs.next_hunk() end)
             return "<Ignore>"
-        end, {expr = true})
+        end, {expr = true, desc = "Next change"})
 
         nnoremap("[c", function()
             if vim.wo.diff then return "[c" end
             vim.schedule(function() gs.prev_hunk() end)
             return "<Ignore>"
-        end, {expr = true})
+        end, {expr = true, desc = "Previous change"})
 
-        nnoremap("<leader>hs", ":Gitsigns stage_hunk<CR>")
-        vnoremap("<leader>hs", ":Gitsigns stage_hunk<CR>")
-        nnoremap("<leader>hr", ":Gitsigns reset_hunk<CR>")
-        vnoremap("<leader>hr", ":Gitsigns reset_hunk<CR>")
+        nnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change"})
+        vnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change"})
+        nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change"})
+        vnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change"})
 
-        nnoremap("<leader>hS", gs.stage_buffer)
-        nnoremap("<leader>hu", gs.undo_stage_hunk)
-        nnoremap("<leader>hR", gs.reset_buffer)
-        nnoremap("<leader>hp", gs.preview_hunk)
+        nnoremap("<leader>gA", gs.stage_buffer, {desc = "Stage buffer"})
+        nnoremap("<leader>gR", gs.reset_buffer, {desc = "Reset buffer"})
+        nnoremap("<leader>gu", gs.undo_stage_hunk, {desc = "Undo stage change"})
+        nnoremap("<leader>gp", gs.preview_hunk, {desc = "Preview change"})
     end
 }

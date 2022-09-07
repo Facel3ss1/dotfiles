@@ -1,6 +1,7 @@
 local M = {}
 
 M.bind = function(op, outer_opts)
+    -- noremap by default, other default options can be specified in outer_opts
     outer_opts = vim.tbl_extend("force",
         {noremap = true},
         outer_opts or {}
