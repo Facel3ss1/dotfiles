@@ -25,6 +25,7 @@ return require("packer").startup {
         }
 
         use "lukas-reineke/indent-blankline.nvim"
+        use "lukas-reineke/virt-column.nvim"
 
         use "lewis6991/gitsigns.nvim"
         use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}

@@ -12,3 +12,9 @@ ayu.setup {
 }
 
 ayu.colorscheme()
+
+-- Call after setting up colorscheme so colorcolumn highlight is cleared
+local has_vc, virtcolumn = pcall(require, "virt-column")
+if has_vc then
+    virtcolumn.setup()
+end
