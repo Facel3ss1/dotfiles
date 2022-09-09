@@ -28,6 +28,7 @@ cmp.setup {
         { name = "path" },
         { name = "luasnip" },
     }, {
+        { name = "emoji" },
         { name = "buffer", keyword_length = 5 },
     }),
     snippet = {
@@ -43,6 +44,8 @@ cmp.setup {
                 nvim_lua = "[api]",
                 path = "[path]",
                 luasnip = "[snip]",
+                cmdline = "[cmd]",
+                cmdline_history = "[hist]",
             },
         },
     },
@@ -50,9 +53,11 @@ cmp.setup {
 
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
+    sources = cmp.config.sources ({
         { name = "buffer" },
-    }
+    }, {
+        { name = "cmdline_history" },
+    })
 })
 
 cmp.setup.cmdline(":", {
@@ -60,6 +65,10 @@ cmp.setup.cmdline(":", {
     sources = cmp.config.sources({
         { name = "path" },
     }, {
-        { name = "cmdline", max_item_count = 20, keyword_length = 4 },
+        { name = "cmdline" },
+    }, {
+        { name = "buffer" },
+    }, {
+        { name = "cmdline_history" },
     })
 })
