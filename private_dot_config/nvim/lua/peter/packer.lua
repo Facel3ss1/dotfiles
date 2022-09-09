@@ -10,9 +10,6 @@ return require("packer").startup(function(use)
 
     use "Shatur/neovim-ayu"
 
-    -- use "tpope/vim-sensible"
-    -- use "tpope/vim-surround"
-    -- use "tpope/vim-commentary"
     -- use "tpope/vim-sleuth"
 
     use "numToStr/Comment.nvim"
@@ -41,6 +38,17 @@ return require("packer").startup(function(use)
         requires = "nvim-lua/plenary.nvim",
     }
     use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-nvim-lua"
+
+    use {"L3MON4D3/LuaSnip", tag = "v1.*"}
+    use "saadparwaiz1/cmp_luasnip"
+
+    use "onsails/lspkind.nvim"
 
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
