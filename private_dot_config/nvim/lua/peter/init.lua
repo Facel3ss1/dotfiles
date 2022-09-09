@@ -15,7 +15,8 @@ local chezmoi_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/"
 
 augroup("ChezmoiApplyOnSave", { clear = true }, {
     {"BufWritePost", pattern = chezmoi_dir .. "*", callback = function(opts)
-        -- FIXME: Change to vim.fs.dirname in nvim 0.8
+        -- FIMXE: Use filetype detection instead
+        -- FIXME: Discarding in Neogit?
         -- Ignore paths in the .git folder
         local path = opts.match
         local git_paths = vim.fn.glob(chezmoi_dir .. ".git/*", false, true)

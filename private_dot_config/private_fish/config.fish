@@ -10,6 +10,8 @@ set -g fish_cursor_replace_one underscore
 # fish has a shim for csh setenv commands
 # eval (dircolors -c ~/.dircolors)
 
+# FIXME: Check for exa and nvim with type -q
+
 set -gx EDITOR 'nvim'
 set -gx VISUAL 'nvim'
 
@@ -23,6 +25,8 @@ fish_add_path -g ~/.cargo/bin
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH # ghcup-env
 
 if status is-interactive
+    # TODO: Move to abbreviations file
+    # TODO: Add git abbreviations
     abbr --add --global vim 'nvim'
     abbr --add --global vi 'nvim'
 

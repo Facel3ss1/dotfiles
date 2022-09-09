@@ -6,9 +6,9 @@ end
 vim.opt.showmode = false
 
 -- TODO: Add global statusline and winbar in nvim 0.8
+-- TODO: Add on_click telescope prompts
 lualine.setup {
     options = {
-        theme = "ayu",
         section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },
     },
