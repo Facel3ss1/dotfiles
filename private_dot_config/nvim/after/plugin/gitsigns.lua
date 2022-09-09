@@ -25,9 +25,9 @@ gitsigns.setup {
         end, {expr = true, desc = "Previous change"})
 
         nnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change"})
-        vnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change"})
+        vnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change (visual)"})
         nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change"})
-        vnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change"})
+        vnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change (visual)"})
 
         nnoremap("<leader>gA", gs.stage_buffer, {desc = "Stage buffer"})
         nnoremap("<leader>gR", gs.reset_buffer, {desc = "Reset buffer"})
