@@ -5,6 +5,7 @@ vim.g.mapleader = " "
 require("peter.globals")
 require("peter.set")
 require("peter.packer")
+require("peter.telescope")
 
 local augroup = require("peter.au").augroup
 
