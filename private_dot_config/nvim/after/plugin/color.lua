@@ -4,7 +4,7 @@ if not ok then
 end
 
 local colors = require("ayu.colors")
-colors.generate()
+colors.generate(true)
 
 ayu.setup {
     mirage = true,
@@ -16,21 +16,18 @@ ayu.setup {
         NotifyTRACETitle = { fg = colors.entity },
         NotifyINFOTitle = { fg = colors.string },
         NotifyWARNTitle = { fg = colors.warning },
-        NotifyERRORTitle = { fg = colors.warning },
         NotifyERRORTitle = { fg = colors.error },
 
         NotifyDEBUGIcon = { fg = colors.comment },
         NotifyTRACEIcon = { fg = colors.entity },
         NotifyINFOIcon = { fg = colors.string },
         NotifyWARNIcon = { fg = colors.warning },
-        NotifyERRORIcon = { fg = colors.warning },
         NotifyERRORIcon = { fg = colors.error },
 
         NotifyDEBUGBorder = { fg = colors.comment },
         NotifyTRACEBorder = { fg = colors.entity },
         NotifyINFOBorder = { fg = colors.string },
         NotifyWARNBorder = { fg = colors.warning },
-        NotifyERRORBorder = { fg = colors.warning },
         NotifyERRORBorder = { fg = colors.error },
     },
 }
