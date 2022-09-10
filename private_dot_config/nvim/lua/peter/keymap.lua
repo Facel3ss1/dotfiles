@@ -1,6 +1,12 @@
 local M = {}
 
-M.bind = function(op, outer_opts)
+---Returns a function which lets you define keymaps for the specified mode(s)
+---with the specified options.
+---@param op string|table The mode(s) the keymap will be defined for.
+---@param outer_opts? table The options that will be applied for the keymaps. By default noremap = true
+---@return fun(lhs: string, rhs: string|function, opts?: table|string) # The mapping function
+---@nodiscard
+function M.bind(op, outer_opts)
     -- noremap by default, other default options can be specified in outer_opts
     outer_opts = vim.tbl_extend("force",
         {noremap = true},
@@ -16,11 +22,8 @@ M.bind = function(op, outer_opts)
     end
 end
 
-M.nmap = M.bind("n", {noremap = false})
-M.imap = M.bind("i", {noremap = false})
 M.nnoremap = M.bind("n")
 M.vnoremap = M.bind("v")
-M.xnoremap = M.bind("x")
-M.inoremap = M.bind("i")
+M.snoremap = M.bind("s")
 
 return M

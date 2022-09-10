@@ -16,9 +16,9 @@ lualine.setup {
         lualine_a = {"mode"},
         lualine_b = {
             {"branch", icon = ""},
-            "diagnostics",
         },
         lualine_c = {
+            "diagnostics",
             {"filename", path = 1},
         },
         lualine_x = {
@@ -36,5 +36,5 @@ lualine.setup {
         lualine_y = {"progress"},
         lualine_z = {"location"},
     },
-    extensions = {"man", "nvim-tree"},
+    extensions = {"man", "quickfix", "nvim-tree"},
 }

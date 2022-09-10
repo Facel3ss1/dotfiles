@@ -4,6 +4,9 @@ if not ok then
 end
 
 whichkey.register({
+    c = {
+        name = "code"
+    },
     f = {
         name = "find",
     },

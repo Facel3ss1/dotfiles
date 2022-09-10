@@ -17,19 +17,20 @@ cmp.setup {
     mapping = {
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
-        -- ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        -- ["<C-u>"] = cmp.mapping.scroll_docs(4),
+        ["<C-j>"] = cmp.mapping.scroll_docs(4),
+        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
         ["<Esc>"] = cmp.mapping.close(),
+        ["<C-c>"] = cmp.mapping.abort(),
         ["<Tab>"] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
     },
     sources = cmp.config.sources({
-        { name = "nvim_lua" },
+        { name = "nvim_lsp" },
         { name = "path" },
         { name = "luasnip" },
     }, {
         { name = "emoji" },
-        { name = "buffer", keyword_length = 5 },
+        { name = "buffer" },
     }),
     snippet = {
         expand = function(args)
@@ -41,7 +42,7 @@ cmp.setup {
             mode = "symbol_text",
             menu = {
                 buffer = "[buf]",
-                nvim_lua = "[api]",
+                nvim_lsp = "[lsp]",
                 path = "[path]",
                 luasnip = "[snip]",
                 cmdline = "[cmd]",

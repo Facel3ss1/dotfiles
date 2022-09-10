@@ -36,6 +36,14 @@ return require("packer").startup {
         use "rcarriga/nvim-notify"
 
         use {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            "neovim/nvim-lspconfig",
+        }
+
+        use "folke/lua-dev.nvim"
+
+        use {
             "nvim-telescope/telescope.nvim",
             branch = "0.1.x",
             requires = "nvim-lua/plenary.nvim",
@@ -48,7 +56,7 @@ return require("packer").startup {
         use "hrsh7th/cmp-buffer"
         use "hrsh7th/cmp-emoji"
         use "hrsh7th/cmp-path"
-        use "hrsh7th/cmp-nvim-lua"
+        use "hrsh7th/cmp-nvim-lsp"
 
         use {"L3MON4D3/LuaSnip", tag = "v1.*"}
         use "saadparwaiz1/cmp_luasnip"

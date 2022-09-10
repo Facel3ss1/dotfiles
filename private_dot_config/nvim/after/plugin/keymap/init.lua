@@ -1,7 +1,7 @@
 local keymap = require("peter.keymap")
 local nnoremap = keymap.nnoremap
 local vnoremap = keymap.vnoremap
-local inoremap = keymap.inoremap
+local snoremap = keymap.snoremap
 
 -- Make j and k take line wrapping into account
 nnoremap("j", "gj")
@@ -16,8 +16,15 @@ nnoremap("<M-k>", ":.m .-2<CR>==", {desc = "Move line down", silent = true})
 vnoremap("<M-j>", ":m '>+1<CR>gv=gv", {desc = "Move line up (visual)", silent = true})
 vnoremap("<M-k>", ":m '<-2<CR>gv=gv", {desc = "Move line down (visual)", silent = true})
 
+-- Backspace in select mode changes instead of deletes
+snoremap("<BS>", "<C-g>c")
+
 -- Recenter screen after certain movements
 nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
+
+-- TODO: Make diagnostic windows have a border
+nnoremap("]d", vim.diagnostic.goto_next, {desc = "Next diagnostic"})
+nnoremap("[d", vim.diagnostic.goto_prev, {desc = "Previous diagnostic"})

@@ -31,6 +31,7 @@ opt.breakindent = true -- ...but preserve indenting if we do wrap
 opt.linebreak = true -- ...and break the line on certain characters if we wrap
 
 opt.scrolloff = 10 -- There will be 10 lines above and below my cursor when scrolling
+opt.sidescrolloff = 5 -- 5 columns to the side of my cursor when horizontally scrolling
 
 opt.tabstop = 4 -- <Tab> characters will be displayed as 4 characters wide
 opt.shiftwidth = 4 -- >, <, and = will work in increments of 4 characters
@@ -43,8 +44,8 @@ opt.smartindent = true -- Smartly add indentation when starting new line
 opt.hlsearch = false -- Turn off highlighting of search results
 
 opt.colorcolumn = "80" -- Put colored column at column 80
-
 opt.cursorline = true -- Highlight current line cursor is on
+opt.signcolumn = "yes" -- Always show the sign column
 
 -- Only have it on in the current buffer
 local function set_cursorline(value)
