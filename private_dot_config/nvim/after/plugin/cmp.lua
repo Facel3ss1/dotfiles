@@ -29,7 +29,6 @@ cmp.setup {
         { name = "path" },
         { name = "luasnip" },
     }, {
-        { name = "emoji" },
         { name = "buffer" },
     }),
     snippet = {
