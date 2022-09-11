@@ -8,4 +8,9 @@ function M.grep_prompt()
     end)
 end
 
+-- Opens the file browser in the containing folder of the current buffer
+function M.file_browser_in_containing_folder()
+    require("telescope").extensions.file_browser.file_browser({path = "%:p:h"})
+end
+
 return M

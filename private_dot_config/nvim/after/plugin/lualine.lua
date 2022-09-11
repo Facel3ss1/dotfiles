@@ -36,5 +36,5 @@ lualine.setup {
         lualine_y = {"progress"},
         lualine_z = {"location"},
     },
-    extensions = {"man", "quickfix", "nvim-tree"},
+    extensions = {"man", "quickfix"},
 }
