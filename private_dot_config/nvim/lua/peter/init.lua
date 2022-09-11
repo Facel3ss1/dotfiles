@@ -6,7 +6,7 @@ require("peter.globals")
 require("peter.set")
 require("peter.packer")
 require("peter.lsp")
-require("peter.telescope")
+require("peter.telescope.setup")
 
 local augroup = require("peter.au").augroup
 
