@@ -6,6 +6,13 @@ end
 dressing.setup {
     input = {
         winblend = 0,
+        get_config = function(opts)
+            if opts.kind == "grepprompt" then
+                return {
+                    relative = "editor",
+                }
+            end
+        end,
     },
     select = {
         get_config = function(opts)
