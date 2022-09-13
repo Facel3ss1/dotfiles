@@ -5,17 +5,23 @@ end
 
 local keymap = require("peter.keymap")
 
+-- Add a rounded border to docs hovers
+vim.lsp.handlers["textDocument/hover"] =
+    vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+
 local function custom_attach()
-    -- TODO: Use telesope pickers (cursor theme)
     -- TODO: I would like some lightbulbs
 
     local nnoremap = keymap.bind("n", {buffer = 0})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
-    nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
-    nnoremap("gT", vim.lsp.buf.type_definition, {desc = "Go to type definition"})
-    nnoremap("gI", vim.lsp.buf.implementation, {desc = "Go to implementation"})
-    nnoremap("gr", vim.lsp.buf.references, {desc = "Go to references"})
+    nnoremap("gd", require("telescope.builtin").lsp_definitions, {desc = "Go to definition"})
+    nnoremap("gT", require("telescope.builtin").lsp_type_definitions, {desc = "Go to type definition"})
+    nnoremap("gI", require("telescope.builtin").lsp_implementations, {desc = "Go to implementation"})
+    nnoremap("gr", require("telescope.builtin").lsp_references, {desc = "Go to references"})
 
     nnoremap("<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
@@ -30,6 +36,7 @@ require("mason-lspconfig").setup_handlers {
     function(server_name)
         require("lspconfig")[server_name].setup {
             on_attach = custom_attach,
+            capabilities = capabilities,
         }
     end,
     ["sumneko_lua"] = function()
@@ -46,6 +53,7 @@ require("mason-lspconfig").setup_handlers {
 
         lspconfig.sumneko_lua.setup {
             on_attach = custom_attach,
+            capabilities = capabilities,
             settings = {
                 Lua = {
                     completion = {

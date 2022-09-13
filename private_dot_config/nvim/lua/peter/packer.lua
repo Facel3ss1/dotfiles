@@ -33,6 +33,7 @@ return require("packer").startup {
         use {"nvim-lualine/lualine.nvim", requires = "kyazdani42/nvim-web-devicons"}
         use "folke/which-key.nvim"
         use "rcarriga/nvim-notify"
+        use "stevearc/dressing.nvim"
 
         use {
             "williamboman/mason.nvim",

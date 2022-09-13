@@ -24,7 +24,3 @@ nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
-
--- TODO: Make diagnostic windows have a border
-nnoremap("]d", vim.diagnostic.goto_next, {desc = "Next diagnostic"})
-nnoremap("[d", vim.diagnostic.goto_prev, {desc = "Previous diagnostic"})

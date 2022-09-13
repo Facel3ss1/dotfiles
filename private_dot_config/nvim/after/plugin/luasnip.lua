@@ -3,8 +3,12 @@ if not ok then
     return
 end
 
+-- TODO: prequire snippet
+
 luasnip.config.set_config {
     history = true,
+    -- Prevents us from jumping to a faraway snippet accidently
+    region_check_events = "InsertEnter",
 }
 
 local keymap = require("peter.keymap")

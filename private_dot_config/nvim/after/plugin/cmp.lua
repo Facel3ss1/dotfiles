@@ -3,6 +3,8 @@ if not ok then
     return
 end
 
+local luasnip = require("luasnip")
+
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 local has_autopairs = pcall(require, "nvim-autopairs")
@@ -21,7 +23,18 @@ cmp.setup {
         ["<C-k>"] = cmp.mapping.scroll_docs(-4),
         ["<Esc>"] = cmp.mapping.close(),
         ["<C-c>"] = cmp.mapping.abort(),
-        ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+        ["<Tab>"] = function(fallback)
+            -- If we are in a snippet, require completions to be selected
+            if luasnip.jumpable(1) and luasnip.in_snippet() then
+                if cmp.get_selected_entry() then
+                    cmp.confirm({select = false})
+                else
+                    luasnip.jump(1)
+                end
+            elseif not cmp.confirm({select = true}) then
+                fallback()
+            end
+        end,
         ["<C-Space>"] = cmp.mapping.complete(),
     },
     sources = cmp.config.sources({
@@ -60,15 +73,16 @@ cmp.setup.cmdline("/", {
     })
 })
 
-cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = "path" },
-    }, {
-        { name = "cmdline" },
-    }, {
-        { name = "buffer" },
-    }, {
-        { name = "cmdline_history" },
-    })
-})
+-- FIXME: This hangs when I type !, only when cmdline is enabled
+-- cmp.setup.cmdline(":", {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = cmp.config.sources({
+--         { name = "path" },
+--     }, {
+--         { name = "cmdline" },
+--     }, {
+--         { name = "buffer" },
+--     }, {
+--         { name = "cmdline_history" },
+--     })
+-- })

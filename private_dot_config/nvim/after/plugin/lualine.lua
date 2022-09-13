@@ -18,7 +18,15 @@ lualine.setup {
             {"branch", icon = ""},
         },
         lualine_c = {
-            "diagnostics",
+            {
+                "diagnostics",
+                symbols = {
+                    error = " ",
+                    warn = " ",
+                    info = " ",
+                    hint = " "
+                },
+            },
             {"filename", path = 1},
         },
         lualine_x = {
