@@ -1,13 +1,8 @@
-local ok, gitsigns = pcall(require, "gitsigns")
-if not ok then
-    return
-end
-
 local keymap = require("peter.keymap")
 
 -- TODO: hunk text objects
 
-gitsigns.setup {
+require("gitsigns").setup {
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 

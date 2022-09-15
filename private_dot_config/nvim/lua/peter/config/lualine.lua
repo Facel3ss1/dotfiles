@@ -1,13 +1,9 @@
-local ok, lualine = pcall(require, "lualine")
-if not ok then
-    return
-end
-
 vim.opt.showmode = false
 
 -- TODO: Add global statusline and winbar in nvim 0.8
 -- TODO: Add on_click telescope prompts
-lualine.setup {
+
+require("lualine").setup {
     options = {
         section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },

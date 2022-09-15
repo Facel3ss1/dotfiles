@@ -25,6 +25,7 @@ local function plugins(use)
     use {
         "kylechui/nvim-surround",
         tag = "*",
+        event = "BufReadPre",
         config = function() require("nvim-surround").setup {} end
     }
     use {
@@ -32,14 +33,27 @@ local function plugins(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
-    use "lukas-reineke/indent-blankline.nvim"
+    use {"lukas-reineke/indent-blankline.nvim", event = "BufReadPre"}
     use "lukas-reineke/virt-column.nvim"
 
-    use "lewis6991/gitsigns.nvim"
+    use {
+        "lewis6991/gitsigns.nvim",
+        event = "BufReadPre",
+        config = function() require("peter.config.gitsigns") end,
+    }
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
 
-    use {"nvim-lualine/lualine.nvim", requires = "kyazdani42/nvim-web-devicons"}
-    use "folke/which-key.nvim"
+    use {
+        "nvim-lualine/lualine.nvim",
+        event = "VimEnter",
+        config = function() require("peter.config.lualine") end,
+        requires = "kyazdani42/nvim-web-devicons",
+    }
+    use {
+        "folke/which-key.nvim",
+        event = "VimEnter",
+        config = function() require("peter.config.which-key") end,
+    }
     use "rcarriga/nvim-notify"
     use "stevearc/dressing.nvim"
     use "j-hui/fidget.nvim"
