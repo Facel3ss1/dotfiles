@@ -64,6 +64,7 @@ return require("packer").startup {
         use "onsails/lspkind.nvim"
 
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use "nvim-treesitter/nvim-treesitter-context"
 
         if packer_bootstrap then
             require("packer").sync()

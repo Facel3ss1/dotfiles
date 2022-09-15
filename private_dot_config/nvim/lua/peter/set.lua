@@ -7,6 +7,13 @@ opt.mouse = "a" -- Let me use the mouse for scrolling etc.
 opt.relativenumber = true -- Show relative line numbers...
 opt.number = true -- ...and show the current line number
 
+-- Fallibly enable() nvim-treesitter-context: it may not be loaded
+-- This forces its line numbers to redraw
+local function enable_ts_context()
+    local _, ts_context = pcall(require, "treesitter-context")
+    pcall(ts_context.enable)
+end
+
 -- Disables relativenumber for insert mode and inactive buffers
 -- https://jeffkreeftmeijer.com/vim-number/#automatic-toggling-between-line-number-modes
 augroup("NumberToggle", { clear = true }, {
@@ -15,6 +22,7 @@ augroup("NumberToggle", { clear = true }, {
     callback = function()
         if vim.o.number and vim.fn.mode() ~= "i" then
             opt.relativenumber = true
+            enable_ts_context()
         end
     end},
     {{"BufLeave", "FocusLost", "InsertEnter", "WinLeave"},
@@ -22,6 +30,7 @@ augroup("NumberToggle", { clear = true }, {
     callback = function()
         if vim.o.number then
             opt.relativenumber = false
+            enable_ts_context()
         end
     end},
 })
