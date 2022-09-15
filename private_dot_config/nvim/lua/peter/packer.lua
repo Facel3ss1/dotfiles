@@ -34,6 +34,7 @@ return require("packer").startup {
         use "folke/which-key.nvim"
         use "rcarriga/nvim-notify"
         use "stevearc/dressing.nvim"
+        use "j-hui/fidget.nvim"
 
         use {
             "williamboman/mason.nvim",
