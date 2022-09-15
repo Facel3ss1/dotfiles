@@ -3,6 +3,7 @@ if not ok then
     return
 end
 
+-- TODO: Use gbc for block comments so that we can eventually use gCC for help
 comment.setup {
     toggler = {
         line = "gcc",

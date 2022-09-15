@@ -24,6 +24,8 @@ end
 
 M.nnoremap = M.bind("n")
 M.vnoremap = M.bind("v")
+M.inoremap = M.bind("i")
+M.xnoremap = M.bind("x")
 M.snoremap = M.bind("s")
 
 return M
