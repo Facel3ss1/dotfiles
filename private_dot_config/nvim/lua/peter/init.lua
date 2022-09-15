@@ -3,8 +3,8 @@
 vim.g.mapleader = " "
 
 require("peter.globals")
-require("peter.set")
-require("peter.packer")
+require("peter.options")
+require("peter.plugins")
 require("peter.lsp")
 require("peter.telescope.setup")
 
