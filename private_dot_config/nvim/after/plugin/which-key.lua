@@ -15,8 +15,4 @@ whichkey.register({
     },
 }, {prefix = "<leader>"})
 
-whichkey.setup {
-    window = {
-        winblend = 5,
-    },
-}
+whichkey.setup {}

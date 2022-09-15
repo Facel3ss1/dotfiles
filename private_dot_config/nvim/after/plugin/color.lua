@@ -9,8 +9,6 @@ colors.generate(true)
 ayu.setup {
     mirage = true,
     overrides = {
-        Normal = { bg = "none" },
-        SignColumn = { bg = "none" },
         -- nvim-notify
         NotifyDEBUGTitle = { fg = colors.comment },
         NotifyTRACETitle = { fg = colors.entity },
@@ -35,17 +33,16 @@ ayu.setup {
 ayu.colorscheme()
 
 -- Configure colors after setting up color scheme
-local has_vc = pcall(require, "virt-column")
+local has_vc, virt_column = pcall(require, "virt-column")
 if has_vc then
-    require("virt-column").setup()
+    virt_column.setup()
 end
 
-local has_notify = pcall(require, "notify")
+local has_notify, notify = pcall(require, "notify")
 if has_notify then
-    require("notify").setup {
-        background_colour = "NormalFloat",
-        stages = "static",
+    notify.setup {
+        stages = "fade",
         top_down = false,
     }
-    vim.notify = require("notify")
+    vim.notify = notify
 end
