@@ -11,7 +11,7 @@ nnoremap("<leader>gc", function() neogit.open {"commit"} end, {desc = "Commit"})
 neogit.setup {
     disable_builtin_notifications = true,
     signs = {
-        section = {"", ""},
-        item = {"", ""},
+        section = {"", ""},
+        item = {"", ""},
     },
 }

@@ -73,5 +73,11 @@ return require("packer").startup {
     end,
     config = {
         preview_updates = true,
+        display = {
+            working_sym = "",
+            error_sym = "",
+            done_sym = "",
+            moved_sym = "",
+        }
     }
 }

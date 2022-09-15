@@ -6,6 +6,7 @@ end
 fidget.setup {
     text = {
         spinner = "dots",
+        done = "",
     },
     timer = {
         spinner_rate = 75,
