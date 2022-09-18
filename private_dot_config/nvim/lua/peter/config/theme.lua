@@ -1,8 +1,4 @@
-local ok, ayu = pcall(require, "ayu")
-if not ok then
-    return
-end
-
+local ayu = require("ayu")
 local colors = require("ayu.colors")
 colors.generate(true)
 
@@ -27,17 +23,16 @@ ayu.setup {
         NotifyINFOBorder = { fg = colors.string },
         NotifyWARNBorder = { fg = colors.warning },
         NotifyERRORBorder = { fg = colors.error },
+
+        -- fidget
+        FidgetTitle = { fg = colors.func },
+        FidgetTask = { fg = colors.comment },
     },
 }
 
 ayu.colorscheme()
 
--- Configure colors after setting up color scheme
-local has_vc, virt_column = pcall(require, "virt-column")
-if has_vc then
-    virt_column.setup()
-end
-
+-- Configure notify after setting up color scheme
 local has_notify, notify = pcall(require, "notify")
 if has_notify then
     notify.setup {
@@ -51,5 +46,6 @@ if has_notify then
             WARN = "",
         },
     }
+
     vim.notify = notify
 end

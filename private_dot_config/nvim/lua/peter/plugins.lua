@@ -10,31 +10,43 @@ local config = {
         error_sym = "",
         done_sym = "",
         moved_sym = "",
-    }
+    },
 }
 
 local function plugins(use)
     -- Packer can manage itself as an optional plugin
     use {"wbthomason/packer.nvim", opt = true}
 
-    use "Shatur/neovim-ayu"
+    use {
+        "Shatur/neovim-ayu",
+        config = function() require("peter.config.theme") end,
+    }
 
     -- use "tpope/vim-sleuth"
 
-    use "numToStr/Comment.nvim"
+    use {
+        "numToStr/Comment.nvim",
+        keys = {"gc", "gb"},
+        config = function() require("Comment").setup {} end,
+    }
     use {
         "kylechui/nvim-surround",
         tag = "*",
         event = "BufReadPre",
-        config = function() require("nvim-surround").setup {} end
+        -- TODO: Surround with braces on new line?
+        config = function() require("nvim-surround").setup {} end,
     }
     use {
         "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+        config = function() require("nvim-autopairs").setup {} end,
     }
 
     use {"lukas-reineke/indent-blankline.nvim", event = "BufReadPre"}
-    use "lukas-reineke/virt-column.nvim"
+    use {
+        "lukas-reineke/virt-column.nvim",
+        event = "BufReadPre",
+        config = function() require("virt-column").setup() end,
+    }
 
     use {
         "lewis6991/gitsigns.nvim",
@@ -55,7 +67,11 @@ local function plugins(use)
         config = function() require("peter.config.which-key") end,
     }
     use "rcarriga/nvim-notify"
-    use "stevearc/dressing.nvim"
+    use {
+        "stevearc/dressing.nvim",
+        event = "BufReadPre",
+        config = function() require("peter.config.dressing") end,
+    }
     use "j-hui/fidget.nvim"
 
     use {

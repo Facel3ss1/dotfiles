@@ -1,14 +1,11 @@
-local ok, dressing = pcall(require, "dressing")
-if not ok then
-    return
-end
-
-dressing.setup {
+require("dressing").setup {
     input = {
+        insert_only = false,
         winblend = 0,
         get_config = function(opts)
             if opts.kind == "grepprompt" then
                 return {
+                    insert_only = true,
                     relative = "editor",
                 }
             end
