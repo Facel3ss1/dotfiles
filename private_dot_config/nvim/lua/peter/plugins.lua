@@ -66,10 +66,14 @@ local function plugins(use)
         event = "VimEnter",
         config = function() require("peter.config.which-key") end,
     }
-    use "rcarriga/nvim-notify"
+    use {
+        "rcarriga/nvim-notify",
+        event = "VimEnter",
+        config = function() require("peter.config.notify") end,
+    }
     use {
         "stevearc/dressing.nvim",
-        event = "BufReadPre",
+        event = "VimEnter",
         config = function() require("peter.config.dressing") end,
     }
     use "j-hui/fidget.nvim"
@@ -85,10 +89,17 @@ local function plugins(use)
     use {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
-        requires = "nvim-lua/plenary.nvim",
+        cmd = "Telescope",
+        module = "telescope",
+        setup = function() require("peter.config.telescope.keymap") end,
+        config = function() require("peter.config.telescope") end,
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "kyazdani42/nvim-web-devicons",
+            {"nvim-telescope/telescope-fzf-native.nvim", module = "telescope._extensions.fzf", run = "make"},
+            {"nvim-telescope/telescope-file-browser.nvim", module = "telescope._extensions.file_browser"},
+        },
     }
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
-    use "nvim-telescope/telescope-file-browser.nvim"
 
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-cmdline"

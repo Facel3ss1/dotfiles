@@ -5,8 +5,6 @@ local inoremap = keymap.inoremap
 local xnoremap = keymap.xnoremap
 local snoremap = keymap.snoremap
 
--- TODO: @ in visual mode
-
 -- Make j and k take line wrapping into account
 nnoremap("j", "gj")
 nnoremap("k", "gk")
@@ -36,3 +34,10 @@ nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
+
+-- TODO: Wrapping
+nnoremap("]q", "<Cmd>cnext<CR>zz", {desc = "Next quickfix item"})
+nnoremap("[q", "<Cmd>cprev<CR>zz", {desc = "Previous quickfix item"})
+
+-- @ in visual mode
+xnoremap("@", ":normal @")

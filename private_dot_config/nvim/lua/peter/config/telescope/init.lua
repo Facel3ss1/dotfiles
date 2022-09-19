@@ -1,8 +1,4 @@
-local ok, telescope = pcall(require, "telescope")
-if not ok then
-    return
-end
-
+local telescope = require("telescope")
 local actions = require("telescope.actions")
 
 telescope.setup {
@@ -21,6 +17,7 @@ telescope.setup {
             previewer = false,
         },
         help_tags = { theme = "ivy" },
+        man_pages = { theme = "ivy" },
         oldfiles = { theme = "ivy" },
         git_branches = { theme = "dropdown" },
         git_status = {
@@ -32,7 +29,6 @@ telescope.setup {
     extensions = {
         file_browser = {
             theme = "ivy",
-            hijack_netrw = true,
         },
     },
 }

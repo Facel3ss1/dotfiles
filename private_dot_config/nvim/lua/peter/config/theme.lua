@@ -31,21 +31,3 @@ ayu.setup {
 }
 
 ayu.colorscheme()
-
--- Configure notify after setting up color scheme
-local has_notify, notify = pcall(require, "notify")
-if has_notify then
-    notify.setup {
-        stages = "fade",
-        top_down = false,
-        icons = {
-            DEBUG = "",
-            ERROR = "",
-            INFO = "",
-            TRACE = "",
-            WARN = "",
-        },
-    }
-
-    vim.notify = notify
-end
