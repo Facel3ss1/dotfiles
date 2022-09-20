@@ -1,4 +1,4 @@
-local nnoremap = require("peter.keymap").nnoremap
+local nnoremap = require("peter.remap").nnoremap
 
 local function grep_prompt()
     vim.ui.input({kind = "grepprompt", prompt = "Grep Prompt: "}, function(input)

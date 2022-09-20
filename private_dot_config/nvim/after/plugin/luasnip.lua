@@ -11,8 +11,7 @@ luasnip.config.set_config {
     region_check_events = "InsertEnter",
 }
 
-local keymap = require("peter.keymap")
-local map = keymap.bind({"i", "s"}, { silent = true })
+local map = require("peter.remap").bind({"i", "s"}, { silent = true })
 
 -- Tab will be the snippet expansion/jump key
 map("<Tab>", function()

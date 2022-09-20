@@ -3,7 +3,7 @@ if not ok then
     return
 end
 
-local keymap = require("peter.keymap")
+local remap = require("peter.remap")
 
 -- Add a rounded border to docs hovers
 vim.lsp.handlers["textDocument/hover"] =
@@ -15,7 +15,7 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 local function custom_attach()
     -- TODO: I would like some lightbulbs
 
-    local nnoremap = keymap.bind("n", {buffer = 0})
+    local nnoremap = remap.bind("n", {buffer = 0})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Go to definition"})

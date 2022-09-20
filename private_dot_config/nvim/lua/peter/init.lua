@@ -4,6 +4,7 @@ vim.g.mapleader = " "
 
 require("peter.globals")
 require("peter.options")
+require("peter.keymap")
 require("peter.plugins")
 require("peter.lsp")
 

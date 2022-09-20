@@ -3,7 +3,7 @@ if not ok then
     return
 end
 
-local nnoremap = require("peter.keymap").nnoremap
+local nnoremap = require("peter.remap").nnoremap
 
 nnoremap("<leader>gs", neogit.open, {desc = "Open Neogit status"})
 nnoremap("<leader>gc", function() neogit.open {"commit"} end, {desc = "Commit"})

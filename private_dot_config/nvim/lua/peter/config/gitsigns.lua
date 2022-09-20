@@ -1,4 +1,4 @@
-local keymap = require("peter.keymap")
+local remap = require("peter.remap")
 
 -- TODO: hunk text objects
 
@@ -9,8 +9,8 @@ require("gitsigns").setup {
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
-        local nnoremap = keymap.bind("n", {buffer = bufnr})
-        local xnoremap = keymap.bind("x", {buffer = bufnr})
+        local nnoremap = remap.bind("n", {buffer = bufnr})
+        local xnoremap = remap.bind("x", {buffer = bufnr})
 
         nnoremap("]c", function()
             if vim.wo.diff then return "]c" end

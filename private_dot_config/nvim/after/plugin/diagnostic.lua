@@ -1,4 +1,4 @@
-local nnoremap = require("peter.keymap").nnoremap
+local nnoremap = require("peter.remap").nnoremap
 
 vim.diagnostic.config {
     -- I don't want signs in the signcolumn

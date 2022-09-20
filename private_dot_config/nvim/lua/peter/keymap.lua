@@ -1,30 +1,49 @@
-local M = {}
+local remap = require("peter.remap")
+local nnoremap = remap.nnoremap
+local xnoremap = remap.xnoremap
+local inoremap = remap.inoremap
+local snoremap = remap.snoremap
 
---- Returns a function which lets you define keymaps for the specified mode(s)
---- with the specified options.
---- @param op string|table The mode(s) the keymap will be defined for.
---- @param outer_opts? table The options that will be applied for the keymaps. By default noremap = true
---- @return fun(lhs: string, rhs: string|function, opts?: table|string) # The mapping function
---- @nodiscard
-function M.bind(op, outer_opts)
-    -- noremap by default, other default options can be specified in outer_opts
-    outer_opts = vim.tbl_extend("force",
-        {noremap = true},
-        outer_opts or {}
-    )
+-- Make j and k take line wrapping into account
+-- If we supply a count beforehand, use default behaviour
+nnoremap("j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
+nnoremap("k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
 
-    return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force",
-            outer_opts,
-            opts or {}
-        )
-        vim.keymap.set(op, lhs, rhs, opts)
-    end
-end
+-- Bri'ish version of # key
+nnoremap("£", "#")
 
-M.nnoremap = M.bind("n")
-M.xnoremap = M.bind("x")
-M.inoremap = M.bind("i")
-M.snoremap = M.bind("s")
+-- Make <Esc> clear search highlights
+nnoremap("<Esc>", "<Cmd>nohl<CR>")
 
-return M
+nnoremap("gw", "*N", {desc = "Search word under cursor"})
+xnoremap("gw", "*N", {desc = "Search word under cursor (visual)"})
+
+nnoremap("<A-j>", ":.m .+1<CR>==", {desc = "Move line up", silent = true})
+nnoremap("<A-k>", ":.m .-2<CR>==", {desc = "Move line down", silent = true})
+xnoremap("<A-j>", ":m '>+1<CR>gv=gv", {desc = "Move line up (visual)", silent = true})
+xnoremap("<A-k>", ":m '<-2<CR>gv=gv", {desc = "Move line down (visual)", silent = true})
+inoremap("<A-j>", "<Esc>:.m .+1<CR>==gi", {desc = "Move line up (insert)", silent = true})
+inoremap("<A-k>", "<Esc>:.m .-2<CR>==gi", {desc = "Move line down (insert)", silent = true})
+
+-- Backspace in select mode changes instead of deletes
+snoremap("<BS>", "<C-g>c")
+
+-- Repeatable indenting
+xnoremap(">", ">gv")
+xnoremap("<", "<gv")
+
+-- Recenter screen after certain movements
+nnoremap("n", "nzz")
+nnoremap("N", "Nzz")
+nnoremap("<C-d>", "<C-d>zz")
+nnoremap("<C-u>", "<C-u>zz")
+
+-- TODO: Wrapping
+-- TODO: ]Q etc for first and last?
+nnoremap("]q", "<Cmd>cnext<CR>zz", {desc = "Next quickfix item"})
+nnoremap("[q", "<Cmd>cprev<CR>zz", {desc = "Previous quickfix item"})
+
+-- TODO: Can we make this interactive?
+-- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
+-- @ in visual mode
+xnoremap("@", ":normal @")
