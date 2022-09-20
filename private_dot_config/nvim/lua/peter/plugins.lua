@@ -96,7 +96,12 @@ local function plugins(use)
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
-            {"nvim-telescope/telescope-fzf-native.nvim", module = "telescope._extensions.fzf", run = "make"},
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                run = "make",
+                cond = vim.fn.executable("make") == 1,
+                module = "telescope._extensions.fzf",
+            },
             {"nvim-telescope/telescope-file-browser.nvim", module = "telescope._extensions.file_browser"},
         },
     }

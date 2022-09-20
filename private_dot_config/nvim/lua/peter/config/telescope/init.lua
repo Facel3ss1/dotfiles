@@ -33,6 +33,7 @@ telescope.setup {
     },
 }
 
-telescope.load_extension("fzf")
+-- The fzf plugin is conditionally loaded by packer, so may not be available
+pcall(telescope.load_extension, "fzf")
 telescope.load_extension("notify")
 telescope.load_extension("file_browser")
