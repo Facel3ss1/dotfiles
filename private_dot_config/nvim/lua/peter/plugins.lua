@@ -53,7 +53,13 @@ local function plugins(use)
         event = "BufReadPre",
         config = function() require("peter.config.gitsigns") end,
     }
-    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+    use {
+        "TimUntersberger/neogit",
+        cmd = "Neogit",
+        setup = require("peter.config.neogit").setup,
+        config = require("peter.config.neogit").config,
+        requires = "nvim-lua/plenary.nvim",
+    }
 
     use {
         "nvim-lualine/lualine.nvim",
