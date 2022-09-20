@@ -1,9 +1,4 @@
-local ok, luasnip = pcall(require, "luasnip")
-if not ok then
-    return
-end
-
--- TODO: prequire snippet
+local luasnip = require("luasnip")
 
 luasnip.config.set_config {
     history = true,
