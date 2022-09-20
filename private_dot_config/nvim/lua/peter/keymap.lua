@@ -23,9 +23,8 @@ function M.bind(op, outer_opts)
 end
 
 M.nnoremap = M.bind("n")
-M.vnoremap = M.bind("v")
-M.inoremap = M.bind("i")
 M.xnoremap = M.bind("x")
+M.inoremap = M.bind("i")
 M.snoremap = M.bind("s")
 
 return M

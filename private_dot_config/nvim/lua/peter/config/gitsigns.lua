@@ -7,7 +7,7 @@ require("gitsigns").setup {
         local gs = package.loaded.gitsigns
 
         local nnoremap = keymap.bind("n", {buffer = bufnr})
-        local vnoremap = keymap.bind("v", {buffer = bufnr})
+        local xnoremap = keymap.bind("x", {buffer = bufnr})
 
         nnoremap("]c", function()
             if vim.wo.diff then return "]c" end
@@ -22,9 +22,9 @@ require("gitsigns").setup {
         end, {expr = true, desc = "Previous change"})
 
         nnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change"})
-        vnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change (visual)"})
+        xnoremap("<leader>ga", ":Gitsigns stage_hunk<CR>", {desc = "Stage change (visual)"})
         nnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change"})
-        vnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change (visual)"})
+        xnoremap("<leader>gr", ":Gitsigns reset_hunk<CR>", {desc = "Reset change (visual)"})
 
         nnoremap("<leader>gA", gs.stage_buffer, {desc = "Stage buffer"})
         nnoremap("<leader>gR", gs.reset_buffer, {desc = "Reset buffer"})
