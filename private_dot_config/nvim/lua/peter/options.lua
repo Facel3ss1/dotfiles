@@ -3,6 +3,7 @@ local augroup = require("peter.au").augroup
 local opt = vim.opt
 
 opt.mouse = "a" -- Let me use the mouse for scrolling etc.
+opt.confirm = true -- Open confirm dialog when there are unsaved changes
 
 opt.relativenumber = true -- Show relative line numbers...
 opt.number = true -- ...and show the current line number
@@ -20,7 +21,7 @@ augroup("NumberToggle", { clear = true }, {
     {{"BufEnter", "FocusGained", "InsertLeave", "WinLeave"},
     pattern = "*",
     callback = function()
-        if vim.o.number and vim.fn.mode() ~= "i" then
+        if vim.o.number and vim.api.nvim_get_mode().mode ~= "i" then
             opt.relativenumber = true
             enable_ts_context()
         end
@@ -33,6 +34,11 @@ augroup("NumberToggle", { clear = true }, {
             enable_ts_context()
         end
     end},
+})
+
+-- Brief highlight when we yank something
+augroup("YankHighlight", { clear = true }, {
+    {"TextYankPost", pattern = "*", callback = function() vim.highlight.on_yank() end},
 })
 
 opt.wrap = false -- Turn off line wrapping...
@@ -50,13 +56,14 @@ opt.expandtab = true -- Use spaces instead of tabs for indentation
 opt.autoindent = true -- Continue indentation from previous line
 opt.smartindent = true -- Smartly add indentation when starting new line
 
-opt.hlsearch = false -- Turn off highlighting of search results
+opt.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
 
+-- TODO: Disable for certain filetypes (quickfix, etc.)
 opt.colorcolumn = "80" -- Put colored column at column 80
 opt.cursorline = true -- Highlight current line cursor is on
 opt.signcolumn = "yes" -- Always show the sign column
 
--- Only have it on in the current buffer
+-- Only have cursorline on in the current window
 local function set_cursorline(value)
     return function()
         opt.cursorline = value
@@ -72,6 +79,11 @@ augroup("CursorLineToggle", { clear = true }, {
 -- Split windows to the right and downwards
 opt.splitright = true
 opt.splitbelow = true
+
+if vim.fn.executable("rg") then
+    opt.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep
+    opt.grepformat = "%f:%l:%c:%m" -- ripgrep's output format
+end
 
 -- Each filetype will have it's own formatoptions which we need to override
 augroup("SetFormatOptions", { clear = true }, {

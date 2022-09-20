@@ -12,6 +12,9 @@ nnoremap("k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
 -- Bri'ish version of # key
 nnoremap("£", "#")
 
+-- Make <Esc> clear search highlights
+nnoremap("<Esc>", "<Cmd>nohl<CR>")
+
 nnoremap("gw", "*N", {desc = "Search word under cursor"})
 xnoremap("gw", "*N", {desc = "Search word under cursor (visual)"})
 
