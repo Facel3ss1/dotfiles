@@ -5,24 +5,26 @@ colors.generate(true)
 ayu.setup {
     mirage = true,
     overrides = {
+        -- NormalFloat = { bg = colors.panel_bg },
+
         -- nvim-notify
-        NotifyDEBUGTitle = { fg = colors.comment },
-        NotifyTRACETitle = { fg = colors.entity },
-        NotifyINFOTitle = { fg = colors.string },
-        NotifyWARNTitle = { fg = colors.warning },
-        NotifyERRORTitle = { fg = colors.error },
+        NotifyTRACETitle = { fg = colors.comment },
+        NotifyDEBUGTitle = { link = "DiagnosticHint" },
+        NotifyINFOTitle = { link = "DiagnosticInfo" },
+        NotifyWARNTitle = { link = "DiagnosticWarn" },
+        NotifyERRORTitle = { link = "DiagnosticError" },
 
-        NotifyDEBUGIcon = { fg = colors.comment },
-        NotifyTRACEIcon = { fg = colors.entity },
-        NotifyINFOIcon = { fg = colors.string },
-        NotifyWARNIcon = { fg = colors.warning },
-        NotifyERRORIcon = { fg = colors.error },
+        NotifyTRACEIcon = { fg = colors.comment },
+        NotifyDEBUGIcon = { link = "DiagnosticHint" },
+        NotifyINFOIcon = { link = "DiagnosticInfo" },
+        NotifyWARNIcon = { link = "DiagnosticWarn" },
+        NotifyERRORIcon = { link = "DiagnosticError" },
 
-        NotifyDEBUGBorder = { fg = colors.comment },
-        NotifyTRACEBorder = { fg = colors.entity },
-        NotifyINFOBorder = { fg = colors.string },
-        NotifyWARNBorder = { fg = colors.warning },
-        NotifyERRORBorder = { fg = colors.error },
+        NotifyTRACEBorder = { fg = colors.comment },
+        NotifyDEBUGBorder = { link = "DiagnosticHint" },
+        NotifyINFOBorder = { link = "DiagnosticInfo" },
+        NotifyWARNBorder = { link = "DiagnosticWarn" },
+        NotifyERRORBorder = { link = "DiagnosticError" },
 
         -- fidget
         FidgetTitle = { fg = colors.func },

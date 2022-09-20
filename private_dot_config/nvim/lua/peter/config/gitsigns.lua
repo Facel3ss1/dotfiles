@@ -3,6 +3,9 @@ local keymap = require("peter.keymap")
 -- TODO: hunk text objects
 
 require("gitsigns").setup {
+    preview_config = {
+        border = "rounded",
+    },
     on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 

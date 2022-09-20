@@ -13,5 +13,9 @@ fidget.setup {
     },
     align = {
         bottom = false,
-    }
+    },
+    window = {
+        blend = 0,
+        relative = "editor",
+    },
 }
