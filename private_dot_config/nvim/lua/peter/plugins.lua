@@ -83,12 +83,16 @@ local function plugins(use)
         event = "VimEnter",
         config = function() require("peter.config.dressing") end,
     }
-    use "j-hui/fidget.nvim"
 
     use {
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
+    }
+    use {
+        "j-hui/fidget.nvim",
+        after = "nvim-lspconfig",
+        config = function() require("peter.config.fidget") end,
     }
 
     use "folke/lua-dev.nvim"
