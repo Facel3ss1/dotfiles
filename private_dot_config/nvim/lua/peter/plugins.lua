@@ -84,10 +84,13 @@ local function plugins(use)
         config = function() require("peter.config.dressing") end,
     }
 
+    -- It is not recommended to lazy load mason
+    use "williamboman/mason.nvim"
+    use {"williamboman/mason-lspconfig.nvim", module = "mason-lspconfig"}
     use {
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
         "neovim/nvim-lspconfig",
+        event = "BufReadPre",
+        config = function() require("peter.config.lsp") end,
     }
     use {
         "j-hui/fidget.nvim",
@@ -95,7 +98,7 @@ local function plugins(use)
         config = function() require("peter.config.fidget") end,
     }
 
-    use "folke/lua-dev.nvim"
+    use {"folke/lua-dev.nvim", module = "lua-dev"}
 
     use {
         "nvim-telescope/telescope.nvim",
@@ -117,12 +120,21 @@ local function plugins(use)
         },
     }
 
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-cmdline"
-    use "dmitmel/cmp-cmdline-history"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-nvim-lsp"
+    use {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        module = "cmp",
+        config = function() require("peter.config.cmp") end,
+        requires = {
+            {"onsails/lspkind.nvim", module = "lspkind"},
+            {"hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp"},
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-cmdline",
+            "dmitmel/cmp-cmdline-history",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+        },
+    }
 
     use {
         "L3MON4D3/LuaSnip",
@@ -130,19 +142,17 @@ local function plugins(use)
         module = "luasnip",
         config = function() require("peter.config.luasnip") end,
     }
-    use "saadparwaiz1/cmp_luasnip"
-
-    use "onsails/lspkind.nvim"
 
     use {
         "nvim-treesitter/nvim-treesitter",
         -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
         run = function() require("nvim-treesitter.install").update({with_sync = true}) end,
-        event = "BufRead",
-        module = "nvim-treesitter",
+        event = "VimEnter",
         config = function() require('peter.config.treesitter') end,
+        requires = {
+            {"nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter"},
+        },
     }
-    use {"nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter"}
 end
 
 require("peter.packer").setup(config, plugins)

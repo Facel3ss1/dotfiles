@@ -1,21 +1,20 @@
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-    return
-end
+require("peter.config.lsp.diagnostic")
 
+local lspconfig = require("lspconfig")
 local remap = require("peter.remap")
 
 -- Add a rounded border to docs hovers
-vim.lsp.handlers["textDocument/hover"] =
-    vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local function custom_attach()
+local function custom_attach(_, bufnr)
     -- TODO: I would like some lightbulbs
+    -- TODO: nvim-cmp-lsp-signature-help?
+    -- TODO: (Auto) formatting
 
-    local nnoremap = remap.bind("n", {buffer = 0})
+    local nnoremap = remap.bind("n", {buffer = bufnr})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Go to definition"})
@@ -27,12 +26,15 @@ local function custom_attach()
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
 end
 
+-- TODO: Extract out settings into table
+
 require("mason").setup()
 require("mason-lspconfig").setup {
     ensure_installed = {"sumneko_lua", "rust_analyzer"},
 }
 require("mason-lspconfig").setup_handlers {
     -- Default handler
+    -- TODO: Factor out into function
     function(server_name)
         require("lspconfig")[server_name].setup {
             on_attach = custom_attach,
@@ -60,6 +62,7 @@ require("mason-lspconfig").setup_handlers {
                         callSnippet = "Replace",
                     },
                     diagnostics = {
+                        libraryFiles = "Disable",
                         globals = {
                             "describe",
                             "it",
@@ -73,6 +76,3 @@ require("mason-lspconfig").setup_handlers {
     end,
     -- TODO: rust-tools
 }
-
--- TODO: Workspace loading indicator?
--- TODO: Formatting

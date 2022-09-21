@@ -1,41 +1,30 @@
-local ok, cmp = pcall(require, "cmp")
-if not ok then
-    return
-end
-
-local luasnip = require("luasnip")
+local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-local has_autopairs = pcall(require, "nvim-autopairs")
-if has_autopairs then
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-end
-
-local lspkind = require("lspkind")
-
 cmp.setup {
     mapping = {
+        -- :h ins-completion and :h ins-completion-menu
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.scroll_docs(4),
-        ["<C-k>"] = cmp.mapping.scroll_docs(-4),
-        ["<Esc>"] = cmp.mapping.close(),
-        ["<C-c>"] = cmp.mapping.abort(),
-        ["<Tab>"] = function(fallback)
-            -- If we are in a snippet, require completions to be selected
-            if luasnip.jumpable(1) and luasnip.in_snippet() then
-                if cmp.get_selected_entry() then
-                    cmp.confirm({select = false})
-                else
-                    luasnip.jump(1)
-                end
-            elseif not cmp.confirm({select = true}) then
-                fallback()
-            end
-        end,
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-e>"] = cmp.mapping.abort(),
+        ["<C-y>"] = cmp.mapping.confirm({select = true}),
         ["<C-Space>"] = cmp.mapping.complete(),
+        -- ["<Tab>"] = function(fallback)
+        --     -- If we are in a snippet, require completions to be selected
+        --     if luasnip.jumpable(1) and luasnip.in_snippet() then
+        --         if cmp.get_selected_entry() then
+        --             cmp.confirm({select = false})
+        --         else
+        --             luasnip.jump(1)
+        --         end
+        --     elseif not cmp.confirm({select = true}) then
+        --         fallback()
+        --     end
+        -- end,
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -86,3 +75,6 @@ cmp.setup.cmdline("/", {
 --         { name = "cmdline_history" },
 --     })
 -- })
+
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
