@@ -3,9 +3,9 @@
 vim.g.mapleader = " "
 
 require("peter.globals")
-require("peter.options")
-require("peter.keymap")
-require("peter.plugins")
+require("peter.config.options")
+require("peter.config.keymap")
+require("peter.config.plugins")
 
 local augroup = require("peter.au").augroup
 
@@ -15,7 +15,7 @@ local chezmoi_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/"
 
 augroup("ChezmoiApplyOnSave", { clear = true }, {
     {"BufWritePost", pattern = chezmoi_dir .. "*", callback = function(opts)
-        -- FIMXE: Use filetype detection instead
+        -- FIXME: Use filetype detection instead
         -- FIXME: Discarding in Neogit?
         -- Ignore paths in the .git folder
         local path = opts.match

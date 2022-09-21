@@ -19,10 +19,14 @@ local function plugins(use)
 
     use {
         "Shatur/neovim-ayu",
-        config = function() require("peter.config.theme") end,
+        config = function() require("peter.plugins.theme") end,
     }
 
-    -- use "tpope/vim-sleuth"
+    -- TODO: vim-sleuth
+    -- TODO: vim-splitjoin, or nvim-trevJ
+    -- TODO: nvim-ts-context-commentstring with lua help comments?
+    -- TODO: vim-matchup
+    -- TODO: toggleterm
 
     use {
         "numToStr/Comment.nvim",
@@ -52,36 +56,36 @@ local function plugins(use)
     use {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
-        config = function() require("peter.config.gitsigns") end,
+        config = function() require("peter.plugins.gitsigns") end,
     }
     use {
         "TimUntersberger/neogit",
         cmd = "Neogit",
-        setup = require("peter.config.neogit").setup,
-        config = require("peter.config.neogit").config,
+        setup = require("peter.plugins.neogit").setup,
+        config = require("peter.plugins.neogit").config,
         requires = "nvim-lua/plenary.nvim",
     }
 
     use {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
-        config = function() require("peter.config.lualine") end,
+        config = function() require("peter.plugins.lualine") end,
         requires = "kyazdani42/nvim-web-devicons",
     }
     use {
         "folke/which-key.nvim",
         event = "VimEnter",
-        config = function() require("peter.config.which-key") end,
+        config = function() require("peter.plugins.which-key") end,
     }
     use {
         "rcarriga/nvim-notify",
         event = "VimEnter",
-        config = function() require("peter.config.notify") end,
+        config = function() require("peter.plugins.notify") end,
     }
     use {
         "stevearc/dressing.nvim",
         event = "VimEnter",
-        config = function() require("peter.config.dressing") end,
+        config = function() require("peter.plugins.dressing") end,
     }
 
     -- It is not recommended to lazy load mason
@@ -90,12 +94,12 @@ local function plugins(use)
     use {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
-        config = function() require("peter.config.lsp") end,
+        config = function() require("peter.plugins.lsp") end,
     }
     use {
         "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
-        config = function() require("peter.config.fidget") end,
+        config = function() require("peter.plugins.fidget") end,
     }
 
     use {"folke/lua-dev.nvim", module = "lua-dev"}
@@ -105,8 +109,8 @@ local function plugins(use)
         branch = "0.1.x",
         cmd = "Telescope",
         module = "telescope",
-        setup = function() require("peter.config.telescope.keymap") end,
-        config = function() require("peter.config.telescope") end,
+        setup = function() require("peter.plugins.telescope.keymap") end,
+        config = function() require("peter.plugins.telescope") end,
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
@@ -124,7 +128,7 @@ local function plugins(use)
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         module = "cmp",
-        config = function() require("peter.config.cmp") end,
+        config = function() require("peter.plugins.cmp") end,
         requires = {
             {"onsails/lspkind.nvim", module = "lspkind"},
             {"hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp"},
@@ -140,7 +144,7 @@ local function plugins(use)
         "L3MON4D3/LuaSnip",
         tag = "v1.*",
         module = "luasnip",
-        config = function() require("peter.config.luasnip") end,
+        config = function() require("peter.plugins.luasnip") end,
     }
 
     use {
@@ -148,7 +152,7 @@ local function plugins(use)
         -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
         run = function() require("nvim-treesitter.install").update({with_sync = true}) end,
         event = "VimEnter",
-        config = function() require('peter.config.treesitter') end,
+        config = function() require('peter.plugins.treesitter') end,
         requires = {
             {"nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter"},
         },

@@ -8,7 +8,7 @@ opt.confirm = true -- Open confirm dialog when there are unsaved changes
 opt.relativenumber = true -- Show relative line numbers...
 opt.number = true -- ...and show the current line number
 
--- Fallibly enable() nvim-treesitter-context: it may not be loaded
+-- Fallibly enable() nvim-treesitter-context because it may not be loaded
 -- This forces its line numbers to redraw
 local function enable_ts_context()
     local _, ts_context = pcall(require, "treesitter-context")
@@ -41,9 +41,9 @@ augroup("YankHighlight", { clear = true }, {
     {"TextYankPost", pattern = "*", callback = function() vim.highlight.on_yank() end},
 })
 
-opt.wrap = false -- Turn off line wrapping...
-opt.breakindent = true -- ...but preserve indenting if we do wrap
-opt.linebreak = true -- ...and break the line on certain characters if we wrap
+opt.wrap = false -- Turn off line wrapping. However, if we do wrap...
+opt.breakindent = true -- ...preserve indentation...
+opt.linebreak = true -- ...and prevent words from splitting into two
 
 opt.scrolloff = 10 -- There will be 10 lines above and below my cursor when scrolling
 opt.sidescrolloff = 5 -- 5 columns to the side of my cursor when horizontally scrolling

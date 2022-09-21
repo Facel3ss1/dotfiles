@@ -1,4 +1,4 @@
-require("peter.config.lsp.diagnostic")
+require("peter.plugins.lsp.diagnostic")
 
 local lspconfig = require("lspconfig")
 local remap = require("peter.remap")
