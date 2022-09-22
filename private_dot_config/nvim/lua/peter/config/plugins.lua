@@ -89,7 +89,10 @@ local function plugins(use)
     }
 
     -- It is not recommended to lazy load mason
-    use "williamboman/mason.nvim"
+    use {
+        "williamboman/mason.nvim",
+        config = function() require("peter.plugins.mason") end,
+    }
     use {"williamboman/mason-lspconfig.nvim", module = "mason-lspconfig"}
     use {
         "neovim/nvim-lspconfig",
