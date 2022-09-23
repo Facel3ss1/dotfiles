@@ -1,6 +1,5 @@
 require("peter.plugins.lsp.diagnostic")
 
-local lspconfig = require("lspconfig")
 local remap = require("peter.remap")
 
 -- Add a rounded border to docs hovers
@@ -30,24 +29,44 @@ local function custom_attach(_, bufnr)
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
 end
 
--- TODO: Extract out settings into table
-
 require("mason-lspconfig").setup {
     ensure_installed = {"sumneko_lua", "rust_analyzer"},
 }
+
+local settings = {
+    ["sumneko_lua"] = {
+        Lua = {
+            completion = {
+                callSnippet = "Replace",
+                postfix = ".",
+            },
+            diagnostics = {
+                libraryFiles = "Disable",
+                globals = {
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                },
+            },
+        },
+    },
+}
+
+local function default_handler(server_name)
+    require("lspconfig")[server_name].setup {
+        on_attach = custom_attach,
+        capabilities = capabilities,
+        settings = settings[server_name],
+    }
+end
+
 require("mason-lspconfig").setup_handlers {
-    -- Default handler
-    -- TODO: Factor out into function
-    function(server_name)
-        require("lspconfig")[server_name].setup {
-            on_attach = custom_attach,
-            capabilities = capabilities,
-        }
-    end,
-    ["sumneko_lua"] = function()
+    default_handler,
+    ["sumneko_lua"] = function(server_name)
         require("lua-dev").setup {
             override = function(root_dir, library)
-                -- Make sure we get lsp in the chezmoi directory
+                -- Make sure we enable lsp for the vim api in the chezmoi directory
                 local chezmoi_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/"
                 if require("lua-dev.util").has_file(root_dir, chezmoi_dir) then
                     library.enabled = true
@@ -56,26 +75,7 @@ require("mason-lspconfig").setup_handlers {
             end,
         }
 
-        lspconfig.sumneko_lua.setup {
-            on_attach = custom_attach,
-            capabilities = capabilities,
-            settings = {
-                Lua = {
-                    completion = {
-                        callSnippet = "Replace",
-                    },
-                    diagnostics = {
-                        libraryFiles = "Disable",
-                        globals = {
-                            "describe",
-                            "it",
-                            "before_each",
-                            "after_each",
-                        },
-                    },
-                },
-            },
-        }
+        default_handler(server_name)
     end,
     -- TODO: rust-tools
 }
