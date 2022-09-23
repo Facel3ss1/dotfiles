@@ -162,4 +162,6 @@ local function plugins(use)
     }
 end
 
+vim.cmd("packadd cfilter")
+
 require("peter.packer").setup(config, plugins)
