@@ -22,7 +22,9 @@ local function custom_attach(_, bufnr)
     nnoremap("gI", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Go to implementation"})
     nnoremap("gr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Go to references"})
 
-    -- TODO: Find diagnostics, symbols in document and workspace
+    nnoremap("<leader>fs", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", {desc = "Find document symbol"})
+    nnoremap("<leader>fS", "<Cmd>lua require('telescope.builtin').lsp_workspace_symbols()<CR>", {desc = "Find workspace symbol"})
+    nnoremap("<leader>fx", "<Cmd>lua require('telescope.builtin').diagnostics()<CR>", {desc = "Find diagnostic"})
 
     nnoremap("<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
