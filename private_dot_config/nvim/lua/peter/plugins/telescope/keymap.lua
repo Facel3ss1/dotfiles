@@ -24,5 +24,6 @@ nnoremap("<leader>fe", "<Cmd>lua require('telescope').extensions.file_browser.fi
 nnoremap("<leader>fE", file_browser_in_containing_folder, {desc = "Open file browser in containing folder"})
 nnoremap("<leader>fm", "<Cmd>lua require('telescope.builtin').man_pages()<CR>", {desc = "Find man page"})
 nnoremap("<leader>fB", "<Cmd>lua require('telescope.builtin').builtin()<CR>", {desc = "Telescope builtin"})
+nnoremap("<leader>fx", "<Cmd>lua require('telescope.builtin').diagnostics()<CR>", {desc = "Find diagnostic"})
 
 nnoremap("<leader>gb", "<Cmd>lua require('telescope.builtin').git_branches()<CR>", {desc = "Branches"})
