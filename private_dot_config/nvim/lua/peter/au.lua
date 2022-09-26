@@ -1,19 +1,36 @@
 local M = {}
 
-function M.augroup(name, opts, autocmds)
-    local group_id = vim.api.nvim_create_augroup(name, opts)
+--- @alias PeterAutocmd fun(event: string|string[], autocmd_opts?: table<string, any>): any
 
-    for _, autocmd in ipairs(autocmds or {}) do
-        local autocmd_opts = vim.tbl_extend("force",
-            autocmd,
+-- Wrapper around `vim.api.nvim_create_augroup` that returns a wrapper around
+-- `vim.api.nvim_create_autocmd` with its `group` option set.
+--
+-- ```lua
+-- local augroup = require("peter.au")
+--
+-- local autocmd = augroup("YankHighlight", {clear = true})
+-- autocmd("TextYankPost", {
+--     pattern = "*", callback = function() vim.highlight.on_yank() end,
+-- })
+-- ```
+--- @param name string # The name of the group
+--- @param augroup_opts? table<string, any> # Dictionary parameters for the autogroup
+--- @return PeterAutocmd autocmd # The autocommand function
+--- @return any group_id # The integer ID of the created group
+function M.augroup(name, augroup_opts)
+    local group_id = vim.api.nvim_create_augroup(name, augroup_opts)
+
+    --- @type PeterAutocmd
+    local function autocmd(event, autocmd_opts)
+        autocmd_opts = vim.tbl_extend("force",
+            autocmd_opts or {},
             {group = group_id}
         )
-        autocmd_opts[1] = nil
 
-        vim.api.nvim_create_autocmd(autocmd[1], autocmd_opts)
+        return vim.api.nvim_create_autocmd(event, autocmd_opts)
     end
 
-    return group_id
+    return autocmd, group_id
 end
 
 M.autocmd = vim.api.nvim_create_autocmd
