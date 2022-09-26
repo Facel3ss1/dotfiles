@@ -1,23 +1,33 @@
 local M = {}
 
---- Returns a function which lets you define keymaps for the specified mode(s)
---- with the specified options.
---- @param op string|table The mode(s) the keymap will be defined for.
---- @param outer_opts? table The options that will be applied for the keymaps. By default noremap = true
---- @return fun(lhs: string, rhs: string|function, opts?: table|string) # The mapping function
+-- Returns a wrapper around `vim.keymap.set` which will set keymaps for the
+-- given modes (`op`) using the defaults specified in `default_opts`.
+--
+-- ```lua
+-- local remap = require("peter.remap")
+--
+-- function on_attach(bufnr)
+--     local nvnoremap = remap.bind({"n", "v"}, {buffer = bufnr})
+--     -- Creates a buffer local non-recursive mapping in normal and visual mode
+--     nvnoremap("<leader>w", "<Cmd>write<CR>", {desc = "Save file"})
+-- end
+-- ```
+--- @param op string|string[] # The mode(s) the keymap will be defined for.
+--- @param default_opts? table<string, any> # Defaults for the keymaps. Note that unless overidden, noremap = true
+--- @return fun(lhs: string, rhs: string|function, opts?: table<string, any>) remap # The mapping function
 --- @nodiscard
-function M.bind(op, outer_opts)
-    -- noremap by default, other default options can be specified in outer_opts
-    outer_opts = vim.tbl_extend("force",
+function M.bind(op, default_opts)
+    default_opts = vim.tbl_extend("force",
         {noremap = true},
-        outer_opts or {}
+        default_opts or {}
     )
 
     return function(lhs, rhs, opts)
         opts = vim.tbl_extend("force",
-            outer_opts,
+            default_opts,
             opts or {}
         )
+
         vim.keymap.set(op, lhs, rhs, opts)
     end
 end
