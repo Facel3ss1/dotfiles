@@ -1,9 +1,7 @@
+require("peter.plugins.lsp.handlers")
 require("peter.plugins.lsp.diagnostic")
 
 local remap = require("peter.remap")
-
--- Add a rounded border to docs hovers
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -16,9 +14,9 @@ local function custom_attach(_, bufnr)
     local nnoremap = remap.bind("n", {buffer = bufnr})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
-    nnoremap("gd", "<Cmd>lua require('telescope.builtin').lsp_definitions()<CR>", {desc = "Go to definition"})
+    nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
     nnoremap("gT", "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", {desc = "Go to type definition"})
-    nnoremap("gI", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Go to implementation"})
+    nnoremap("gI", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Go to implementations"})
     nnoremap("gr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Go to references"})
 
     nnoremap("<leader>fs", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", {desc = "Find document symbol"})
