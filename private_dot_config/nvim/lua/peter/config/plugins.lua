@@ -148,6 +148,12 @@ local function plugins(use)
         tag = "v1.*",
         module = "luasnip",
         config = function() require("peter.plugins.luasnip") end,
+        requires = {
+            "rafamadriz/friendly-snippets",
+            config = function()
+                require("luasnip.loaders.from_vscode").lazy_load()
+            end,
+        },
     }
 
     use {

@@ -13,18 +13,6 @@ cmp.setup {
         ["<C-e>"] = cmp.mapping.abort(),
         ["<C-y>"] = cmp.mapping.confirm({select = true}),
         ["<C-Space>"] = cmp.mapping.complete(),
-        -- ["<Tab>"] = function(fallback)
-        --     -- If we are in a snippet, require completions to be selected
-        --     if luasnip.jumpable(1) and luasnip.in_snippet() then
-        --         if cmp.get_selected_entry() then
-        --             cmp.confirm({select = false})
-        --         else
-        --             luasnip.jump(1)
-        --         end
-        --     elseif not cmp.confirm({select = true}) then
-        --         fallback()
-        --     end
-        -- end,
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
