@@ -43,7 +43,13 @@ nnoremap("<C-u>", "<C-u>zz")
 nnoremap("]q", "<Cmd>cnext<CR>zz", {desc = "Next quickfix item"})
 nnoremap("[q", "<Cmd>cprev<CR>zz", {desc = "Previous quickfix item"})
 
--- TODO: Can we make this interactive?
--- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
+-- FIXME: This doesn't work in Lua yet
 -- @ in visual mode
-xnoremap("@", ":normal @")
+-- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
+vim.cmd([[
+    function! ExecuteMacroOverVisualRange()
+        echo "@".getcmdline()
+        execute ":'<,'>normal @".nr2char(getchar())
+    endfunction
+]])
+xnoremap("@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
