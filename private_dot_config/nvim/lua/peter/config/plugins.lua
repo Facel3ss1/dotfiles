@@ -22,11 +22,13 @@ local function plugins(use)
         config = function() require("peter.plugins.theme") end,
     }
 
-    -- TODO: vim-sleuth
     -- TODO: vim-splitjoin, or nvim-trevJ
     -- TODO: nvim-ts-context-commentstring with lua help comments?
     -- TODO: vim-matchup
     -- TODO: toggleterm
+    -- TODO: Highlight trailing whitespace
+
+    use {"tpope/vim-sleuth", event = "BufReadPre"}
 
     use {
         "numToStr/Comment.nvim",
@@ -168,6 +170,7 @@ local function plugins(use)
     }
 end
 
-vim.cmd("packadd cfilter")
+-- See :h pack-add for why we need the !
+vim.cmd("packadd! cfilter")
 
 require("peter.packer").setup(config, plugins)

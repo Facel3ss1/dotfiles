@@ -26,6 +26,19 @@ require("lualine").setup {
             {"filename", path = 1},
         },
         lualine_x = {
+            function()
+                local tabstop = vim.bo.tabstop
+                local shiftwidth = vim.fn.shiftwidth()
+                local expandtab = vim.bo.expandtab
+
+                if expandtab then
+                    return string.format("spaces: %i", shiftwidth)
+                elseif shiftwidth == tabstop then
+                    return string.format("tabs: %i", shiftwidth)
+                else
+                    return string.format("tabs/spaces: %i/%i", tabstop, shiftwidth)
+                end
+            end,
             "encoding",
             {
                 "fileformat",
