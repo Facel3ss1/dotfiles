@@ -63,8 +63,17 @@ local function plugins(use)
     use {
         "TimUntersberger/neogit",
         cmd = "Neogit",
+        module = "neogit",
         setup = require("peter.plugins.neogit").setup,
         config = require("peter.plugins.neogit").config,
+        requires = "nvim-lua/plenary.nvim",
+    }
+    use {
+        "sindrets/diffview.nvim",
+        cmd = {"DiffviewOpen", "DiffviewFileHistory"},
+        module = "diffview",
+        setup = require("peter.plugins.diffview").setup,
+        config = require("peter.plugins.diffview").config,
         requires = "nvim-lua/plenary.nvim",
     }
 

@@ -14,6 +14,9 @@ function M.config()
             section = {"", ""},
             item = {"", ""},
         },
+        integrations = {
+            diffview = true,
+        },
     }
 end
 

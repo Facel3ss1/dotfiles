@@ -30,6 +30,12 @@ opt.colorcolumn = "80" -- Put colored column at column 80
 opt.cursorline = true -- Highlight current line cursor is on
 opt.signcolumn = "yes" -- Always show the sign column
 
+opt.fillchars = {
+    diff = "╱",
+}
+
+-- TODO: Set conceallevel = 0 for help files?
+
 -- Split windows to the right and downwards
 opt.splitright = true
 opt.splitbelow = true
