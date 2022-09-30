@@ -183,6 +183,7 @@ local function plugins(use)
         config = function() require('peter.plugins.treesitter') end,
         requires = {
             {"nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter"},
+            {"RRethy/nvim-treesitter-endwise", after = "nvim-treesitter"},
         },
     }
 end
