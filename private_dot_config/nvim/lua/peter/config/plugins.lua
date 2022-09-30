@@ -1,3 +1,4 @@
+-- TODO: Make opt the default
 local config = {
     auto_reload_compiled = false,
     preview_updates = true,

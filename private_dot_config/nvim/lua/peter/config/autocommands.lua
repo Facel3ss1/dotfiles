@@ -1,6 +1,8 @@
 local augroup = require("peter.au").augroup
 local autocmd
 
+-- TODO: Add descriptions to autocommands
+
 -- Run chezmoi apply when we save our config
 
 -- TODO: Move chezmoi path to an env.lua file or something
@@ -18,7 +20,8 @@ autocmd("BufWritePost", {
         -- Ignore paths in the .git folder
         local path = opts.match
         local git_paths = vim.fn.glob(chezmoi_dir .. ".git/*", false, true)
-        if vim.fn.index(git_paths, path) < 0 then 
+        if vim.fn.index(git_paths, path) < 0 then
+            -- TODO: Use vim.notify
             vim.cmd('!chezmoi apply --source-path "%"')
         end
     end,
