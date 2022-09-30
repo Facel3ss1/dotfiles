@@ -29,6 +29,7 @@ opt.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
 opt.colorcolumn = "80" -- Put colored column at column 80
 opt.cursorline = true -- Highlight current line cursor is on
 opt.signcolumn = "yes" -- Always show the sign column
+opt.laststatus = 3 -- Use global statusline
 
 opt.fillchars = {
     diff = "╱",
