@@ -44,8 +44,16 @@ local function plugins(use)
     }
     use {
         "windwp/nvim-autopairs",
+        event = "InsertEnter",
         module = "nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end,
+    }
+    use {
+        -- ALTERNATIVE: vim-wordmotion
+        -- ALTERNATIVE: vim-textobj-variable-segment
+        "bkad/CamelCaseMotion",
+        event = "BufReadPre",
+        setup = function() vim.g.camelcasemotion_key = "\\" end,
     }
 
     use {"lukas-reineke/indent-blankline.nvim", event = "BufReadPre"}
