@@ -124,6 +124,13 @@ local function plugins(use)
         after = "nvim-lspconfig",
         config = function() require("peter.plugins.fidget") end,
     }
+    use {
+        "kosayoda/nvim-lightbulb",
+        after = "nvim-lspconfig",
+        config = function() require("peter.plugins.lightbulb") end,
+        -- FIXME: This workaround plugin was fixed in nvim 0.8
+        requires = "antoinemadec/FixCursorHold.nvim",
+    }
 
     use {"folke/lua-dev.nvim", module = "lua-dev"}
 

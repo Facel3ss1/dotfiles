@@ -2,6 +2,7 @@ local opt = vim.opt
 
 opt.mouse = "a" -- Let me use the mouse for scrolling etc.
 opt.confirm = true -- Open confirm dialog when there are unsaved changes
+opt.updatetime = 250 -- Trigger CursorHold etc. after 250ms
 
 opt.relativenumber = true -- Show relative line numbers...
 opt.number = true -- ...and show the current line number

@@ -29,6 +29,9 @@ ayu.setup {
         -- fidget
         FidgetTitle = { fg = colors.func },
         FidgetTask = { fg = colors.comment },
+
+        -- nvim-lightbulb
+        LightBulbFloatWin = { fg = colors.accent },
     },
 }
 
