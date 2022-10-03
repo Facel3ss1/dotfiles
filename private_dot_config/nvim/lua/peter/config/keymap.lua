@@ -42,6 +42,8 @@ nnoremap("<C-u>", "<C-u>zz")
 -- TODO: ]Q etc for first and last?
 nnoremap("]q", "<Cmd>cnext<CR>zz", {desc = "Next quickfix item"})
 nnoremap("[q", "<Cmd>cprev<CR>zz", {desc = "Previous quickfix item"})
+nnoremap("]l", "<Cmd>lnext<CR>zz", {desc = "Next location list item"})
+nnoremap("[l", "<Cmd>lprev<CR>zz", {desc = "Previous location list item"})
 
 -- FIXME: This doesn't work in Lua yet
 -- @ in visual mode
