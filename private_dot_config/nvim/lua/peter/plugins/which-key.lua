@@ -10,6 +10,9 @@ whichkey.register({
     g = {
         name = "git",
     },
+    h = {
+        name = "help",
+    },
 }, {prefix = "<leader>"})
 
 whichkey.register {
@@ -22,4 +25,5 @@ whichkey.register {
     ["Y"] = "which_key_ignore",
 }
 
+-- TODO: Change icons
 whichkey.setup {}

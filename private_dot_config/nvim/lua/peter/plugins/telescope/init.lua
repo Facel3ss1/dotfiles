@@ -1,6 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
+-- TODO: Make default layout go down instead of up
 telescope.setup {
     defaults = {
         mappings = {
@@ -16,15 +17,16 @@ telescope.setup {
             theme = "dropdown",
             previewer = false,
         },
-        help_tags = { theme = "ivy" },
-        man_pages = { theme = "ivy" },
-        oldfiles = { theme = "ivy" },
+        filetypes = { theme = "dropdown" },
         git_branches = { theme = "dropdown" },
         git_status = {
             git_icons = {
                 changed = "M",
             },
         },
+        help_tags = { theme = "ivy" },
+        man_pages = { theme = "ivy" },
+        oldfiles = { theme = "ivy" },
     },
     extensions = {
         file_browser = {
