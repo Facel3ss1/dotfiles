@@ -2,7 +2,10 @@ local M = {}
 
 function M.setup()
     local nnoremap = require("peter.remap").nnoremap
+
     nnoremap("<leader>gd", "<Cmd>DiffviewOpen<CR>", {desc = "Open diff view"})
+    nnoremap("<leader>gh", "<Cmd>DiffviewFileHistory<CR>", {desc = "Open history"})
+    nnoremap("<leader>gH", "<Cmd>DiffviewFileHistory %<CR>", {desc = "Open file history"})
 end
 
 function M.config()
