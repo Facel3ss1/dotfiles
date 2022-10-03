@@ -39,5 +39,6 @@ nnoremap("<leader>hl", "<Cmd>Telescope highlights<CR>", {desc = "Highlights"})
 nnoremap("<leader>hf", "<Cmd>Telescope filetypes<CR>", {desc = "File types"})
 nnoremap("<leader>ho", "<Cmd>Telescope vim_options<CR>", {desc = "Options"})
 nnoremap("<leader>ha", "<Cmd>Telescope autocommands<CR>", {desc = "Autocommands"})
+nnoremap("<leader>hn", "<Cmd>Telescope notify<CR>", {desc = "Notifications"})
 
 nnoremap("<leader>gb", "<Cmd>Telescope git_branches<CR>", {desc = "Branches"})

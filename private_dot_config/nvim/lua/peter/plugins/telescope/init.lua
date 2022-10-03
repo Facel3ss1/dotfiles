@@ -1,9 +1,12 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 
--- TODO: Make default layout go down instead of up
 telescope.setup {
     defaults = {
+        sorting_strategy = "ascending",
+        layout_config = {
+            prompt_position = "top",
+        },
         mappings = {
             ["i"] = {
                 ["<Up>"] = actions.cycle_history_prev,
@@ -26,7 +29,6 @@ telescope.setup {
         },
         help_tags = { theme = "ivy" },
         man_pages = { theme = "ivy" },
-        oldfiles = { theme = "ivy" },
     },
     extensions = {
         file_browser = {
