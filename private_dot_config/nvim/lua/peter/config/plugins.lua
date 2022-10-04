@@ -28,6 +28,7 @@ local function plugins(use)
     -- TODO: vim-matchup
     -- TODO: toggleterm
     -- TODO: Highlight trailing whitespace
+    -- TODO: dial.nvim
 
     use {"tpope/vim-sleuth", event = "BufReadPre"}
 
@@ -156,7 +157,7 @@ local function plugins(use)
 
     use {
         "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
+        event = {"InsertEnter", "CmdlineEnter"},
         module = "cmp",
         config = function() require("peter.plugins.cmp") end,
         requires = {
