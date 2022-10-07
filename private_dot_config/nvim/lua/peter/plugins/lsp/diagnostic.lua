@@ -28,6 +28,7 @@ local function get_highest_diag_severity()
     end
 end
 
+-- TODO: Replace these with ]e and use ]d for regular diag next/prev
 nnoremap("]d", function()
     vim.diagnostic.goto_next({severity = get_highest_diag_severity()})
 end, { desc = "Next diagnostic" })

@@ -1,3 +1,4 @@
+-- FIXME: Use vim.o (see https://github.com/neovim/neovim/pull/19982 and https://github.com/neovim/neovim/issues/20107)
 local opt = vim.opt
 
 opt.mouse = "a" -- Let me use the mouse for scrolling etc.
@@ -25,6 +26,8 @@ opt.autoindent = true -- Continue indentation from previous line
 opt.smartindent = true -- Smartly add indentation when starting new line
 
 opt.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
+
+-- TODO: undofile?
 
 -- TODO: Disable for certain filetypes (quickfix, etc.)
 opt.colorcolumn = "80" -- Put colored column at column 80

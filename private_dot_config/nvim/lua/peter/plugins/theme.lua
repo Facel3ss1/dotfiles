@@ -2,9 +2,12 @@ local ayu = require("ayu")
 local colors = require("ayu.colors")
 colors.generate(true)
 
+-- TODO: Move overrides to my own function
+-- TODO: Make terminal colors the same as ayu theme in Windows Terminal (ayu dark?)
 ayu.setup {
     mirage = true,
     overrides = {
+        -- TODO: Override LineNr for ts context if we do this
         -- NormalFloat = { bg = colors.panel_bg },
 
         -- nvim-notify

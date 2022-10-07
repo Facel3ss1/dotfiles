@@ -26,4 +26,5 @@ whichkey.register {
 }
 
 -- TODO: Change icons
+-- TODO: v shouldn't open menu
 whichkey.setup {}

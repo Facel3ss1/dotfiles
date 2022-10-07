@@ -16,6 +16,8 @@ autocmd("BufWritePost", {
     callback = function(opts)
         -- FIXME: Use filetype detection instead?
         -- FIXME: Discarding in Neogit?
+        -- FIXME: Somehow check the output of `chezmoi ignored?`
+        -- See https://github.com/alker0/chezmoi.vim
 
         -- Ignore paths in the .git folder
         local path = opts.match

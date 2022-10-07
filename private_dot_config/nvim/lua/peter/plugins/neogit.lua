@@ -1,5 +1,7 @@
 local M = {}
 
+-- TODO: Disable colorcolumn for neogit windows (except commits)
+
 function M.setup()
     local nnoremap = require("peter.remap").nnoremap
 

@@ -48,6 +48,7 @@ local function plugins(use)
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         module = "nvim-autopairs",
+        -- TODO: Fix ``` in lua comments, disable `?
         config = function() require("nvim-autopairs").setup {} end,
     }
     use {

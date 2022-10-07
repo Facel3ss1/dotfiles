@@ -1,3 +1,4 @@
+-- TODO: Automatically update installed packages
 require("mason").setup {
     ui = {
         border = "rounded",

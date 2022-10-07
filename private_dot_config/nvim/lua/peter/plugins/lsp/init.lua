@@ -6,14 +6,17 @@ local remap = require("peter.remap")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+-- FIXME: Use LspAttach autocommand in nvim 0.8
 local function custom_attach(_, bufnr)
     -- TODO: nvim-cmp-lsp-signature-help?
     -- TODO: (Auto) formatting
+    -- TODO: Guard mappings behind capabilities checks?
 
     local nnoremap = remap.bind("n", {buffer = bufnr})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
+    -- TODO: Change this keymap?
     nnoremap("gT", "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", {desc = "Go to type definition"})
     nnoremap("gI", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Go to implementations"})
     nnoremap("gr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Go to references"})
