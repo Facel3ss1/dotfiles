@@ -94,6 +94,13 @@ local function plugins(use)
         requires = "kyazdani42/nvim-web-devicons",
     }
     use {
+        "akinsho/bufferline.nvim",
+        tag = "v2.*",
+        event = "VimEnter",
+        config = function() require("peter.plugins.bufferline") end,
+        requires = "kyazdani42/nvim-web-devicons",
+    }
+    use {
         "folke/which-key.nvim",
         event = "VimEnter",
         config = function() require("peter.plugins.which-key") end,
