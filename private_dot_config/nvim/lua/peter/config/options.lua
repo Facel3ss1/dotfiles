@@ -36,7 +36,7 @@ opt.fillchars = {
     diff = "╱",
 }
 
--- TODO: Set conceallevel = 0 for help files?
+opt.virtualedit = "block"
 
 -- Split windows to the right and downwards
 opt.splitright = true

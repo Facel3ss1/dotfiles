@@ -61,7 +61,7 @@ autocmd({"BufLeave", "FocusLost", "InsertEnter", "WinLeave"}, {
 
 autocmd = augroup("YankHighlight", {clear = true})
 autocmd("TextYankPost", {
-    pattern = "*", callback = function() vim.highlight.on_yank() end,
+    pattern = "*", callback = function() pcall(vim.highlight.on_yank) end,
 })
 
 -- Only have cursorline on in the current window
