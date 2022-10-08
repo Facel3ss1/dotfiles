@@ -10,15 +10,15 @@ set -g fish_cursor_replace_one underscore
 # fish has a shim for csh setenv commands
 # eval (dircolors -c ~/.dircolors)
 
-# FIXME: Check for exa and nvim with type -q
-
-set -gx EDITOR 'nvim'
-set -gx VISUAL 'nvim'
+if type -q nvim
+    set -gx EDITOR 'nvim'
+    set -gx VISUAL 'nvim'
+    set -gx MANPAGER 'nvim +Man!'
+end
 
 # Make less support colors and scrolling w/ the mouse
 set -gx LESS '-R --mouse --wheel-lines=3'
 set -gx PAGER 'less'
-set -gx MANPAGER 'nvim +Man!'
 
 fish_add_path -g ~/.local/bin
 fish_add_path -g ~/.cargo/bin
@@ -27,14 +27,23 @@ set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; se
 if status is-interactive
     # TODO: Move to abbreviations file
     # TODO: Add git abbreviations
-    abbr --add --global vim 'nvim'
-    abbr --add --global vi 'nvim'
 
-    abbr --add --global ls 'exa'
-    abbr --add --global la 'exa -la --git'
-    abbr --add --global ll 'exa -l --git'
-    abbr --add --global lat 'exa -la --git --tree'
-    abbr --add --global llt 'exa -l --git --tree'
+    if type -q nvim
+        abbr --add --global vim 'nvim'
+        abbr --add --global vi 'nvim'
+    end
+
+    if type -q exa
+        abbr --add --global ls 'exa'
+        abbr --add --global la 'exa -la --git'
+        abbr --add --global ll 'exa -l --git'
+        abbr --add --global lat 'exa -la --git --tree'
+        abbr --add --global llt 'exa -l --git --tree'
+    else
+        abbr --add --global ls 'ls --color=auto'
+        abbr --add --global la 'ls -lA --color=auto'
+        abbr --add --global ll 'ls -l --color=auto'
+    end
 end
 
 if type -q starship
