@@ -2,17 +2,17 @@ require("peter.plugins.lsp.handlers")
 require("peter.plugins.lsp.diagnostic")
 
 local remap = require("peter.remap")
+local augroup = require("peter.au").augroup
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
--- FIXME: Use LspAttach autocommand in nvim 0.8
-local function custom_attach(_, bufnr)
+local function custom_attach(args)
     -- TODO: nvim-cmp-lsp-signature-help?
     -- TODO: (Auto) formatting
     -- TODO: Guard mappings behind capabilities checks?
 
-    local nnoremap = remap.bind("n", {buffer = bufnr})
+    local nnoremap = remap.bind("n", {buffer = args.buf})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
@@ -28,8 +28,11 @@ local function custom_attach(_, bufnr)
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
 end
 
+local autocmd = augroup("PeterLspAttach", {clear = true})
+autocmd("LspAttach", {callback = custom_attach})
+
 require("mason-lspconfig").setup {
-    ensure_installed = {"sumneko_lua", "rust_analyzer"},
+    ensure_installed = {"sumneko_lua"},
 }
 
 local settings = {
@@ -41,12 +44,6 @@ local settings = {
             },
             diagnostics = {
                 libraryFiles = "Disable",
-                globals = {
-                    "describe",
-                    "it",
-                    "before_each",
-                    "after_each",
-                },
             },
         },
     },
@@ -54,7 +51,6 @@ local settings = {
 
 local function default_handler(server_name)
     require("lspconfig")[server_name].setup {
-        on_attach = custom_attach,
         capabilities = capabilities,
         settings = settings[server_name],
     }

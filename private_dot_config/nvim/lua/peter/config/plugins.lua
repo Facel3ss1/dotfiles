@@ -137,8 +137,6 @@ local function plugins(use)
         "kosayoda/nvim-lightbulb",
         after = "nvim-lspconfig",
         config = function() require("peter.plugins.lightbulb") end,
-        -- FIXME: This workaround plugin was fixed in nvim 0.8
-        requires = "antoinemadec/FixCursorHold.nvim",
     }
 
     use {"folke/lua-dev.nvim", module = "lua-dev"}
@@ -205,7 +203,7 @@ local function plugins(use)
     }
 end
 
--- See :h pack-add for why we need the !
-vim.cmd("packadd! cfilter")
+-- See :h pack-add for why we need the bang
+vim.cmd.packadd {"cfilter", bang = true}
 
 require("peter.packer").setup(config, plugins)

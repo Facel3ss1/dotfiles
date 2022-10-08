@@ -9,6 +9,7 @@ ayu.setup {
     overrides = {
         -- TODO: Override LineNr for ts context if we do this
         -- NormalFloat = { bg = colors.panel_bg },
+        WinSeparator = { fg = colors.guide_active },
 
         -- nvim-notify
         NotifyTRACETitle = { fg = colors.comment },

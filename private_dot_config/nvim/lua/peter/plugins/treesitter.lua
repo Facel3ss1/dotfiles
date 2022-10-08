@@ -1,5 +1,4 @@
 require("nvim-treesitter.configs").setup {
-    -- FIXME: C, Lua and Vim are included in nvim 0.8
     ensure_installed = {
         "bash",
         "c",

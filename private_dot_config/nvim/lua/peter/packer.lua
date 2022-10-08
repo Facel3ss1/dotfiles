@@ -22,7 +22,7 @@ local function auto_compile()
             end
 
             require("peter.config.plugins")
-            vim.cmd("PackerCompile")
+            require("packer").compile()
             notify("Refreshed and compiled plugins")
         end,
         desc = "Refresh and compile plugins",
@@ -41,11 +41,11 @@ local function bootstrap()
             local out = vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
             notify(out)
 
-            vim.cmd("packadd! packer.nvim")
+            vim.cmd.packadd {"packer.nvim", bang = true}
             did_bootstrap = true
         end
     else
-        vim.cmd("packadd! packer.nvim")
+        vim.cmd.packadd {"packer.nvim", bang = true}
     end
 
     return did_bootstrap
