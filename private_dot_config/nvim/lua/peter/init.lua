@@ -1,6 +1,6 @@
--- Change leader to space
--- This is the first thing we do so that mappings from now on are set correctly
-vim.g.mapleader = " "
+-- Map the leaders first so that mappings from now on are set correctly
+vim.g.mapleader = " " -- <Space>
+vim.g.maplocalleader = "  " -- <Space><Space>
 
 -- TODO: Central place for icons
 

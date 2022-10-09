@@ -22,6 +22,8 @@ set -gx PAGER 'less'
 
 fish_add_path -g ~/.local/bin
 fish_add_path -g ~/.cargo/bin
+# elan is a fork of rustup but for installations of the Lean theorem prover
+fish_add_path -g ~/.elan/bin
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH # ghcup-env
 
 if status is-interactive

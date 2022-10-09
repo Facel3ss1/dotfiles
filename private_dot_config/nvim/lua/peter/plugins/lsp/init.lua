@@ -7,7 +7,7 @@ local augroup = require("peter.au").augroup
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-local function custom_attach(args)
+local function on_attach(args)
     -- TODO: nvim-cmp-lsp-signature-help?
     -- TODO: (Auto) formatting
     -- TODO: Guard mappings behind capabilities checks?
@@ -29,7 +29,7 @@ local function custom_attach(args)
 end
 
 local autocmd = augroup("PeterLspAttach", {clear = true})
-autocmd("LspAttach", {callback = custom_attach})
+autocmd("LspAttach", {callback = on_attach})
 
 require("mason-lspconfig").setup {
     ensure_installed = {"sumneko_lua"},

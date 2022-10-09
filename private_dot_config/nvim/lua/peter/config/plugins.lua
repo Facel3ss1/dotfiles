@@ -126,6 +126,7 @@ local function plugins(use)
     use {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
+        module = "lspconfig",
         config = function() require("peter.plugins.lsp") end,
     }
     use {
@@ -139,7 +140,26 @@ local function plugins(use)
         config = function() require("peter.plugins.lightbulb") end,
     }
 
-    use {"folke/lua-dev.nvim", module = "lua-dev"}
+    use {
+        "folke/lua-dev.nvim",
+        module = "lua-dev",
+        requires = "neovim/nvim-lspconfig",
+    }
+    use {
+        "Julian/lean.nvim",
+        cond = vim.fn.executable("lean-language-server") == 1,
+        ft = "lean3",
+        config = function()
+            require("lean").setup {
+                abbreviations = { builtin = true },
+                mappings = true,
+            }
+        end,
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "neovim/nvim-lspconfig",
+        },
+    }
 
     use {
         "nvim-telescope/telescope.nvim",
