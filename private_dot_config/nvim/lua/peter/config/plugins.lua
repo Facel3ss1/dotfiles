@@ -221,6 +221,8 @@ local function plugins(use)
             {"RRethy/nvim-treesitter-endwise", after = "nvim-treesitter"},
         },
     }
+
+    use {"dstein64/vim-startuptime", cmd = "StartupTime"}
 end
 
 -- See :h pack-add for why we need the bang
