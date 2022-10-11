@@ -45,7 +45,7 @@ opt.virtualedit = "block"
 opt.splitright = true
 opt.splitbelow = true
 
-if vim.fn.executable("rg") then
+if vim.fn.executable("rg") == 1 then
     opt.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep
     opt.grepformat = "%f:%l:%c:%m" -- ripgrep's output format
 end

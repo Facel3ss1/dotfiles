@@ -11,5 +11,6 @@ require("peter.config.keymap")
 require("peter.config.plugins")
 
 -- TODO: Configure gx for WSL using wsl-open
+-- TODO: executable() utility function
 -- TODO: health check for my config
 -- TODO: spell checks
