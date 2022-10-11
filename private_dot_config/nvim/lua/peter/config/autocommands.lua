@@ -75,3 +75,12 @@ autocmd("FileType", {
             + "q" -- Let me wrap comments with gq
     end,
 })
+
+autocmd = augroup("SetTerminalOptions", {clear = true})
+autocmd("TermOpen", {
+    callback = function()
+        vim.wo.number = false
+        vim.wo.relativenumber = false
+        vim.wo.colorcolumn = ""
+    end,
+})
