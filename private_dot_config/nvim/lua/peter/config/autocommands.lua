@@ -3,30 +3,13 @@ local autocmd
 
 -- TODO: Add descriptions to autocommands
 
--- Run chezmoi apply when we save our config
+-- Load chezmoi config if we are in the chezmoi directory
 
--- TODO: Move chezmoi path to an env.lua file or something
--- FIXME: Check for chezmoi using vim.fn.executable
--- FIXME: Use chezmoi template to fill this in?
-local chezmoi_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/"
-
-autocmd = augroup("ChezmoiApplyOnSave", {clear = true})
-autocmd("BufWritePost", {
-    pattern = chezmoi_dir .. "*",
-    callback = function(opts)
-        -- FIXME: Use filetype detection instead?
-        -- FIXME: Discarding in Neogit?
-        -- FIXME: Somehow check the output of `chezmoi ignored?`
-        -- See https://github.com/alker0/chezmoi.vim
-
-        -- Ignore paths in the .git folder
-        local path = opts.match
-        local git_paths = vim.fn.glob(chezmoi_dir .. ".git/*", false, true)
-        if vim.fn.index(git_paths, path) < 0 then
-            -- TODO: Use vim.notify
-            vim.cmd('!chezmoi apply --source-path "%"')
-        end
-    end,
+autocmd = vim.api.nvim_create_autocmd
+autocmd({"BufReadPost", "BufNewFile"}, {
+    pattern = "*/chezmoi/*",
+    once = true,
+    callback = function() require("peter.chezmoi") end,
 })
 
 -- Disables relativenumber for insert mode and inactive buffers.

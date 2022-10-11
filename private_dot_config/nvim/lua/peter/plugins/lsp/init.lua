@@ -61,8 +61,8 @@ require("mason-lspconfig").setup_handlers {
     ["sumneko_lua"] = function(server_name)
         require("lua-dev").setup {
             override = function(root_dir, library)
-                -- Make sure we enable lsp for the vim api in the chezmoi directory
-                local chezmoi_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/"
+                -- Add vim plugins and api to path if we are in the chezmoi directory
+                local chezmoi_dir = require("peter.chezmoi").source_dir
                 if require("lua-dev.util").has_file(chezmoi_dir, root_dir) then
                     library.enabled = true
                     library.plugins = true

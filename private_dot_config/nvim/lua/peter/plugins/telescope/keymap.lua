@@ -14,7 +14,7 @@ local function file_browser_in_containing_folder()
 end
 
 local function search_config()
-    local config_dir = vim.fn.expand("~") .. "/.local/share/chezmoi/private_dot_config/nvim/"
+    local config_dir = require("peter.chezmoi").source_dir .. "/private_dot_config/nvim/"
     -- TODO: :tcd on enter? Open in new tab?
     require("telescope.builtin").find_files({cwd = config_dir})
 end

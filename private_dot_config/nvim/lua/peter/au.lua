@@ -33,6 +33,4 @@ function M.augroup(name, augroup_opts)
     return autocmd, group_id
 end
 
-M.autocmd = vim.api.nvim_create_autocmd
-
 return M
