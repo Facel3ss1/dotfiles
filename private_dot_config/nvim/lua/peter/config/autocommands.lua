@@ -69,7 +69,7 @@ autocmd("FileType", {
     pattern = "*",
     callback = function()
         vim.opt.formatoptions = vim.opt.formatoptions
-            + "o" -- o and O will auto insert comments
+            - "o" -- o and O won't auto insert comments
             + "r" -- Insert comments when pressing enter
             + "j" -- Remove comment characters when joining
             + "q" -- Let me wrap comments with gq
