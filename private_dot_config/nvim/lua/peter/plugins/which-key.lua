@@ -16,6 +16,7 @@ whichkey.register({
 }, {prefix = "<leader>"})
 
 whichkey.register {
+    ["&"] = "which_key_ignore",
     ["£"] = "which_key_ignore",
     ["<C-d>"] = "which_key_ignore",
     ["<C-u>"] = "which_key_ignore",

@@ -12,5 +12,5 @@ vim.lsp.handlers["textDocument/definition"] = function(_, result)
         result = result[1]
     end
 
-    vim.lsp.util.jump_to_location(result, "utf-8")
+    vim.lsp.util.jump_to_location(result, "utf-8", false)
 end
