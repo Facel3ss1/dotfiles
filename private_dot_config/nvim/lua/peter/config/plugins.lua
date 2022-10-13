@@ -130,6 +130,13 @@ local function plugins(use)
         config = function() require("peter.plugins.lsp") end,
     }
     use {
+        "jose-elias-alvarez/null-ls.nvim",
+        module = "null-ls",
+        config = function() require("peter.plugins.null-ls") end,
+        requires = "nvim-lua/plenary.nvim",
+    }
+
+    use {
         "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
         config = function() require("peter.plugins.fidget") end,

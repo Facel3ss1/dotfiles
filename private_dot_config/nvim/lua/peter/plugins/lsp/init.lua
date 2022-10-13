@@ -12,7 +12,11 @@ local function on_attach(args)
     -- TODO: (Auto) formatting
     -- TODO: Guard mappings behind capabilities checks?
 
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local cap = vim.lsp.protocol.resolve_capabilities(client.server_capabilities)
+
     local nnoremap = remap.bind("n", {buffer = args.buf})
+    local vnoremap = remap.bind("v", {buffer = args.buf})
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
@@ -26,6 +30,14 @@ local function on_attach(args)
 
     nnoremap("<leader>cr", vim.lsp.buf.rename, {desc = "Rename"})
     nnoremap("<leader>ca", vim.lsp.buf.code_action, {desc = "Code action"})
+
+    if cap.documentFormattingProvider then
+        nnoremap("<leader>cf", vim.lsp.buf.format, {desc = "Format document"})
+    end
+
+    if cap.documentRangeFormattingProvider then
+        vnoremap("<leader>cf", vim.lsp.buf.format, {desc = "Format range"})
+    end
 end
 
 local autocmd = augroup("PeterLspAttach", {clear = true})
@@ -74,3 +86,5 @@ require("mason-lspconfig").setup_handlers {
     end,
     -- TODO: rust-tools
 }
+
+require("null-ls")
