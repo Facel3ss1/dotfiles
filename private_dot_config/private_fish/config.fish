@@ -1,5 +1,7 @@
 set fish_greeting
 
+# TODO: ctrl+y to autocomplete
+
 # Vi mode
 set -g fish_key_bindings fish_vi_key_bindings
 set -g fish_cursor_default block
@@ -11,32 +13,34 @@ set -g fish_cursor_replace_one underscore
 # eval (dircolors -c ~/.dircolors)
 
 if type -q nvim
-    set -gx EDITOR 'nvim'
-    set -gx VISUAL 'nvim'
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
     set -gx MANPAGER 'nvim +Man!'
 end
 
 # Make less support colors and scrolling w/ the mouse
 set -gx LESS '-R --mouse --wheel-lines=3'
-set -gx PAGER 'less'
+set -gx PAGER less
 
 fish_add_path -g ~/.local/bin
 fish_add_path -g ~/.cargo/bin
 # elan is a fork of rustup but for installations of the Lean theorem prover
 fish_add_path -g ~/.elan/bin
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH # ghcup-env
+# ghcup-env
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
 
 if status is-interactive
     # TODO: Move to abbreviations file
     # TODO: Add git abbreviations
 
     if type -q nvim
-        abbr --add --global vim 'nvim'
-        abbr --add --global vi 'nvim'
+        abbr --add --global vim nvim
+        abbr --add --global vi nvim
     end
 
     if type -q exa
-        abbr --add --global ls 'exa'
+        abbr --add --global ls exa
         abbr --add --global la 'exa -la --git'
         abbr --add --global ll 'exa -l --git'
         abbr --add --global lat 'exa -la --git --tree'
