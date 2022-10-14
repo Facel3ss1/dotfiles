@@ -1,5 +1,5 @@
 require("peter.plugins.lsp.handlers")
-require("peter.plugins.lsp.diagnostic")
+require("peter.plugins.lsp.diagnostics")
 
 local remap = require("peter.remap")
 local augroup = require("peter.au").augroup
