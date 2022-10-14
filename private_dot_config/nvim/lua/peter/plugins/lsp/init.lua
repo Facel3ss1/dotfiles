@@ -20,8 +20,8 @@ local function on_attach(args)
 
     nnoremap("K", vim.lsp.buf.hover, {desc = "View docs under cursor"})
     nnoremap("gd", vim.lsp.buf.definition, {desc = "Go to definition"})
-    -- TODO: Change this keymap?
-    nnoremap("gT", "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", {desc = "Go to type definition"})
+    nnoremap("gD", vim.lsp.buf.declaration, {desc = "Go to declaration"})
+    nnoremap("go", "<Cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>", {desc = "Go to type definition"})
     nnoremap("gI", "<Cmd>lua require('telescope.builtin').lsp_implementations()<CR>", {desc = "Go to implementations"})
     nnoremap("gr", "<Cmd>lua require('telescope.builtin').lsp_references()<CR>", {desc = "Go to references"})
 
