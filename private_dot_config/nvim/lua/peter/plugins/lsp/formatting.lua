@@ -1,0 +1,80 @@
+local M = {}
+
+local augroup = require("peter.au").augroup
+local remap = require("peter.remap")
+
+local null_ls = require("null-ls")
+
+M.should_format_on_save = true
+
+local function toggle_format_on_save()
+    M.should_format_on_save = not M.should_format_on_save
+
+    if M.should_format_on_save then
+        vim.notify("Enabled format on save", vim.log.levels.INFO, { title = "Formatting" })
+    else
+        vim.notify("Disabled format on save", vim.log.levels.INFO, { title = "Formatting" })
+    end
+end
+
+local function null_ls_has_method(filetype, method)
+    local sources = null_ls.get_sources()
+    for _, source in ipairs(sources) do
+        if source.filetypes[filetype] and source.methods[method] then
+            return true
+        end
+    end
+
+    return false
+end
+
+-- Called from the LspAttach autocommand
+function M.on_attach(args)
+    -- TODO: formatexpr?
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local capabilities = client.server_capabilities
+    local filetype = vim.bo[bufnr].filetype
+
+    local nnoremap = remap.bind("n", { buffer = bufnr })
+    local vnoremap = remap.bind("v", { buffer = bufnr })
+
+    if null_ls_has_method(filetype, null_ls.methods.FORMATTING) then
+        -- If null-ls can format this filetype, disable formatting on the other client
+        capabilities.documentFormattingProvider = client.name == "null-ls"
+    else
+        -- Otherwise, only enable if the regular client can format
+        capabilities.documentFormattingProvider = not (client.name == "null-ls")
+            and capabilities.documentFormattingProvider
+    end
+
+    if capabilities.documentFormattingProvider then
+        nnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
+
+        local autocmd = augroup("LspFormatOnSave", { clear = true })
+        autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                if M.should_format_on_save then
+                    vim.lsp.buf.format()
+                end
+            end,
+        })
+    end
+
+    if null_ls_has_method(filetype, null_ls.methods.RANGE_FORMATTING) then
+        capabilities.documentRangeFormattingProvider = client.name == "null-ls"
+    else
+        capabilities.documentRangeFormattingProvider = not (client.name == "null-ls")
+            and capabilities.documentRangeFormattingProvider
+    end
+
+    if capabilities.documentRangeFormattingProvider then
+        vnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
+    end
+
+    -- Global mapping instead of buffer local
+    remap.nnoremap("<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
+end
+
+return M

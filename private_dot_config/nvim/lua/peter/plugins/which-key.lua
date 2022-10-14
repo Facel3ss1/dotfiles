@@ -13,6 +13,9 @@ whichkey.register({
     h = {
         name = "help",
     },
+    t = {
+        name = "toggle",
+    },
 }, {prefix = "<leader>"})
 
 whichkey.register {
