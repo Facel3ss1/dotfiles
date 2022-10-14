@@ -37,6 +37,8 @@ nnoremap("[d", function()
     vim.diagnostic.goto_prev({severity = get_highest_diag_severity()})
 end, { desc = "Previous diagnostic" })
 
+nnoremap("<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
 -- Define diagnostic signs
 local signs = { Error = "", Warn = "", Info = "", Hint = "" }
 
