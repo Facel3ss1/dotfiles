@@ -7,12 +7,12 @@ the functionality comes from the plugins.
 ## Folder structure
 
 ```
-.
-├── init.lua         // Entry point for the configuration. Automatically sourced.
-└── lua              // Not automatically sourced, but required by `init.lua`.
-   └── peter         // Contains any utility modules that are used throughout the config.
-      ├── config     // Basic config of builtin neovim functionality.
-      └── plugins    // Plugin configuration. The files in here are only required when packer loads the plugins.
+nvim
+├── init.lua           // Entry point for the configuration. Automatically sourced.
+└── lua                // Not automatically sourced, but required by `init.lua`.
+    └── peter          // Contains any utility modules that are used throughout the config.
+        ├── config     // Basic config of builtin neovim functionality.
+        └── plugins    // Plugin configuration. The files in here are only required when packer loads the plugins.
 ```
 
 ## Requirements
