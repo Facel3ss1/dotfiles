@@ -84,6 +84,14 @@ require("mason-lspconfig").setup_handlers {
 
         default_handler(server_name)
     end,
+    ["clangd"] = function(server_name)
+        require("clangd_extensions").setup {
+            server = {
+                capabilities = capabilities,
+                settings = settings[server_name],
+            },
+        }
+    end,
     -- TODO: rust-tools
 }
 

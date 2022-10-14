@@ -147,10 +147,10 @@ local function plugins(use)
         config = function() require("peter.plugins.lightbulb") end,
     }
 
+    use {"folke/lua-dev.nvim", module = "lua-dev"}
     use {
-        "folke/lua-dev.nvim",
-        module = "lua-dev",
-        requires = "neovim/nvim-lspconfig",
+        "https://git.sr.ht/~p00f/clangd_extensions.nvim",
+        module = "clangd_extensions",
     }
     use {
         "Julian/lean.nvim",
@@ -162,10 +162,7 @@ local function plugins(use)
                 mappings = true,
             }
         end,
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "neovim/nvim-lspconfig",
-        },
+        requires = "nvim-lua/plenary.nvim",
     }
 
     use {
