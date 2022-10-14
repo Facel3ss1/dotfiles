@@ -1,6 +1,9 @@
-require("null-ls").setup {
+local null_ls = require("null-ls")
+
+null_ls.setup {
     sources = {
-        require("null-ls").builtins.formatting.fish_indent,
-        require("null-ls").builtins.diagnostics.fish,
+        null_ls.builtins.formatting.fish_indent,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.fish,
     },
 }

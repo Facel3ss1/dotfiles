@@ -57,6 +57,9 @@ local settings = {
             diagnostics = {
                 libraryFiles = "Disable",
             },
+            format = {
+                enable = false,
+            },
         },
     },
 }
