@@ -13,7 +13,7 @@ function M.config()
     require("neogit").setup {
         disable_builtin_notifications = true,
         signs = {
-            section = {"", ""},
+            section = {"", ""},
             item = {"", ""},
         },
         integrations = {
