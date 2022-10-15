@@ -61,11 +61,11 @@ end
 require("mason-lspconfig").setup_handlers {
     default_handler,
     ["sumneko_lua"] = function(server_name)
-        require("lua-dev").setup {
+        require("neodev").setup {
             override = function(root_dir, library)
                 -- Add vim plugins and api to path if we are in the chezmoi directory
                 local chezmoi_dir = require("peter.chezmoi").source_dir
-                if require("lua-dev.util").has_file(chezmoi_dir, root_dir) then
+                if require("neodev.util").has_file(chezmoi_dir, root_dir) then
                     library.enabled = true
                     library.plugins = true
                 end

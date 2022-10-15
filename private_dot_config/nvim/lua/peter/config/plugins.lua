@@ -147,7 +147,7 @@ local function plugins(use)
         config = function() require("peter.plugins.lightbulb") end,
     }
 
-    use {"folke/lua-dev.nvim", module = "lua-dev"}
+    use {"folke/neodev.nvim", module = "neodev"}
     use {
         "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         module = "clangd_extensions",
