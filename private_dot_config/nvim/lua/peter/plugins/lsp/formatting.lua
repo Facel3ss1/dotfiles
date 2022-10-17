@@ -51,15 +51,19 @@ function M.on_attach(args)
     if capabilities.documentFormattingProvider then
         nnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
 
-        local autocmd = augroup("LspFormatOnSave", { clear = true })
-        autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-                if M.should_format_on_save then
-                    vim.lsp.buf.format()
-                end
-            end,
-        })
+        -- Note that we don't clear the autogroup when we attach to a new buffer
+        local autocmd, group_id = augroup("LspFormatOnSave", { clear = false })
+        -- Ensure that there is exactly one formatting autocommand per buffer
+        if #vim.api.nvim_get_autocmds { group = group_id, buffer = bufnr } == 0 then
+            autocmd("BufWritePre", {
+                buffer = bufnr,
+                callback = function()
+                    if M.should_format_on_save then
+                        vim.lsp.buf.format()
+                    end
+                end,
+            })
+        end
     end
 
     if null_ls_has_method(filetype, null_ls.methods.RANGE_FORMATTING) then
