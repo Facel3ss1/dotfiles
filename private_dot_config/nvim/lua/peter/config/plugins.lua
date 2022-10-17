@@ -70,6 +70,7 @@ local function plugins(use)
         end,
     }
 
+    -- TODO: Highlight current indent level
     use { "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" }
     use {
         "lukas-reineke/virt-column.nvim",
@@ -257,6 +258,8 @@ local function plugins(use)
         },
     }
 
+    -- TODO: nvim-ts-context-commentstring with lua help comments?
+    -- TODO: nvim-ts-autotag
     use {
         "nvim-treesitter/nvim-treesitter",
         -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
@@ -264,16 +267,16 @@ local function plugins(use)
             require("nvim-treesitter.install").update { with_sync = true }
         end,
         event = "VimEnter",
+        module = "nvim-treesitter",
         config = function()
             require("peter.plugins.treesitter")
         end,
-        requires = {
-            { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" },
-            { "RRethy/nvim-treesitter-endwise", after = "nvim-treesitter" },
-            -- TODO: treesitter playground
-            -- TODO: nvim-ts-context-commentstring with lua help comments?
-            -- TODO: nvim-ts-autotag
-        },
+    }
+    use { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" }
+    use { "RRethy/nvim-treesitter-endwise", after = "nvim-treesitter" }
+    use {
+        "nvim-treesitter/playground",
+        cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
     }
 
     use { "dstein64/vim-startuptime", cmd = "StartupTime" }

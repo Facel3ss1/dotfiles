@@ -44,6 +44,9 @@ require("nvim-treesitter.configs").setup {
     endwise = {
         enable = true,
     },
+    playground = {
+        enable = true,
+    },
     -- TODO: enable indent feature
     -- TODO: folding
 }
