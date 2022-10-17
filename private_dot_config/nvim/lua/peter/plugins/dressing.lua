@@ -19,5 +19,5 @@ require("dressing").setup {
                 }
             end
         end,
-    }
+    },
 }

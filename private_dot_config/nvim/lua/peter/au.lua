@@ -22,10 +22,7 @@ function M.augroup(name, augroup_opts)
 
     --- @type PeterAutocmd
     local function autocmd(event, autocmd_opts)
-        autocmd_opts = vim.tbl_extend("force",
-            autocmd_opts or {},
-            {group = group_id}
-        )
+        autocmd_opts = vim.tbl_extend("force", autocmd_opts or {}, { group = group_id })
 
         return vim.api.nvim_create_autocmd(event, autocmd_opts)
     end

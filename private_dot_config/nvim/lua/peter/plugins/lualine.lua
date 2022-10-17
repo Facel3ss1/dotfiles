@@ -10,9 +10,9 @@ require("lualine").setup {
         component_separators = { left = "|", right = "|" },
     },
     sections = {
-        lualine_a = {"mode"},
+        lualine_a = { "mode" },
         lualine_b = {
-            {"branch", icon = ""},
+            { "branch", icon = "" },
         },
         lualine_c = {
             {
@@ -21,10 +21,10 @@ require("lualine").setup {
                     error = " ",
                     warn = " ",
                     info = " ",
-                    hint = " "
+                    hint = " ",
                 },
             },
-            {"filename", path = 1},
+            { "filename", path = 1 },
         },
         lualine_x = {
             function()
@@ -49,10 +49,10 @@ require("lualine").setup {
                     mac = "cr",
                 },
             },
-            {"filetype", colored = false},
+            { "filetype", colored = false },
         },
-        lualine_y = {"progress"},
-        lualine_z = {"location"},
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
     },
-    extensions = {"man", "quickfix"},
+    extensions = { "man", "quickfix" },
 }

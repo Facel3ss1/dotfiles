@@ -6,8 +6,8 @@ local snoremap = remap.snoremap
 
 -- Make j and k take line wrapping into account
 -- If we supply a count beforehand, use default behaviour
-nnoremap("j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
-nnoremap("k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
+nnoremap("j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+nnoremap("k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Bri'ish version of # key
 nnoremap("£", "#")
@@ -15,15 +15,15 @@ nnoremap("£", "#")
 -- Make <Esc> clear search highlights
 nnoremap("<Esc>", "<Cmd>nohl<CR>")
 
-nnoremap("gw", "*N", {desc = "Search word under cursor"})
-xnoremap("gw", "*N", {desc = "Search word under cursor (visual)"})
+nnoremap("gw", "*N", { desc = "Search word under cursor" })
+xnoremap("gw", "*N", { desc = "Search word under cursor (visual)" })
 
-nnoremap("<A-j>", ":.m .+1<CR>==", {desc = "Move line up", silent = true})
-nnoremap("<A-k>", ":.m .-2<CR>==", {desc = "Move line down", silent = true})
-xnoremap("<A-j>", ":m '>+1<CR>gv=gv", {desc = "Move line up (visual)", silent = true})
-xnoremap("<A-k>", ":m '<-2<CR>gv=gv", {desc = "Move line down (visual)", silent = true})
-inoremap("<A-j>", "<Esc>:.m .+1<CR>==gi", {desc = "Move line up (insert)", silent = true})
-inoremap("<A-k>", "<Esc>:.m .-2<CR>==gi", {desc = "Move line down (insert)", silent = true})
+nnoremap("<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
+nnoremap("<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })
+xnoremap("<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line up (visual)", silent = true })
+xnoremap("<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line down (visual)", silent = true })
+inoremap("<A-j>", "<Esc>:.m .+1<CR>==gi", { desc = "Move line up (insert)", silent = true })
+inoremap("<A-k>", "<Esc>:.m .-2<CR>==gi", { desc = "Move line down (insert)", silent = true })
 
 -- Backspace in select mode changes instead of deletes
 snoremap("<BS>", "<C-g>c")
@@ -40,10 +40,10 @@ nnoremap("<C-u>", "<C-u>zz")
 
 -- TODO: Wrapping
 -- TODO: ]Q etc for first and last?
-nnoremap("]q", "<Cmd>cnext<CR>zz", {desc = "Next quickfix item"})
-nnoremap("[q", "<Cmd>cprev<CR>zz", {desc = "Previous quickfix item"})
-nnoremap("]l", "<Cmd>lnext<CR>zz", {desc = "Next location list item"})
-nnoremap("[l", "<Cmd>lprev<CR>zz", {desc = "Previous location list item"})
+nnoremap("]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix item" })
+nnoremap("[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
+nnoremap("]l", "<Cmd>lnext<CR>zz", { desc = "Next location list item" })
+nnoremap("[l", "<Cmd>lprev<CR>zz", { desc = "Previous location list item" })
 
 -- FIXME: This doesn't work in Lua yet
 -- @ in visual mode

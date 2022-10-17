@@ -4,7 +4,7 @@ luasnip.config.set_config {
     history = true,
 }
 
-local map = require("peter.remap").bind({"i", "s"}, {silent = true})
+local map = require("peter.remap").bind({ "i", "s" }, { silent = true })
 
 -- Tab will be the snippet expansion/jump key
 map("<Tab>", function()
@@ -13,7 +13,7 @@ map("<Tab>", function()
     else
         return "<Tab>"
     end
-end, {expr = true})
+end, { expr = true })
 
 map("<S-Tab>", function()
     if luasnip.jumpable(-1) then
@@ -21,4 +21,4 @@ map("<S-Tab>", function()
     else
         return "<S-Tab>"
     end
-end, {expr = true})
+end, { expr = true })

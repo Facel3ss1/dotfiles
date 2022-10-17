@@ -30,11 +30,11 @@ end
 
 -- TODO: Replace these with ]e and use ]d for regular diag next/prev
 nnoremap("]d", function()
-    vim.diagnostic.goto_next({severity = get_highest_diag_severity()})
+    vim.diagnostic.goto_next { severity = get_highest_diag_severity() }
 end, { desc = "Next diagnostic" })
 
 nnoremap("[d", function()
-    vim.diagnostic.goto_prev({severity = get_highest_diag_severity()})
+    vim.diagnostic.goto_prev { severity = get_highest_diag_severity() }
 end, { desc = "Previous diagnostic" })
 
 nnoremap("<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })

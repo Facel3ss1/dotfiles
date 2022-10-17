@@ -4,7 +4,7 @@ local augroup = require("peter.au").augroup
 
 M.source_dir = vim.fn.expand("~") .. "/.local/share/chezmoi"
 
-local autocmd = augroup("ChezmoiApplyOnSave", {clear = true})
+local autocmd = augroup("ChezmoiApplyOnSave", { clear = true })
 autocmd("BufWritePost", {
     pattern = M.source_dir .. "/*",
     callback = function(opts)
@@ -21,15 +21,15 @@ autocmd("BufWritePost", {
         end
 
         local function chezmoi_info(message)
-            vim.notify(message, vim.log.levels.INFO, {title = "chezmoi"})
+            vim.notify(message, vim.log.levels.INFO, { title = "chezmoi" })
         end
 
         local function chezmoi_warn(message)
-            vim.notify(message, vim.log.levels.WARN, {title = "chezmoi"})
+            vim.notify(message, vim.log.levels.WARN, { title = "chezmoi" })
         end
 
         local relative_path = vim.fn.expand("%")
-        vim.fn.jobstart({"chezmoi", "apply", "--source-path", relative_path}, {
+        vim.fn.jobstart({ "chezmoi", "apply", "--source-path", relative_path }, {
             stderr_buffered = true,
             on_exit = function(_, exit_code, _)
                 if exit_code == 0 then

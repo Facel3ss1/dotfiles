@@ -16,60 +16,75 @@ local config = {
 
 local function plugins(use)
     -- Packer can manage itself as an optional plugin
-    use {"wbthomason/packer.nvim", opt = true}
+    use { "wbthomason/packer.nvim", opt = true }
 
     use {
         "Shatur/neovim-ayu",
-        config = function() require("peter.plugins.theme") end,
+        config = function()
+            require("peter.plugins.theme")
+        end,
     }
 
     -- TODO: vim-splitjoin, or nvim-trevJ
-    -- TODO: nvim-ts-context-commentstring with lua help comments?
     -- TODO: vim-matchup
     -- TODO: toggleterm
     -- TODO: Highlight trailing whitespace
     -- TODO: dial.nvim
+    -- TODO: nvim-semantic-tokens
+    -- TODO: glow.nvim
 
-    use {"tpope/vim-sleuth", event = "BufReadPre"}
+    use { "tpope/vim-sleuth", event = "BufReadPre" }
 
     use {
         "numToStr/Comment.nvim",
-        keys = {"gc", "gb"},
-        config = function() require("Comment").setup {} end,
+        keys = { "gc", "gb" },
+        config = function()
+            require("Comment").setup {}
+        end,
     }
     use {
         "kylechui/nvim-surround",
         tag = "*",
         event = "BufReadPre",
         -- TODO: Surround with braces on new line?
-        config = function() require("nvim-surround").setup {} end,
+        config = function()
+            require("nvim-surround").setup {}
+        end,
     }
     use {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         module = "nvim-autopairs",
         -- TODO: Fix ``` in lua comments, disable `?
-        config = function() require("nvim-autopairs").setup {} end,
+        config = function()
+            require("nvim-autopairs").setup {}
+        end,
     }
     use {
         -- ALTERNATIVE: vim-wordmotion
         -- ALTERNATIVE: vim-textobj-variable-segment
         "bkad/CamelCaseMotion",
         event = "BufReadPre",
-        setup = function() vim.g.camelcasemotion_key = "\\" end,
+        setup = function()
+            vim.g.camelcasemotion_key = "\\"
+        end,
     }
 
-    use {"lukas-reineke/indent-blankline.nvim", event = "BufReadPre"}
+    use { "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" }
     use {
         "lukas-reineke/virt-column.nvim",
         event = "BufReadPre",
-        config = function() require("virt-column").setup() end,
+        config = function()
+            require("virt-column").setup()
+        end,
     }
 
     use {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
-        config = function() require("peter.plugins.gitsigns") end,
+        config = function()
+            require("peter.plugins.gitsigns")
+        end,
     }
     use {
         "TimUntersberger/neogit",
@@ -81,7 +96,7 @@ local function plugins(use)
     }
     use {
         "sindrets/diffview.nvim",
-        cmd = {"DiffviewOpen", "DiffviewFileHistory"},
+        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
         module = "diffview",
         setup = require("peter.plugins.diffview").setup,
         config = require("peter.plugins.diffview").config,
@@ -91,63 +106,83 @@ local function plugins(use)
     use {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
-        config = function() require("peter.plugins.lualine") end,
+        config = function()
+            require("peter.plugins.lualine")
+        end,
         requires = "kyazdani42/nvim-web-devicons",
     }
     use {
         "akinsho/bufferline.nvim",
         tag = "v2.*",
         event = "VimEnter",
-        config = function() require("peter.plugins.bufferline") end,
+        config = function()
+            require("peter.plugins.bufferline")
+        end,
         requires = "kyazdani42/nvim-web-devicons",
     }
     use {
         "folke/which-key.nvim",
         event = "VimEnter",
-        config = function() require("peter.plugins.which-key") end,
+        config = function()
+            require("peter.plugins.which-key")
+        end,
     }
     use {
         "rcarriga/nvim-notify",
         event = "VimEnter",
-        config = function() require("peter.plugins.notify") end,
+        config = function()
+            require("peter.plugins.notify")
+        end,
     }
     use {
         "stevearc/dressing.nvim",
         event = "VimEnter",
-        config = function() require("peter.plugins.dressing") end,
+        config = function()
+            require("peter.plugins.dressing")
+        end,
     }
 
     -- It is not recommended to lazy load mason
     use {
         "williamboman/mason.nvim",
-        config = function() require("peter.plugins.mason") end,
+        config = function()
+            require("peter.plugins.mason")
+        end,
     }
-    use {"williamboman/mason-lspconfig.nvim", module = "mason-lspconfig"}
+    use { "williamboman/mason-lspconfig.nvim", module = "mason-lspconfig" }
     use {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",
         module = "lspconfig",
-        config = function() require("peter.plugins.lsp") end,
+        config = function()
+            require("peter.plugins.lsp")
+        end,
     }
     use {
         "jose-elias-alvarez/null-ls.nvim",
         module = "null-ls",
-        config = function() require("peter.plugins.null-ls") end,
+        config = function()
+            require("peter.plugins.null-ls")
+        end,
         requires = "nvim-lua/plenary.nvim",
     }
 
     use {
         "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
-        config = function() require("peter.plugins.fidget") end,
+        config = function()
+            require("peter.plugins.fidget")
+        end,
     }
     use {
         "kosayoda/nvim-lightbulb",
         after = "nvim-lspconfig",
-        config = function() require("peter.plugins.lightbulb") end,
+        config = function()
+            require("peter.plugins.lightbulb")
+        end,
     }
 
-    use {"folke/neodev.nvim", module = "neodev"}
+    use { "folke/neodev.nvim", module = "neodev" }
     use {
         "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         module = "clangd_extensions",
@@ -170,8 +205,12 @@ local function plugins(use)
         branch = "0.1.x",
         cmd = "Telescope",
         module = "telescope",
-        setup = function() require("peter.plugins.telescope.keymap") end,
-        config = function() require("peter.plugins.telescope") end,
+        setup = function()
+            require("peter.plugins.telescope.keymap")
+        end,
+        config = function()
+            require("peter.plugins.telescope")
+        end,
         requires = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
@@ -181,18 +220,20 @@ local function plugins(use)
                 cond = vim.fn.executable("make") == 1,
                 module = "telescope._extensions.fzf",
             },
-            {"nvim-telescope/telescope-file-browser.nvim", module = "telescope._extensions.file_browser"},
+            { "nvim-telescope/telescope-file-browser.nvim", module = "telescope._extensions.file_browser" },
         },
     }
 
     use {
         "hrsh7th/nvim-cmp",
-        event = {"InsertEnter", "CmdlineEnter"},
+        event = { "InsertEnter", "CmdlineEnter" },
         module = "cmp",
-        config = function() require("peter.plugins.cmp") end,
+        config = function()
+            require("peter.plugins.cmp")
+        end,
         requires = {
-            {"onsails/lspkind.nvim", module = "lspkind"},
-            {"hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp"},
+            { "onsails/lspkind.nvim", module = "lspkind" },
+            { "hrsh7th/cmp-nvim-lsp", module = "cmp_nvim_lsp" },
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
             "dmitmel/cmp-cmdline-history",
@@ -205,7 +246,9 @@ local function plugins(use)
         "L3MON4D3/LuaSnip",
         tag = "v1.*",
         module = "luasnip",
-        config = function() require("peter.plugins.luasnip") end,
+        config = function()
+            require("peter.plugins.luasnip")
+        end,
         requires = {
             "rafamadriz/friendly-snippets",
             config = function()
@@ -217,19 +260,26 @@ local function plugins(use)
     use {
         "nvim-treesitter/nvim-treesitter",
         -- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
-        run = function() require("nvim-treesitter.install").update({with_sync = true}) end,
+        run = function()
+            require("nvim-treesitter.install").update { with_sync = true }
+        end,
         event = "VimEnter",
-        config = function() require('peter.plugins.treesitter') end,
+        config = function()
+            require("peter.plugins.treesitter")
+        end,
         requires = {
-            {"nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter"},
-            {"RRethy/nvim-treesitter-endwise", after = "nvim-treesitter"},
+            { "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" },
+            { "RRethy/nvim-treesitter-endwise", after = "nvim-treesitter" },
+            -- TODO: treesitter playground
+            -- TODO: nvim-ts-context-commentstring with lua help comments?
+            -- TODO: nvim-ts-autotag
         },
     }
 
-    use {"dstein64/vim-startuptime", cmd = "StartupTime"}
+    use { "dstein64/vim-startuptime", cmd = "StartupTime" }
 end
 
 -- See :h pack-add for why we need the bang
-vim.cmd.packadd {"cfilter", bang = true}
+vim.cmd.packadd { "cfilter", bang = true }
 
 require("peter.packer").setup(config, plugins)

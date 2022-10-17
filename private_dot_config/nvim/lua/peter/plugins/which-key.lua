@@ -2,7 +2,7 @@ local whichkey = require("which-key")
 
 whichkey.register({
     c = {
-        name = "code"
+        name = "code",
     },
     f = {
         name = "find",
@@ -16,7 +16,7 @@ whichkey.register({
     t = {
         name = "toggle",
     },
-}, {prefix = "<leader>"})
+}, { prefix = "<leader>" })
 
 whichkey.register {
     ["&"] = "which_key_ignore",

@@ -17,16 +17,10 @@ local M = {}
 --- @return fun(lhs: string, rhs: string|function, opts?: table<string, any>) remap # The mapping function
 --- @nodiscard
 function M.bind(op, default_opts)
-    default_opts = vim.tbl_extend("force",
-        {noremap = true},
-        default_opts or {}
-    )
+    default_opts = vim.tbl_extend("force", { noremap = true }, default_opts or {})
 
     return function(lhs, rhs, opts)
-        opts = vim.tbl_extend("force",
-            default_opts,
-            opts or {}
-        )
+        opts = vim.tbl_extend("force", default_opts, opts or {})
 
         vim.keymap.set(op, lhs, rhs, opts)
     end

@@ -3,17 +3,17 @@ local augroup = require("peter.au").augroup
 local M = {}
 
 local function notify(msg, level)
-    vim.notify(msg, level, {title = "Packer"})
+    vim.notify(msg, level, { title = "Packer" })
 end
 
 local function confirm(msg)
-    return vim.fn.confirm(msg, table.concat({"&Yes", "&No"}, "\n"), 1) == 1
+    return vim.fn.confirm(msg, table.concat({ "&Yes", "&No" }, "\n"), 1) == 1
 end
 
 local function auto_compile()
-    local autocmd = augroup("PackerAutoCompile", {clear = true})
+    local autocmd = augroup("PackerAutoCompile", { clear = true })
     autocmd("BufWritePost", {
-        pattern = {"*/peter/plugins/*.lua", "*/peter/config/plugins.lua", "*/peter/packer.lua"},
+        pattern = { "*/peter/plugins/*.lua", "*/peter/config/plugins.lua", "*/peter/packer.lua" },
         callback = function()
             for p, _ in pairs(package.loaded) do
                 if p:find("^peter.plugins") or p == "peter.config.plugins" or p == "peter.packer" then
@@ -38,14 +38,21 @@ local function bootstrap()
         -- TODO: Put this in a :PackerBootstrap command
         if confirm("Download packer and install plugins?") then
             notify("Downloading packer.nvim...")
-            local out = vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+            local out = vim.fn.system {
+                "git",
+                "clone",
+                "--depth",
+                "1",
+                "https://github.com/wbthomason/packer.nvim",
+                install_path,
+            }
             notify(out)
 
-            vim.cmd.packadd {"packer.nvim", bang = true}
+            vim.cmd.packadd { "packer.nvim", bang = true }
             did_bootstrap = true
         end
     else
-        vim.cmd.packadd {"packer.nvim", bang = true}
+        vim.cmd.packadd { "packer.nvim", bang = true }
     end
 
     return did_bootstrap
