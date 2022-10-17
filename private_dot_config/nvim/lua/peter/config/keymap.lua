@@ -4,6 +4,10 @@ local xnoremap = remap.xnoremap
 local inoremap = remap.inoremap
 local snoremap = remap.snoremap
 
+-- Space is the leader key, so remove the default behaviour
+-- This will also make which-key show when we press space
+nnoremap("<Space>", "<Nop>")
+
 -- Make j and k take line wrapping into account
 -- If we supply a count beforehand, use default behaviour
 nnoremap("j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
