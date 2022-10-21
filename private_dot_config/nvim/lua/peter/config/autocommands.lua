@@ -28,8 +28,8 @@ autocmd = augroup("NumberToggle", { clear = true })
 autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
     pattern = "*",
     callback = function()
-        if vim.o.number and vim.api.nvim_get_mode().mode ~= "i" then
-            vim.opt.relativenumber = true
+        if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
+            vim.wo.relativenumber = true
             enable_ts_context()
         end
     end,
@@ -37,8 +37,8 @@ autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
 autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
     pattern = "*",
     callback = function()
-        if vim.o.number then
-            vim.opt.relativenumber = false
+        if vim.wo.number then
+            vim.wo.relativenumber = false
             enable_ts_context()
         end
     end,
@@ -58,7 +58,7 @@ autocmd("TextYankPost", {
 
 local function set_cursorline(value)
     return function()
-        vim.opt.cursorline = value
+        vim.wo.cursorline = value
     end
 end
 

@@ -1,4 +1,4 @@
-vim.opt.showmode = false
+vim.o.showmode = false
 
 -- TODO: Add winbar in nvim 0.8
 -- TODO: Add on_click telescope prompts
