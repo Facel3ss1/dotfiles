@@ -28,7 +28,10 @@ telescope.setup {
             },
         },
         help_tags = { theme = "ivy" },
-        man_pages = { theme = "ivy" },
+        man_pages = {
+            theme = "ivy",
+            sections = { "ALL" },
+        },
     },
     extensions = {
         file_browser = {
