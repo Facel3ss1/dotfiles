@@ -10,7 +10,7 @@ vim.diagnostic.config {
     severity_sort = true,
 }
 
--- Navigation between diagnostics prioritises errors first, then warnings etc.
+-- Navigation between "problems" prioritises errors first, then warnings etc.
 
 local severity_levels = {
     vim.diagnostic.severity.ERROR,
@@ -28,14 +28,16 @@ local function get_highest_diag_severity()
     end
 end
 
--- TODO: Replace these with ]e and use ]d for regular diag next/prev
-nnoremap("]d", function()
+nnoremap("]e", function()
     vim.diagnostic.goto_next { severity = get_highest_diag_severity() }
-end, { desc = "Next diagnostic" })
+end, { desc = "Next problem" })
 
-nnoremap("[d", function()
+nnoremap("[e", function()
     vim.diagnostic.goto_prev { severity = get_highest_diag_severity() }
-end, { desc = "Previous diagnostic" })
+end, { desc = "Previous problem" })
+
+nnoremap("]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+nnoremap("[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
 
 nnoremap("<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
