@@ -1,0 +1,35 @@
+[user]
+	name = Peter Medus
+	email = 16763503+Facel3ss1@users.noreply.github.com
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	# Don't use less if content fits on the terminal screen
+	# pager = less -F -X
+	# Don't clear the screen after using less
+	# pager = less -X
+[pull]
+	ff = only
+[rebase]
+	autoSquash = true
+[alias]
+	s = status
+	l = log --graph --decorate --pretty=oneline --abbrev-commit
+[credential]
+	{{ if .wsl.isWSL -}}
+	# Use Windows' credential manager
+	helper = /mnt/c/Users/{{ .wsl.windowsUsername }}/scoop/apps/git/current/mingw64/bin/git-credential-manager-core.exe
+	{{- else -}}
+	helper = manager-core
+	{{- end }}
+# This requires Git 2.36+
+[includeIf "hasconfig:remote.*.url:{{ .uni.git.remote }}/**"]
+	# This file overrides the email for university repositories
+	path = uni
+[credential "{{ .uni.git.remote }}"]
+	# See https://github.com/GitCredentialManager/git-credential-manager/blob/main/docs/gitlab.md
+	GitLabDevClientId = {{ .uni.git.GitLabDevClientId }}
+	GitLabDevClientSecret = {{ .uni.git.GitLabDevClientSecret }}
+	gitLabAuthModes = browser
+	provider = gitlab
