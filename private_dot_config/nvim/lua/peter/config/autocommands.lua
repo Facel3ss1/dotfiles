@@ -67,6 +67,36 @@ autocmd("WinEnter", { callback = set_cursorline(true) })
 autocmd("WinLeave", { callback = set_cursorline(false) })
 autocmd("FileType", { pattern = "TelescopePrompt", callback = set_cursorline(false) })
 
+-- Disable/Change colorcolumn for certain filetypes
+-- TODO: buftypes? filenames?
+
+local function disable_colorcolumn()
+    if vim.wo.colorcolumn ~= "80" then
+        return
+    end
+    vim.wo.colorcolumn = ""
+end
+
+autocmd = augroup("SetColorColumn", { clear = true })
+autocmd("FileType", {
+    pattern = { "gitcommit", "NeogitCommitMessage" },
+    callback = function()
+        vim.wo.colorcolumn = "50,72"
+    end,
+})
+autocmd("FileType", {
+    pattern = {
+        "help",
+        "gitrebase",
+        "qf",
+        "checkhealth",
+        "Neogit*",
+        "packer",
+        "tsplayground",
+        "startuptime",
+    },
+    callback = disable_colorcolumn,
+})
 -- Each filetype will have it's own formatoptions which we need to override
 
 autocmd = augroup("SetFormatOptions", { clear = true })

@@ -26,7 +26,6 @@ vim.o.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
 
 -- TODO: undofile?
 
--- TODO: Disable for certain filetypes (quickfix, etc.)
 vim.o.colorcolumn = "80" -- Put colored column at column 80
 vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
