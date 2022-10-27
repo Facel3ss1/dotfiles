@@ -20,7 +20,8 @@ local function search_config()
 end
 
 nnoremap("<leader>fd", "<Cmd>Telescope find_files<CR>", { desc = "Find file" })
-nnoremap("<leader>ft", "<Cmd>Telescope git_files<CR>", { desc = "Find git file" })
+nnoremap("<leader>fD", "<Cmd>Telescope git_files<CR>", { desc = "Find git file" })
+nnoremap("<leader>fb", "<Cmd>Telescope buffers<CR>", { desc = "Find buffer" })
 nnoremap("<leader>fg", "<Cmd>Telescope live_grep<CR>", { desc = "Live grep" })
 nnoremap("<leader>fG", grep_prompt, { desc = "Grep prompt" })
 nnoremap("<leader>fo", "<Cmd>Telescope oldfiles<CR>", { desc = "Open recent file" })
