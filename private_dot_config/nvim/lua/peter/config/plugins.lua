@@ -26,14 +26,19 @@ local function plugins(use)
     }
 
     -- TODO: vim-splitjoin, or nvim-trevJ
+    -- TODO: lsp_signature.nvim?
     -- TODO: vim-matchup
-    -- TODO: toggleterm
     -- TODO: Highlight trailing whitespace
     -- TODO: dial.nvim
-    -- TODO: nvim-semantic-tokens
+    -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
     -- TODO: glow.nvim
+    -- TODO: Use other events as well as BufReadPre?
 
-    use { "tpope/vim-sleuth", event = "BufReadPre" }
+    use {
+        "tpope/vim-sleuth",
+        cmd = "Sleuth",
+        event = "BufReadPre",
+    }
 
     use {
         "numToStr/Comment.nvim",
@@ -49,6 +54,7 @@ local function plugins(use)
         "kylechui/nvim-surround",
         tag = "*",
         event = "BufReadPre",
+        -- TODO: keys
         -- TODO: Surround with braces on new line?
         config = function()
             require("nvim-surround").setup {}
@@ -69,7 +75,7 @@ local function plugins(use)
         "bkad/CamelCaseMotion",
         event = "BufReadPre",
         setup = function()
-            vim.g.camelcasemotion_key = "\\"
+            vim.g.camelcasemotion_key = [[\]]
         end,
     }
     use {
@@ -90,7 +96,7 @@ local function plugins(use)
     }
     use {
         "lukas-reineke/virt-column.nvim",
-        event = "BufReadPre",
+        event = "VimEnter",
         config = function()
             require("virt-column").setup()
         end,
