@@ -2,15 +2,13 @@
 vim.g.mapleader = " " -- <Space>
 vim.g.maplocalleader = "  " -- <Space><Space>
 
--- TODO: Central place for icons
-
 require("peter.globals")
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
 require("peter.config.plugins")
 
--- TODO: Configure gx for WSL using wsl-open
+-- TODO: Central place for icons
 -- TODO: executable() utility function
 -- TODO: health check for my config
 -- TODO: spell checks

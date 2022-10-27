@@ -41,6 +41,17 @@ vim.o.virtualedit = "block"
 vim.o.splitright = true
 vim.o.splitbelow = true
 
+-- Allow me to use gx to open URLs and files
+if vim.fn.executable("wslview") == 1 then
+    vim.g.netrw_browsex_viewer = "wslview"
+elseif vim.fn.has("win32") == 1 then
+    vim.g.netrw_browsex_viewer = "start"
+elseif vim.fn.executable("xdg-open") == 1 then
+    vim.g.netrw_browsex_viewer = "xdg-open"
+elseif vim.fn.has("mac") == 1 then
+    vim.g.netrw_browsex_viewer = "open"
+end
+
 if vim.fn.executable("rg") == 1 then
     -- TODO: Don't search hidden files?
     vim.o.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep

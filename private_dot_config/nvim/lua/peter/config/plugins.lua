@@ -72,6 +72,14 @@ local function plugins(use)
             vim.g.camelcasemotion_key = "\\"
         end,
     }
+    use {
+        -- ALTERNATIVE: Do this myself (see https://gist.github.com/habamax/0a6c1d2013ea68adcf2a52024468752e)
+        "stsewd/gx-extended.vim",
+        keys = { "gx" },
+        setup = function()
+            vim.g["gxext#opencmd"] = "gx"
+        end,
+    }
 
     -- TODO: Highlight current indent level
     use { "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" }
