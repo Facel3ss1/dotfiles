@@ -7,10 +7,10 @@ local augroup = require("peter.au").augroup
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local function on_attach(args)
-    -- TODO: Signature help?
     local nnoremap = remap.bind("n", { buffer = args.buf })
 
     nnoremap("K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
+    nnoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
     nnoremap("gd", vim.lsp.buf.definition, { desc = "Go to definition" })
     nnoremap("gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
     nnoremap(
