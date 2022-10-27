@@ -81,8 +81,13 @@ local function plugins(use)
         end,
     }
 
-    -- TODO: Highlight current indent level
-    use { "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" }
+    use {
+        "lukas-reineke/indent-blankline.nvim",
+        event = "VimEnter",
+        config = function()
+            require("peter.plugins.indent-blankline")
+        end,
+    }
     use {
         "lukas-reineke/virt-column.nvim",
         event = "BufReadPre",
