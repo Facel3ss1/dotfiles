@@ -97,6 +97,15 @@ autocmd("FileType", {
     },
     callback = disable_colorcolumn,
 })
+
+autocmd = augroup("SetCommentString", { clear = true })
+autocmd("FileType", {
+    pattern = "gitconfig",
+    callback = function()
+        vim.bo.commentstring = "# %s"
+    end,
+})
+
 -- Each filetype will have it's own formatoptions which we need to override
 
 autocmd = augroup("SetFormatOptions", { clear = true })

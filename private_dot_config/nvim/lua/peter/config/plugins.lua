@@ -40,6 +40,9 @@ local function plugins(use)
         keys = { "gc", "gb" },
         config = function()
             require("Comment").setup {}
+
+            local ft = require("Comment.ft")
+            ft.set("lean3", { "--%s", "/-%s-/" })
         end,
     }
     use {
