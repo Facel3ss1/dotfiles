@@ -27,19 +27,25 @@ require("lualine").setup {
             { "filename", path = 1 },
         },
         lualine_x = {
-            function()
-                local tabstop = vim.bo.tabstop
-                local shiftwidth = vim.fn.shiftwidth()
-                local expandtab = vim.bo.expandtab
+            {
+                function()
+                    local tabstop = vim.bo.tabstop
+                    local shiftwidth = vim.fn.shiftwidth()
+                    local expandtab = vim.bo.expandtab
 
-                if expandtab then
-                    return string.format("spaces: %i", shiftwidth)
-                elseif shiftwidth == tabstop then
-                    return string.format("tabs: %i", shiftwidth)
-                else
-                    return string.format("tabs/spaces: %i/%i", tabstop, shiftwidth)
-                end
-            end,
+                    if expandtab then
+                        return string.format("spaces: %i", shiftwidth)
+                    elseif shiftwidth == tabstop then
+                        return string.format("tabs: %i", shiftwidth)
+                    else
+                        return string.format("tabs/spaces: %i/%i", tabstop, shiftwidth)
+                    end
+                end,
+                cond = function()
+                    local should_hide = vim.bo.filetype == "help" or vim.bo.buftype == "terminal"
+                    return not should_hide
+                end,
+            },
             "encoding",
             {
                 "fileformat",
@@ -48,6 +54,9 @@ require("lualine").setup {
                     dos = "crlf",
                     mac = "cr",
                 },
+                cond = function()
+                    return vim.bo.buftype ~= "terminal"
+                end,
             },
             { "filetype", colored = false },
         },
