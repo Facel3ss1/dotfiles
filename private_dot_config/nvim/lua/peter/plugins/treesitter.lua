@@ -35,7 +35,7 @@ require("nvim-treesitter.configs").setup {
         "yaml",
     },
     sync_install = false,
-    auto_install = true,
+    auto_install = vim.fn.executable("tree-sitter") == 1,
     highlight = {
         enable = true,
         disable = { "help" },
