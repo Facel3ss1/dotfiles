@@ -7,6 +7,8 @@ use don't try to install this yourself!
 
 ## Installation
 
+<!-- TODO: Document windows instalation and nvim setup -->
+
 First, install [chezmoi](https://chezmoi.io) and the [Bitwarden
 CLI](https://bitwarden.com/help/cli/) into `~/.local/bin`.
 

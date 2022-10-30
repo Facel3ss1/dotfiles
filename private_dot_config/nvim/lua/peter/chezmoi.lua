@@ -2,7 +2,7 @@ local M = {}
 
 local augroup = require("peter.au").augroup
 
-M.source_dir = vim.fn.expand("~") .. "/.local/share/chezmoi"
+M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
 local autocmd = augroup("ChezmoiApplyOnSave", { clear = true })
 autocmd("BufWritePost", {

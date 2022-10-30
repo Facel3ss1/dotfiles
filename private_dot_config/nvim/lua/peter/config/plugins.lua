@@ -208,6 +208,7 @@ local function plugins(use)
     use { "folke/neodev.nvim", module = "neodev" }
     use {
         "https://git.sr.ht/~p00f/clangd_extensions.nvim",
+        as = "clangd_extensions.nvim",
         module = "clangd_extensions",
     }
     use {
