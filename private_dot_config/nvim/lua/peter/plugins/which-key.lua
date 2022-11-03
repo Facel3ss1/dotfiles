@@ -1,5 +1,9 @@
 local whichkey = require("which-key")
 
+-- See https://github.com/folke/which-key.nvim/blob/main/lua/which-key/plugins/presets/init.lua
+local presets = require("which-key.plugins.presets")
+presets.operators["v"] = nil
+
 whichkey.register({
     c = {
         name = "code",
@@ -30,5 +34,4 @@ whichkey.register {
 }
 
 -- TODO: Change icons
--- TODO: v shouldn't open menu
 whichkey.setup {}
