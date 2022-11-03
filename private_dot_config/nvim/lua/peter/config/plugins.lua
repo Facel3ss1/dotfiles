@@ -154,7 +154,20 @@ local function plugins(use)
         "rcarriga/nvim-notify",
         event = "VimEnter",
         config = function()
-            require("peter.plugins.notify")
+            local notify = require("notify")
+
+            notify.setup {
+                stages = "fade",
+                icons = {
+                    DEBUG = "",
+                    ERROR = "",
+                    INFO = "",
+                    TRACE = "",
+                    WARN = "",
+                },
+            }
+
+            vim.notify = notify
         end,
     }
     use {
@@ -194,7 +207,15 @@ local function plugins(use)
         "j-hui/fidget.nvim",
         after = "nvim-lspconfig",
         config = function()
-            require("peter.plugins.fidget")
+            require("fidget").setup {
+                text = {
+                    spinner = "dots",
+                    done = "",
+                },
+                timer = {
+                    spinner_rate = 75,
+                },
+            }
         end,
     }
     use {
