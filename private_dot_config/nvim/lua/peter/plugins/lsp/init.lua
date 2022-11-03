@@ -96,6 +96,24 @@ require("mason-lspconfig").setup_handlers {
                 settings = settings[server_name],
             },
         }
+
+        local cmp = require("cmp")
+
+        -- FIXME: clangd completion entries have a space before
+        cmp.setup.filetype({ "c", "cpp" }, {
+            sorting = {
+                comparators = {
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.recently_used,
+                    require("clangd_extensions.cmp_scores"),
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
+            },
+        })
     end,
     -- TODO: rust-tools
 }
