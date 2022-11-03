@@ -9,5 +9,8 @@ deleted = "x"
 [directory]
 read_only = " "
 
+[kotlin]
+symbol = "K "
+
 [lua]
 symbol = " "
