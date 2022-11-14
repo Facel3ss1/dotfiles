@@ -52,23 +52,18 @@ cmp.setup.cmdline({ "/", "?" }, {
 
 -- TODO: gitcommit completions
 
--- cmp.setup.cmdline(":", {
---     mapping = cmp.mapping.preset.cmdline(),
---     sources = cmp.config.sources({
---         { name = "path" },
---     }, {
---         -- HACK: This is a workaround for https://github.com/hrsh7th/cmp-cmdline/issues/24
---         -- When I'm on WSL and I type !, it tries to enumerate my windows path
---         -- as well as my linux path, which is sloooooow and it hanged nvim. So
---         -- I use this regex thing from the above issue to alleviate that (it
---         -- doesn't work in all cases, but it's better than nothing).
---         -- { name = "cmdline", keyword_pattern = [=[[^[:blank:]\!]*]=] },
---     }, {
---         { name = "cmdline_history" },
---     }, {
---         { name = "buffer" },
---     }),
--- })
+cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = "path" },
+    }, {
+        { name = "cmdline" },
+    }, {
+        { name = "cmdline_history" },
+    }, {
+        { name = "buffer" },
+    }),
+})
 
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
