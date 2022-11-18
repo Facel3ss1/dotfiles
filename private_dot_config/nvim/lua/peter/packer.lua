@@ -3,7 +3,7 @@ local augroup = require("peter.au").augroup
 local M = {}
 
 local function notify(msg, level)
-    vim.notify(msg, level, { title = "Packer" })
+    vim.notify(msg, level, { title = "packer" })
 end
 
 local function confirm(msg)
