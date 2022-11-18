@@ -5,3 +5,9 @@ symbol = " "
 modified = "*"
 renamed = "r"
 deleted = "x"
+
+[directory]
+read_only = " "
+
+[lua]
+symbol = " "
