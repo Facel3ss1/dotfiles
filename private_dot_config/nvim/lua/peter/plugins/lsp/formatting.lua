@@ -36,21 +36,20 @@ function M.on_attach(args)
     local capabilities = client.server_capabilities
     local filetype = vim.bo[bufnr].filetype
 
-    local nnoremap = remap.bind("n", { buffer = bufnr })
-    local vnoremap = remap.bind("v", { buffer = bufnr })
-
     if null_ls_has_method(filetype, null_ls.methods.FORMATTING) then
         -- If null-ls can format this filetype, disable formatting on the other client
         capabilities.documentFormattingProvider = client.name == "null-ls"
+        capabilities.documentRangeFormattingProvider = client.name == "null-ls"
+            and null_ls_has_method(filetype, null_ls.methods.RANGE_FORMATTING)
     else
         -- Otherwise, only enable if the regular client can format
         capabilities.documentFormattingProvider = not (client.name == "null-ls")
             and capabilities.documentFormattingProvider
+        capabilities.documentRangeFormattingProvider = not (client.name == "null-ls")
+            and capabilities.documentRangeFormattingProvider
     end
 
     if capabilities.documentFormattingProvider then
-        nnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
-
         -- Note that we don't clear the autogroup when we attach to a new buffer
         local autocmd, group_id = augroup("LspFormatOnSave", { clear = false })
         -- Ensure that there is exactly one formatting autocommand per buffer
@@ -66,16 +65,11 @@ function M.on_attach(args)
         end
     end
 
-    if null_ls_has_method(filetype, null_ls.methods.RANGE_FORMATTING) then
-        capabilities.documentRangeFormattingProvider = client.name == "null-ls"
-    else
-        capabilities.documentRangeFormattingProvider = not (client.name == "null-ls")
-            and capabilities.documentRangeFormattingProvider
-    end
+    local nnoremap = remap.bind("n", { buffer = bufnr })
+    local vnoremap = remap.bind("v", { buffer = bufnr })
 
-    if capabilities.documentRangeFormattingProvider then
-        vnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
-    end
+    nnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
+    vnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
 
     -- Global mapping instead of buffer local
     remap.nnoremap("<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
