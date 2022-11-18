@@ -19,8 +19,10 @@ nnoremap("£", "#")
 -- Make <Esc> clear search highlights
 nnoremap("<Esc>", "<Cmd>nohl<CR>")
 
-nnoremap("gw", "*N", { desc = "Search word under cursor" })
-xnoremap("gw", "*N", { desc = "Search word under cursor (visual)" })
+-- TODO: Map this in operator pending mode so it is a text object
+-- See https://www.vikasraj.dev/blog/vim-dot-repeat
+nnoremap("cn", "*Ncgn", { desc = "Change next occurance of word under cursor" })
+nnoremap("cN", "*NcgN", { desc = "Change previous occurance of word under cursor" })
 
 nnoremap("<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
 nnoremap("<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })
@@ -42,7 +44,7 @@ nnoremap("N", "Nzz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
--- TODO: Wrapping
+-- TODO: vim-unimpaired
 nnoremap("]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix item" })
 nnoremap("[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
 nnoremap("]l", "<Cmd>lnext<CR>zz", { desc = "Next location list item" })
