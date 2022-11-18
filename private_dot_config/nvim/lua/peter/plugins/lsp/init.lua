@@ -62,6 +62,9 @@ local settings = {
             format = {
                 enable = false,
             },
+            workspace = {
+                checkThirdParty = false,
+            },
         },
     },
 }
