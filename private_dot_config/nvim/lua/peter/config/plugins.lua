@@ -233,6 +233,15 @@ local function plugins(use)
         requires = "nvim-lua/plenary.nvim",
     }
     use {
+        "saecki/crates.nvim",
+        tag = "v0.3.0",
+        event = "BufRead Cargo.toml",
+        config = function()
+            require("peter.plugins.crates")
+        end,
+        requires = "nvim-lua/plenary.nvim",
+    }
+    use {
         "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         as = "clangd_extensions.nvim",
         module = "clangd_extensions",
