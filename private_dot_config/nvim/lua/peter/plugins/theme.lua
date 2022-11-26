@@ -36,7 +36,7 @@ ayu.setup {
         FidgetTask = { fg = colors.comment },
 
         -- nvim-lightbulb
-        LightBulbFloatWin = { fg = colors.accent },
+        LightBulbSign = { fg = colors.accent },
     },
 }
 

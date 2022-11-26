@@ -222,7 +222,13 @@ local function plugins(use)
         "kosayoda/nvim-lightbulb",
         after = "nvim-lspconfig",
         config = function()
-            require("peter.plugins.lightbulb")
+            require("nvim-lightbulb").setup {
+                autocmd = {
+                    enabled = true,
+                },
+            }
+
+            vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LightBulbSign" })
         end,
     }
 
