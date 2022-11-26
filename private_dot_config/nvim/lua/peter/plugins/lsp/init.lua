@@ -4,10 +4,18 @@ require("peter.plugins.lsp.diagnostics")
 local remap = require("peter.remap")
 local augroup = require("peter.au").augroup
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local server_on_attach = {
+    ["rust_analyzer"] = function(args)
+        local rust_tools = require("rust-tools")
+        local nnoremap = remap.bind("n", { buffer = args.buf })
+
+        nnoremap("K", rust_tools.hover_actions.hover_actions, { desc = "View docs and hover actions under cursor" })
+    end,
+}
 
 local function on_attach(args)
     local nnoremap = remap.bind("n", { buffer = args.buf })
+    local vnoremap = remap.bind("v", { buffer = args.buf })
 
     nnoremap("K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
     nnoremap("<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
@@ -38,8 +46,14 @@ local function on_attach(args)
 
     nnoremap("<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
     nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+    vnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code action (visual)" })
 
     require("peter.plugins.lsp.formatting").on_attach(args)
+
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if server_on_attach[client.name] then
+        server_on_attach[client.name](args)
+    end
 end
 
 local autocmd = augroup("PeterLspAttach", { clear = true })
@@ -67,7 +81,17 @@ local settings = {
             },
         },
     },
+    ["rust_analyzer"] = {
+        ["rust-analyzer"] = {
+            checkOnSave = {
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+            },
+        },
+    },
 }
+
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local function default_handler(server_name)
     require("lspconfig")[server_name].setup {
@@ -91,6 +115,14 @@ require("mason-lspconfig").setup_handlers {
         }
 
         default_handler(server_name)
+    end,
+    ["rust_analyzer"] = function(server_name)
+        require("rust-tools").setup {
+            server = {
+                capabilities = capabilities,
+                settings = settings[server_name],
+            },
+        }
     end,
     ["clangd"] = function(server_name)
         require("clangd_extensions").setup {
@@ -118,7 +150,6 @@ require("mason-lspconfig").setup_handlers {
             },
         })
     end,
-    -- TODO: rust-tools
 }
 
 require("null-ls")

@@ -228,6 +228,11 @@ local function plugins(use)
 
     use { "folke/neodev.nvim", module = "neodev" }
     use {
+        "simrat39/rust-tools.nvim",
+        module = "rust-tools",
+        requires = "nvim-lua/plenary.nvim",
+    }
+    use {
         "https://git.sr.ht/~p00f/clangd_extensions.nvim",
         as = "clangd_extensions.nvim",
         module = "clangd_extensions",
