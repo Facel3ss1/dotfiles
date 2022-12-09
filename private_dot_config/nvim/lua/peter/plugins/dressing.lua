@@ -1,7 +1,9 @@
 require("dressing").setup {
     input = {
         insert_only = false,
-        winblend = 0,
+        win_options = {
+            winblend = 0,
+        },
         get_config = function(opts)
             if opts.kind == "grepprompt" then
                 return {
