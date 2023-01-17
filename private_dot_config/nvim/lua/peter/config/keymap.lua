@@ -44,16 +44,6 @@ nnoremap("N", "Nzz")
 nnoremap("<C-d>", "<C-d>zz")
 nnoremap("<C-u>", "<C-u>zz")
 
--- TODO: vim-unimpaired
-nnoremap("]q", "<Cmd>cnext<CR>zz", { desc = "Next quickfix item" })
-nnoremap("[q", "<Cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
-nnoremap("]l", "<Cmd>lnext<CR>zz", { desc = "Next location list item" })
-nnoremap("[l", "<Cmd>lprev<CR>zz", { desc = "Previous location list item" })
-nnoremap("]Q", "<Cmd>clast<CR>zz", { desc = "Last quickfix item" })
-nnoremap("[Q", "<Cmd>cfirst<CR>zz", { desc = "First quickfix item" })
-nnoremap("]L", "<Cmd>llast<CR>zz", { desc = "Last location list item" })
-nnoremap("[L", "<Cmd>lfirst<CR>zz", { desc = "First location list item" })
-
 -- FIXME: This doesn't work in Lua yet
 -- @ in visual mode
 -- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim

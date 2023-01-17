@@ -14,6 +14,7 @@ local config = {
     },
 }
 
+-- TODO: Use lazy.nvim
 local function plugins(use)
     -- Packer can manage itself as an optional plugin
     use { "wbthomason/packer.nvim", opt = true }
@@ -39,6 +40,7 @@ local function plugins(use)
         cmd = "Sleuth",
         event = "BufReadPre",
     }
+    use { "tpope/vim-unimpaired", event = "VimEnter" }
 
     use {
         "numToStr/Comment.nvim",
@@ -65,6 +67,7 @@ local function plugins(use)
         event = "InsertEnter",
         module = "nvim-autopairs",
         -- TODO: Fix ``` in lua comments, disable `?
+        -- TODO: Fix turbofish in rust
         config = function()
             require("nvim-autopairs").setup {}
         end,
