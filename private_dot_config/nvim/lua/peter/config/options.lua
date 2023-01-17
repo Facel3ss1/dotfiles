@@ -12,6 +12,7 @@ vim.o.linebreak = true -- ...and prevent words from splitting into two
 
 vim.o.scrolloff = 10 -- There will be 10 lines above and below my cursor when scrolling
 vim.o.sidescrolloff = 5 -- 5 columns to the side of my cursor when horizontally scrolling
+vim.o.scrollback = 100000 -- 100,000 line scrollback in terminal buffers
 
 -- Indentation defaults
 vim.o.tabstop = 4 -- <Tab> characters will be displayed as 4 characters wide
