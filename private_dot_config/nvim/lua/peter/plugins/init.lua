@@ -1,12 +1,5 @@
 return {
-    {
-        "Shatur/neovim-ayu",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require("peter.plugins.theme")
-        end,
-    },
+    { import = "peter.plugins.colorscheme" },
     -- TODO: vim-splitjoin, or nvim-trevJ
     -- TODO: lsp_signature.nvim?
     -- TODO: inc-rename.nvim
@@ -25,7 +18,10 @@ return {
     { "tpope/vim-unimpaired", event = "VeryLazy" },
     {
         "numToStr/Comment.nvim",
-        keys = { "gc", "gb" },
+        keys = {
+            { "gc", desc = "Line comment" },
+            { "gb", desc = "Block comment" },
+        },
         config = function()
             require("Comment").setup {}
 
@@ -46,7 +42,10 @@ return {
         event = "InsertEnter",
         -- TODO: Fix ``` in lua comments, disable `?
         -- TODO: Fix turbofish in rust
-        config = true,
+        config = function()
+            require("nvim-autopairs").setup {}
+            require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+        end,
     },
     {
         -- ALTERNATIVE: vim-wordmotion
@@ -68,64 +67,48 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",
-        config = function()
-            require("peter.plugins.indent-blankline")
-        end,
+        opts = {
+            show_current_context = true,
+            buftype_exclude = { "terminal", "nofile" },
+            filetype_exclude = {
+                "help",
+                "diff",
+                "git",
+                "checkhealth",
+            },
+        },
     },
     {
         "lukas-reineke/virt-column.nvim",
         event = "VimEnter",
         config = true,
     },
-    {
-        "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
-        config = function()
-            require("peter.plugins.gitsigns")
-        end,
-    },
-    {
-        "TimUntersberger/neogit",
-        cmd = "Neogit",
-        init = require("peter.plugins.neogit").setup,
-        config = require("peter.plugins.neogit").config,
-        dependencies = "nvim-lua/plenary.nvim",
-    },
-    {
-        "sindrets/diffview.nvim",
-        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-        init = require("peter.plugins.diffview").setup,
-        config = require("peter.plugins.diffview").config,
-        dependencies = "nvim-lua/plenary.nvim",
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("peter.plugins.lualine")
-        end,
-        dependencies = "kyazdani42/nvim-web-devicons",
-    },
+    { import = "peter.plugins.gitsigns" },
+    { import = "peter.plugins.neogit" },
+    { import = "peter.plugins.diffview" },
+    { import = "peter.plugins.lualine" },
     {
         "akinsho/bufferline.nvim",
         version = "2.*",
         event = "VeryLazy",
-        config = function()
-            require("peter.plugins.bufferline")
-        end,
+        opts = {
+            options = {
+                mode = "tabs",
+                always_show_bufferline = false,
+                separator_style = "thick",
+                indicator = {
+                    style = "none",
+                },
+            },
+        },
         dependencies = "kyazdani42/nvim-web-devicons",
     },
-    {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("peter.plugins.which-key")
-        end,
-    },
+    { import = "peter.plugins.which-key" },
     {
         -- ALTERNATIVE: notifier.nvim
         "rcarriga/nvim-notify",
         event = "VimEnter",
+        -- TODO: Dismiss keybind
         config = function()
             local notify = require("notify")
 
@@ -146,16 +129,47 @@ return {
     {
         "stevearc/dressing.nvim",
         event = "VeryLazy",
-        config = function()
-            require("peter.plugins.dressing")
-        end,
+        opts = {
+            input = {
+                insert_only = false,
+                win_options = {
+                    winblend = 0,
+                },
+                get_config = function(opts)
+                    if opts.kind == "grepprompt" then
+                        return {
+                            insert_only = true,
+                            relative = "editor",
+                        }
+                    end
+                end,
+            },
+            select = {
+                get_config = function(opts)
+                    if opts.kind == "codeaction" then
+                        return {
+                            telescope = require("telescope.themes").get_cursor(),
+                        }
+                    end
+                end,
+            },
+        },
     },
     -- It is not recommended to lazy load mason
     {
         "williamboman/mason.nvim",
-        config = function()
-            require("peter.plugins.mason")
-        end,
+        -- TODO: Automatically update installed packages
+        -- TODO: Ensure stylua is installed?
+        opts = {
+            ui = {
+                border = "rounded",
+                icons = {
+                    package_installed = "",
+                    package_pending = "",
+                    package_uninstalled = "●",
+                },
+            },
+        },
     },
     "williamboman/mason-lspconfig.nvim",
     {
@@ -179,13 +193,13 @@ return {
             },
             {
                 "kosayoda/nvim-lightbulb",
-                config = function()
-                    require("nvim-lightbulb").setup {
-                        autocmd = {
-                            enabled = true,
-                        },
-                    }
-
+                opts = {
+                    autocmd = {
+                        enabled = true,
+                    },
+                },
+                config = function(_, opts)
+                    require("nvim-lightbulb").setup(opts)
                     vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LightBulbSign" })
                 end,
             },
@@ -193,25 +207,26 @@ return {
     },
     {
         "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("peter.plugins.null-ls")
+        opts = function()
+            local null_ls = require("null-ls")
+
+            return {
+                sources = {
+                    null_ls.builtins.formatting.fish_indent,
+                    null_ls.builtins.formatting.stylua,
+                    null_ls.builtins.diagnostics.fish,
+                },
+            }
         end,
         dependencies = "nvim-lua/plenary.nvim",
     },
     "folke/neodev.nvim",
     {
         "simrat39/rust-tools.nvim",
+        cond = vim.fn.executable("rust-analyzer") == 1,
         dependencies = "nvim-lua/plenary.nvim",
     },
-    {
-        "saecki/crates.nvim",
-        version = "0.3.0",
-        event = "BufRead Cargo.toml",
-        config = function()
-            require("peter.plugins.crates")
-        end,
-        dependencies = "nvim-lua/plenary.nvim",
-    },
+    { import = "peter.plugins.crates" },
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     {
         "Julian/lean.nvim",
@@ -244,53 +259,9 @@ return {
             "nvim-telescope/telescope-file-browser.nvim",
         },
     },
-    {
-        "hrsh7th/nvim-cmp",
-        event = { "InsertEnter", "CmdlineEnter" },
-        config = function()
-            require("peter.plugins.cmp")
-        end,
-        dependencies = {
-            "onsails/lspkind.nvim",
-            "hrsh7th/cmp-nvim-lsp",
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-cmdline",
-            "dmitmel/cmp-cmdline-history",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-        },
-    },
-    {
-        "L3MON4D3/LuaSnip",
-        version = "1.*",
-        config = function()
-            require("peter.plugins.luasnip")
-        end,
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-            config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-            end,
-        },
-    },
-    -- TODO: nvim-ts-context-commentstring with lua help comments?
-    -- TODO: nvim-ts-autotag
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        event = "VimEnter",
-        config = function()
-            require("peter.plugins.treesitter")
-        end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-context",
-            "RRethy/nvim-treesitter-endwise",
-        },
-    },
-    {
-        "nvim-treesitter/playground",
-        cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-    },
+    { import = "peter.plugins.cmp" },
+    { import = "peter.plugins.luasnip" },
+    { import = "peter.plugins.treesitter" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
 }
 
