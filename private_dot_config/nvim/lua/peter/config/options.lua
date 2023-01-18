@@ -26,6 +26,7 @@ vim.o.smartindent = true -- Smartly add indentation when starting new line
 vim.o.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
 
 -- TODO: undofile?
+-- TODO: backup and backupdir?
 
 vim.o.colorcolumn = "80" -- Put colored column at column 80
 vim.o.cursorline = true -- Highlight current line cursor is on
@@ -69,3 +70,5 @@ if vim.fn.executable("rg") == 1 then
     vim.o.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep
     vim.o.grepformat = "%f:%l:%c:%m" -- ripgrep's output format
 end
+
+-- vim.o.guifont = "JetBrainsMono NF:h10"

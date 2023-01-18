@@ -47,6 +47,9 @@ require("nvim-treesitter.configs").setup {
     playground = {
         enable = true,
     },
-    -- TODO: enable indent feature
-    -- TODO: folding
+    -- TODO: enable indent feature here and for indent-blankline
 }
+
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldenable = false

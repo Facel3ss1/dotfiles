@@ -42,6 +42,7 @@ require("lualine").setup {
                     end
                 end,
                 cond = function()
+                    -- TODO: gitcommit and NeogitCommitMessage
                     local should_hide = vim.bo.filetype == "help" or vim.bo.buftype == "terminal"
                     return not should_hide
                 end,

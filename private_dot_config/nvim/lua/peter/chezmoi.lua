@@ -4,6 +4,8 @@ local augroup = require("peter.au").augroup
 
 M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
+-- TODO: Keymap to jump to target path file
+
 local autocmd = augroup("ChezmoiApplyOnSave", { clear = true })
 autocmd("BufWritePost", {
     pattern = M.source_dir .. "/*",

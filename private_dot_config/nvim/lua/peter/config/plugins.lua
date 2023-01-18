@@ -28,6 +28,8 @@ local function plugins(use)
 
     -- TODO: vim-splitjoin, or nvim-trevJ
     -- TODO: lsp_signature.nvim?
+    -- TODO: inc-rename.nvim
+    -- TODO: todo-comments
     -- TODO: vim-matchup
     -- TODO: Highlight trailing whitespace
     -- TODO: dial.nvim
@@ -154,6 +156,7 @@ local function plugins(use)
         end,
     }
     use {
+        -- ALTERNATIVE: notifier.nvim
         "rcarriga/nvim-notify",
         event = "VimEnter",
         config = function()

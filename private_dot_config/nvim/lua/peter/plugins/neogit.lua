@@ -1,6 +1,7 @@
 local M = {}
 
 function M.setup()
+    -- TODO: Would ]c etc. be possible?
     local nnoremap = require("peter.remap").nnoremap
 
     nnoremap("<leader>gs", "<Cmd>Neogit<CR>", { desc = "Open Neogit status" })

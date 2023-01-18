@@ -8,6 +8,7 @@ use don't try to install this yourself!
 ## Installation
 
 <!-- TODO: Document windows instalation and nvim setup -->
+<!-- You need developer mode to make symlinks without admin -->
 
 First, install [chezmoi](https://chezmoi.io) and the [Bitwarden
 CLI](https://bitwarden.com/help/cli/) into `~/.local/bin`.
@@ -32,7 +33,8 @@ Then, log in to Bitwarden:
 bw login
 ```
 
-Now we can apply the dotfiles:
+Now we can apply the dotfiles (the `--apply` flag can be omitted to only clone
+into the source directory):
 
 ```bash
 chezmoi init --apply Facel3ss1

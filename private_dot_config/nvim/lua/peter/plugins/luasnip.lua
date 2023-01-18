@@ -2,6 +2,8 @@ local luasnip = require("luasnip")
 
 luasnip.config.set_config {
     history = true,
+    -- FIXME: Prevents us from jumping to a faraway snippet accidently?
+    region_check_events = "CursorHold",
 }
 
 local map = require("peter.remap").bind({ "i", "s" }, { silent = true })
