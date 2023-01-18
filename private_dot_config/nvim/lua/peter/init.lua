@@ -6,7 +6,7 @@ require("peter.globals")
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
-require("peter.config.plugins")
+require("peter.plugins")
 
 -- TODO: Central place for icons
 -- TODO: executable() utility function
