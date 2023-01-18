@@ -36,6 +36,7 @@ vim.o.laststatus = 3 -- Use global statusline
 vim.opt.fillchars = {
     diff = "╱",
 }
+vim.opt.shortmess:append("I") -- Don't show the intro on startup
 
 vim.o.virtualedit = "block"
 

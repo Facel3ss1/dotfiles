@@ -22,7 +22,7 @@ return {
         cmd = "Sleuth",
         event = "BufReadPre",
     },
-    { "tpope/vim-unimpaired", event = "VimEnter" },
+    { "tpope/vim-unimpaired", event = "VeryLazy" },
     {
         "numToStr/Comment.nvim",
         keys = { "gc", "gb" },
@@ -39,18 +39,14 @@ return {
         event = "BufReadPre",
         -- TODO: keys
         -- TODO: Surround with braces on new line?
-        config = function()
-            require("nvim-surround").setup {}
-        end,
+        config = true,
     },
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
         -- TODO: Fix ``` in lua comments, disable `?
         -- TODO: Fix turbofish in rust
-        config = function()
-            require("nvim-autopairs").setup {}
-        end,
+        config = true,
     },
     {
         -- ALTERNATIVE: vim-wordmotion
@@ -71,7 +67,7 @@ return {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
             require("peter.plugins.indent-blankline")
         end,
@@ -79,9 +75,7 @@ return {
     {
         "lukas-reineke/virt-column.nvim",
         event = "VimEnter",
-        config = function()
-            require("virt-column").setup()
-        end,
+        config = true,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -106,7 +100,7 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
             require("peter.plugins.lualine")
         end,
@@ -115,7 +109,7 @@ return {
     {
         "akinsho/bufferline.nvim",
         version = "2.*",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
             require("peter.plugins.bufferline")
         end,
@@ -123,7 +117,7 @@ return {
     },
     {
         "folke/which-key.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
             require("peter.plugins.which-key")
         end,
@@ -151,7 +145,7 @@ return {
     },
     {
         "stevearc/dressing.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
             require("peter.plugins.dressing")
         end,
@@ -173,17 +167,15 @@ return {
         dependencies = {
             {
                 "j-hui/fidget.nvim",
-                config = function()
-                    require("fidget").setup {
-                        text = {
-                            spinner = "dots",
-                            done = "",
-                        },
-                        timer = {
-                            spinner_rate = 75,
-                        },
-                    }
-                end,
+                opts = {
+                    text = {
+                        spinner = "dots",
+                        done = "",
+                    },
+                    timer = {
+                        spinner_rate = 75,
+                    },
+                },
             },
             {
                 "kosayoda/nvim-lightbulb",
@@ -225,12 +217,10 @@ return {
         "Julian/lean.nvim",
         cond = vim.fn.executable("lean-language-server") == 1,
         ft = "lean3",
-        config = function()
-            require("lean").setup {
-                abbreviations = { builtin = true },
-                mappings = true,
-            }
-        end,
+        opts = {
+            abbreviations = { builtin = true },
+            mappings = true,
+        },
         dependencies = "nvim-lua/plenary.nvim",
     },
     {
