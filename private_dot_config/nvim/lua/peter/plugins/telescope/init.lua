@@ -36,6 +36,7 @@ telescope.setup {
     extensions = {
         file_browser = {
             theme = "ivy",
+            respect_gitignore = false,
         },
     },
 }
