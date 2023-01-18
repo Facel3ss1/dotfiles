@@ -6,6 +6,5 @@ require("indent_blankline").setup {
         "diff",
         "git",
         "checkhealth",
-        "packer",
     },
 }

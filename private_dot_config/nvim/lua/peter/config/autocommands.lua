@@ -91,7 +91,6 @@ autocmd("FileType", {
         "qf",
         "checkhealth",
         "Neogit*",
-        "packer",
         "tsplayground",
         "startuptime",
     },

@@ -41,7 +41,7 @@ telescope.setup {
     },
 }
 
--- The fzf plugin is conditionally loaded by packer, so may not be available
+-- The fzf plugin is only loaded when `make` is installed, so may not be available
 pcall(telescope.load_extension, "fzf")
 telescope.load_extension("notify")
 telescope.load_extension("file_browser")

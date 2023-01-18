@@ -1,8 +1,6 @@
 # Neovim configuration
 
-Uses [packer](https://github.com/wbthomason/packer.nvim) to manage plugins. You
-can opt not to install the plugins for a bare-bones config, but the majority of
-the functionality comes from the plugins.
+Uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
 ## Folder structure
 
@@ -12,7 +10,7 @@ nvim
 └── lua                // Not automatically sourced, but required by `init.lua`.
     └── peter          // Contains any utility modules that are used throughout the config.
         ├── config     // Basic config of builtin neovim functionality.
-        └── plugins    // Plugin configuration. The files in here are only required when packer loads the plugins.
+        └── plugins    // Plugin configuration.
 ```
 
 ## Requirements
