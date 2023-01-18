@@ -6,6 +6,7 @@ require("peter.globals")
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
+require("peter.chezmoi")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

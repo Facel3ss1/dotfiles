@@ -3,17 +3,6 @@ local autocmd
 
 -- TODO: Add descriptions to autocommands
 
--- Load chezmoi config if we are in the chezmoi directory
-
-autocmd = vim.api.nvim_create_autocmd
-autocmd({ "BufReadPost", "BufNewFile" }, {
-    pattern = "*/chezmoi/*",
-    once = true,
-    callback = function()
-        require("peter.chezmoi")
-    end,
-})
-
 -- Disables relativenumber for insert mode and inactive buffers.
 -- https://jeffkreeftmeijer.com/vim-number/#automatic-toggling-between-line-number-modes
 
