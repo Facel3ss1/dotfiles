@@ -238,27 +238,7 @@ return {
         },
         dependencies = "nvim-lua/plenary.nvim",
     },
-    {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        cmd = "Telescope",
-        init = function()
-            require("peter.plugins.telescope.keymap")
-        end,
-        config = function()
-            require("peter.plugins.telescope")
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "kyazdani42/nvim-web-devicons",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                cond = vim.fn.executable("make") == 1,
-            },
-            "nvim-telescope/telescope-file-browser.nvim",
-        },
-    },
+    { import = "peter.plugins.telescope" },
     { import = "peter.plugins.cmp" },
     { import = "peter.plugins.luasnip" },
     { import = "peter.plugins.treesitter" },
