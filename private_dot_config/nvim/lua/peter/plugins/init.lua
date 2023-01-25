@@ -1,5 +1,4 @@
 return {
-    { import = "peter.plugins.colorscheme" },
     -- TODO: vim-splitjoin, or nvim-trevJ
     -- TODO: lsp_signature.nvim?
     -- TODO: inc-rename.nvim
@@ -10,17 +9,13 @@ return {
     -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
     -- TODO: glow.nvim
     -- TODO: Use other events as well as BufReadPre?
-    {
-        "tpope/vim-sleuth",
-        cmd = "Sleuth",
-        event = "BufReadPre",
-    },
+    { "tpope/vim-sleuth", cmd = "Sleuth", event = "BufReadPre" },
     { "tpope/vim-unimpaired", event = "VeryLazy" },
     {
         "numToStr/Comment.nvim",
         keys = {
-            { "gc", desc = "Line comment" },
-            { "gb", desc = "Block comment" },
+            { "gc", mode = { "n", "v" }, desc = "Line comment" },
+            { "gb", mode = { "n", "v" }, desc = "Block comment" },
         },
         config = function()
             require("Comment").setup {}
@@ -78,15 +73,7 @@ return {
             },
         },
     },
-    {
-        "lukas-reineke/virt-column.nvim",
-        event = "VimEnter",
-        config = true,
-    },
-    { import = "peter.plugins.gitsigns" },
-    { import = "peter.plugins.neogit" },
-    { import = "peter.plugins.diffview" },
-    { import = "peter.plugins.lualine" },
+    { "lukas-reineke/virt-column.nvim", event = "VimEnter", config = true },
     {
         "akinsho/bufferline.nvim",
         version = "2.*",
@@ -103,7 +90,6 @@ return {
         },
         dependencies = "kyazdani42/nvim-web-devicons",
     },
-    { import = "peter.plugins.which-key" },
     {
         -- ALTERNATIVE: notifier.nvim
         "rcarriga/nvim-notify",
@@ -155,93 +141,6 @@ return {
             },
         },
     },
-    -- It is not recommended to lazy load mason
-    {
-        "williamboman/mason.nvim",
-        -- TODO: Automatically update installed packages
-        -- TODO: Ensure stylua is installed?
-        opts = {
-            ui = {
-                border = "rounded",
-                icons = {
-                    package_installed = "",
-                    package_pending = "",
-                    package_uninstalled = "●",
-                },
-            },
-        },
-    },
-    "williamboman/mason-lspconfig.nvim",
-    {
-        "neovim/nvim-lspconfig",
-        event = "BufReadPre",
-        config = function()
-            require("peter.plugins.lsp")
-        end,
-        dependencies = {
-            {
-                "j-hui/fidget.nvim",
-                opts = {
-                    text = {
-                        spinner = "dots",
-                        done = "",
-                    },
-                    timer = {
-                        spinner_rate = 75,
-                    },
-                },
-            },
-            {
-                "kosayoda/nvim-lightbulb",
-                opts = {
-                    autocmd = {
-                        enabled = true,
-                    },
-                },
-                config = function(_, opts)
-                    require("nvim-lightbulb").setup(opts)
-                    vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LightBulbSign" })
-                end,
-            },
-        },
-    },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        opts = function()
-            local null_ls = require("null-ls")
-
-            return {
-                sources = {
-                    null_ls.builtins.formatting.fish_indent,
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.fish,
-                },
-            }
-        end,
-        dependencies = "nvim-lua/plenary.nvim",
-    },
-    "folke/neodev.nvim",
-    {
-        "simrat39/rust-tools.nvim",
-        cond = vim.fn.executable("rust-analyzer") == 1,
-        dependencies = "nvim-lua/plenary.nvim",
-    },
-    { import = "peter.plugins.crates" },
-    { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
-    {
-        "Julian/lean.nvim",
-        cond = vim.fn.executable("lean-language-server") == 1,
-        ft = "lean3",
-        opts = {
-            abbreviations = { builtin = true },
-            mappings = true,
-        },
-        dependencies = "nvim-lua/plenary.nvim",
-    },
-    { import = "peter.plugins.telescope" },
-    { import = "peter.plugins.cmp" },
-    { import = "peter.plugins.luasnip" },
-    { import = "peter.plugins.treesitter" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
 }
 

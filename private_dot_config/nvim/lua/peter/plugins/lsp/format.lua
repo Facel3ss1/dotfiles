@@ -1,8 +1,5 @@
 local M = {}
 
-local augroup = require("peter.au").augroup
-local remap = require("peter.remap")
-
 local null_ls = require("null-ls")
 
 M.should_format_on_save = true
@@ -16,6 +13,8 @@ local function toggle_format_on_save()
         vim.notify("Disabled format on save", vim.log.levels.INFO, { title = "Formatting" })
     end
 end
+
+vim.keymap.set("n", "<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
 
 local function null_ls_has_method(filetype, method)
     local sources = null_ls.get_sources()
@@ -31,10 +30,10 @@ end
 -- Called from the LspAttach autocommand
 function M.on_attach(args)
     -- TODO: formatexpr?
-    local bufnr = args.buf
+    local buf = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     local capabilities = client.server_capabilities
-    local filetype = vim.bo[bufnr].filetype
+    local filetype = vim.bo[buf].filetype
 
     if null_ls_has_method(filetype, null_ls.methods.FORMATTING) then
         -- If null-ls can format this filetype, disable formatting on the other client
@@ -51,11 +50,12 @@ function M.on_attach(args)
 
     if capabilities.documentFormattingProvider then
         -- Note that we don't clear the autogroup when we attach to a new buffer
-        local autocmd, group_id = augroup("LspFormatOnSave", { clear = false })
+        local group_id = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = false })
         -- Ensure that there is exactly one formatting autocommand per buffer
-        if #vim.api.nvim_get_autocmds { group = group_id, buffer = bufnr } == 0 then
-            autocmd("BufWritePre", {
-                buffer = bufnr,
+        if #vim.api.nvim_get_autocmds { group = group_id, buffer = buf } == 0 then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = group_id,
+                buffer = buf,
                 callback = function()
                     if M.should_format_on_save then
                         vim.lsp.buf.format()
@@ -64,15 +64,6 @@ function M.on_attach(args)
             })
         end
     end
-
-    local nnoremap = remap.bind("n", { buffer = bufnr })
-    local vnoremap = remap.bind("v", { buffer = bufnr })
-
-    nnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
-    vnoremap("<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
-
-    -- Global mapping instead of buffer local
-    remap.nnoremap("<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
 end
 
 return M
