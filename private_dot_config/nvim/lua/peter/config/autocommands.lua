@@ -7,9 +7,9 @@ local autocmd
 -- https://jeffkreeftmeijer.com/vim-number/#automatic-toggling-between-line-number-modes
 
 -- Enable nvim-treesitter-context using pcall (it may not be loaded)
--- Enabling it causes its line numbers to redraw
-local function enable_ts_context()
+local function redraw_treesitter_context()
     local _, ts_context = pcall(require, "treesitter-context")
+    -- Redraw treesitter-context's line number
     pcall(ts_context.enable)
 end
 
@@ -19,7 +19,7 @@ autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
     callback = function()
         if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
             vim.wo.relativenumber = true
-            enable_ts_context()
+            redraw_treesitter_context()
         end
     end,
 })
@@ -28,7 +28,7 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
     callback = function()
         if vim.wo.number then
             vim.wo.relativenumber = false
-            enable_ts_context()
+            redraw_treesitter_context()
         end
     end,
 })

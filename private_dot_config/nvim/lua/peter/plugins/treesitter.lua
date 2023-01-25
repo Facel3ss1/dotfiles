@@ -1,6 +1,7 @@
 return {
     -- TODO: nvim-ts-context-commentstring with lua help comments?
     -- TODO: nvim-ts-autotag
+    -- TODO: Incremental selection with <CR> and <BS>
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -65,13 +66,8 @@ return {
             -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
             -- vim.o.foldenable = false
         end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-context",
-            "RRethy/nvim-treesitter-endwise",
-        },
     },
-    {
-        "nvim-treesitter/playground",
-        cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" },
-    },
+    { "nvim-treesitter/nvim-treesitter-context", module = false, event = "BufReadPre", config = true },
+    { "RRethy/nvim-treesitter-endwise", event = "InsertEnter" },
+    { "nvim-treesitter/playground", cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" } },
 }
