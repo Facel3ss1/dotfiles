@@ -21,12 +21,32 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    group = vim.api.nvim_create_augroup("LazyPackadd", { clear = true }),
+    callback = function()
+        -- See :h pack-add for why we need the bang
+        vim.cmd.packadd { "cfilter", bang = true }
+    end,
+})
+
 require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
+    checker = { enabled = true },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "matchit",
+                "tohtml",
+            },
+        },
+    },
     ui = {
         border = "rounded",
     },
 })
+
+vim.keymap.set("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -- TODO: Central place for icons
 -- TODO: executable() utility function
