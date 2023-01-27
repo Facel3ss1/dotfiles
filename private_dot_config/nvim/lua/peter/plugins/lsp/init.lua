@@ -1,4 +1,7 @@
 return {
+    -- TODO: lsp_signature.nvim?
+    -- TODO: inc-rename.nvim
+    -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
     {
         "neovim/nvim-lspconfig",
         event = "BufReadPre",

@@ -109,11 +109,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "kyazdani42/nvim-web-devicons",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                cond = vim.fn.executable("make") == 1,
-            },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
             "nvim-telescope/telescope-file-browser.nvim",
         },
     },

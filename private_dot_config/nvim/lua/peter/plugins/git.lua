@@ -1,4 +1,24 @@
 return {
+    -- TODO: Would ]c etc. be possible?
+    {
+        "TimUntersberger/neogit",
+        cmd = "Neogit",
+        keys = {
+            { "<leader>gs", "<Cmd>Neogit<CR>", desc = "Open Neogit status" },
+            { "<leader>gc", "<Cmd>Neogit commit<CR>", desc = "Commit" },
+        },
+        opts = {
+            disable_builtin_notifications = true,
+            signs = {
+                section = { "", "" },
+                item = { "", "" },
+            },
+            integrations = {
+                diffview = true,
+            },
+        },
+        dependencies = "nvim-lua/plenary.nvim",
+    },
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
@@ -45,5 +65,33 @@ return {
                 map("n", "<leader>gp", gs.preview_hunk, { desc = "Preview change" })
             end,
         },
+    },
+    {
+        "sindrets/diffview.nvim",
+        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+        keys = {
+            { "<leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Open diff view" },
+            { "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open history" },
+            { "<leader>gH", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open file history" },
+            { "<leader>gH", ":DiffviewFileHistory %<CR>", mode = "x", silent = true, desc = "Open history for range" },
+        },
+        opts = {
+            enhanced_diff_hl = true,
+            signs = {
+                done = "",
+            },
+            keymaps = {
+                file_panel = {
+                    ["q"] = "<Cmd>DiffviewClose<CR>",
+                },
+                file_history_panel = {
+                    ["q"] = "<Cmd>DiffviewClose<CR>",
+                },
+                view = {
+                    ["q"] = "<Cmd>DiffviewClose<CR>",
+                },
+            },
+        },
+        dependencies = "nvim-lua/plenary.nvim",
     },
 }
