@@ -5,7 +5,7 @@ vim.g.maplocalleader = "  " -- <Space><Space>
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
-require("peter.chezmoi")
+require("peter.config.chezmoi")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -49,6 +49,7 @@ vim.api.nvim_create_autocmd("User", {
     group = vim.api.nvim_create_augroup("ChezmoiAddLazyLock", { clear = true }),
     pattern = "LazyUpdate",
     callback = function()
+        -- TODO: Make a git commit?
         local lockfile = vim.fs.normalize(vim.fn.stdpath("config")) .. "/lazy-lock.json"
         chezmoi_command({ "add", lockfile }, "chezmoi add: lazy-lock.json")
     end,
