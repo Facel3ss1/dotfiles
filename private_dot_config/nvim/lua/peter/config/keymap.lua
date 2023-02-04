@@ -1,50 +1,46 @@
-local remap = require("peter.remap")
-local nnoremap = remap.nnoremap
-local xnoremap = remap.xnoremap
-local inoremap = remap.inoremap
-local snoremap = remap.snoremap
-
 -- Space is the leader key, so remove the default behaviour
 -- This will also make which-key show when we press space
-nnoremap("<Space>", "<Nop>")
+vim.keymap.set("n", "<Space>", "<Nop>")
 
 -- Make j and k take line wrapping into account
 -- If we supply a count beforehand, use default behaviour
-nnoremap("j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-nnoremap("k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Bri'ish version of # key
-nnoremap("£", "#")
+vim.keymap.set("n", "£", "#")
 
 -- Make <Esc> clear search highlights
-nnoremap("<Esc>", "<Cmd>nohl<CR>")
+-- TODO: Clear when we don't press a search key
+vim.keymap.set("n", "<Esc>", "<Cmd>nohl<CR>")
 
 -- TODO: Map this in operator pending mode so it is a text object
 -- See https://www.vikasraj.dev/blog/vim-dot-repeat
-nnoremap("cn", "*Ncgn", { desc = "Change next occurance of word under cursor" })
-nnoremap("cN", "*NcgN", { desc = "Change previous occurance of word under cursor" })
+vim.keymap.set("n", "cn", "*Ncgn", { desc = "Change next occurance of word under cursor" })
+vim.keymap.set("n", "cN", "*NcgN", { desc = "Change previous occurance of word under cursor" })
 
-nnoremap("<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
-nnoremap("<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })
-xnoremap("<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line up (visual)", silent = true })
-xnoremap("<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line down (visual)", silent = true })
-inoremap("<A-j>", "<Esc>:.m .+1<CR>==gi", { desc = "Move line up (insert)", silent = true })
-inoremap("<A-k>", "<Esc>:.m .-2<CR>==gi", { desc = "Move line down (insert)", silent = true })
+vim.keymap.set("n", "<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
+vim.keymap.set("n", "<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })
+vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line up", silent = true })
+vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line down", silent = true })
+vim.keymap.set("i", "<A-j>", "<Esc>:.m .+1<CR>==gi", { desc = "Move line up", silent = true })
+vim.keymap.set("i", "<A-k>", "<Esc>:.m .-2<CR>==gi", { desc = "Move line down", silent = true })
 
 -- Backspace in select mode changes instead of deletes
-snoremap("<BS>", "<C-g>c")
+vim.keymap.set("s", "<BS>", "<C-g>c")
 
 -- Repeatable indenting
-xnoremap(">", ">gv")
-xnoremap("<", "<gv")
+vim.keymap.set("x", ">", ">gv")
+vim.keymap.set("x", "<", "<gv")
 
 -- Recenter screen after certain movements
-nnoremap("n", "nzz")
-nnoremap("N", "Nzz")
-nnoremap("<C-d>", "<C-d>zz")
-nnoremap("<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzz")
+vim.keymap.set("n", "N", "Nzz")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 -- FIXME: This doesn't work in Lua yet
+-- See https://github.com/neovim/neovim/pull/22048
 -- @ in visual mode
 -- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
 vim.cmd([[
@@ -53,4 +49,4 @@ vim.cmd([[
         execute ":'<,'>normal @".nr2char(getchar())
     endfunction
 ]])
-xnoremap("@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
+vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
