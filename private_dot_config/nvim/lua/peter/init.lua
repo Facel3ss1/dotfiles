@@ -2,7 +2,6 @@
 vim.g.mapleader = " " -- <Space>
 vim.g.maplocalleader = "  " -- <Space><Space>
 
-require("peter.globals")
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
