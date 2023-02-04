@@ -1,6 +1,5 @@
 return {
     -- TODO: lsp_signature.nvim?
-    -- TODO: inc-rename.nvim
     -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
     {
         "neovim/nvim-lspconfig",
@@ -69,8 +68,11 @@ return {
             end
 
             local function on_attach(args)
+                local buf = args.buf
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+
                 local function map(mode, lhs, rhs, opts)
-                    opts.buffer = args.buf
+                    opts.buffer = buf
                     vim.keymap.set(mode, lhs, rhs, opts)
                 end
 
@@ -90,7 +92,7 @@ return {
                 map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
                 map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
 
-                require("peter.plugins.lsp.format").on_attach(args)
+                require("peter.plugins.lsp.format").on_attach(client, buf)
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {

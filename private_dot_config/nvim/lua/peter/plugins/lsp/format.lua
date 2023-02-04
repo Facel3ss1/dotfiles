@@ -28,10 +28,8 @@ local function null_ls_has_method(filetype, method)
 end
 
 -- Called from the LspAttach autocommand
-function M.on_attach(args)
+function M.on_attach(client, buf)
     -- TODO: formatexpr?
-    local buf = args.buf
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
     local capabilities = client.server_capabilities
     local filetype = vim.bo[buf].filetype
 
