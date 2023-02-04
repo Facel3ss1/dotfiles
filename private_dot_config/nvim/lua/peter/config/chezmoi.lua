@@ -43,6 +43,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         local relative_path = vim.fn.expand("%")
         chezmoi_command({ "apply", "--source-path", relative_path }, "chezmoi apply: " .. relative_path)
     end,
+    desc = "Run chezmoi apply",
 })
 
 vim.api.nvim_create_autocmd("User", {
@@ -53,6 +54,7 @@ vim.api.nvim_create_autocmd("User", {
         local lockfile = vim.fs.normalize(vim.fn.stdpath("config")) .. "/lazy-lock.json"
         chezmoi_command({ "add", lockfile }, "chezmoi add: lazy-lock.json")
     end,
+    desc = "Run chezmoi add lazy-lock.json",
 })
 
 return M

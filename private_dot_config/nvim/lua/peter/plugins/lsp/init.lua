@@ -98,6 +98,7 @@ return {
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("PeterLspAttach", { clear = true }),
                 callback = on_attach,
+                desc = "Call LSP on_attach()",
             })
 
             local settings = {

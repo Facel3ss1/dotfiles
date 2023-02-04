@@ -27,6 +27,7 @@ vim.api.nvim_create_autocmd("User", {
         -- See :h pack-add for why we need the bang
         vim.cmd.packadd { "cfilter", bang = true }
     end,
+    desc = "Run :packadd! cfilter",
 })
 
 require("lazy").setup("peter.plugins", {

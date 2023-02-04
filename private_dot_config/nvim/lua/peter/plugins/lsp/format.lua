@@ -48,17 +48,18 @@ function M.on_attach(client, buf)
 
     if capabilities.documentFormattingProvider then
         -- Note that we don't clear the autogroup when we attach to a new buffer
-        local group_id = vim.api.nvim_create_augroup("LspFormatOnSave", { clear = false })
+        local format_group = vim.api.nvim_create_augroup("PeterLspFormatOnSave", { clear = false })
         -- Ensure that there is exactly one formatting autocommand per buffer
-        if #vim.api.nvim_get_autocmds { group = group_id, buffer = buf } == 0 then
+        if #vim.api.nvim_get_autocmds { group = format_group, buffer = buf } == 0 then
             vim.api.nvim_create_autocmd("BufWritePre", {
-                group = group_id,
+                group = format_group,
                 buffer = buf,
                 callback = function()
                     if M.should_format_on_save then
                         vim.lsp.buf.format()
                     end
                 end,
+                desc = "Call vim.lsp.buf.format() if format on save is enabled",
             })
         end
     end

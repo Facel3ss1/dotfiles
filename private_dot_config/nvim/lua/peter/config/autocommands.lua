@@ -1,8 +1,3 @@
-local augroup = require("peter.au").augroup
-local autocmd
-
--- TODO: Add descriptions to autocommands
-
 -- Disables relativenumber for insert mode and inactive buffers.
 -- https://jeffkreeftmeijer.com/vim-number/#automatic-toggling-between-line-number-modes
 
@@ -13,8 +8,9 @@ local function redraw_treesitter_context()
     pcall(ts_context.enable)
 end
 
-autocmd = augroup("NumberToggle", { clear = true })
-autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+local numbertoggle_group = vim.api.nvim_create_augroup("NumberToggle", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+    group = numbertoggle_group,
     pattern = "*",
     callback = function()
         if vim.wo.number and vim.api.nvim_get_mode().mode ~= "i" then
@@ -22,8 +18,10 @@ autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
             redraw_treesitter_context()
         end
     end,
+    desc = "Enable relativenumber",
 })
-autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+    group = numbertoggle_group,
     pattern = "*",
     callback = function()
         if vim.wo.number then
@@ -31,30 +29,43 @@ autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
             redraw_treesitter_context()
         end
     end,
+    desc = "Disable relativenumber",
 })
 
 -- Brief highlight when we yank something
-
-autocmd = augroup("YankHighlight", { clear = true })
-autocmd("TextYankPost", {
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
     pattern = "*",
     callback = function()
         pcall(vim.highlight.on_yank)
     end,
+    desc = "Call vim.highlight.on_yank()",
 })
 
 -- Only have cursorline on in the current window
-
 local function set_cursorline(value)
     return function()
         vim.wo.cursorline = value
     end
 end
 
-autocmd = augroup("CursorLineToggle", { clear = true })
-autocmd("WinEnter", { callback = set_cursorline(true) })
-autocmd("WinLeave", { callback = set_cursorline(false) })
-autocmd("FileType", { pattern = "TelescopePrompt", callback = set_cursorline(false) })
+local cursorline_group = vim.api.nvim_create_augroup("CursorLineToggle", { clear = true })
+vim.api.nvim_create_autocmd("WinEnter", {
+    group = cursorline_group,
+    callback = set_cursorline(true),
+    desc = "Enable cursorline",
+})
+vim.api.nvim_create_autocmd("WinLeave", {
+    group = cursorline_group,
+    callback = set_cursorline(false),
+    desc = "Disable cursorline",
+})
+vim.api.nvim_create_autocmd("FileType", {
+    group = cursorline_group,
+    pattern = "TelescopePrompt",
+    callback = set_cursorline(false),
+    desc = "Disable cursorline",
+})
 
 -- Disable/Change colorcolumn for certain filetypes
 -- TODO: buftypes? filenames?
@@ -66,14 +77,17 @@ local function disable_colorcolumn()
     vim.wo.colorcolumn = ""
 end
 
-autocmd = augroup("SetColorColumn", { clear = true })
-autocmd("FileType", {
+local colorcolumn_group = vim.api.nvim_create_augroup("SetColorColumn", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = colorcolumn_group,
     pattern = { "gitcommit", "NeogitCommitMessage" },
     callback = function()
         vim.wo.colorcolumn = "50,72"
     end,
+    desc = "Set colorcolumn = 50,72",
 })
-autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
+    group = colorcolumn_group,
     pattern = {
         "help",
         "gitrebase",
@@ -84,20 +98,21 @@ autocmd("FileType", {
         "startuptime",
     },
     callback = disable_colorcolumn,
+    desc = "Disable colorcolumn",
 })
 
-autocmd = augroup("SetCommentString", { clear = true })
-autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("SetCommentString", { clear = true }),
     pattern = "gitconfig",
     callback = function()
         vim.bo.commentstring = "# %s"
     end,
+    desc = 'Set commentstring = "# %s"',
 })
 
 -- Each filetype will have it's own formatoptions which we need to override
-
-autocmd = augroup("SetFormatOptions", { clear = true })
-autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("SetFormatOptions", { clear = true }),
     pattern = "*",
     callback = function()
         vim.opt.formatoptions = vim.opt.formatoptions
@@ -106,13 +121,15 @@ autocmd("FileType", {
             + "j" -- Remove comment characters when joining
             + "q" -- Let me wrap comments with gq
     end,
+    desc = "Change formatoptions: +rjq -o",
 })
 
-autocmd = augroup("SetTerminalOptions", { clear = true })
-autocmd("TermOpen", {
+vim.api.nvim_create_autocmd("TermOpen", {
+    group = vim.api.nvim_create_augroup("SetTerminalOptions", { clear = true }),
     callback = function()
         vim.wo.number = false
         vim.wo.relativenumber = false
         vim.wo.colorcolumn = ""
     end,
+    desc = "Disable line numbers and colorcolumn",
 })

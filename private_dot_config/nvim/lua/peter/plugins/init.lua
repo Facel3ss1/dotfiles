@@ -34,6 +34,7 @@ return {
                     map("<leader>ccf", crates.show_features_popup, { desc = "Show crate features" })
                     map("<leader>ccd", crates.show_dependencies_popup, { desc = "Show crate dependencies" })
                 end,
+                desc = "Register crates.nvim keybindings",
             })
 
             crates.setup(opts)
