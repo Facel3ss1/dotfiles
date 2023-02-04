@@ -75,7 +75,13 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
-        config = function()
+        -- TODO: Change icons
+        opts = {
+            window = {
+                border = "rounded",
+            },
+        },
+        config = function(_, opts)
             local whichkey = require("which-key")
 
             -- See https://github.com/folke/which-key.nvim/blob/main/lua/which-key/plugins/presets/init.lua
@@ -112,8 +118,7 @@ return {
                 ["Y"] = "which_key_ignore",
             }
 
-            -- TODO: Change icons
-            whichkey.setup {}
+            whichkey.setup(opts)
         end,
     },
     {
