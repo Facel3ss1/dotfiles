@@ -1,7 +1,6 @@
 return {
     -- TODO: nvim-ts-context-commentstring with lua help comments?
     -- TODO: nvim-ts-autotag
-    -- TODO: Incremental selection with <CR> and <BS>
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -49,6 +48,15 @@ return {
                     enable = true,
                     disable = { "help" },
                     additional_vim_regex_highlighting = false,
+                },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "<CR>",
+                        node_incremental = "<CR>",
+                        scope_incremental = "<Nop>",
+                        node_decremental = "<BS>",
+                    },
                 },
                 endwise = {
                     enable = true,
