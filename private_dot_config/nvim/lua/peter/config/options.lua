@@ -23,7 +23,7 @@ vim.o.expandtab = true -- Use spaces instead of tabs for indentation
 vim.o.autoindent = true -- Continue indentation from previous line
 vim.o.smartindent = true -- Smartly add indentation when starting new line
 
-vim.o.hlsearch = true -- Highlight search results, I've mapped <Esc> to :nohl
+vim.o.ignorecase = true -- Searching is case-insensitive by default. Use \C to make it case-sensitive
 
 -- TODO: undofile?
 -- TODO: backup and backupdir?

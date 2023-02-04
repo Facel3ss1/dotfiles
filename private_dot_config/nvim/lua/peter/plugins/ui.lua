@@ -199,6 +199,13 @@ return {
             },
         },
     },
+    -- Disable hlsearch when I move the cursor
+    {
+        "asiryk/auto-hlsearch.nvim",
+        version = "1.0.0",
+        keys = { "/", "?", "*", "#", "n", "N" },
+        config = true,
+    },
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",

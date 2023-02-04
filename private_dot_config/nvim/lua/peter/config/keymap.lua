@@ -11,7 +11,6 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "£", "#")
 
 -- Make <Esc> clear search highlights
--- TODO: Clear when we don't press a search key
 vim.keymap.set("n", "<Esc>", "<Cmd>nohl<CR>")
 
 -- TODO: Map this in operator pending mode so it is a text object
