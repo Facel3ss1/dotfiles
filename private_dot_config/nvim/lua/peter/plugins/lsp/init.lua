@@ -91,8 +91,23 @@ return {
                 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
                 map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
                 map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
+                map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
                 require("peter.plugins.lsp.format").on_attach(client, buf)
+
+                if client.server_capabilities.codeLensProvider then
+                    local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
+                    if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = args.buf } == 0 then
+                        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+                            group = codelens_group,
+                            buffer = args.buf,
+                            callback = function()
+                                vim.lsp.codelens.refresh()
+                            end,
+                            desc = "Call vim.lsp.codelens.refresh()",
+                        })
+                    end
+                end
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
