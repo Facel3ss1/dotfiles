@@ -117,7 +117,7 @@ return {
             })
 
             local settings = {
-                ["sumneko_lua"] = {
+                ["lua_ls"] = {
                     Lua = {
                         completion = {
                             callSnippet = "Replace",
@@ -154,7 +154,7 @@ return {
             end
 
             require("mason-lspconfig").setup {
-                ensure_installed = { "sumneko_lua" },
+                ensure_installed = { "lua_ls" },
             }
             require("mason-lspconfig").setup_handlers {
                 default_handler,
