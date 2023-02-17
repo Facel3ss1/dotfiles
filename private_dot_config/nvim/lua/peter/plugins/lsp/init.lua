@@ -166,6 +166,14 @@ return {
                         },
                     }
                 end,
+                ["hls"] = function(server_name)
+                    require("haskell-tools").setup {
+                        hls = {
+                            capabilities = capabilities,
+                            settings = settings[server_name],
+                        },
+                    }
+                end,
                 ["clangd"] = function(server_name)
                     require("clangd_extensions").setup {
                         server = {
@@ -242,4 +250,9 @@ return {
     },
     { "simrat39/rust-tools.nvim", dependencies = "nvim-lua/plenary.nvim" },
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
+    {
+        "mrcjkb/haskell-tools.nvim",
+        version = "1.*",
+        dependencies = { "nvim-lua/plenary.nvim", "telescope.nvim" },
+    },
 }
