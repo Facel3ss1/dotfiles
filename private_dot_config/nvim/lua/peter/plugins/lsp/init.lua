@@ -179,6 +179,14 @@ return {
                         server = {
                             capabilities = capabilities,
                             settings = settings[server_name],
+                            on_attach = function(_, buf)
+                                vim.keymap.set(
+                                    "n",
+                                    "<leader>ch",
+                                    "<Cmd>ClangdSwitchSourceHeader<CR>",
+                                    { buffer = buf, desc = "Switch between source/header" }
+                                )
+                            end,
                         },
                     }
 
