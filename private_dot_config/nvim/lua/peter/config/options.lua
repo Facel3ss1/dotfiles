@@ -33,6 +33,7 @@ vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
 vim.o.laststatus = 3 -- Use global statusline
 
+vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.fillchars = {
     diff = "╱",
 }
