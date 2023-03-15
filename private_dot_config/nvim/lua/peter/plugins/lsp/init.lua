@@ -9,20 +9,6 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
             {
-                "folke/neodev.nvim",
-                opts = {
-                    -- TODO: Use neoconf instead?
-                    override = function(root_dir, options)
-                        -- Add vim plugins and api to path if we are in the chezmoi directory
-                        local chezmoi_dir = require("peter.chezmoi").source_dir
-                        if require("neodev.util").has_file(chezmoi_dir, root_dir) then
-                            options.enabled = true
-                            options.plugins = true
-                        end
-                    end,
-                },
-            },
-            {
                 "j-hui/fidget.nvim",
                 opts = {
                     text = {
@@ -158,6 +144,21 @@ return {
             }
             require("mason-lspconfig").setup_handlers {
                 default_handler,
+                ["lua_ls"] = function(server_name)
+                    require("neodev").setup {
+                        -- TODO: Use neoconf instead?
+                        override = function(root_dir, library)
+                            -- Add vim plugins and api to path if we are in the chezmoi config directory
+                            local config_dir = require("peter.config.chezmoi").source_dir .. "/private_dot_config/nvim"
+                            if root_dir == config_dir then
+                                library.enabled = true
+                                library.plugins = true
+                            end
+                        end,
+                    }
+
+                    default_handler(server_name)
+                end,
                 ["rust_analyzer"] = function(server_name)
                     require("rust-tools").setup {
                         server = {
@@ -256,6 +257,7 @@ return {
         end,
         dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },
     },
+    { "folke/neodev.nvim" },
     { "simrat39/rust-tools.nvim", dependencies = "nvim-lua/plenary.nvim" },
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     {
