@@ -33,6 +33,10 @@ vim.api.nvim_create_autocmd("User", {
 require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
     checker = { enabled = true },
+    change_detection = { notify = false },
+    install = {
+        colorscheme = { "ayu-mirage", "habamax" },
+    },
     performance = {
         rtp = {
             disabled_plugins = {
@@ -46,7 +50,7 @@ require("lazy").setup("peter.plugins", {
     },
 })
 
-vim.keymap.set("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -- TODO: Central place for icons
 -- TODO: executable() utility function

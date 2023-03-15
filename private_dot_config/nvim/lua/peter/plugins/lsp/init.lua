@@ -216,6 +216,9 @@ return {
     {
         "williamboman/mason.nvim",
         cmd = "Mason",
+        keys = {
+            { "<leader>um", "<Cmd>Mason<CR>", desc = "Open Mason" },
+        },
         -- TODO: Automatically update installed packages
         opts = {
             ui = {

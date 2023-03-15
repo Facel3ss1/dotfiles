@@ -1,5 +1,6 @@
 return {
     -- TODO: Add on_click telescope prompts
+    -- TODO: Add attached LSP and move file icon to left of path
     {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
@@ -105,6 +106,9 @@ return {
                 t = {
                     name = "toggle",
                 },
+                u = {
+                    name = "ui",
+                },
             }, { prefix = "<leader>" })
 
             whichkey.register {
@@ -140,7 +144,15 @@ return {
     {
         -- ALTERNATIVE: notifier.nvim
         "rcarriga/nvim-notify",
-        -- TODO: Dismiss keybind
+        keys = {
+            {
+                "<leader>un",
+                function()
+                    require("notify").dismiss { silent = true, pending = true }
+                end,
+                desc = "Dismiss all notifications",
+            },
+        },
         opts = {
             stages = "fade",
             icons = {

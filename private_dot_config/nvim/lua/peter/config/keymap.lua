@@ -49,3 +49,9 @@ vim.cmd([[
     endfunction
 ]])
 vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
+
+vim.keymap.set("n", "<leader>uc", function()
+    -- TODO: Delete all the buffers when we close the tab (mini.bufremove)?
+    vim.cmd.tabnew()
+    vim.cmd.tcd { require("peter.config.chezmoi").source_dir }
+end, { desc = "Open chezmoi directory in new tab" })
