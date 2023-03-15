@@ -29,7 +29,6 @@ end
 
 -- Called from the LspAttach autocommand
 function M.on_attach(client, buf)
-    -- TODO: formatexpr?
     local capabilities = client.server_capabilities
     local filetype = vim.bo[buf].filetype
 
@@ -63,6 +62,11 @@ function M.on_attach(client, buf)
             })
         end
     end
+
+    -- FIXME: Can't I use vim.bo?
+    -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
+    -- See https://github.com/neovim/neovim/pull/19677
+    vim.api.nvim_buf_set_option(buf, "formatexpr", "")
 end
 
 return M
