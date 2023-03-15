@@ -1,9 +1,33 @@
 return {
-    -- TODO: todo-comments
     -- TODO: glow.nvim
     { "tpope/vim-sleuth", cmd = "Sleuth", event = "BufReadPre" },
+    -- ALTERNATIVE: mini.bracketed
     { "tpope/vim-unimpaired", event = "VeryLazy" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
+    {
+        "folke/todo-comments.nvim",
+        cmd = { "TodoQuickFix", "TodoLocList", "TodoTrouble", "TodoTelescope" },
+        event = { "BufReadPost", "BufNewFile" },
+        -- stylua: ignore
+        keys = {
+            { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+            { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment", },
+            { "<leader>ft", "<Cmd>TodoTelescope keywords=TODO,FIXME,XXX<CR>", desc = "Find todos" },
+        },
+        opts = {
+            signs = false,
+            highlight = {
+                keyword = "fg",
+                after = "",
+                -- See https://github.com/folke/todo-comments.nvim/issues/10
+                pattern = [[.*<(KEYWORDS)(\([^\)]*\))?:]],
+            },
+            search = {
+                pattern = [=[\b(KEYWORDS)(\([^\)]*\))?:]=],
+            },
+        },
+        dependencies = "nvim-lua/plenary.nvim",
+    },
     {
         "saecki/crates.nvim",
         version = "0.3.0",
