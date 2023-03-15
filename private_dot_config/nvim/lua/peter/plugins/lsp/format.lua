@@ -63,10 +63,9 @@ function M.on_attach(client, buf)
         end
     end
 
-    -- FIXME: Can't I use vim.bo?
     -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
     -- See https://github.com/neovim/neovim/pull/19677
-    vim.api.nvim_buf_set_option(buf, "formatexpr", "")
+    vim.bo[buf].formatexpr = nil
 end
 
 return M
