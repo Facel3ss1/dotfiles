@@ -38,10 +38,14 @@ return {
             return {
                 mirage = true,
                 overrides = {
-                    -- TODO: Override LineNr for ts context if we do this
                     -- NormalFloat = { bg = colors.panel_bg },
+                    -- Turn off italics in comments
                     Comment = { fg = colors.comment },
+                    -- Workaround for https://github.com/neovim/neovim/issues/9800
+                    CursorLine = { bg = colors.line, ctermfg = 15 },
                     WinSeparator = { fg = colors.guide_active, bg = colors.line },
+                    LspCodeLens = { fg = colors.comment, italic = true },
+                    LspCodeLensSeparator = { fg = colors.comment },
 
                     -- Add faded background for diagnostics virtual text
                     DiagnosticVirtualTextError = { fg = colors.error, bg = blend(colors.error, colors.bg, 0.1) },
@@ -74,6 +78,10 @@ return {
 
                     -- nvim-lightbulb
                     LightBulbSign = { fg = colors.accent },
+
+                    -- nvim-treesitter-context
+                    TreesitterContext = { bg = colors.panel_bg },
+                    TreesitterContextLineNumber = { fg = colors.guide_normal, bg = colors.panel_bg },
                 },
             }
         end,
