@@ -1,6 +1,6 @@
 return {
     -- TODO: Add on_click telescope prompts
-    -- TODO: Add attached LSP and move file icon to left of path
+    -- TODO: Add attached LSP
     {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
@@ -24,6 +24,12 @@ return {
                             info = " ",
                             hint = " ",
                         },
+                    },
+                    {
+                        "filetype",
+                        padding = { left = 1, right = 0 },
+                        icon_only = true,
+                        separator = "",
                     },
                     { "filename", path = 1 },
                 },
@@ -60,11 +66,12 @@ return {
                             return vim.bo.buftype ~= "terminal"
                         end,
                     },
-                    { "filetype", colored = false },
+                    { "filetype", icons_enabled = false },
                 },
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
             },
+            -- TODO: nvim-dap-ui
             extensions = { "man", "quickfix" },
         },
         config = function(_, opts)
