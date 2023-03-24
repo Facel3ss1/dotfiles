@@ -19,12 +19,14 @@ return {
             highlight = {
                 keyword = "fg",
                 after = "",
+                -- This matches a todo with an author in brackets, as well as a todo on its own without a colon
                 -- See https://github.com/folke/todo-comments.nvim/issues/10
-                pattern = [[.*<(KEYWORDS)(\([^\)]*\))?:]],
+                pattern = [=[.*<(KEYWORDS)(\([^\)]*\))?(:|$)]=],
             },
             search = {
-                pattern = [=[\b(KEYWORDS)(\([^\)]*\))?:]=],
+                pattern = [=[\b(KEYWORDS)(\([^\)]*\))?(:|$)]=],
             },
+            -- TODO: Configure the keywords
         },
         dependencies = "nvim-lua/plenary.nvim",
     },

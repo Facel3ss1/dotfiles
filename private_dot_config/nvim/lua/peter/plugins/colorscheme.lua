@@ -47,6 +47,8 @@ return {
                     LspCodeLens = { fg = colors.comment, italic = true },
                     LspCodeLensSeparator = { fg = colors.comment },
 
+                    Todo = { link = "DiagnosticInfo" },
+
                     -- Add faded background for diagnostics virtual text
                     DiagnosticVirtualTextError = { fg = colors.error, bg = blend(colors.error, colors.bg, 0.1) },
                     DiagnosticVirtualTextWarn = { fg = colors.keyword, bg = blend(colors.keyword, colors.bg, 0.1) },
