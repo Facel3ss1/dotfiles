@@ -13,6 +13,7 @@ return {
                 section = { "", "" },
                 item = { "", "" },
             },
+            remember_settings = false,
             integrations = {
                 diffview = true,
             },
