@@ -24,10 +24,12 @@ vim.api.nvim_create_autocmd("User", {
     pattern = "VeryLazy",
     group = vim.api.nvim_create_augroup("LazyPackadd", { clear = true }),
     callback = function()
-        -- See :h pack-add for why we need the bang
-        vim.cmd.packadd { "cfilter", bang = true }
+        -- :h pack-add says we need a bang, but this doesn't load the plugin,
+        -- it only adds the files to 'runtimepath' - given that lazy.nvim is
+        -- managing the runtimepath lets just add it normally.
+        vim.cmd.packadd { "cfilter" }
     end,
-    desc = "Run :packadd! cfilter",
+    desc = "Run :packadd cfilter",
 })
 
 require("lazy").setup("peter.plugins", {
@@ -56,3 +58,4 @@ vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 -- TODO: executable() utility function
 -- TODO: health check for my config
 -- TODO: spell checks
+-- TODO: See :h vim.paste()
