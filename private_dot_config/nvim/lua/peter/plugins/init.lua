@@ -3,6 +3,7 @@ return {
     { "tpope/vim-sleuth", cmd = "Sleuth", event = "BufReadPre" },
     -- ALTERNATIVE: mini.bracketed
     { "tpope/vim-unimpaired", event = "VeryLazy" },
+    { "tpope/vim-abolish", event = "VeryLazy" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
     {
         "folke/todo-comments.nvim",
