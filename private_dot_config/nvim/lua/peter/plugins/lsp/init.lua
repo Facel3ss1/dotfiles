@@ -1,9 +1,12 @@
 return {
     -- TODO: lsp_signature.nvim?
     -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
+    -- FIXME: clang-format and clang-tidy not highlighting as yaml
     {
         "neovim/nvim-lspconfig",
+        -- FIXME: Make it work when I :e myfile
         event = "BufReadPre",
+        cmd = { "LspInfo" },
         dependencies = {
             "mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -40,6 +43,7 @@ return {
             -- Add a rounded border to docs hovers
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
+            -- TODO: Keybind to see all the definitions?
             -- Always jump to the first definition when we go to definition
             vim.lsp.handlers["textDocument/definition"] = function(_, result)
                 if not result or vim.tbl_isempty(result) then
@@ -64,6 +68,7 @@ return {
                 end
 
                 map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
+                -- TODO: Add floating border to this
                 map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
                 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
@@ -141,6 +146,7 @@ return {
             end
 
             require("mason-lspconfig").setup {
+                -- TODO: jsonls
                 ensure_installed = { "lua_ls" },
             }
             require("mason-lspconfig").setup_handlers {
@@ -194,7 +200,7 @@ return {
 
                     local cmp = require("cmp")
 
-                    -- FIXME: clangd completion entries have a space before
+                    -- FIXME: clangd completion entries have a space/bullet before
                     cmp.setup.filetype({ "c", "cpp" }, {
                         sorting = {
                             comparators = {
@@ -251,12 +257,30 @@ return {
         opts = function()
             local null_ls = require("null-ls")
 
+            -- Mason package name -> null-ls source
+            local mason_sources = {
+                stylua = null_ls.builtins.formatting.stylua,
+                isort = null_ls.builtins.formatting.isort,
+                black = null_ls.builtins.formatting.black,
+                flake8 = null_ls.builtins.diagnostics.flake8,
+            }
+
+            local sources = {
+                null_ls.builtins.formatting.fish_indent,
+                null_ls.builtins.diagnostics.fish,
+            }
+
+            -- Only enable null-ls sources if the mason package is installed
+            local mason_registry = require("mason-registry")
+            for package_name, source in pairs(mason_sources) do
+                local package = mason_registry.get_package(package_name)
+                if package:is_installed() then
+                    table.insert(sources, source)
+                end
+            end
+
             return {
-                sources = {
-                    null_ls.builtins.formatting.fish_indent,
-                    null_ls.builtins.formatting.stylua,
-                    null_ls.builtins.diagnostics.fish,
-                },
+                sources = sources,
             }
         end,
         dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },
