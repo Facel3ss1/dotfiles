@@ -1,9 +1,20 @@
+local function format_diagnostic(diagnostic)
+    if not diagnostic.code then
+        return string.format("%s [%s]", diagnostic.message, diagnostic.source)
+    end
+
+    return string.format("%s [%s(%s)]", diagnostic.message, diagnostic.source, diagnostic.code)
+end
+
 vim.diagnostic.config {
     -- I don't want signs in the signcolumn
     signs = false,
     -- TODO: Colored border depending on severity?
-    float = { border = "rounded" },
-    -- TODO: Colored background for virtual text?
+    float = {
+        format = format_diagnostic,
+        border = "rounded",
+    },
+    -- TODO: Give higher priority than inlay hints
     virtual_text = { spacing = 4, prefix = "●" },
     severity_sort = true,
 }
