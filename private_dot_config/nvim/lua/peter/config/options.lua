@@ -25,8 +25,9 @@ vim.o.smartindent = true -- Smartly add indentation when starting new line
 
 vim.o.ignorecase = true -- Searching is case-insensitive by default. Use \C to make it case-sensitive
 
--- TODO: undofile?
--- TODO: backup and backupdir?
+vim.o.undofile = true -- Save/Restore undo history to the undo directory when I save/load a file
+-- FIXME: Change backupdir
+-- vim.o.backup = true -- Save a backup to the backup directory when I save a file
 
 vim.o.colorcolumn = "80" -- Put colored column at column 80
 vim.o.cursorline = true -- Highlight current line cursor is on
@@ -39,7 +40,7 @@ vim.opt.fillchars = {
 }
 vim.opt.shortmess:append("I") -- Don't show the intro on startup
 
-vim.o.virtualedit = "block"
+vim.o.virtualedit = "block" -- Let me move to non-existent characters with <C-v>
 
 -- Split windows to the right and downwards
 vim.o.splitright = true
