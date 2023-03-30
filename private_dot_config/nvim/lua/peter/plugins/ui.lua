@@ -78,7 +78,7 @@ return {
             vim.o.showmode = false
             require("lualine").setup(opts)
         end,
-        dependencies = "kyazdani42/nvim-web-devicons",
+        dependencies = "nvim-tree/nvim-web-devicons",
     },
     {
         "folke/which-key.nvim",
@@ -146,7 +146,7 @@ return {
                 },
             },
         },
-        dependencies = "kyazdani42/nvim-web-devicons",
+        dependencies = "nvim-tree/nvim-web-devicons",
     },
     {
         -- ALTERNATIVE: notifier.nvim
