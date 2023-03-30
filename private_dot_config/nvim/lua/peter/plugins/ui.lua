@@ -230,6 +230,7 @@ return {
         event = "VeryLazy",
         opts = {
             show_current_context = true,
+            use_treesitter = true,
             buftype_exclude = { "terminal", "nofile" },
             filetype_exclude = {
                 "help",

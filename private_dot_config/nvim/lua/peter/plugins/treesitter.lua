@@ -64,12 +64,15 @@ return {
                 playground = {
                     enable = true,
                 },
-                -- TODO: enable indent feature here and for indent-blankline
+                indent = {
+                    enable = true,
+                },
             }
         end,
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
 
+            -- FIXME: https://github.com/nvim-telescope/telescope.nvim/issues/699
             -- vim.o.foldmethod = "expr"
             -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
             -- vim.o.foldenable = false
