@@ -1,6 +1,7 @@
 return {
     -- TODO: Add on_click telescope prompts
     -- TODO: Add attached LSP
+    -- TODO: Add git blame to bottom right
     {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
@@ -72,7 +73,7 @@ return {
                 lualine_z = { "location" },
             },
             -- TODO: nvim-dap-ui
-            extensions = { "man", "quickfix" },
+            extensions = { "lazy", "man", "quickfix" },
         },
         config = function(_, opts)
             vim.o.showmode = false
