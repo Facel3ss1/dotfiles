@@ -133,3 +133,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
     desc = "Disable line numbers and colorcolumn",
 })
+
+vim.filetype.add {
+    filename = {
+        [".clang-format"] = "yaml",
+        [".clang-tidy"] = "yaml",
+    },
+}
