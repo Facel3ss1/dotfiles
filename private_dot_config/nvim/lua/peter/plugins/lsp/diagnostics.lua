@@ -1,9 +1,9 @@
-local function format_diagnostic(diagnostic)
+local function format_error_code(diagnostic)
     if not diagnostic.code then
-        return string.format("%s [%s]", diagnostic.message, diagnostic.source)
+        return string.format(" %s", diagnostic.source)
     end
 
-    return string.format("%s [%s(%s)]", diagnostic.message, diagnostic.source, diagnostic.code)
+    return string.format(" %s(%s)", diagnostic.source, diagnostic.code)
 end
 
 vim.diagnostic.config {
@@ -11,7 +11,7 @@ vim.diagnostic.config {
     signs = false,
     -- TODO: Colored border depending on severity?
     float = {
-        format = format_diagnostic,
+        suffix = format_error_code,
         border = "rounded",
     },
     -- TODO: Give higher priority than inlay hints
