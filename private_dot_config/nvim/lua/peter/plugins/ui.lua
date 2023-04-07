@@ -72,8 +72,7 @@ return {
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
             },
-            -- TODO: nvim-dap-ui
-            extensions = { "lazy", "man", "quickfix" },
+            extensions = { "lazy", "man", "quickfix", "nvim-dap-ui" },
         },
         config = function(_, opts)
             vim.o.showmode = false
@@ -101,6 +100,9 @@ return {
                 mode = { "n", "v" },
                 c = {
                     name = "code",
+                },
+                d = {
+                    name = "debug",
                 },
                 f = {
                     name = "find",
