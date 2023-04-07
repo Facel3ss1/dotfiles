@@ -1,0 +1,3 @@
+# Force LF line endings on all OSes
+# See https://stackoverflow.com/questions/62554245/how-can-i-use-lf-line-endings-in-git-for-windows-in-2020-for-good
+* text=auto eol=lf
