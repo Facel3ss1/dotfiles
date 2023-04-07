@@ -1,3 +1,4 @@
+-- TODO: git-conflict.nvim
 return {
     -- TODO: Would ]c etc. be possible?
     {
@@ -72,15 +73,16 @@ return {
         cmd = { "DiffviewOpen", "DiffviewFileHistory" },
         keys = {
             { "<leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Open diff view" },
-            { "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open history" },
-            { "<leader>gH", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open file history" },
-            { "<leader>gH", ":DiffviewFileHistory %<CR>", mode = "x", silent = true, desc = "Open history for range" },
+            { "<leader>gh", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open file history" },
+            { "<leader>gh", ":DiffviewFileHistory %<CR>", mode = "x", silent = true, desc = "Open history for range" },
+            { "<leader>gH", "<Cmd>DiffviewFileHistory<CR>", desc = "Open commit history" },
         },
         opts = {
             enhanced_diff_hl = true,
             signs = {
                 done = "",
             },
+            -- TODO
             keymaps = {
                 file_panel = {
                     ["q"] = "<Cmd>DiffviewClose<CR>",
@@ -92,6 +94,12 @@ return {
                     ["q"] = "<Cmd>DiffviewClose<CR>",
                 },
             },
+            -- FIXME: The diff4 view doesn't seem to be a thing? (try g<C-x> to switch views)
+            -- view = {
+            --     merge_tool = {
+            --         layout = "diff4_mixed",
+            --     },
+            -- },
         },
         dependencies = "nvim-lua/plenary.nvim",
     },
