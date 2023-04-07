@@ -57,7 +57,7 @@ require("lazy").setup("peter.plugins", {
 vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 -- TODO: Central place for icons
--- TODO: executable() utility function
+-- TODO: executable() and has() utility functions
 -- TODO: health check for my config
 -- TODO: spell checks
--- TODO: See :h vim.paste()
+-- TODO: --remote-ui ???

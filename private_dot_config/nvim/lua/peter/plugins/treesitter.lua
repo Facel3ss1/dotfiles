@@ -1,6 +1,7 @@
 return {
     -- TODO: nvim-ts-context-commentstring with lua help comments?
     -- TODO: nvim-ts-autotag
+    -- TODO: "in comment" e.g. gqic for formatting (nvim-ts-textobjects)
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -73,6 +74,7 @@ return {
             require("nvim-treesitter.configs").setup(opts)
 
             -- FIXME: https://github.com/nvim-telescope/telescope.nvim/issues/699
+            -- TODO: vim.treesitter.foldexpr()
             -- vim.o.foldmethod = "expr"
             -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
             -- vim.o.foldenable = false

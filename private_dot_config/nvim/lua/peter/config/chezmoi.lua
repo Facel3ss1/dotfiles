@@ -3,6 +3,7 @@ local M = {}
 M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
 -- TODO: Keymap to jump to target path file
+-- TODO: Use vim.filetype.add() to register filetypes
 
 local function chezmoi_command(command, success_message)
     table.insert(command, 1, "chezmoi")

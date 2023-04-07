@@ -55,3 +55,5 @@ vim.keymap.set("n", "<leader>uc", function()
     vim.cmd.tabnew()
     vim.cmd.tcd { require("peter.config.chezmoi").source_dir }
 end, { desc = "Open chezmoi directory in new tab" })
+
+-- TODO: dd in quickfix list (quickfix reflector)

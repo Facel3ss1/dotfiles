@@ -11,6 +11,7 @@ return {
                     local builtin = "find_files"
                     if vim.loop.fs_stat(vim.loop.cwd() .. "/.git") then
                         opts.show_untracked = true
+                        -- FIXME: Don't show deleted files?
                         builtin = "git_files"
                     end
 
@@ -36,6 +37,7 @@ return {
             { "<leader>f/", "<Cmd>Telescope file_browser files=false<CR>", desc = "Open folder browser" },
             {
                 "<leader>f.",
+                -- FIXME: Use cwd when in terminal buffer
                 "<Cmd>Telescope file_browser path=%:p:h<CR>",
                 desc = "Open file browser in containing folder",
             },

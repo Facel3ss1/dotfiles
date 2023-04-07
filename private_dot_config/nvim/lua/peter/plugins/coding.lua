@@ -1,9 +1,10 @@
 return {
     -- TODO: vim-matchup
-    -- TODO: vim-splitjoin, or nvim-trevJ
-    -- TODO: Highlight trailing whitespace
+    -- TODO: vim-splitjoin, or treesj
+    -- TODO: Highlight trailing whitespace (mini.trailspace), see :h editorconfig and Primeagen's config for trimming
     -- TODO: dial.nvim
     {
+        -- TODO: nvim-cmp-emoji
         "hrsh7th/nvim-cmp",
         event = { "InsertEnter", "CmdlineEnter" },
         opts = function()

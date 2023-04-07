@@ -67,8 +67,12 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Disable cursorline",
 })
 
+-- FIXME: If we change these options then change the *window* (not buffer) to
+-- one where these options don't apply, we should revert the changes
+
 -- Disable/Change colorcolumn for certain filetypes
 -- TODO: buftypes? filenames?
+-- TODO: Set based on textwidth option
 
 local function disable_colorcolumn()
     if vim.wo.colorcolumn ~= "80" then
