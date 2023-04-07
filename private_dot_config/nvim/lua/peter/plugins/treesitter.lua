@@ -80,5 +80,4 @@ return {
     },
     { "nvim-treesitter/nvim-treesitter-context", module = false, event = "BufReadPre", config = true },
     { "RRethy/nvim-treesitter-endwise", event = "InsertEnter" },
-    { "nvim-treesitter/playground", cmd = { "TSPlaygroundToggle", "TSHighlightCapturesUnderCursor" } },
 }

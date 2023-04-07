@@ -1,7 +1,6 @@
 return {
     -- TODO: glow.nvim
-    { "tpope/vim-sleuth", cmd = "Sleuth", event = "BufReadPre" },
-    -- ALTERNATIVE: mini.bracketed
+    -- TODO: mini.bracketed
     { "tpope/vim-unimpaired", event = "VeryLazy" },
     { "tpope/vim-abolish", event = "VeryLazy" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
