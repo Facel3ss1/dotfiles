@@ -38,16 +38,19 @@ return {
             return {
                 mirage = true,
                 overrides = {
-                    -- NormalFloat = { bg = colors.panel_bg },
                     -- Turn off italics in comments
                     Comment = { fg = colors.comment },
+                    Todo = { link = "DiagnosticInfo" },
                     -- Workaround for https://github.com/neovim/neovim/issues/9800
                     CursorLine = { bg = colors.line, ctermfg = 15 },
                     WinSeparator = { fg = colors.guide_active, bg = colors.line },
                     LspCodeLens = { fg = colors.comment, italic = true },
                     LspCodeLensSeparator = { fg = colors.comment },
 
-                    Todo = { link = "DiagnosticInfo" },
+                    -- Make variables plain insted of Identifier (See :h lsp-semantic-highlight)
+                    ["@lsp.type.variable"] = { fg = colors.fg },
+                    -- Make parameters highlight the same way as constants
+                    ["@lsp.type.parameter"] = { link = "Constant" },
 
                     -- Add faded background for diagnostics virtual text
                     DiagnosticVirtualTextError = { fg = colors.error, bg = blend(colors.error, colors.bg, 0.1) },
