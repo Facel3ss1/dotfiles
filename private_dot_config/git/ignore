@@ -3,6 +3,9 @@ Thumbs.db
 
 .vscode
 .idea
+.exrc
+.nvimrc
+.nvim.lua
 
 .clangd
 compile_commands.json

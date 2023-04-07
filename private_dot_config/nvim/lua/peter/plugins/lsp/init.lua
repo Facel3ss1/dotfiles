@@ -1,7 +1,5 @@
 return {
     -- TODO: lsp_signature.nvim?
-    -- TODO: hl-args with lua exlude self and use and/or nvim-semantic-tokens
-    -- FIXME: clang-format and clang-tidy not highlighting as yaml
     {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile
@@ -154,6 +152,7 @@ return {
                 ["lua_ls"] = function(server_name)
                     require("neodev").setup {
                         -- TODO: Use neoconf instead?
+                        -- TODO: Enable in .nvim.lua files?
                         override = function(root_dir, library)
                             -- Add vim plugins and api to path if we are in the chezmoi config directory
                             local config_dir = require("peter.config.chezmoi").source_dir .. "/private_dot_config/nvim"

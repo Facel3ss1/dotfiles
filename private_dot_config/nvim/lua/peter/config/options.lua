@@ -76,4 +76,6 @@ if vim.fn.executable("rg") == 1 then
     vim.o.grepformat = "%f:%l:%c:%m" -- ripgrep's output format
 end
 
+vim.o.exrc = true -- Run .exrc, .nvimrc and .nvim.lua files in the current directory (See :h trust)
+
 -- vim.o.guifont = "JetBrainsMono NF:h10"
