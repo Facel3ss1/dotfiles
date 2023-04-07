@@ -34,7 +34,9 @@ vim.api.nvim_create_autocmd("User", {
 
 require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
-    checker = { enabled = true },
+    checker = {
+        enabled = not (vim.fn.has("win32") == 1),
+    },
     change_detection = { notify = false },
     install = {
         colorscheme = { "ayu-mirage", "habamax" },
