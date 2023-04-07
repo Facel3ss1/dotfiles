@@ -33,7 +33,9 @@ vim.o.colorcolumn = "80" -- Put colored column at column 80
 vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
 vim.o.laststatus = 3 -- Use global statusline
+-- TODO: statuscolumn
 
+-- TODO: linematch
 vim.opt.diffopt:append("algorithm:histogram")
 vim.opt.fillchars = {
     diff = "╱",
@@ -42,9 +44,9 @@ vim.opt.shortmess:append("I") -- Don't show the intro on startup
 
 vim.o.virtualedit = "block" -- Let me move to non-existent characters with <C-v>
 
--- Split windows to the right and downwards
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.o.splitright = true -- Split windows to the right...
+vim.o.splitbelow = true -- ...and downwards
+vim.o.splitkeep = "screen" -- Don't move text when splitting
 
 -- Use powershell on Windows (see :h shell-powershell)
 if vim.fn.has("win32") == 1 then
