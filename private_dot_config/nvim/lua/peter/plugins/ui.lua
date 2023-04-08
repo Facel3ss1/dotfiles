@@ -72,6 +72,7 @@ return {
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
             },
+            -- TODO: Custom telescope extension?
             extensions = { "lazy", "man", "quickfix", "nvim-dap-ui" },
         },
         config = function(_, opts)
@@ -225,7 +226,7 @@ return {
     {
         "asiryk/auto-hlsearch.nvim",
         version = "1.0.0",
-        keys = { "/", "?", "*", "#", "n", "N" },
+        event = "VeryLazy",
         config = true,
     },
     {
