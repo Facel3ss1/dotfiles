@@ -34,23 +34,53 @@ return {
             local colors = require("ayu.colors")
             colors.generate(true)
 
-            -- TODO: Make terminal colors the same as ayu theme in Windows Terminal (ayu dark?)
             return {
                 mirage = true,
                 overrides = {
-                    -- Turn off italics in comments
-                    Comment = { fg = colors.comment },
-                    Todo = { link = "DiagnosticInfo" },
-                    -- Workaround for https://github.com/neovim/neovim/issues/9800
-                    CursorLine = { bg = colors.line, ctermfg = 15 },
+                    CursorLine = { bg = colors.line, ctermfg = 15 }, -- Workaround for https://github.com/neovim/neovim/issues/9800
                     WinSeparator = { fg = colors.guide_active, bg = colors.line },
                     LspCodeLens = { fg = colors.comment, italic = true },
                     LspCodeLensSeparator = { fg = colors.comment },
 
-                    -- Make variables plain insted of Identifier (See :h lsp-semantic-highlight)
-                    ["@lsp.type.variable"] = { fg = colors.fg },
-                    -- Make parameters highlight the same way as constants
-                    ["@lsp.type.parameter"] = { link = "Constant" },
+                    -- :h group-name (you can do :set syntax=help to see the colors)
+                    -- Comment = { fg = colors.comment }, -- Turn off italics in comments
+                    Identifier = { fg = colors.fg },
+                    PreProc = { link = "Statement" },
+                    Macro = { link = "Function" },
+                    Structure = { link = "Type" },
+                    SpecialComment = { fg = colors.markup },
+                    Todo = { link = "DiagnosticInfo" },
+
+                    -- :h treesitter-highlight-groups
+                    ["@text.literal"] = { link = "String" },
+                    ["@constructor"] = { link = "Structure" },
+                    ["@variable.builtin"] = { fg = colors.keyword, italic = true },
+
+                    -- :h lsp-semantic-highlight
+                    ["@lsp.type.property"] = { fg = colors.tag },
+                    ["@lsp.type.parameter"] = { fg = colors.constant, italic = true },
+                    ["@lsp.type.keyword"] = { link = "Statement" },
+                    ["@lsp.mod.constant"] = { link = "Constant" },
+                    ["@lsp.typemod.keyword.documentation"] = { link = "SpecialComment" }, -- Doc keywords (e.g. @param)
+
+                    -- Builtin functions
+                    ["@function.builtin"] = { fg = colors.markup },
+                    ["@lsp.typemod.function.defaultLibrary"] = { fg = colors.markup },
+
+                    -- Namespaces
+                    ["@namespace"] = { fg = colors.fg },
+                    ["@lsp.type.namespace"] = { fg = colors.fg },
+
+                    -- Language specific fixes:
+
+                    ["@constructor.lua"] = { link = "@punctuation.bracket.lua" }, -- "constructors" in lua are just curly braces
+                    ["@keyword.coroutine.lua"] = { link = "@variable.builtin.lua" }, -- `coroutine` is a builtin variable, not a keyword
+                    ["@punctuation.delimiter.comment"] = { link = "Comment" }, -- Don't highlight colons in TODOs
+                    -- Builtin tables e.g. math, table
+                    ["@variable.builtin.lua"] = { fg = colors.fg, italic = true },
+                    ["@lsp.typemod.variable.defaultLibrary.lua"] = { fg = colors.fg, italic = true },
+
+                    ["@lsp.type.enumMember.rust"] = { link = "@lsp.type.enum.rust" }, -- Rust enums are more like types instead of constants
 
                     -- Add faded background for diagnostics virtual text
                     DiagnosticVirtualTextError = { fg = colors.error, bg = blend(colors.error, colors.bg, 0.1) },
