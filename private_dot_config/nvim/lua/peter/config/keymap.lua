@@ -56,4 +56,7 @@ vim.keymap.set("n", "<leader>uc", function()
     vim.cmd.tcd { require("peter.config.chezmoi").source_dir }
 end, { desc = "Open chezmoi directory in new tab" })
 
+vim.keymap.set("n", "<leader>hi", "<Cmd>Inspect<CR>", { desc = "Inspect at cursor" })
+vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter syntax tree" })
+
 -- TODO: dd in quickfix list (quickfix reflector)
