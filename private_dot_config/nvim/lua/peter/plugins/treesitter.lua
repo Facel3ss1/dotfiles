@@ -47,7 +47,6 @@ return {
                 auto_install = vim.fn.executable("tree-sitter") == 1,
                 highlight = {
                     enable = true,
-                    disable = { "help" },
                     additional_vim_regex_highlighting = false,
                 },
                 incremental_selection = {
@@ -62,9 +61,6 @@ return {
                 endwise = {
                     enable = true,
                 },
-                playground = {
-                    enable = true,
-                },
                 indent = {
                     enable = true,
                 },
@@ -74,7 +70,7 @@ return {
             require("nvim-treesitter.configs").setup(opts)
 
             -- FIXME: https://github.com/nvim-telescope/telescope.nvim/issues/699
-            -- TODO: vim.treesitter.foldexpr()
+            -- TODO: vim.treesitter.foldexpr() or just use foldexpr = indent as we use treesitter indent already
             -- vim.o.foldmethod = "expr"
             -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
             -- vim.o.foldenable = false
