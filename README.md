@@ -49,6 +49,7 @@ bw lock
 ## Software
 
 - [nvim](https://neovim.io) ([Config README](private_dot_config/nvim/README.md))
+- [wezterm](https://wezfurlong.org/wezterm/index.html)
 - [fish](https://fishshell.com)
 - [starship](https://starship.rs)
 - [exa](https://the.exa.website/)
