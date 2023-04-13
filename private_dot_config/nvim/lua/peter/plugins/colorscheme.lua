@@ -43,7 +43,6 @@ return {
                     LspCodeLensSeparator = { fg = colors.comment },
 
                     -- :h group-name (you can do :set syntax=help to see the colors)
-                    -- Comment = { fg = colors.comment }, -- Turn off italics in comments
                     Identifier = { fg = colors.fg },
                     PreProc = { link = "Statement" },
                     Macro = { link = "Function" },
@@ -54,12 +53,13 @@ return {
                     -- :h treesitter-highlight-groups
                     ["@text.literal"] = { link = "String" },
                     ["@constructor"] = { link = "Structure" },
+                    ["@namespace"] = { fg = colors.fg },
                     ["@variable.builtin"] = { fg = colors.keyword, italic = true },
+                    ["@punctuation.delimiter.comment"] = { link = "Comment" }, -- Don't highlight colons in TODOs
 
                     -- :h lsp-semantic-highlight
-                    ["@lsp.type.property"] = { fg = colors.tag },
                     ["@lsp.type.parameter"] = { fg = colors.constant, italic = true },
-                    ["@lsp.type.keyword"] = { link = "Statement" },
+                    ["@lsp.type.keyword"] = { link = "@keyword" },
                     ["@lsp.mod.constant"] = { link = "Constant" },
                     ["@lsp.typemod.keyword.documentation"] = { link = "SpecialComment" }, -- Doc keywords (e.g. @param)
 
@@ -67,15 +67,10 @@ return {
                     ["@function.builtin"] = { fg = colors.markup },
                     ["@lsp.typemod.function.defaultLibrary"] = { fg = colors.markup },
 
-                    -- Namespaces
-                    ["@namespace"] = { fg = colors.fg },
-                    ["@lsp.type.namespace"] = { fg = colors.fg },
-
                     -- Language specific fixes:
 
                     ["@constructor.lua"] = { link = "@punctuation.bracket.lua" }, -- "constructors" in lua are just curly braces
                     ["@keyword.coroutine.lua"] = { link = "@variable.builtin.lua" }, -- `coroutine` is a builtin variable, not a keyword
-                    ["@punctuation.delimiter.comment"] = { link = "Comment" }, -- Don't highlight colons in TODOs
                     -- Builtin tables e.g. math, table
                     ["@variable.builtin.lua"] = { fg = colors.fg, italic = true },
                     ["@lsp.typemod.variable.defaultLibrary.lua"] = { fg = colors.fg, italic = true },
