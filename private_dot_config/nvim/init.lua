@@ -52,6 +52,9 @@ require("lazy").setup("peter.plugins", {
     ui = {
         border = "rounded",
     },
+    diff = {
+        cmd = "diffview.nvim",
+    },
 })
 
 vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
