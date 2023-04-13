@@ -16,6 +16,11 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
+[lazy-lock.json]
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+
 [*.fish]
 indent_style = space
 indent_size = 4
