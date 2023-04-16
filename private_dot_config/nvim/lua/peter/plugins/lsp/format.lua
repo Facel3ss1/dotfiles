@@ -14,6 +14,7 @@ local function toggle_format_on_save()
     end
 end
 
+-- TODO: Move to keymap.lua
 vim.keymap.set("n", "<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
 
 local function null_ls_has_method(filetype, method)

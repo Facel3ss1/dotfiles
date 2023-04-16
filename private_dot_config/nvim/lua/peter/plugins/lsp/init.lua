@@ -1,5 +1,6 @@
 return {
     -- TODO: lsp_signature.nvim?
+    -- TODO: inlay-hints.nvim
     {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile
@@ -66,8 +67,9 @@ return {
                 end
 
                 map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
+                map("n", "gK", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 -- TODO: Add floating border to this
-                map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
+                map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
                 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
                 map("n", "go", "<Cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
@@ -205,6 +207,7 @@ return {
                             comparators = {
                                 cmp.config.compare.offset,
                                 cmp.config.compare.exact,
+                                ---@diagnostic disable-next-line: assign-type-mismatch
                                 cmp.config.compare.recently_used,
                                 require("clangd_extensions.cmp_scores"),
                                 cmp.config.compare.kind,

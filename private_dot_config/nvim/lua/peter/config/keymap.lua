@@ -13,10 +13,7 @@ vim.keymap.set("n", "£", "#")
 -- Make <Esc> clear search highlights
 vim.keymap.set("n", "<Esc>", "<Cmd>nohl<CR>")
 
--- TODO: Map this in operator pending mode so it is a text object
--- See https://www.vikasraj.dev/blog/vim-dot-repeat
-vim.keymap.set("n", "cn", "*Ncgn", { desc = "Change next occurance of word under cursor" })
-vim.keymap.set("n", "cN", "*NcgN", { desc = "Change previous occurance of word under cursor" })
+vim.keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
 
 vim.keymap.set("n", "<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
 vim.keymap.set("n", "<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })

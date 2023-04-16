@@ -65,6 +65,7 @@ return {
                         map_opts.buffer = args.buf
                         vim.keymap.set("n", lhs, rhs, map_opts)
                     end
+                    -- TODO: Change this mapping to K?
                     map("<leader>ccp", crates.show_crate_popup, { desc = "Show crate popup" })
                     map("<leader>ccv", crates.show_versions_popup, { desc = "Show crate versions" })
                     map("<leader>ccf", crates.show_features_popup, { desc = "Show crate features" })
