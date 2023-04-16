@@ -1,9 +1,19 @@
 return {
     -- TODO: glow.nvim
-    -- TODO: mini.bracketed
-    { "tpope/vim-unimpaired", event = "VeryLazy" },
     { "tpope/vim-abolish", event = "VeryLazy" },
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
+    {
+        "echasnovski/mini.bracketed",
+        version = false,
+        event = "VeryLazy",
+        opts = {
+            comment = { suffix = "" },
+            treesitter = { suffix = "" },
+        },
+        config = function(_, opts)
+            require("mini.bracketed").setup(opts)
+        end,
+    },
     {
         "folke/todo-comments.nvim",
         cmd = { "TodoQuickFix", "TodoLocList", "TodoTrouble", "TodoTelescope" },
