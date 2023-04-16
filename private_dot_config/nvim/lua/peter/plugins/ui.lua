@@ -97,41 +97,30 @@ return {
             local presets = require("which-key.plugins.presets")
             presets.operators["v"] = nil
 
-            whichkey.register({
+            ---@type table<string, any>
+            local keys = {
                 mode = { "n", "v" },
-                c = {
-                    name = "code",
-                },
-                d = {
-                    name = "debug",
-                },
-                f = {
-                    name = "find",
-                },
-                g = {
-                    name = "git",
-                },
-                h = {
-                    name = "help",
-                },
-                t = {
-                    name = "toggle",
-                },
-                u = {
-                    name = "ui",
-                },
-            }, { prefix = "<leader>" })
 
-            whichkey.register {
-                ["&"] = "which_key_ignore",
-                ["£"] = "which_key_ignore",
-                ["<C-d>"] = "which_key_ignore",
-                ["<C-u>"] = "which_key_ignore",
-                ["n"] = "which_key_ignore",
-                ["N"] = "which_key_ignore",
-                ["<C-l>"] = "which_key_ignore",
-                ["Y"] = "which_key_ignore",
+                g = { name = "goto" },
+                ["]"] = { name = "next" },
+                ["["] = { name = "previous" },
+
+                ["<leader>c"] = { name = "code" },
+                ["<leader>d"] = { name = "debug" },
+                ["<leader>f"] = { name = "find" },
+                ["<leader>g"] = { name = "git" },
+                ["<leader>h"] = { name = "help" },
+                ["<leader>t"] = { name = "toggle" },
+                ["<leader>u"] = { name = "ui" },
             }
+
+            local ignore_keys =
+                { "<C-r>", "u", "#", "*", "/", "?", "&", "£", "<C-d>", "<C-u>", "n", "N", "<C-l>", "Y" }
+            for _, key in ipairs(ignore_keys) do
+                keys[key] = "which_key_ignore"
+            end
+
+            whichkey.register(keys)
 
             whichkey.setup(opts)
         end,
