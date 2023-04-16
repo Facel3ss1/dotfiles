@@ -38,9 +38,10 @@ return {
                 mirage = true,
                 overrides = {
                     CursorLine = { bg = colors.line, ctermfg = 15 }, -- Workaround for https://github.com/neovim/neovim/issues/9800
-                    WinSeparator = { fg = colors.guide_active, bg = colors.line },
+                    WinSeparator = { fg = colors.guide_active },
                     LspCodeLens = { fg = colors.comment, italic = true },
                     LspCodeLensSeparator = { fg = colors.comment },
+                    DiagnosticUnnecessary = { fg = colors.comment },
 
                     -- :h group-name (you can do :set syntax=help to see the colors)
                     Identifier = { fg = colors.fg },
@@ -58,9 +59,8 @@ return {
                     ["@punctuation.delimiter.comment"] = { link = "Comment" }, -- Don't highlight colons in TODOs
 
                     -- :h lsp-semantic-highlight
-                    ["@lsp.type.parameter"] = { fg = colors.constant, italic = true },
+                    ["@lsp.type.parameter"] = { fg = colors.lsp_parameter, italic = true }, -- Make parameters italic
                     ["@lsp.type.keyword"] = { link = "@keyword" },
-                    ["@lsp.mod.constant"] = { link = "Constant" },
                     ["@lsp.typemod.keyword.documentation"] = { link = "SpecialComment" }, -- Doc keywords (e.g. @param)
 
                     -- Builtin functions
