@@ -10,6 +10,8 @@ return {
         -- stylua: ignore
         keys = {
             { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+            { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Set conditional breakpoint" },
+            { "<leader>dl", function() require("dap").set_breakpoint(nil, nil, vim.fn.input("Logpoint message: ")) end, desc = "Set logpoint" },
             { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
             { "<leader>do", function() require("dap").step_over() end, desc = "Step over" },
             { "<leader>di", function() require("dap").step_into() end, desc = "Step into" },
