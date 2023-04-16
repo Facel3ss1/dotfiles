@@ -1,4 +1,4 @@
--- TODO: git-conflict.nvim
+-- TODO: git-conflict.nvim?
 return {
     -- TODO: Would ]c etc. be possible?
     {

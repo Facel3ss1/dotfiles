@@ -55,7 +55,6 @@ if not (vim.fn.has("win32") == 1) then
         callback = function()
             -- TODO: Make a git commit?
             local lockfile = vim.fs.normalize(vim.fn.stdpath("config")) .. "/lazy-lock.json"
-            print(lockfile)
             chezmoi_command({ "add", lockfile }, "chezmoi add: lazy-lock.json")
         end,
         desc = "Run chezmoi add lazy-lock.json",

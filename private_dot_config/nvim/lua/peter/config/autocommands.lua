@@ -98,13 +98,15 @@ vim.api.nvim_create_autocmd("FileType", {
         "qf",
         "checkhealth",
         "Neogit*",
-        "tsplayground",
         "startuptime",
     },
     callback = disable_colorcolumn,
     desc = "Disable colorcolumn",
 })
 
+-- TODO: Quit certain filetypes when I press q
+
+-- TODO: Move to filetype plugin?
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetCommentString", { clear = true }),
     pattern = "gitconfig",
@@ -114,6 +116,7 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = 'Set commentstring = "# %s"',
 })
 
+-- TODO: Should we just set a default formatoptions?
 -- Each filetype will have it's own formatoptions which we need to override
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetFormatOptions", { clear = true }),
