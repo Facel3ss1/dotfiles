@@ -147,3 +147,9 @@ vim.filetype.add {
         [".clang-tidy"] = "yaml",
     },
 }
+
+vim.filetype.add {
+    extension = {
+        typ = "typst",
+    },
+}

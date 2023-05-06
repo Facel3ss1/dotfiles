@@ -78,4 +78,10 @@ return {
         end,
         dependencies = "nvim-lua/plenary.nvim",
     },
+    -- TODO: typst.nvim or treesitter parser? They were both WIP when I added this
+    {
+        "kaarmu/typst.vim",
+        ft = "typst",
+        lazy = false,
+    },
 }
