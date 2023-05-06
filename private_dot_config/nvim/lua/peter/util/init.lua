@@ -1,5 +1,13 @@
 local M = {}
 
+function M.has(feature)
+    return vim.fn.has(feature) == 1
+end
+
+function M.executable(name)
+    return vim.fn.executable(name) == 1
+end
+
 function M.info(msg, opts)
     opts = opts or {}
     vim.notify(msg, vim.log.levels.INFO, opts)

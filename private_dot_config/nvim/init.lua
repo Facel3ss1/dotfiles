@@ -2,6 +2,8 @@
 vim.g.mapleader = " " -- <Space>
 vim.g.maplocalleader = "  " -- <Space><Space>
 
+local util = require("peter.util")
+
 require("peter.config.autocommands")
 require("peter.config.options")
 require("peter.config.keymap")
@@ -35,7 +37,7 @@ vim.api.nvim_create_autocmd("User", {
 require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
     checker = {
-        enabled = not (vim.fn.has("win32") == 1),
+        enabled = not util.has("win32"),
     },
     change_detection = { notify = false },
     install = {
@@ -58,6 +60,5 @@ require("lazy").setup("peter.plugins", {
 })
 
 -- TODO: Central place for icons
--- TODO: executable() and has() utility functions
 -- TODO: health check for my config
 -- TODO: --remote-ui ???

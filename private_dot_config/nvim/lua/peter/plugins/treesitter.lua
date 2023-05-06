@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 return {
     -- TODO: neogen
     -- TODO: nvim-ts-context-commentstring with lua help comments?
@@ -45,7 +47,7 @@ return {
                     "yaml",
                 },
                 sync_install = false,
-                auto_install = vim.fn.executable("tree-sitter") == 1,
+                auto_install = util.executable("tree-sitter"),
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = false,

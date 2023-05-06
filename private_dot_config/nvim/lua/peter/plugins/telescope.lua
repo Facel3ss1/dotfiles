@@ -1,3 +1,6 @@
+local util = require("peter.util")
+
+-- TODO: Change horizontal split to <C-s>
 return {
     {
         "nvim-telescope/telescope.nvim",
@@ -92,6 +95,7 @@ return {
                     },
                 },
                 extensions = {
+                    -- TODO: Unmap backspace
                     file_browser = {
                         theme = "ivy",
                         respect_gitignore = false,
@@ -111,7 +115,7 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
-            { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
+            { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = util.executable("make") },
             "nvim-telescope/telescope-file-browser.nvim",
         },
     },

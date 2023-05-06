@@ -49,8 +49,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "Run chezmoi apply",
 })
 
--- This only works in WSL
-if not (vim.fn.has("win32") == 1) then
+-- This only works in WSL, and I primarily change the config in WSL anyway
+if not util.has("win32") then
     vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("ChezmoiAddLazyLock", { clear = true }),
         pattern = "LazyUpdate",

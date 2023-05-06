@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 -- TODO: Breakpoint icons
 -- TODO: Virtual text
 -- TODO: mason-nvim-dap?
@@ -28,7 +30,7 @@ return {
                 type = "executable",
                 command = vim.fn.exepath("OpenDebugAD7"),
             }
-            if vim.fn.has("win32") == 1 then
+            if util.has("win32") then
                 dap.adapters.cppdbg.options = {
                     detached = false,
                 }

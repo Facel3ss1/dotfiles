@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 vim.o.mouse = "a" -- Let me use the mouse for scrolling etc.
 vim.o.confirm = true -- Open confirm dialog when there are unsaved changes
 vim.o.updatetime = 250 -- Trigger CursorHold etc. after 250ms
@@ -49,8 +51,8 @@ vim.o.splitbelow = true -- ...and downwards
 vim.o.splitkeep = "screen" -- Don't move text when splitting
 
 -- Use powershell on Windows (see :h shell-powershell)
-if vim.fn.has("win32") == 1 then
-    vim.o.shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell"
+if util.has("win32") then
+    vim.o.shell = util.executable("pwsh") and "pwsh" or "powershell"
     vim.o.shellcmdflag =
         "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
     vim.o.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
@@ -60,17 +62,17 @@ if vim.fn.has("win32") == 1 then
 end
 
 -- Allow me to use gx to open URLs and files
-if vim.fn.executable("wslview") == 1 then
+if util.executable("wslview") then
     vim.g.netrw_browsex_viewer = "wslview"
-elseif vim.fn.has("win32") == 1 then
+elseif util.has("win32") then
     vim.g.netrw_browsex_viewer = "start"
-elseif vim.fn.executable("xdg-open") == 1 then
+elseif util.executable("xdg-open") then
     vim.g.netrw_browsex_viewer = "xdg-open"
-elseif vim.fn.has("mac") == 1 then
+elseif util.has("mac") then
     vim.g.netrw_browsex_viewer = "open"
 end
 
-if vim.fn.executable("rg") == 1 then
+if util.executable("rg") then
     -- TODO: Don't search hidden files?
     vim.o.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep
     vim.o.grepformat = "%f:%l:%c:%m" -- ripgrep's output format
