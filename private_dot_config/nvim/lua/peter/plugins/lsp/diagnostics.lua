@@ -19,25 +19,10 @@ vim.diagnostic.config {
     severity_sort = true,
 }
 
+-- FIXME: Don't use deprecated symbols
 local signs = { Error = "", Warn = "", Info = "", Hint = "" }
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     -- See :h diagnostic-signs
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
-vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
-
-local diagnostics_enabled = true
-local function toggle_diagnostics()
-    diagnostics_enabled = not diagnostics_enabled
-
-    if diagnostics_enabled then
-        vim.diagnostic.enable()
-        vim.notify("Enabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
-    else
-        vim.diagnostic.disable()
-        vim.notify("Disabled diagnostics", vim.log.levels.INFO, { title = "Diagnostics" })
-    end
-end
-vim.keymap.set("n", "<leader>td", toggle_diagnostics, { desc = "Toggle diagnostics" })

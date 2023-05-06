@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 -- Space is the leader key, so remove the default behaviour
 -- This will also make which-key show when we press space
 vim.keymap.set("n", "<Space>", "<Nop>")
@@ -47,13 +49,23 @@ vim.cmd([[
 ]])
 vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
 
+vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
 vim.keymap.set("n", "<leader>uc", function()
     -- TODO: Delete all the buffers when we close the tab (mini.bufremove)?
     vim.cmd.tabnew()
     vim.cmd.tcd { require("peter.config.chezmoi").source_dir }
 end, { desc = "Open chezmoi directory in new tab" })
+vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 vim.keymap.set("n", "<leader>hi", "<Cmd>Inspect<CR>", { desc = "Inspect at cursor" })
 vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter syntax tree" })
+
+-- stylua: ignore start
+vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
+vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle spell checking" })
+vim.keymap.set("n", "<leader>tf", function() require("peter.plugins.lsp.format").toggle_format_on_save() end, { desc = "Toggle format on save" })
+vim.keymap.set("n", "<leader>td", function() util.toggle_diagnostics() end, { desc = "Toggle diagnostics" })
+-- stylua: ignore end
 
 -- TODO: dd in quickfix list (quickfix reflector)

@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 return {
     -- TODO: lsp_signature.nvim?
     -- TODO: inlay-hints.nvim
@@ -46,7 +48,7 @@ return {
             -- Always jump to the first definition when we go to definition
             vim.lsp.handlers["textDocument/definition"] = function(_, result)
                 if not result or vim.tbl_isempty(result) then
-                    vim.notify("[LSP] No results from textDocument/definition", vim.log.levels.INFO, { title = "LSP" })
+                    util.info("[LSP] No results from textDocument/definition", { title = "LSP" })
                     return
                 end
 
@@ -69,7 +71,7 @@ return {
                 map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
                 map("n", "gK", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 -- TODO: Add floating border to this
-                map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
+                -- map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
                 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
                 map("n", "go", "<Cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })

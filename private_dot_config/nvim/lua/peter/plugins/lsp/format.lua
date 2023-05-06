@@ -1,21 +1,18 @@
 local M = {}
 
+local util = require("peter.util")
 local null_ls = require("null-ls")
 
 M.should_format_on_save = true
-
-local function toggle_format_on_save()
+function M.toggle_format_on_save()
     M.should_format_on_save = not M.should_format_on_save
 
     if M.should_format_on_save then
-        vim.notify("Enabled format on save", vim.log.levels.INFO, { title = "Formatting" })
+        util.info("Enabled format on save", { title = "Formatting" })
     else
-        vim.notify("Disabled format on save", vim.log.levels.INFO, { title = "Formatting" })
+        util.info("Disabled format on save", { title = "Formatting" })
     end
 end
-
--- TODO: Move to keymap.lua
-vim.keymap.set("n", "<leader>tf", toggle_format_on_save, { desc = "Toggle format on save" })
 
 local function null_ls_has_method(filetype, method)
     local sources = null_ls.get_sources()

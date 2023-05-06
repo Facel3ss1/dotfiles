@@ -1,5 +1,7 @@
 local M = {}
 
+local util = require("peter.util")
+
 M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
 -- TODO: Keymap to jump to target path file
@@ -11,14 +13,14 @@ local function chezmoi_command(command, success_message)
         stderr_buffered = true,
         on_exit = function(_, exit_code, _)
             if exit_code == 0 then
-                vim.notify(success_message, vim.log.levels.INFO, { title = "chezmoi" })
+                util.info(success_message, { title = "chezmoi" })
             end
         end,
         on_stderr = function(_, lines, _)
             -- The last line is always an empty string, remove it
             table.remove(lines)
             if #lines > 0 then
-                vim.notify(table.concat(lines, "\n"), vim.log.levels.WARN, { title = "chezmoi" })
+                util.warn(table.concat(lines, "\n"), { title = "chezmoi" })
             end
         end,
     })
