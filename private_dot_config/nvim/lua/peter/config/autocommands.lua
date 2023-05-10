@@ -99,6 +99,7 @@ vim.api.nvim_create_autocmd("FileType", {
         "checkhealth",
         "Neogit*",
         "startuptime",
+        "oil",
     },
     callback = disable_colorcolumn,
     desc = "Disable colorcolumn",

@@ -47,6 +47,7 @@ require("lazy").setup("peter.plugins", {
         rtp = {
             disabled_plugins = {
                 "matchit",
+                "netrwPlugin",
                 "tohtml",
             },
         },

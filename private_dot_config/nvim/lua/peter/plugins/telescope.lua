@@ -37,12 +37,29 @@ return {
             },
             { "<leader>fo", "<Cmd>Telescope oldfiles<CR>", desc = "Open recent file" },
             { "<leader>ff", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find in buffer" },
-            { "<leader>f/", "<Cmd>Telescope file_browser files=false<CR>", desc = "Open folder browser" },
             {
-                "<leader>f.",
-                -- FIXME: Use cwd when in terminal buffer
-                "<Cmd>Telescope file_browser path=%:p:h<CR>",
-                desc = "Open file browser in containing folder",
+                "<leader>f/",
+                function()
+                    local actions = require("telescope.actions")
+                    local action_state = require("telescope.actions.state")
+
+                    -- Open folder in oil.nvim
+                    require("telescope").extensions.file_browser.file_browser {
+                        files = false,
+                        attach_mappings = function(_, map)
+                            map({ "i", "n" }, "<CR>", function(prompt_bufnr)
+                                local entry = action_state.get_selected_entry()
+                                vim.schedule(function()
+                                    vim.cmd.edit { entry.value }
+                                end)
+                                actions.close(prompt_bufnr)
+                            end)
+
+                            return true
+                        end,
+                    }
+                end,
+                desc = "Open folder browser",
             },
             { "<leader>fx", "<Cmd>Telescope diagnostics<CR>", desc = "Find diagnostic" },
 
@@ -92,13 +109,6 @@ return {
                     man_pages = {
                         theme = "ivy",
                         sections = { "ALL" },
-                    },
-                },
-                extensions = {
-                    -- TODO: Unmap backspace
-                    file_browser = {
-                        theme = "ivy",
-                        respect_gitignore = false,
                     },
                 },
             }

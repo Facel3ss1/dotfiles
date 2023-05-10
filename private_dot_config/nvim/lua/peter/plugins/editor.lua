@@ -13,6 +13,18 @@ return {
             require("mini.bracketed").setup(opts)
         end,
     },
+    -- TODO: Make this lazy
+    -- TODO: Respect cwd in terminal buffers
+    {
+        "stevearc/oil.nvim",
+        lazy = false,
+        -- stylua: ignore
+        keys = {
+            { "-", function() require("oil").open() end, desc = "Open parent directory" },
+        },
+        config = true,
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
     {
         "folke/todo-comments.nvim",
         cmd = { "TodoQuickFix", "TodoLocList", "TodoTrouble", "TodoTelescope" },
