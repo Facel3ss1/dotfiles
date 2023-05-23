@@ -137,6 +137,7 @@ return {
 
             local ft = require("Comment.ft")
             ft.set("lean3", { "--%s", "/-%s-/" })
+            ft.set("typst", { "//%s", "/*%s*/" })
         end,
     },
     {
