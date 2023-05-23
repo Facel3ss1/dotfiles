@@ -157,6 +157,8 @@ return {
         config = function()
             require("nvim-autopairs").setup {}
             require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
+
+            table.insert(require("nvim-autopairs").get_rules("```")[1].filetypes, "typst")
         end,
     },
     {
