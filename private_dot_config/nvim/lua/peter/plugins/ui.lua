@@ -230,6 +230,7 @@ return {
                 "diff",
                 "git",
                 "checkhealth",
+                "TelescopePrompt",
             },
         },
     },
