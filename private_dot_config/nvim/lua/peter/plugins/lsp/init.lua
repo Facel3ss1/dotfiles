@@ -119,6 +119,7 @@ return {
                         },
                         diagnostics = {
                             libraryFiles = "Disable",
+                            unusedLocalExclude = { "_*" },
                         },
                         format = {
                             enable = false,
