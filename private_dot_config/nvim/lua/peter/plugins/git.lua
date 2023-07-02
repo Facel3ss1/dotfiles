@@ -2,7 +2,7 @@
 return {
     -- TODO: Would ]c etc. be possible?
     {
-        "TimUntersberger/neogit",
+        "NeogitOrg/neogit",
         cmd = "Neogit",
         keys = {
             { "<leader>gs", "<Cmd>Neogit<CR>", desc = "Open Neogit status" },
@@ -94,7 +94,7 @@ return {
                     ["q"] = "<Cmd>DiffviewClose<CR>",
                 },
             },
-            -- FIXME: The diff4 view doesn't seem to be a thing? (try g<C-x> to switch views)
+            -- TODO
             -- view = {
             --     merge_tool = {
             --         layout = "diff4_mixed",
