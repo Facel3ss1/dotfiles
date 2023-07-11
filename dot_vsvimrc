@@ -27,6 +27,12 @@ xmap <A-k> :vsc Edit.MoveSelectedLinesUp<CR>
 map <C-o> :vsc View.NavigateBackward<CR>
 map <C-i> :vsc View.NavigateForward<CR>
 
+nmap gcc :vsc Edit.ToggleLineComment<CR>
+vmap gc :vsc Edit.ToggleLineComment<CR>
+
+noremap <CR> :vsc Edit.ExpandSelection<CR>
+noremap <BS> :vsc Edit.ContractSelection<CR>
+
 nmap gd :vsc Edit.GoToDefinition<CR>
 nmap gD :vsc Edit.GoToDeclaration<CR>
 nmap gI :vsc Edit.GoToImplementation<CR>
@@ -34,11 +40,14 @@ nmap gr :vsc Edit.FindAllReferences<CR>
 nmap K :vsc Edit.QuickInfo<CR>
 
 nmap <Leader>ca :vsc View.QuickActions<CR>
+vmap <Leader>ca :vsc View.QuickActions<CR>
 nmap <Leader>cr :vsc Refactor.Rename<CR>
+vmap <Leader>cr :vsc Refactor.Rename<CR>
 nmap <Leader>ch :vsc EditorContextMenus.CodeWindow.ToggleHeaderCodeFile<CR>
 nmap <Leader>cf :vsc Edit.FormatDocument<CR>
 
 nmap <Leader>fd :vsc Edit.GoToFile<CR>
+nmap <Leader>fg :vsc Edit.FindInFiles<CR>
 
 nmap ]d :vsc Edit.GoToNextIssueInFile<CR>
 nmap [d :vsc Edit.GoToPreviousIssueInFile<CR>
