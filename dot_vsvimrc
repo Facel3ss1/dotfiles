@@ -1,0 +1,44 @@
+let mapleader=" "
+
+set scrolloff=10
+set hlsearch
+set ignorecase
+set incsearch
+set number
+set relativenumber
+set visualbell
+
+map <Space> <Nop>
+map <C-d> <C-d>zz
+map <C-u> <C-u>zz
+map n nzz
+map N Nzz
+map Y y$
+nnoremap <Esc> :nohl<CR>
+map gw *N
+vnoremap > >gv
+vnoremap < <gv
+
+nmap <A-j> :.m .+1<CR>==
+nmap <A-k> :.m .-2<CR>==
+xmap <A-j> :vsc Edit.MoveSelectedLinesDown<CR>
+xmap <A-k> :vsc Edit.MoveSelectedLinesUp<CR>
+
+map <C-o> :vsc View.NavigateBackward<CR>
+map <C-i> :vsc View.NavigateForward<CR>
+
+nmap gd :vsc Edit.GoToDefinition<CR>
+nmap gD :vsc Edit.GoToDeclaration<CR>
+nmap gI :vsc Edit.GoToImplementation<CR>
+nmap gr :vsc Edit.FindAllReferences<CR>
+nmap K :vsc Edit.QuickInfo<CR>
+
+nmap <Leader>ca :vsc View.QuickActions<CR>
+nmap <Leader>cr :vsc Refactor.Rename<CR>
+nmap <Leader>ch :vsc EditorContextMenus.CodeWindow.ToggleHeaderCodeFile<CR>
+nmap <Leader>cf :vsc Edit.FormatDocument<CR>
+
+nmap <Leader>fd :vsc Edit.GoToFile<CR>
+
+nmap ]d :vsc Edit.GoToNextIssueInFile<CR>
+nmap [d :vsc Edit.GoToPreviousIssueInFile<CR>
