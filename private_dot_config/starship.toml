@@ -7,7 +7,7 @@ renamed = "r"
 deleted = "x"
 
 [directory]
-read_only = " "
+read_only = " 󰍁"
 
 [kotlin]
 symbol = "K "
