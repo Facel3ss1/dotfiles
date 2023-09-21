@@ -1,16 +1,11 @@
-{{- if eq .chezmoi.os "windows" -}}
-[cd]
-command = "powershell"
-args = ["-NoLogo"]
-
-{{ end -}}
-
 [data]
 
-[data.wsl]
-{{ $isWSL := and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+[data.windows]
+{{ $powershellExecutable := or (lookPath "pwsh.exe") "powershell.exe" -}}
+{{- $isWSL := and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+username = {{ if (or $isWSL (eq .chezmoi.os "windows")) -}} {{ output $powershellExecutable "-Command" "$env:UserName" | trim | quote }} {{- else -}} "" {{- end }}
+powershellExecutable = {{ $powershellExecutable | quote }}
 isWSL = {{ $isWSL | toToml }}
-windowsUsername = {{ if $isWSL -}} {{ output "powershell.exe" "$env:UserName" | trim | quote }} {{- else -}} "" {{- end }}
 
 [data.uni.git]
 {{ $bwUniGitUuid := "2f29a8d3-199a-4dfb-9927-af3801388a31" -}}
@@ -19,3 +14,9 @@ email = {{ $bwUniGitFields.Email.value | quote }}
 remote = {{ $bwUniGitFields.Remote.value | quote }}
 GitLabDevClientId = {{ $bwUniGitFields.GitLabDevClientId.value | quote }}
 GitLabDevClientSecret = {{ $bwUniGitFields.GitLabDevClientSecret.value | quote }}
+
+{{ if eq .chezmoi.os "windows" }}
+[cd]
+command = {{ $powershellExecutable | quote }}
+args = ["-NoLogo"]
+{{- end }}

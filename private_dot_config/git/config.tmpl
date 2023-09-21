@@ -16,10 +16,16 @@
 [alias]
 	s = status
 	l = log --graph --decorate --pretty=oneline --abbrev-commit
+{{ if eq .chezmoi.os "windows" -}}
+[http]
+	# Use Windows' SSL so Visual Studio doesn't complain about missing certificates
+	# See https://github.com/scalingexcellence/scrapybook/issues/36
+	sslBackend = schannel
+{{ end -}}
 [credential]
-	{{ if .wsl.isWSL -}}
-	# Use Windows' credential manager
-	helper = /mnt/c/Users/{{ .wsl.windowsUsername }}/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe
+	{{ if .windows.isWSL -}}
+	# Use Windows' credential manager from WSL
+	helper = /mnt/c/Users/{{ .windows.username }}/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe
 	{{- else -}}
 	helper = manager
 	{{- end }}
