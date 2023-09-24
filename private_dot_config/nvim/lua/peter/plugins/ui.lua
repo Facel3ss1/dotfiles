@@ -1,3 +1,5 @@
+local icons = require("peter.util.icons")
+
 return {
     -- TODO: Add on_click telescope prompts
     -- TODO: Add attached LSP
@@ -14,17 +16,16 @@ return {
             sections = {
                 lualine_a = { "mode" },
                 lualine_b = {
-                    { "branch", icon = "" },
+                    { "branch", icon = icons.git.branch },
                 },
                 lualine_c = {
                     {
                         "diagnostics",
                         symbols = {
-                            -- FIXME: Change icons
-                            error = " ",
-                            warn = " ",
-                            info = " ",
-                            hint = " ",
+                            hint = icons.diagnostics.HINT .. " ",
+                            info = icons.diagnostics.INFO .. " ",
+                            warn = icons.diagnostics.WARN .. " ",
+                            error = icons.diagnostics.ERROR .. " ",
                         },
                     },
                     {
@@ -135,6 +136,9 @@ return {
                 mode = "tabs",
                 always_show_bufferline = false,
                 separator_style = "thick",
+                buffer_close_icon = icons.ui.close,
+                close_icon = icons.ui.close_box,
+                modified_icon = icons.ui.dot,
                 indicator = {
                     style = "none",
                 },
@@ -156,14 +160,7 @@ return {
         },
         opts = {
             stages = "fade",
-            -- FIXME: Change icons
-            icons = {
-                DEBUG = "",
-                ERROR = "",
-                INFO = "",
-                TRACE = "",
-                WARN = "",
-            },
+            icons = icons.notifications,
         },
         init = function()
             ---@diagnostic disable-next-line: duplicate-set-field

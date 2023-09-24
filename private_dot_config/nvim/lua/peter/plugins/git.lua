@@ -1,3 +1,5 @@
+local icons = require("peter.util.icons")
+
 -- TODO: git-conflict.nvim?
 return {
     -- TODO: Would ]c etc. be possible?
@@ -11,9 +13,8 @@ return {
         opts = {
             disable_builtin_notifications = true,
             signs = {
-                -- FIXME: Change icons
-                section = { "", "" },
-                item = { "", "" },
+                section = { icons.ui.collapsed, icons.ui.expanded },
+                item = { icons.ui.collapsed, icons.ui.expanded },
             },
             remember_settings = false,
             integrations = {
@@ -82,8 +83,7 @@ return {
         opts = {
             enhanced_diff_hl = true,
             signs = {
-                -- FIXME: Change icon
-                done = "",
+                done = icons.ui.done,
             },
             -- TODO
             keymaps = {

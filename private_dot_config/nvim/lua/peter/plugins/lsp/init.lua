@@ -1,4 +1,5 @@
 local util = require("peter.util")
+local icons = require("peter.util.icons")
 
 return {
     -- TODO: lsp_signature.nvim?
@@ -18,8 +19,7 @@ return {
                 opts = {
                     text = {
                         spinner = "dots",
-                        -- FIXME: Change icon
-                        done = "",
+                        done = icons.ui.done,
                     },
                     timer = {
                         spinner_rate = 75,
@@ -32,12 +32,10 @@ return {
                     autocmd = {
                         enabled = true,
                     },
+                    sign = {
+                        text = icons.ui.lightbulb,
+                    },
                 },
-                config = function(_, opts)
-                    require("nvim-lightbulb").setup(opts)
-                    -- FIXME: Change icon
-                    vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LightBulbSign" })
-                end,
             },
         },
         init = function()
@@ -238,10 +236,9 @@ return {
             ui = {
                 border = "rounded",
                 icons = {
-                    -- FIXME: Change icons
-                    package_installed = "",
-                    package_pending = "",
-                    package_uninstalled = "●",
+                    package_installed = icons.packages.installed,
+                    package_pending = icons.packages.pending,
+                    package_uninstalled = icons.packages.uninstalled,
                 },
             },
         },

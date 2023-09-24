@@ -1,3 +1,5 @@
+local icons = require("peter.util.icons")
+
 local function format_error_code(diagnostic)
     if not diagnostic.code then
         return string.format(" %s", diagnostic.source)
@@ -15,12 +17,17 @@ vim.diagnostic.config {
         border = "rounded",
     },
     -- TODO: Give higher priority than inlay hints
-    virtual_text = { spacing = 4, prefix = "●" },
+    virtual_text = { spacing = 4, prefix = icons.ui.dot },
     severity_sort = true,
 }
 
--- FIXME: Don't use deprecated symbols
-local signs = { Error = "", Warn = "", Info = "", Hint = "" }
+local signs = {
+    Hint = icons.diagnostics.HINT,
+    Info = icons.diagnostics.INFO,
+    Warn = icons.diagnostics.WARN,
+    Error = icons.diagnostics.ERROR,
+}
+
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     -- See :h diagnostic-signs
