@@ -11,6 +11,7 @@ return {
         opts = {
             disable_builtin_notifications = true,
             signs = {
+                -- FIXME: Change icons
                 section = { "", "" },
                 item = { "", "" },
             },
@@ -20,6 +21,7 @@ return {
             },
         },
         dependencies = "nvim-lua/plenary.nvim",
+        config = true,
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -80,6 +82,7 @@ return {
         opts = {
             enhanced_diff_hl = true,
             signs = {
+                -- FIXME: Change icon
                 done = "",
             },
             -- TODO

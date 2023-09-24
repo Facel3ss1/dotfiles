@@ -20,6 +20,7 @@ return {
                     {
                         "diagnostics",
                         symbols = {
+                            -- FIXME: Change icons
                             error = " ",
                             warn = " ",
                             info = " ",
@@ -155,6 +156,7 @@ return {
         },
         opts = {
             stages = "fade",
+            -- FIXME: Change icons
             icons = {
                 DEBUG = "",
                 ERROR = "",

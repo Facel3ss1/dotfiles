@@ -133,12 +133,7 @@ return {
             { "gc", mode = { "n", "v" }, desc = "Line comment" },
             { "gb", mode = { "n", "v" }, desc = "Block comment" },
         },
-        config = function()
-            require("Comment").setup {}
-
-            local ft = require("Comment.ft")
-            ft.set("lean3", { "--%s", "/-%s-/" })
-        end,
+        config = true,
     },
     {
         "kylechui/nvim-surround",

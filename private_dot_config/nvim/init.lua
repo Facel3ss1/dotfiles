@@ -66,3 +66,5 @@ require("lazy").setup("peter.plugins", {
 -- TODO: Central place for icons
 -- TODO: health check for my config
 -- TODO: --remote-ui ???
+-- FIXME: Replace null-ls with something else (it has been archived) - conform.nvim?
+-- FIXME: Update icons to Nerd fonts v3

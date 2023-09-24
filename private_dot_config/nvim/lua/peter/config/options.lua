@@ -31,7 +31,7 @@ vim.o.undofile = true -- Save/Restore undo history to the undo directory when I 
 -- FIXME: Change backupdir
 -- vim.o.backup = true -- Save a backup to the backup directory when I save a file
 
-vim.o.colorcolumn = "80" -- Put colored column at column 80
+vim.o.colorcolumn = "80" -- Put colored column at column 80 by default (can be overridden)
 vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
 vim.o.laststatus = 3 -- Use global statusline
@@ -61,6 +61,7 @@ if util.has("win32") then
     vim.o.shellxquote = ""
 end
 
+-- FIXME: Change so not reliant on netrw
 -- Allow me to use gx to open URLs and files
 if util.executable("wslview") then
     vim.g.netrw_browsex_viewer = "wslview"

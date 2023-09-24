@@ -18,6 +18,7 @@ return {
                 opts = {
                     text = {
                         spinner = "dots",
+                        -- FIXME: Change icon
                         done = "",
                     },
                     timer = {
@@ -34,6 +35,7 @@ return {
                 },
                 config = function(_, opts)
                     require("nvim-lightbulb").setup(opts)
+                    -- FIXME: Change icon
                     vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LightBulbSign" })
                 end,
             },
@@ -236,6 +238,7 @@ return {
             ui = {
                 border = "rounded",
                 icons = {
+                    -- FIXME: Change icons
                     package_installed = "",
                     package_pending = "",
                     package_uninstalled = "●",
