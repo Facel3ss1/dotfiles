@@ -3,7 +3,7 @@ local icons = require("peter.util.icons")
 
 return {
     -- TODO: lsp_signature.nvim?
-    -- TODO: inlay-hints.nvim
+    -- TODO: inlay-hints.nvim - not needed after nvim 0.10
     {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile
@@ -15,6 +15,7 @@ return {
             "hrsh7th/cmp-nvim-lsp",
             {
                 "j-hui/fidget.nvim",
+                -- FIXME
                 tag = "legacy",
                 opts = {
                     text = {
@@ -84,11 +85,15 @@ return {
 
                 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
                 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-                map("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format document" })
-                map("v", "<leader>cf", vim.lsp.buf.format, { desc = "Format range" })
+                -- stylua: ignore start
+                map("n", "<leader>cf", function() require("conform").format() end, { desc = "Format document" })
+                map("v", "<leader>cf", function() require("conform").format() end, { desc = "Format range" })
+                -- stylua: ignore end
                 map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
-                require("peter.plugins.lsp.format").on_attach(client, buf)
+                -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
+                -- See https://github.com/neovim/neovim/pull/19677
+                vim.bo[buf].formatexpr = nil
 
                 if client.server_capabilities.codeLensProvider then
                     local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
@@ -258,38 +263,24 @@ return {
         end,
     },
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = "BufReadPre",
-        opts = function()
-            local null_ls = require("null-ls")
-
-            -- Mason package name -> null-ls source
-            local mason_sources = {
-                stylua = null_ls.builtins.formatting.stylua,
-                isort = null_ls.builtins.formatting.isort,
-                black = null_ls.builtins.formatting.black,
-                flake8 = null_ls.builtins.diagnostics.flake8,
-            }
-
-            local sources = {
-                null_ls.builtins.formatting.fish_indent,
-                null_ls.builtins.diagnostics.fish,
-            }
-
-            -- Only enable null-ls sources if the mason package is installed
-            local mason_registry = require("mason-registry")
-            for package_name, source in pairs(mason_sources) do
-                local package = mason_registry.get_package(package_name)
-                if package:is_installed() then
-                    table.insert(sources, source)
+        "stevearc/conform.nvim",
+        event = "BufWritePre",
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "isort", "black" },
+            },
+            format_on_save = function(_buf)
+                if util.disable_format_on_save then
+                    return
                 end
-            end
 
-            return {
-                sources = sources,
-            }
-        end,
-        dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },
+                return {
+                    timeout_ms = 500,
+                    lsp_fallback = true,
+                }
+            end,
+        },
     },
     { "folke/neodev.nvim" },
     { "simrat39/rust-tools.nvim", dependencies = "nvim-lua/plenary.nvim" },

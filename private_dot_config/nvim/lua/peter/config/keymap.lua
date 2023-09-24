@@ -64,7 +64,7 @@ vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter s
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
 vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle spell checking" })
-vim.keymap.set("n", "<leader>tf", function() require("peter.plugins.lsp.format").toggle_format_on_save() end, { desc = "Toggle format on save" })
+vim.keymap.set("n", "<leader>tf", function() util.toggle_format_on_save() end, { desc = "Toggle format on save" })
 vim.keymap.set("n", "<leader>td", function() util.toggle_diagnostics() end, { desc = "Toggle diagnostics" })
 -- stylua: ignore end
 

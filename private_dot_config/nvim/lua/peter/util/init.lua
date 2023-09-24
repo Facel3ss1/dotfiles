@@ -40,4 +40,15 @@ function M.toggle_diagnostics()
     end
 end
 
+M.disable_format_on_save = false
+function M.toggle_format_on_save()
+    M.disable_format_on_save = not M.disable_format_on_save
+
+    if M.disable_format_on_save then
+        M.info("Disabled format on save", { title = "Formatting" })
+    else
+        M.info("Enabled format on save", { title = "Formatting" })
+    end
+end
+
 return M

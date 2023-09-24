@@ -65,4 +65,3 @@ require("lazy").setup("peter.plugins", {
 
 -- TODO: health check for my config
 -- TODO: --remote-ui ???
--- FIXME: Replace null-ls with something else (it has been archived) - conform.nvim?
