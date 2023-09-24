@@ -3,7 +3,6 @@
 [data.windows]
 {{ $powershellExecutable := or (lookPath "pwsh.exe") "powershell.exe" -}}
 {{- $isWSL := and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-username = {{ if (or $isWSL (eq .chezmoi.os "windows")) -}} {{ output $powershellExecutable "-Command" "$env:UserName" | trim | quote }} {{- else -}} "" {{- end }}
 powershellExecutable = {{ $powershellExecutable | quote }}
 isWSL = {{ $isWSL | toToml }}
 

@@ -23,11 +23,15 @@
 	sslBackend = schannel
 {{ end -}}
 [credential]
-	{{ if .windows.isWSL -}}
+	{{ with .windows -}}
+	{{- if .isWSL -}}
 	# Use Windows' credential manager from WSL
-	helper = /mnt/c/Users/{{ .windows.username }}/scoop/apps/git/current/mingw64/bin/git-credential-manager.exe
+	{{ $scoopPath := or (trim (output .powershellExecutable "-Command" "$env:SCOOP")) (print (trim (output .powershellExecutable "-Command" "$env:USERPROFILE")) "\\scoop") -}}
+	{{ $scoopPathWsl := trim (output "wslpath" "-u" $scoopPath) -}}
+	helper = {{ $scoopPathWsl }}/apps/git/current/mingw64/bin/git-credential-manager.exe
 	{{- else -}}
 	helper = manager
+	{{- end -}}
 	{{- end }}
 # This requires Git 2.36+
 [includeIf "hasconfig:remote.*.url:{{ .uni.git.remote }}/**"]
