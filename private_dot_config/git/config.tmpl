@@ -4,14 +4,22 @@
 [init]
 	defaultBranch = main
 [core]
+	{{ if eq .git.editor "nvim" -}}
 	editor = nvim
+	{{- else if eq .git.editor "code" -}}
+	editor = code --wait
+	{{- end }}
 [pull]
 	ff = only
 [rebase]
 	autoSquash = true
 [merge]
 	conflictStyle = diff3
+	{{ if eq .git.editor "nvim" -}}
 	tool = nvimdiff
+	{{- else if eq .git.editor "code" -}}
+	tool = code
+	{{- end }}
 [mergetool]
 	writeToTemp = true
 	keepBackup = false
@@ -19,7 +27,11 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
 	algorithm = histogram
+	{{ if eq .git.editor "nvim" -}}
 	tool = nvimdiff
+	{{- else if eq .git.editor "code" -}}
+	tool = code
+	{{- end }}
 [difftool "code"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [alias]
