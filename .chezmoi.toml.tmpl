@@ -1,4 +1,4 @@
-[data]
+{{- $uniEnabled := and (lookPath "bw" | isExecutable) (promptBoolOnce .uni "enabled" "Do you want to initialise configuration for university") -}}
 
 [data.windows]
 {{ $powershellExecutable := or (lookPath "pwsh.exe") "powershell.exe" -}}
@@ -6,6 +6,10 @@
 powershellExecutable = {{ $powershellExecutable | quote }}
 isWSL = {{ $isWSL | toToml }}
 
+[data.uni]
+enabled = {{ $uniEnabled | toToml }}
+
+{{ if $uniEnabled }}
 [data.uni.git]
 {{ $bwUniGitUuid := "2f29a8d3-199a-4dfb-9927-af3801388a31" -}}
 {{- $bwUniGitFields := (bitwardenFields "item" $bwUniGitUuid) -}}
@@ -13,6 +17,7 @@ email = {{ $bwUniGitFields.Email.value | quote }}
 remote = {{ $bwUniGitFields.Remote.value | quote }}
 GitLabDevClientId = {{ $bwUniGitFields.GitLabDevClientId.value | quote }}
 GitLabDevClientSecret = {{ $bwUniGitFields.GitLabDevClientSecret.value | quote }}
+{{- end }}
 
 {{ if eq .chezmoi.os "windows" }}
 [cd]

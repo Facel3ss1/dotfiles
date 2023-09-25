@@ -1,5 +1,10 @@
 **/README.md
+
 {{- if ne .chezmoi.os "windows" }}
 AppData/
 Documents/
+{{- end }}
+
+{{- if not .uni.enabled }}
+.config/git/uni
 {{- end }}

@@ -35,13 +35,14 @@
 	{{ with .windows -}}
 	{{- if .isWSL -}}
 	# Use Windows' credential manager from WSL
-	{{ $scoopPath := or (trim (output .powershellExecutable "-Command" "$env:SCOOP")) (print (trim (output .powershellExecutable "-Command" "$env:USERPROFILE")) "\\scoop") -}}
-	{{ $scoopPathWsl := trim (output "wslpath" "-u" $scoopPath) -}}
+	{{ $scoopPath := or (output .powershellExecutable "-Command" "$env:SCOOP" | trim) (print (output .powershellExecutable "-Command" "$env:USERPROFILE" | trim) "\\scoop") -}}
+	{{ $scoopPathWsl := output "wslpath" "-u" $scoopPath | trim -}}
 	helper = {{ $scoopPathWsl }}/apps/git/current/mingw64/bin/git-credential-manager.exe
 	{{- else -}}
 	helper = manager
 	{{- end -}}
 	{{- end }}
+{{ if .uni.enabled -}}
 # This requires Git 2.36+
 [includeIf "hasconfig:remote.*.url:{{ .uni.git.remote }}/**"]
 	# This file overrides the email for university repositories
@@ -52,3 +53,4 @@
 	GitLabDevClientSecret = {{ .uni.git.GitLabDevClientSecret }}
 	gitLabAuthModes = browser
 	provider = gitlab
+{{- end }}
