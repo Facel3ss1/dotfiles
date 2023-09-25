@@ -11,8 +11,17 @@
 	autoSquash = true
 [merge]
 	conflictStyle = diff3
+	tool = nvimdiff
+[mergetool]
+	writeToTemp = true
+	keepBackup = false
+[mergetool "code"]
+	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
 	algorithm = histogram
+	tool = nvimdiff
+[difftool "code"]
+	cmd = code --wait --diff $LOCAL $REMOTE
 [alias]
 	s = status
 	l = log --graph --decorate --pretty=oneline --abbrev-commit
