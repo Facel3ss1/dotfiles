@@ -1,4 +1,10 @@
-{{- $uniEnabled := and (lookPath "bw" | isExecutable) (promptBoolOnce .uni "enabled" "Do you want to initialise configuration for university") -}}
+{{- $gitName := promptStringOnce (. | dig "git" dict) "name" "What is your Git name" "Peter Medus" -}}
+{{- $gitEmail := promptStringOnce (. | dig "git" dict) "email" "What is your Git email" "16763503+Facel3ss1@users.noreply.github.com" -}}
+{{- $uniEnabled := and (lookPath "bw" | isExecutable) (promptBoolOnce (. | dig "uni" dict) "enabled" "Do you want to initialise configuration for university") -}}
+
+[data.git]
+name = {{ $gitName | quote }}
+email = {{ $gitEmail | quote }}
 
 [data.windows]
 {{ $powershellExecutable := or (lookPath "pwsh.exe") "powershell.exe" -}}
