@@ -2,15 +2,12 @@
 let mapleader=" "
 
 """ Plugins  --------------------------------
-set surround
-" set multiple-cursors
-set commentary
-set argtextobj
-set highlightedyank
-set textobj-entire
-Plug 'preservim/nerdtree`
-" set easymotion
-" set ReplaceWithRegister
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'kana/vim-textobj-entire'
+Plug 'preservim/nerdtree'
 
 """ Plugin settings -------------------------
 let g:argtextobj_pairs="[:],(:),<:>"
@@ -23,7 +20,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set number
-set relativenumber
+" set relativenumber
 set visualbell
 
 """ Idea specific settings ------------------
@@ -44,9 +41,14 @@ map \e ]w
 map \ge ]b
 vnoremap > >gv
 vnoremap < <gv
+map <CR> <Action>(EditorSelectWord)
+map <BS> <Action>(EditorUnSelectWord)
+imap <C-V> <Action>($Paste)
 
 " map <leader>f <Plug>(easymotion-s)
 " map <leader>e <Plug>(easymotion-f)
+
+map - <Action>(ShowNavBar)
 
 map <leader>fd <Action>(GotoFile)
 map <leader>fc <Action>(GotoClass)
@@ -62,6 +64,7 @@ map <leader>hn <Action>(ActivateNotificationsToolWindow)
 map gr <Action>(FindUsages)
 map gI <Action>(GotoImplementation)
 map go <Action>(GotoTypeDeclaration)
+map gx <Action>(ClickLink)
 
 " map <leader>d <Action>(Debug)
 map <leader>cd <Action>(ShowErrorDescription)
@@ -69,11 +72,16 @@ map <leader>cr <Action>(RenameElement)
 map <leader>cR <Action>(Refactorings.QuickListPopupAction)
 map <leader>ca <Action>(ShowIntentionActions)
 map <leader>cg <Action>(Generate)
-map <leader>cf <Action>(ReformatCode)
+map <leader>cf <Action>(SilentCodeCleanup)
+map <leader>cn <Action>(ReSharperNavigateTo)
 map <leader>ch <Action>(CIDR.Lang.SwitchHeaderSource)
-map <leader>cF <Action>(com.github.ragurney.spotless.actions.ReformatAllFilesAction)
+" map <leader>cF <Action>(com.github.ragurney.spotless.actions.ReformatAllFilesAction)
 " map <leader>c <Action>(Stop)
 map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>b <Action>(BuildSolutionAction)
+
+map <leader>tt <Action>(RiderDotCoverTriggerContinuousTestingAction)
 "
 " map <leader>s <Action>(SelectInProjectView)
 " map <leader>a <Action>(Annotate)
@@ -88,5 +96,7 @@ map ]c <Action>(VcsShowNextChangeMarker)
 map [c <Action>(VcsShowPrevChangeMarker)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
+map ]m <Action>(MethodDown)
+map [m <Action>(MethodUp)
 
 " map <leader>b <Action>(ToggleLineBreakpoint)
