@@ -5,49 +5,52 @@ set hlsearch
 set ignorecase
 set incsearch
 set number
-set relativenumber
+" set relativenumber
 set visualbell
 
-map <Space> <Nop>
-map <C-d> <C-d>zz
-map <C-u> <C-u>zz
-map n nzz
-map N Nzz
-map Y y$
+noremap <Space> <Nop>
+noremap <C-d> <C-d>zz
+noremap <C-u> <C-u>zz
+noremap n nzz
+noremap N Nzz
+nnoremap cgn cgn
+nnoremap cgN cgN
+noremap Y y$
 nnoremap <Esc> :nohl<CR>
-map gw *N
+noremap gw *N
 vnoremap > >gv
 vnoremap < <gv
 
-nmap <A-j> :.m .+1<CR>==
-nmap <A-k> :.m .-2<CR>==
-xmap <A-j> :vsc Edit.MoveSelectedLinesDown<CR>
-xmap <A-k> :vsc Edit.MoveSelectedLinesUp<CR>
+nnoremap <A-j> :.m .+1<CR>==
+nnoremap <A-k> :.m .-2<CR>==
+vnoremap <A-j> :vsc Edit.MoveSelectedLinesDown<CR>
+vnoremap <A-k> :vsc Edit.MoveSelectedLinesUp<CR>
 
-map <C-o> :vsc View.NavigateBackward<CR>
-map <C-i> :vsc View.NavigateForward<CR>
+noremap <C-o> :vsc View.NavigateBackward<CR>
+noremap <C-i> :vsc View.NavigateForward<CR>
 
-nmap gcc :vsc Edit.ToggleLineComment<CR>
-vmap gc :vsc Edit.ToggleLineComment<CR>
+nnoremap gcc :vsc Edit.ToggleLineComment<CR>
+vnoremap gc :vsc Edit.ToggleLineComment<CR>
 
 noremap <CR> :vsc Edit.ExpandSelection<CR>
 noremap <BS> :vsc Edit.ContractSelection<CR>
 
-nmap gd :vsc Edit.GoToDefinition<CR>
-nmap gD :vsc Edit.GoToDeclaration<CR>
-nmap gI :vsc Edit.GoToImplementation<CR>
-nmap gr :vsc Edit.FindAllReferences<CR>
-nmap K :vsc Edit.QuickInfo<CR>
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gD :vsc Edit.GoToDeclaration<CR>
+nnoremap gI :vsc Edit.GoToImplementation<CR>
+nnoremap gr :vsc Edit.FindAllReferences<CR>
+nnoremap K :vsc Edit.QuickInfo<CR>
 
-nmap <Leader>ca :vsc View.QuickActions<CR>
-vmap <Leader>ca :vsc View.QuickActions<CR>
-nmap <Leader>cr :vsc Refactor.Rename<CR>
-vmap <Leader>cr :vsc Refactor.Rename<CR>
-nmap <Leader>ch :vsc EditorContextMenus.CodeWindow.ToggleHeaderCodeFile<CR>
-nmap <Leader>cf :vsc Edit.FormatDocument<CR>
+noremap <Leader>ca :vsc View.QuickActions<CR>
+noremap <Leader>cc :vsc Edit.Edit.IntelliCode.Apply<CR>
+noremap <Leader>cr :vsc Refactor.Rename<CR>
+nnoremap <Leader>ch :vsc EditorContextMenus.CodeWindow.ToggleHeaderCodeFile<CR>
+nnoremap <Leader>cf :vsc EditorContextMenus.FileHealthIndicator.RunDefaultCodeCleanup<CR>
 
-nmap <Leader>fd :vsc Edit.GoToFile<CR>
-nmap <Leader>fg :vsc Edit.FindInFiles<CR>
+nnoremap <Leader>fd :vsc Edit.GoToFile<CR>
+nnoremap <Leader>fg :vsc Edit.FindInFiles<CR>
 
-nmap ]d :vsc Edit.GoToNextIssueInFile<CR>
-nmap [d :vsc Edit.GoToPreviousIssueInFile<CR>
+nnoremap ]d :vsc Edit.GoToNextIssueInFile<CR>
+nnoremap [d :vsc Edit.GoToPreviousIssueInFile<CR>
+nnoremap ]m :vsc Edit.NextMethod<CR>
+nnoremap [m :vsc Edit.PreviousMethod<CR>
