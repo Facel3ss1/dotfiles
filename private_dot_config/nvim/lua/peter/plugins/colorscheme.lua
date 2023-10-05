@@ -112,6 +112,9 @@ return {
                     -- nvim-treesitter-context
                     TreesitterContext = { bg = colors.panel_bg },
                     TreesitterContextLineNumber = { fg = colors.guide_normal, bg = colors.panel_bg },
+
+                    -- indent-blankline
+                    IblScope = { fg = colors.comment },
                 },
             }
         end,

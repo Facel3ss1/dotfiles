@@ -220,16 +220,29 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         event = "VeryLazy",
+        main = "ibl",
         opts = {
-            show_current_context = true,
-            use_treesitter = true,
-            buftype_exclude = { "terminal", "nofile" },
-            filetype_exclude = {
-                "help",
-                "diff",
-                "git",
-                "checkhealth",
-                "TelescopePrompt",
+            scope = {
+                show_start = false,
+                show_end = false,
+                include = {
+                    node_type = {
+                        ["*"] = { "*" },
+                    },
+                },
+            },
+            exclude = {
+                filetypes = {
+                    "help",
+                    "diff",
+                    "git",
+                    "checkhealth",
+                    "TelescopePrompt",
+                },
+                buftypes = {
+                    "terminal",
+                    "nofile",
+                },
             },
         },
     },
