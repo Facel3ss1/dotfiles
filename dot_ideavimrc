@@ -82,6 +82,7 @@ map <leader>z <Action>(ToggleDistractionFreeMode)
 map <leader>b <Action>(BuildSolutionAction)
 
 map <leader>tt <Action>(RiderDotCoverTriggerContinuousTestingAction)
+map <leader>th <Action>(ToggleInlayHintsGloballyAction)
 "
 " map <leader>s <Action>(SelectInProjectView)
 " map <leader>a <Action>(Annotate)
