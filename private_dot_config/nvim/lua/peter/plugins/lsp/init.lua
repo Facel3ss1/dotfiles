@@ -85,10 +85,6 @@ return {
 
                 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
                 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-                -- stylua: ignore start
-                map("n", "<leader>cf", function() require("conform").format() end, { desc = "Format document" })
-                map("v", "<leader>cf", function() require("conform").format() end, { desc = "Format range" })
-                -- stylua: ignore end
                 map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
                 -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
@@ -265,6 +261,25 @@ return {
     {
         "stevearc/conform.nvim",
         event = "BufWritePre",
+        cmd = "ConformInfo",
+        keys = {
+            {
+                "<leader>cf",
+                function()
+                    require("conform").format()
+                end,
+                desc = "Format document",
+                mode = { "n" },
+            },
+            {
+                "<leader>cf",
+                function()
+                    require("conform").format()
+                end,
+                desc = "Format range",
+                mode = { "v" },
+            },
+        },
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
