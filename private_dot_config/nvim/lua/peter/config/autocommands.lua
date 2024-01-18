@@ -148,10 +148,3 @@ vim.filetype.add {
         [".clang-tidy"] = "yaml",
     },
 }
-
--- FIXME: Remove when https://github.com/neovim/neovim/pull/23578 lands
-vim.filetype.add {
-    extension = {
-        typ = "typst",
-    },
-}
