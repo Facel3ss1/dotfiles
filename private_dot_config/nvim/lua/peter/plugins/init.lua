@@ -3,7 +3,7 @@ return {
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
     {
         "saecki/crates.nvim",
-        version = "0.3.0",
+        version = "0.4.0",
         event = "BufRead Cargo.toml",
         config = function(_, opts)
             local crates = require("crates")
