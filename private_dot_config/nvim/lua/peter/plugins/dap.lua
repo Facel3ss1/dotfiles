@@ -3,7 +3,6 @@ local util = require("peter.util")
 -- TODO: Breakpoint icons
 -- TODO: Virtual text
 -- TODO: mason-nvim-dap?
--- TODO: rust-tools
 -- TODO: telescope-dap
 -- TODO: one-small-step-for-vimkind
 return {
@@ -60,7 +59,6 @@ return {
                 },
             }
             dap.configurations.c = dap.configurations.cpp
-            dap.configurations.rust = dap.configurations.cpp
 
             local dapui = require("dapui")
             dap.listeners.after.event_initialized["dapui_config"] = function()

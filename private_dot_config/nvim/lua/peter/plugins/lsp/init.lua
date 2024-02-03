@@ -1,6 +1,38 @@
 local util = require("peter.util")
 local icons = require("peter.util.icons")
 
+local lsp_settings = {
+    ["lua_ls"] = {
+        Lua = {
+            completion = {
+                callSnippet = "Replace",
+                postfix = ".",
+            },
+            diagnostics = {
+                libraryFiles = "Disable",
+                unusedLocalExclude = { "_*" },
+            },
+            format = {
+                enable = false,
+            },
+            workspace = {
+                checkThirdParty = false,
+            },
+        },
+    },
+    ["rust_analyzer"] = {
+        ["rust-analyzer"] = {
+            check = {
+                command = "clippy",
+                extraArgs = { "--no-deps" },
+            },
+        },
+    },
+    ["typos_lsp"] = {
+        diagnosticSeverity = "Warning",
+    },
+}
+
 return {
     -- TODO: lsp_signature.nvim?
     -- TODO: inlay-hints.nvim - not needed after nvim 0.10
@@ -112,41 +144,12 @@ return {
                 desc = "Call LSP on_attach()",
             })
 
-            local settings = {
-                ["lua_ls"] = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace",
-                            postfix = ".",
-                        },
-                        diagnostics = {
-                            libraryFiles = "Disable",
-                            unusedLocalExclude = { "_*" },
-                        },
-                        format = {
-                            enable = false,
-                        },
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                    },
-                },
-                ["rust_analyzer"] = {
-                    ["rust-analyzer"] = {
-                        checkOnSave = {
-                            command = "clippy",
-                            extraArgs = { "--no-deps" },
-                        },
-                    },
-                },
-            }
-
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
             local function default_handler(server_name)
                 require("lspconfig")[server_name].setup {
                     capabilities = capabilities,
-                    settings = settings[server_name],
+                    settings = lsp_settings[server_name],
                 }
             end
 
@@ -159,9 +162,7 @@ return {
                 ["typos_lsp"] = function(server_name)
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities,
-                        init_options = {
-                            diagnosticSeverity = "Warning",
-                        },
+                        init_options = lsp_settings[server_name],
                     }
                 end,
                 ["lua_ls"] = function(server_name)
@@ -180,19 +181,13 @@ return {
 
                     default_handler(server_name)
                 end,
-                ["rust_analyzer"] = function(server_name)
-                    require("rust-tools").setup {
-                        server = {
-                            capabilities = capabilities,
-                            settings = settings[server_name],
-                        },
-                    }
-                end,
+                -- rustaceanvim sets up rust-analyzer for us
+                ["rust_analyzer"] = function() end,
                 ["hls"] = function(server_name)
                     require("haskell-tools").setup {
                         hls = {
                             capabilities = capabilities,
-                            settings = settings[server_name],
+                            settings = lsp_settings[server_name],
                         },
                     }
                 end,
@@ -200,7 +195,7 @@ return {
                     require("clangd_extensions").setup {
                         server = {
                             capabilities = capabilities,
-                            settings = settings[server_name],
+                            settings = lsp_settings[server_name],
                             on_attach = function(_, buf)
                                 vim.keymap.set(
                                     "n",
@@ -308,7 +303,19 @@ return {
         },
     },
     { "folke/neodev.nvim" },
-    { "simrat39/rust-tools.nvim", dependencies = "nvim-lua/plenary.nvim" },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "*",
+        ft = { "rust" },
+        opts = {
+            server = {
+                settings = lsp_settings["rust_analyzer"],
+            },
+        },
+        config = function(_, opts)
+            vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
+        end,
+    },
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     {
         "mrcjkb/haskell-tools.nvim",
