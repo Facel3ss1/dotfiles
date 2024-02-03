@@ -156,6 +156,14 @@ return {
             }
             require("mason-lspconfig").setup_handlers {
                 default_handler,
+                ["typos_lsp"] = function(server_name)
+                    require("lspconfig")[server_name].setup {
+                        capabilities = capabilities,
+                        init_options = {
+                            diagnosticSeverity = "Warning",
+                        },
+                    }
+                end,
                 ["lua_ls"] = function(server_name)
                     require("neodev").setup {
                         -- TODO: Use neoconf instead?
@@ -248,6 +256,7 @@ return {
 
             local ensure_installed = {
                 "stylua",
+                "typos-lsp",
             }
             local mason_registry = require("mason-registry")
             for _, package_name in ipairs(ensure_installed) do
@@ -283,6 +292,7 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
+                -- TODO: Use ruff for formatting
                 python = { "isort", "black" },
             },
             format_on_save = function(_buf)

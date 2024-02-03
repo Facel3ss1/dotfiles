@@ -30,6 +30,6 @@ Running `:checkhealth` can also show you what is needed by the plugins.
 
 LSPs and other tools are installed and managed by
 [Mason](https://github.com/williamboman/mason.nvim). In general, to install
-tools for a language, you will need the package mangager for that language
+tools for a language, you will need the package manager for that language
 (e.g. `cargo`, `pip`, `npm`). You can run `:checkhealth mason` to see what
 package managers you have installed.

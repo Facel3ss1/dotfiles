@@ -7,7 +7,7 @@ use don't try to install this yourself!
 
 ## Installation
 
-<!-- TODO: Document windows instalation and nvim setup -->
+<!-- TODO: Document windows installation and nvim setup -->
 <!-- You need developer mode to make symlinks without admin -->
 
 First, install [chezmoi](https://chezmoi.io) and the [Bitwarden
