@@ -16,7 +16,6 @@ vim.diagnostic.config {
         suffix = format_error_code,
         border = "rounded",
     },
-    -- TODO: Give higher priority than inlay hints
     virtual_text = { spacing = 4, prefix = icons.ui.dot },
     severity_sort = true,
 }

@@ -35,7 +35,6 @@ local lsp_settings = {
 
 return {
     -- TODO: lsp_signature.nvim?
-    -- TODO: inlay-hints.nvim - not needed after nvim 0.10
     {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile
@@ -119,6 +118,10 @@ return {
                 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
                 map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
+                map("n", "<leader>th", function()
+                    require("lsp-inlayhints").toggle()
+                end, { desc = "Toggle inlay hints" })
+
                 -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
                 -- See https://github.com/neovim/neovim/pull/19677
                 vim.bo[buf].formatexpr = nil
@@ -136,6 +139,8 @@ return {
                         })
                     end
                 end
+
+                require("lsp-inlayhints").on_attach(client, buf)
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -296,6 +301,8 @@ return {
             end,
         },
     },
+    -- FIXME: Remove when nvim 0.10 releases
+    { "lvimuser/lsp-inlayhints.nvim", config = true },
     { "folke/neodev.nvim" },
     {
         "mrcjkb/rustaceanvim",
