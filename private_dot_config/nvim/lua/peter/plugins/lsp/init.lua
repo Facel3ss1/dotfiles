@@ -183,14 +183,8 @@ return {
                 end,
                 -- rustaceanvim sets up rust-analyzer for us
                 ["rust_analyzer"] = function() end,
-                ["hls"] = function(server_name)
-                    require("haskell-tools").setup {
-                        hls = {
-                            capabilities = capabilities,
-                            settings = lsp_settings[server_name],
-                        },
-                    }
-                end,
+                -- haskell-tools sets up hls for us
+                ["hls"] = function() end,
                 ["clangd"] = function(server_name)
                     require("clangd_extensions").setup {
                         server = {
@@ -319,7 +313,10 @@ return {
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     {
         "mrcjkb/haskell-tools.nvim",
-        version = "1.*",
-        dependencies = { "nvim-lua/plenary.nvim", "telescope.nvim" },
+        version = "*",
+        ft = { "haskell", "lhaskell", "cabal", "cabalproject " },
+        config = function(_, opts)
+            vim.g.haskell_tools = vim.tbl_deep_extend("force", {}, opts or {})
+        end,
     },
 }
