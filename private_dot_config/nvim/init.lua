@@ -38,6 +38,8 @@ require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
     checker = {
         enabled = not util.has("win32"),
+        -- TODO: Change all pinned versions to version = "*"
+        check_pinned = true,
     },
     change_detection = { notify = false },
     install = {
