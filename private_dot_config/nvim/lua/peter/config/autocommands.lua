@@ -67,6 +67,15 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Disable cursorline",
 })
 
+-- Resize splits if the window got resized
+vim.api.nvim_create_autocmd("VimResized", {
+    group = vim.api.nvim_create_augroup("ResizeSplits", { clear = true }),
+    callback = function()
+        vim.cmd("tabdo wincmd =")
+    end,
+    desc = "Run :tabdo wincmd =",
+})
+
 -- FIXME: If we change these options then change the *window* (not buffer) to
 -- one where these options don't apply, we should revert the changes
 
