@@ -61,18 +61,6 @@ if util.has("win32") then
     vim.o.shellxquote = ""
 end
 
--- FIXME: Change so not reliant on netrw
--- Allow me to use gx to open URLs and files
-if util.executable("wslview") then
-    vim.g.netrw_browsex_viewer = "wslview"
-elseif util.has("win32") then
-    vim.g.netrw_browsex_viewer = "start"
-elseif util.executable("xdg-open") then
-    vim.g.netrw_browsex_viewer = "xdg-open"
-elseif util.has("mac") then
-    vim.g.netrw_browsex_viewer = "open"
-end
-
 if util.executable("rg") then
     -- TODO: Don't search hidden files?
     vim.o.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep
