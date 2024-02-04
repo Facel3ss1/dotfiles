@@ -30,6 +30,12 @@ fish_add_path -g ~/.elan/bin
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
 set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
 
+# pnpm
+set -gx PNPM_HOME $HOME/.local/share/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+
 if status is-interactive
     # TODO: Move to abbreviations file
     # TODO: Add git abbreviations
