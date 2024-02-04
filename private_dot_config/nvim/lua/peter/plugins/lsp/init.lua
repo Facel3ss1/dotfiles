@@ -77,7 +77,6 @@ return {
                 end
 
                 map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
-                map("n", "gK", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 -- TODO: Add floating border to this
                 -- map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
@@ -163,6 +162,26 @@ return {
                 end,
                 -- rustaceanvim sets up rust-analyzer for us
                 ["rust_analyzer"] = function() end,
+                ["tsserver"] = function(server_name)
+                    require("typescript-tools").setup {
+                        capabilities = capabilities,
+                        settings = lsp_settings[server_name],
+                        on_attach = function(_, buf)
+                            vim.keymap.set(
+                                "n",
+                                "gs",
+                                "<Cmd>TSToolsGoToSourceDefinition<CR>",
+                                { buffer = buf, desc = "Go to source definition" }
+                            )
+
+                            vim.api.nvim_create_autocmd("BufWritePre", {
+                                group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
+                                command = "TSToolsOrganizeImports",
+                                desc = "Organize typescript imports",
+                            })
+                        end,
+                    }
+                end,
                 -- haskell-tools sets up hls for us
                 ["hls"] = function() end,
                 ["clangd"] = function(server_name)
@@ -261,6 +280,10 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
+                javascript = { { "prettierd", "prettier" } },
+                javascriptreact = { { "prettierd", "prettier" } },
+                typescript = { { "prettierd", "prettier" } },
+                typescriptreact = { { "prettierd", "prettier" } },
                 -- TODO: Use ruff for formatting
                 python = { "isort", "black" },
             },
@@ -315,6 +338,10 @@ return {
         config = function(_, opts)
             vim.g.rustaceanvim = vim.tbl_deep_extend("force", {}, opts or {})
         end,
+    },
+    {
+        "pmizio/typescript-tools.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     },
     { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
     {
