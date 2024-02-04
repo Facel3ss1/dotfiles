@@ -10,7 +10,8 @@ return {
         -- FIXME: See https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1900679583
         version = "0.9.2",
         build = ":TSUpdate",
-        event = "BufReadPost",
+        event = "BufReadPre",
+        cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
         opts = function()
             return {
                 ensure_installed = {
@@ -81,6 +82,16 @@ return {
             -- vim.o.foldenable = false
         end,
     },
-    { "nvim-treesitter/nvim-treesitter-context", module = false, event = "BufReadPre", config = true },
-    { "RRethy/nvim-treesitter-endwise", event = "InsertEnter" },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        module = false,
+        event = "BufReadPre",
+        config = true,
+        dependencies = { "nvim-treesitter" },
+    },
+    {
+        "RRethy/nvim-treesitter-endwise",
+        event = "InsertEnter",
+        dependencies = { "nvim-treesitter" },
+    },
 }
