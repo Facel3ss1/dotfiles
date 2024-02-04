@@ -76,7 +76,9 @@ return {
                     vim.keymap.set(mode, lhs, rhs, opts)
                 end
 
-                map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
+                if client.server_capabilities.hoverProvider then
+                    map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
+                end
                 -- TODO: Add floating border to this
                 -- map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })

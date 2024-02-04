@@ -9,7 +9,7 @@ return {
             on_attach = function(bufnr)
                 require("cmp").setup.buffer { sources = { { name = "crates" } } }
 
-                vim.keymap.set("n", "<leader>cC", function()
+                vim.keymap.set("n", "K", function()
                     require("crates").show_popup()
                 end, { desc = "Show crate popup", buffer = bufnr })
             end,
