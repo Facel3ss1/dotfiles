@@ -53,6 +53,5 @@
   "typst.vim": { "branch": "main", "commit": "816ba15885cb5eb742e06bafcd53b1a8531d334b" },
   "vim-abolish": { "branch": "master", "commit": "dcbfe065297d31823561ba787f51056c147aa682" },
   "vim-startuptime": { "branch": "master", "commit": "454b3de856b7bd298700de33d79774ca9b9e3875" },
-  "virt-column.nvim": { "branch": "master", "commit": "b62b4ef0774d19452d4ed18e473e824c7a756f2f" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }

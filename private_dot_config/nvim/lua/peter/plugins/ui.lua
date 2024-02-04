@@ -246,5 +246,4 @@ return {
             },
         },
     },
-    { "lukas-reineke/virt-column.nvim", event = "VimEnter", config = true },
 }

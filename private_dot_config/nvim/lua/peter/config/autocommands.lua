@@ -76,47 +76,18 @@ vim.api.nvim_create_autocmd("VimResized", {
     desc = "Run :tabdo wincmd =",
 })
 
--- FIXME: If we change these options then change the *window* (not buffer) to
--- one where these options don't apply, we should revert the changes
-
--- Disable/Change colorcolumn for certain filetypes
--- TODO: buftypes? filenames?
--- TODO: Set based on textwidth option
-
-local function disable_colorcolumn()
-    if vim.wo.colorcolumn ~= "80" then
-        return
-    end
-    vim.wo.colorcolumn = ""
-end
-
-local colorcolumn_group = vim.api.nvim_create_augroup("SetColorColumn", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    group = colorcolumn_group,
+    group = vim.api.nvim_create_augroup("GitCommitColorcolumn", { clear = true }),
     pattern = { "gitcommit", "NeogitCommitMessage" },
     callback = function()
         vim.wo.colorcolumn = "50,72"
     end,
     desc = "Set colorcolumn = 50,72",
 })
-vim.api.nvim_create_autocmd("FileType", {
-    group = colorcolumn_group,
-    pattern = {
-        "help",
-        "gitrebase",
-        "qf",
-        "checkhealth",
-        "Neogit*",
-        "startuptime",
-        "oil",
-    },
-    callback = disable_colorcolumn,
-    desc = "Disable colorcolumn",
-})
 
 -- TODO: Quit certain filetypes when I press q
 
--- TODO: Move to filetype plugin?
+-- TODO: Move to Comment.nvim?
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetCommentString", { clear = true }),
     pattern = "gitconfig",
@@ -146,9 +117,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
     callback = function()
         vim.wo.number = false
         vim.wo.relativenumber = false
-        vim.wo.colorcolumn = ""
     end,
-    desc = "Disable line numbers and colorcolumn",
+    desc = "Disable line numbers",
 })
 
 vim.filetype.add {

@@ -31,7 +31,6 @@ vim.o.undofile = true -- Save/Restore undo history to the undo directory when I 
 -- FIXME: Change backupdir
 -- vim.o.backup = true -- Save a backup to the backup directory when I save a file
 
-vim.o.colorcolumn = "80" -- Put colored column at column 80 by default (can be overridden)
 vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
 vim.o.laststatus = 3 -- Use global statusline
