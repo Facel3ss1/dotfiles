@@ -8,7 +8,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         -- FIXME: See https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1900679583
-        tag = "v0.9.2",
+        version = "0.9.2",
         build = ":TSUpdate",
         event = "BufReadPost",
         opts = function()

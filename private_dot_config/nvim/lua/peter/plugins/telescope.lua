@@ -4,7 +4,7 @@ local util = require("peter.util")
 return {
     {
         "nvim-telescope/telescope.nvim",
-        version = "0.1.*",
+        version = "*",
         cmd = "Telescope",
         keys = {
             {

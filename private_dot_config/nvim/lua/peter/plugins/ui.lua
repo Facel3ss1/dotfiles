@@ -129,7 +129,7 @@ return {
     },
     {
         "akinsho/bufferline.nvim",
-        version = "2.*",
+        version = "*",
         event = "VeryLazy",
         opts = {
             options = {
@@ -147,8 +147,8 @@ return {
         dependencies = "nvim-tree/nvim-web-devicons",
     },
     {
-        -- ALTERNATIVE: notifier.nvim
         "rcarriga/nvim-notify",
+        version = "*",
         keys = {
             {
                 "<leader>un",
@@ -213,7 +213,7 @@ return {
     -- Disable hlsearch when I move the cursor
     {
         "asiryk/auto-hlsearch.nvim",
-        version = "1.0.0",
+        version = "*",
         event = "VeryLazy",
         config = true,
     },

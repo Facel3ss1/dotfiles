@@ -2,7 +2,7 @@ return {
     { "tpope/vim-abolish", event = "VeryLazy" },
     {
         "echasnovski/mini.bracketed",
-        version = false,
+        version = "*",
         event = "VeryLazy",
         opts = {
             -- Disable ]c and ]t keybinds, as they are used by gitsigns and todo-comments
