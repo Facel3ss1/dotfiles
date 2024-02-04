@@ -102,10 +102,6 @@ return {
                     NotifyWARNBorder = { link = "DiagnosticFloatingWarn" },
                     NotifyERRORBorder = { link = "DiagnosticFloatingError" },
 
-                    -- fidget
-                    FidgetTitle = { fg = colors.func },
-                    FidgetTask = { fg = colors.comment },
-
                     -- nvim-lightbulb
                     LightBulbSign = { fg = colors.accent },
 

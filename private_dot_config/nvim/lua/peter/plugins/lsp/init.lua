@@ -44,31 +44,6 @@ return {
             "mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
-            {
-                "j-hui/fidget.nvim",
-                -- FIXME
-                tag = "legacy",
-                opts = {
-                    text = {
-                        spinner = "dots",
-                        done = icons.ui.done,
-                    },
-                    timer = {
-                        spinner_rate = 75,
-                    },
-                },
-            },
-            {
-                "kosayoda/nvim-lightbulb",
-                opts = {
-                    autocmd = {
-                        enabled = true,
-                    },
-                    sign = {
-                        text = icons.ui.lightbulb,
-                    },
-                },
-            },
         },
         init = function()
             require("peter.plugins.lsp.diagnostics")
@@ -303,6 +278,30 @@ return {
     },
     -- FIXME: Remove when nvim 0.10 releases
     { "lvimuser/lsp-inlayhints.nvim", config = true },
+    {
+        "j-hui/fidget.nvim",
+        event = { "LspAttach" },
+        version = "*",
+        opts = {
+            progress = {
+                display = {
+                    done_icon = icons.ui.done,
+                },
+            },
+        },
+    },
+    {
+        "kosayoda/nvim-lightbulb",
+        event = { "LspAttach" },
+        opts = {
+            autocmd = {
+                enabled = true,
+            },
+            sign = {
+                text = icons.ui.lightbulb,
+            },
+        },
+    },
     { "folke/neodev.nvim" },
     {
         "mrcjkb/rustaceanvim",
