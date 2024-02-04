@@ -45,12 +45,12 @@ if status is-interactive
         abbr --add --global vi nvim
     end
 
-    if type -q exa
-        abbr --add --global ls exa
-        abbr --add --global la 'exa -la --git'
-        abbr --add --global ll 'exa -l --git'
-        abbr --add --global lat 'exa -la --git --tree'
-        abbr --add --global llt 'exa -l --git --tree'
+    if type -q eza
+        abbr --add --global ls eza
+        abbr --add --global la 'eza -la --git'
+        abbr --add --global ll 'eza -l --git'
+        abbr --add --global lat 'eza -la --git --tree'
+        abbr --add --global llt 'eza -l --git --tree'
     else
         abbr --add --global ls 'ls --color=auto'
         abbr --add --global la 'ls -lA --color=auto'

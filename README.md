@@ -52,5 +52,5 @@ bw lock
 - [wezterm](https://wezfurlong.org/wezterm/index.html)
 - [fish](https://fishshell.com)
 - [starship](https://starship.rs)
-- [exa](https://the.exa.website/)
+- [eza](https://eza.rocks)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
