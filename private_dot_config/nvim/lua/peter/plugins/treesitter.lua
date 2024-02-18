@@ -7,8 +7,7 @@ return {
     -- TODO: "in comment" e.g. gqic for formatting (nvim-ts-textobjects)
     {
         "nvim-treesitter/nvim-treesitter",
-        -- FIXME: See https://github.com/nvim-treesitter/nvim-treesitter/issues/2293#issuecomment-1900679583
-        version = "0.9.2",
+        version = "*",
         build = ":TSUpdate",
         event = "BufReadPre",
         cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
