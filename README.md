@@ -54,3 +54,4 @@ bw lock
 - [starship](https://starship.rs)
 - [eza](https://eza.rocks)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
+- [difftastic](https://difftastic.wilfred.me.uk/)

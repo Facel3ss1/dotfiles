@@ -37,6 +37,7 @@
 	{{- else if eq .git.editor "code" -}}
 	tool = code
 	{{- end }}
+	external = difft
 [difftool "code"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [alias]
