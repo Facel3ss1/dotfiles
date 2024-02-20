@@ -28,6 +28,8 @@
 [mergetool]
 	writeToTemp = true
 	keepBackup = false
+[mergetool "nvimdiff"]
+	layout = "LOCAL,BASE,REMOTE / MERGED"
 [mergetool "code"]
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
