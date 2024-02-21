@@ -32,3 +32,6 @@ GitLabDevClientSecret = {{ $bwUniGitFields.GitLabDevClientSecret.value | quote }
 command = {{ $powershellExecutable | quote }}
 args = ["-NoLogo"]
 {{- end }}
+
+[diff]
+command = "difft"
