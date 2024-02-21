@@ -1,0 +1,8 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
+gui:
+  sidePanelWidth: 0.25
+  scrollHeight: 10
+  showFileTree: false
+  theme:
+    selectedLineBgColor:
+      - reverse
