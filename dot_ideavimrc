@@ -33,6 +33,7 @@ map <Space> <Nop>
 map Y y$
 nnoremap <Esc> :nohl<CR>
 map gw *N
+map gJ J"_x
 map <A-k> <Action>(MoveStatementUp)
 map <A-j> <Action>(MoveStatementDown)
 map \w [w
@@ -44,9 +45,6 @@ vnoremap < <gv
 map <CR> <Action>(EditorSelectWord)
 map <BS> <Action>(EditorUnSelectWord)
 imap <C-V> <Action>($Paste)
-
-" map <leader>f <Plug>(easymotion-s)
-" map <leader>e <Plug>(easymotion-f)
 
 map - <Action>(ShowNavBar)
 
