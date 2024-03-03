@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow
+
+name: "EditorConfig"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  ec:
+    name: EC validity
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check EditorConfig configuration
+        run: test -f .editorconfig
+      - name: Check adherence to EditorConfig
+        uses: greut/eclint-action@v0

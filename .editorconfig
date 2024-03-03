@@ -3,27 +3,19 @@
 root = true
 
 [*]
+indent_style = space
+indent_size = 4
 charset = utf-8
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[**/README.md]
-indent_style = space
-indent_size = 4
-
-[*.lua]
-indent_style = space
-indent_size = 4
+[*.yml]
+indent_size = 2
 
 [lazy-lock.json]
-indent_style = space
 indent_size = 2
 insert_final_newline = false
-
-[*.fish]
-indent_style = space
-indent_size = 4
 
 [private_dot_config/git/**]
 indent_style = tab
