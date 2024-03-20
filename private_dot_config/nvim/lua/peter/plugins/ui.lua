@@ -75,7 +75,13 @@ return {
                 lualine_z = { "location" },
             },
             -- TODO: Custom telescope extension?
-            extensions = { "lazy", "man", "quickfix", "nvim-dap-ui", "oil" },
+            extensions = {
+                "lazy",
+                "man",
+                "quickfix",
+                "nvim-dap-ui",
+                "oil",
+            },
         },
         config = function(_, opts)
             vim.o.showmode = false
