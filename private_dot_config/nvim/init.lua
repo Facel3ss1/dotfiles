@@ -58,6 +58,7 @@ require("lazy").setup("peter.plugins", {
     },
     ui = {
         border = "rounded",
+        backdrop = 100,
     },
     diff = {
         cmd = "diffview.nvim",
