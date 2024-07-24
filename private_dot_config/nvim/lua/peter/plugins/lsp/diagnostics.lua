@@ -27,6 +27,7 @@ local signs = {
     Error = icons.diagnostics.ERROR,
 }
 
+-- FIXME: Use `signs` in vim.diagnostic.config in nvim 0.10
 for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     -- See :h diagnostic-signs

@@ -37,6 +37,7 @@ return {
             return {
                 mirage = true,
                 overrides = {
+                    -- FIXME: Update for nvim 0.10
                     CursorLine = { bg = colors.line, ctermfg = 15 }, -- Workaround for https://github.com/neovim/neovim/issues/9800
                     WinSeparator = { fg = colors.guide_active },
                     LspCodeLens = { fg = colors.comment, italic = true },

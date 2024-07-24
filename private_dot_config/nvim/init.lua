@@ -10,6 +10,7 @@ require("peter.config.keymap")
 require("peter.config.chezmoi")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- FIXME: Use vim.uv in nvim 0.10
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system {
         "git",

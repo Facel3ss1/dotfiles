@@ -60,6 +60,7 @@ if util.has("win32") then
     vim.o.shellxquote = ""
 end
 
+-- FIXME: nvim 0.10 uses ripgrep if available
 if util.executable("rg") then
     -- TODO: Don't search hidden files?
     vim.o.grepprg = "rg --vimgrep --hidden --glob '!.git'" -- Use ripgrep instead of grep

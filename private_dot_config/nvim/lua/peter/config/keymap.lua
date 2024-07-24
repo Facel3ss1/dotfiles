@@ -37,7 +37,7 @@ vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- FIXME: This doesn't work in Lua yet
+-- FIXME: Remove when nvim 0.10 is released
 -- See https://github.com/neovim/neovim/pull/22048
 -- @ in visual mode
 -- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim

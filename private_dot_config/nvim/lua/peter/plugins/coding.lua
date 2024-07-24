@@ -92,6 +92,7 @@ return {
             "hrsh7th/cmp-path",
         },
     },
+    -- FIXME: Replace with vim.snippet when nvim 0.10 releases?
     {
         "L3MON4D3/LuaSnip",
         version = "*",
@@ -127,6 +128,7 @@ return {
             end,
         },
     },
+    -- FIXME: Remove when nvim 0.10 releases
     {
         "numToStr/Comment.nvim",
         keys = {

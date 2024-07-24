@@ -9,6 +9,7 @@ M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
 local function chezmoi_command(command, success_message)
     table.insert(command, 1, "chezmoi")
+    -- FIXME: Use vim.system in nvim 0.10?
     vim.fn.jobstart(command, {
         stderr_buffered = true,
         on_exit = function(_, exit_code, _)
