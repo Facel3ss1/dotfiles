@@ -91,47 +91,28 @@ return {
     },
     {
         "folke/which-key.nvim",
+        version = "*",
         event = "VeryLazy",
         -- TODO: Change icons
         opts = {
-            window = {
-                border = "rounded",
+            preset = "helix",
+            spec = {
+                {
+                    mode = { "n", "v" },
+                    { "<leader>c", group = "code" },
+                    { "<leader>d", group = "debug" },
+                    { "<leader>f", group = "find" },
+                    { "<leader>g", group = "git" },
+                    { "<leader>h", group = "help" },
+                    { "<leader>t", group = "toggle" },
+                    { "<leader>u", group = "ui" },
+                    { "[", group = "prev" },
+                    { "]", group = "next" },
+                    { "g", group = "goto" },
+                    { "z", group = "fold" },
+                },
             },
         },
-        config = function(_, opts)
-            local whichkey = require("which-key")
-
-            -- See https://github.com/folke/which-key.nvim/blob/main/lua/which-key/plugins/presets/init.lua
-            local presets = require("which-key.plugins.presets")
-            presets.operators["v"] = nil
-
-            ---@type table<string, any>
-            local keys = {
-                mode = { "n", "v" },
-
-                g = { name = "goto" },
-                ["]"] = { name = "next" },
-                ["["] = { name = "previous" },
-
-                ["<leader>c"] = { name = "code" },
-                ["<leader>d"] = { name = "debug" },
-                ["<leader>f"] = { name = "find" },
-                ["<leader>g"] = { name = "git" },
-                ["<leader>h"] = { name = "help" },
-                ["<leader>t"] = { name = "toggle" },
-                ["<leader>u"] = { name = "ui" },
-            }
-
-            local ignore_keys =
-                { "<C-r>", "u", "#", "*", "/", "?", "&", "£", "<C-d>", "<C-u>", "n", "N", "<C-l>", "Y" }
-            for _, key in ipairs(ignore_keys) do
-                keys[key] = "which_key_ignore"
-            end
-
-            whichkey.register(keys)
-
-            whichkey.setup(opts)
-        end,
     },
     {
         "akinsho/bufferline.nvim",
@@ -192,7 +173,6 @@ return {
         end,
         opts = {
             input = {
-                insert_only = false,
                 win_options = {
                     winblend = 0,
                 },

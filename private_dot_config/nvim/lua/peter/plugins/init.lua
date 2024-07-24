@@ -6,13 +6,12 @@ return {
         version = "*",
         event = { "BufRead Cargo.toml" },
         opts = {
-            on_attach = function(bufnr)
-                require("cmp").setup.buffer { sources = { { name = "crates" } } }
-
-                vim.keymap.set("n", "K", function()
-                    require("crates").show_popup()
-                end, { desc = "Show crate popup", buffer = bufnr })
-            end,
+            lsp = {
+                enabled = true,
+                actions = true,
+                completion = true,
+                hover = true,
+            },
         },
     },
     -- TODO: typst.nvim or treesitter parser? They were both WIP when I added this

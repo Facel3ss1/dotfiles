@@ -1,7 +1,6 @@
 local util = require("peter.util")
 
 -- Space is the leader key, so remove the default behaviour
--- This will also make which-key show when we press space
 vim.keymap.set("n", "<Space>", "<Nop>")
 
 -- Make j and k take line wrapping into account

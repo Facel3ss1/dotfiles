@@ -24,6 +24,7 @@ return {
         dependencies = "nvim-lua/plenary.nvim",
         config = true,
     },
+    -- TODO: Use mini.diff?
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
