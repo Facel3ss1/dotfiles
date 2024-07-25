@@ -68,6 +68,9 @@ return {
                 vim.lsp.util.jump_to_location(result, "utf-8", false)
             end
 
+            -- Enable inlay hints by default
+            vim.lsp.inlay_hint.enable()
+
             local function on_attach(args)
                 local buf = args.buf
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -97,7 +100,16 @@ return {
                 map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
 
                 map("n", "<leader>th", function()
-                    require("lsp-inlayhints").toggle()
+                    local inlay_hints_enabled = vim.lsp.inlay_hint.is_enabled()
+                    inlay_hints_enabled = not inlay_hints_enabled
+
+                    vim.lsp.inlay_hint.enable(inlay_hints_enabled)
+
+                    if inlay_hints_enabled then
+                        util.info("Enabled inlay hints", { title = "Inlay hints" })
+                    else
+                        util.info("Disabled inlay hints", { title = "Inlay hints" })
+                    end
                 end, { desc = "Toggle inlay hints" })
 
                 -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
@@ -117,8 +129,6 @@ return {
                         })
                     end
                 end
-
-                require("lsp-inlayhints").on_attach(client, buf)
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -303,8 +313,6 @@ return {
             end,
         },
     },
-    -- FIXME: Remove when nvim 0.10 releases
-    { "lvimuser/lsp-inlayhints.nvim", config = true },
     {
         "j-hui/fidget.nvim",
         event = { "LspAttach" },
