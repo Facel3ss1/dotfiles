@@ -75,7 +75,19 @@ vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter s
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
 vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle spell checking" })
 vim.keymap.set("n", "<leader>tf", function() util.toggle_format_on_save() end, { desc = "Toggle format on save" })
-vim.keymap.set("n", "<leader>td", function() util.toggle_diagnostics() end, { desc = "Toggle diagnostics" })
 -- stylua: ignore end
+
+vim.keymap.set("n", "<leader>td", function()
+    local diagnostics_enabled = vim.diagnostic.is_enabled()
+    diagnostics_enabled = not diagnostics_enabled
+
+    vim.diagnostic.enable(diagnostics_enabled)
+
+    if diagnostics_enabled then
+        util.info("Enabled diagnostics", { title = "Diagnostics" })
+    else
+        util.info("Disabled diagnostics", { title = "Diagnostics" })
+    end
+end, { desc = "Toggle diagnostics" })
 
 -- TODO: dd in quickfix list (quickfix reflector)

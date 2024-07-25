@@ -6,6 +6,7 @@ local util = require("peter.util")
 
 require("peter.config.autocommands")
 require("peter.config.options")
+require("peter.config.diagnostics")
 require("peter.config.keymap")
 require("peter.config.chezmoi")
 

@@ -45,9 +45,6 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
         },
-        init = function()
-            require("peter.plugins.lsp.diagnostics")
-        end,
         config = function()
             -- Add a rounded border to docs hovers
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })

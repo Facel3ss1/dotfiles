@@ -32,19 +32,6 @@ function M.toggle(option)
     end
 end
 
-local diagnostics_enabled = true
-function M.toggle_diagnostics()
-    diagnostics_enabled = not diagnostics_enabled
-
-    if diagnostics_enabled then
-        vim.diagnostic.enable()
-        M.info("Enabled diagnostics", { title = "Diagnostics" })
-    else
-        vim.diagnostic.disable()
-        M.info("Disabled diagnostics", { title = "Diagnostics" })
-    end
-end
-
 M.disable_format_on_save = false
 function M.toggle_format_on_save()
     M.disable_format_on_save = not M.disable_format_on_save
