@@ -33,6 +33,8 @@ local lsp_settings = {
     },
 }
 
+local enable_format_on_save = true
+
 return {
     -- TODO: lsp_signature.nvim?
     {
@@ -286,6 +288,20 @@ return {
                 desc = "Format range",
                 mode = { "v" },
             },
+            {
+                "<leader>tf",
+                function()
+                    enable_format_on_save = not enable_format_on_save
+
+                    if enable_format_on_save then
+                        util.info("Enabled format on save", { title = "Formatting" })
+                    else
+                        util.info("Disabled format on save", { title = "Formatting" })
+                    end
+                end,
+                desc = "Toggle format on save",
+                mode = { "n" },
+            },
         },
         opts = {
             formatters_by_ft = {
@@ -298,7 +314,7 @@ return {
                 python = { "isort", "black" },
             },
             format_on_save = function(_buf)
-                if util.disable_format_on_save then
+                if not enable_format_on_save then
                     return
                 end
 
