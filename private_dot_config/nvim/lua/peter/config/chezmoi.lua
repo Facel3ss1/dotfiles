@@ -7,24 +7,15 @@ M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 -- TODO: Keymap to jump to target path file
 -- TODO: Use vim.filetype.add() to register filetypes
 
-local function chezmoi_command(command, success_message)
-    table.insert(command, 1, "chezmoi")
-    -- FIXME: Use vim.system in nvim 0.10?
-    vim.fn.jobstart(command, {
-        stderr_buffered = true,
-        on_exit = function(_, exit_code, _)
-            if exit_code == 0 then
-                util.info(success_message, { title = "chezmoi" })
-            end
-        end,
-        on_stderr = function(_, lines, _)
-            -- The last line is always an empty string, remove it
-            table.remove(lines)
-            if #lines > 0 then
-                util.warn(table.concat(lines, "\n"), { title = "chezmoi" })
-            end
-        end,
-    })
+local function chezmoi(args, success_message)
+    vim.system({ "chezmoi", unpack(args) }, { text = true }, function(out)
+        if out.code == 0 then
+            util.info(success_message, { title = "chezmoi" })
+        else
+            -- Trim trailing \n from stderr
+            util.warn(out.stderr:gsub("%s+$", ""), { title = "chezmoi" })
+        end
+    end)
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -45,20 +36,20 @@ vim.api.nvim_create_autocmd("BufWritePost", {
         end
 
         local relative_path = vim.fn.expand("%")
-        chezmoi_command({ "apply", "--source-path", relative_path }, "chezmoi apply: " .. relative_path)
+        chezmoi({ "apply", "--source-path", relative_path }, "chezmoi apply: " .. relative_path)
     end,
     desc = "Run chezmoi apply",
 })
 
+-- FIXME: lazy-lock.json doesn't get updated when I remove plugins
 -- This only works in WSL, and I primarily change the config in WSL anyway
 if not util.has("win32") then
     vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("ChezmoiAddLazyLock", { clear = true }),
         pattern = "LazyUpdate",
         callback = function()
-            -- TODO: Make a git commit?
-            local lockfile = vim.fs.normalize(vim.fn.stdpath("config")) .. "/lazy-lock.json"
-            chezmoi_command({ "add", lockfile }, "chezmoi add: lazy-lock.json")
+            local lockfile = vim.fs.normalize(vim.fn.stdpath("config") .. "/lazy-lock.json")
+            chezmoi({ "add", lockfile }, "chezmoi add: lazy-lock.json")
         end,
         desc = "Run chezmoi add lazy-lock.json",
     })
