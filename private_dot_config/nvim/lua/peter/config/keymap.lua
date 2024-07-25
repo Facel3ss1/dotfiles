@@ -36,18 +36,6 @@ vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
--- FIXME: Remove when nvim 0.10 is released
--- See https://github.com/neovim/neovim/pull/22048
--- @ in visual mode
--- https://github.com/stoeffel/.dotfiles/blob/master/vim/visual-at.vim
-vim.cmd([[
-    function! ExecuteMacroOverVisualRange()
-        echo "@".getcmdline()
-        execute ":'<,'>normal @".nr2char(getchar())
-    endfunction
-]])
-vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
-
 -- Snippet jumping
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
     if vim.snippet.active { direction = 1 } then
