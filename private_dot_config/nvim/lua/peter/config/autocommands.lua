@@ -111,6 +111,15 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Change formatoptions: +rjq -o",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("HelpConcealLevel", { clear = true }),
+    pattern = "help",
+    callback = function()
+        vim.wo.conceallevel = 0
+    end,
+    desc = "Set conceallevel = 0",
+})
+
 vim.api.nvim_create_autocmd("TermOpen", {
     group = vim.api.nvim_create_augroup("SetTerminalOptions", { clear = true }),
     callback = function()
