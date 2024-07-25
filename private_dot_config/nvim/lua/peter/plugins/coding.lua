@@ -157,23 +157,4 @@ return {
             vim.g.camelcasemotion_key = [[\]]
         end,
     },
-    -- FIXME: Remove once nvim 0.10 releases
-    {
-        "chrishrb/gx.nvim",
-        keys = {
-            { "gx", "<cmd>Browse<cr>", mode = { "n", "x" }, desc = "Open link in browser" },
-        },
-        cmd = { "Browse" },
-        opts = function()
-            local opts = {}
-
-            if require("peter.util").has("wsl") then
-                opts.open_browser_app = "powershell.exe"
-                opts.open_browser_args = { "start", "explorer.exe" }
-            end
-
-            return opts
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
 }
