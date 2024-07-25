@@ -10,7 +10,8 @@ vim.o.number = true -- ...and show the current line number
 -- Wrapping
 vim.o.wrap = false -- Turn off line wrapping. However, if we do wrap...
 vim.o.breakindent = true -- ...preserve indentation...
-vim.o.linebreak = true -- ...and prevent words from splitting into two
+vim.o.linebreak = true -- ...prevent words from splitting into two...
+vim.o.smoothscroll = true --  ...and scroll using screen lines
 
 vim.o.scrolloff = 10 -- There will be 10 lines above and below my cursor when scrolling
 vim.o.sidescrolloff = 5 -- 5 columns to the side of my cursor when horizontally scrolling
