@@ -87,7 +87,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- TODO: Quit certain filetypes when I press q
 
--- TODO: Move to Comment.nvim?
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetCommentString", { clear = true }),
     pattern = "gitconfig",
