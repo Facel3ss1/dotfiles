@@ -73,7 +73,6 @@ vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter s
 
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
-vim.keymap.set("n", "<leader>ts", function() util.toggle("spell") end, { desc = "Toggle spell checking" })
 -- stylua: ignore end
 
 vim.keymap.set("n", "<leader>td", function()

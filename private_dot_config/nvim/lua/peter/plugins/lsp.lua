@@ -29,11 +29,12 @@ local lsp_settings = {
         },
     },
     ["typos_lsp"] = {
-        diagnosticSeverity = "Warning",
+        diagnosticSeverity = "Hint",
     },
 }
 
 local enable_format_on_save = true
+local enable_typos_lsp_diagnostics = true
 
 return {
     -- TODO: lsp_signature.nvim?
@@ -42,6 +43,32 @@ return {
         -- FIXME: Make it work when I :e myfile
         event = "BufReadPre",
         cmd = { "LspInfo" },
+        keys = {
+            {
+                "<leader>ts",
+                function()
+                    enable_typos_lsp_diagnostics = not enable_typos_lsp_diagnostics
+
+                    if enable_typos_lsp_diagnostics then
+                        util.info("Enabled spell checking", { title = "typos" })
+                    else
+                        util.info("Disabled spell checking", { title = "typos" })
+                    end
+
+                    local clients = vim.lsp.get_clients { name = "typos_lsp" }
+                    if #clients ~= 1 then
+                        return
+                    end
+
+                    local typos_client = clients[1]
+                    local typos_ns = vim.lsp.diagnostic.get_namespace(typos_client.id)
+
+                    vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
+                end,
+                desc = "Toggle typos spell checking",
+                mode = { "n" },
+            },
+        },
         dependencies = {
             "mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -126,6 +153,12 @@ return {
                             desc = "Call vim.lsp.codelens.refresh()",
                         })
                     end
+                end
+
+                -- Set initial state of typos-lsp diagnostics
+                if client.name == "typos_lsp" then
+                    local typos_ns = vim.lsp.diagnostic.get_namespace(client.id)
+                    vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
                 end
             end
 
