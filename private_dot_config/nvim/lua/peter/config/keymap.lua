@@ -48,6 +48,29 @@ vim.cmd([[
 ]])
 vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
 
+-- Snippet jumping
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
+    if vim.snippet.active { direction = 1 } then
+        vim.schedule(function()
+            vim.snippet.jump(1)
+        end)
+        return
+    end
+
+    return "<Tab>"
+end, { expr = true, silent = true })
+
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+    if vim.snippet.active { direction = -1 } then
+        vim.schedule(function()
+            vim.snippet.jump(-1)
+        end)
+        return
+    end
+
+    return "<S-Tab>"
+end, { expr = true, silent = true })
+
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 vim.keymap.set("n", "<leader>uc", function()

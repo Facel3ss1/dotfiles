@@ -23,13 +23,12 @@ return {
                 },
                 sources = cmp.config.sources {
                     { name = "nvim_lsp" },
-                    { name = "luasnip" },
                     { name = "path" },
                     { name = "buffer" },
                 },
                 snippet = {
                     expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
+                        vim.snippet.expand(args.body)
                     end,
                 },
                 formatting = {
@@ -39,7 +38,6 @@ return {
                             buffer = "[buf]",
                             nvim_lsp = "[lsp]",
                             path = "[path]",
-                            luasnip = "[snip]",
                             cmdline = "[cmd]",
                             cmdline_history = "[hist]",
                         },
@@ -85,47 +83,10 @@ return {
         dependencies = {
             "onsails/lspkind.nvim",
             "hrsh7th/cmp-nvim-lsp",
-            "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-cmdline",
             "dmitmel/cmp-cmdline-history",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-        },
-    },
-    -- FIXME: Replace with vim.snippet when nvim 0.10 releases?
-    {
-        "L3MON4D3/LuaSnip",
-        version = "*",
-        keys = {
-            {
-                "<Tab>",
-                function()
-                    return require("luasnip").expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>"
-                end,
-                mode = { "i", "s" },
-                silent = true,
-                expr = true,
-            },
-            {
-                "<S-Tab>",
-                function()
-                    return require("luasnip").jumpable(-1) and "<Cmd>lua require('luasnip').jump(-1)<CR>" or "<S-Tab>"
-                end,
-                mode = { "i", "s" },
-                silent = true,
-                expr = true,
-            },
-        },
-        opts = {
-            history = true,
-            region_check_events = "InsertEnter",
-            delete_check_events = "TextChanged,InsertLeave",
-        },
-        dependencies = {
-            "rafamadriz/friendly-snippets",
-            config = function()
-                require("luasnip.loaders.from_vscode").lazy_load()
-            end,
         },
     },
     {
