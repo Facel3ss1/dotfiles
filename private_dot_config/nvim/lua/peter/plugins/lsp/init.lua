@@ -60,8 +60,7 @@ return {
                     return
                 end
 
-                -- FIXME: Use vim.islist() in nvim 0.10
-                if vim.tbl_islist(result) then
+                if vim.islist(result) then
                     result = result[1]
                 end
 
@@ -74,16 +73,16 @@ return {
             local function on_attach(args)
                 local buf = args.buf
                 local client = vim.lsp.get_client_by_id(args.data.client_id)
+                if client == nil then
+                    util.error("[LSP] Could not find client with id " .. args.data.client_id, { title = "LSP" })
+                    return
+                end
 
                 local function map(mode, lhs, rhs, opts)
                     opts.buffer = buf
                     vim.keymap.set(mode, lhs, rhs, opts)
                 end
 
-                -- FIXME: nvim 0.10 maps K to hover by default
-                if client.server_capabilities.hoverProvider then
-                    map("n", "K", vim.lsp.buf.hover, { desc = "View docs under cursor" })
-                end
                 -- TODO: Add floating border to this
                 -- map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
