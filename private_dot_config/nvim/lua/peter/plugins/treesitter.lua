@@ -13,9 +13,8 @@ return {
         cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
         opts = function()
             return {
+                -- See :h treesitter-parsers and :TSInstallInfo to see the parsers that are built in to Neovim.
                 ensure_installed = {
-                    "bash",
-                    "c",
                     "c_sharp",
                     "cmake",
                     "comment",
@@ -31,21 +30,14 @@ return {
                     "json",
                     "jsonc",
                     "latex",
-                    "lua",
                     "make",
-                    "markdown",
-                    "markdown_inline",
                     "meson",
                     "ninja",
-                    "python",
-                    "query",
                     "regex",
                     "rust",
                     "toml",
                     "tsx",
                     "typescript",
-                    "vim",
-                    "vimdoc",
                     "yaml",
                 },
                 sync_install = false,
