@@ -28,12 +28,6 @@ return {
                             error = icons.diagnostics.ERROR .. " ",
                         },
                     },
-                    {
-                        "filetype",
-                        padding = { left = 1, right = 0 },
-                        icon_only = true,
-                        separator = "",
-                    },
                     { "filename", path = 1 },
                 },
                 lualine_x = {
@@ -69,7 +63,7 @@ return {
                             return vim.bo.buftype ~= "terminal"
                         end,
                     },
-                    { "filetype", icons_enabled = false },
+                    "filetype",
                 },
                 lualine_y = { "progress" },
                 lualine_z = { "location" },
