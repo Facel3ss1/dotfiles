@@ -189,22 +189,6 @@ return {
                         init_options = lsp_settings[server_name],
                     }
                 end,
-                ["lua_ls"] = function(server_name)
-                    require("neodev").setup {
-                        -- TODO: Use neoconf instead?
-                        -- TODO: Enable in .nvim.lua files?
-                        override = function(root_dir, library)
-                            -- Add vim plugins and api to path if we are in the chezmoi config directory
-                            local config_dir = require("peter.config.chezmoi").source_dir .. "/private_dot_config/nvim"
-                            if root_dir == config_dir then
-                                library.enabled = true
-                                library.plugins = true
-                            end
-                        end,
-                    }
-
-                    default_handler(server_name)
-                end,
                 -- rustaceanvim sets up rust-analyzer for us
                 ["rust_analyzer"] = function() end,
                 ["tsserver"] = function(server_name)
@@ -382,8 +366,18 @@ return {
             },
         },
     },
-    -- FIXME: Replace with lazydev.nvim?
-    { "folke/neodev.nvim" },
+    -- FIXME: The nvim-cmp source for require() module names doesn't seem to work
+    {
+        "folke/lazydev.nvim",
+        version = "*",
+        ft = { "lua" },
+        opts = {
+            library = {
+                { path = "luvit-meta/library", words = { "vim%.uv" } },
+            },
+        },
+    },
+    { "Bilal2453/luvit-meta" },
     {
         "mrcjkb/rustaceanvim",
         version = "*",
