@@ -1,5 +1,8 @@
+-- TODO: glow.nvim
+
+---@module "lazy"
+---@type LazySpec
 return {
-    -- TODO: glow.nvim
     { "dstein64/vim-startuptime", cmd = "StartupTime" },
     {
         "saecki/crates.nvim",

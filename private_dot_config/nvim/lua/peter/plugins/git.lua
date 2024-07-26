@@ -1,6 +1,9 @@
 local icons = require("peter.util.icons")
 
--- TODO: git-conflict.nvim?
+-- TODO: diffconflicts?
+
+---@module "lazy"
+---@type LazySpec
 return {
     -- TODO: Would ]c etc. be possible?
     {

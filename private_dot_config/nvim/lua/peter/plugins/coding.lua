@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
     -- TODO: vim-matchup
     -- TODO: vim-splitjoin, or treesj

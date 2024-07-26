@@ -36,8 +36,11 @@ local lsp_settings = {
 local enable_format_on_save = true
 local enable_typos_lsp_diagnostics = true
 
+-- TODO: lsp_signature.nvim?
+
+---@module "lazy"
+---@type LazySpec
 return {
-    -- TODO: lsp_signature.nvim?
     {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile

@@ -1,6 +1,9 @@
 local util = require("peter.util")
 
 -- TODO: Change horizontal split to <C-s>
+
+---@module "lazy"
+---@type LazySpec
 return {
     {
         "nvim-telescope/telescope.nvim",

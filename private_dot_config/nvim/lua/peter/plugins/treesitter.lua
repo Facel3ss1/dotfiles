@@ -1,10 +1,13 @@
 local util = require("peter.util")
 
+-- TODO: neogen
+-- TODO: nvim-ts-context-commentstring with lua help comments?
+-- TODO: nvim-ts-autotag
+-- TODO: "in comment" e.g. gqic for formatting (nvim-ts-textobjects)
+
+---@module "lazy"
+---@type LazySpec
 return {
-    -- TODO: neogen
-    -- TODO: nvim-ts-context-commentstring with lua help comments?
-    -- TODO: nvim-ts-autotag
-    -- TODO: "in comment" e.g. gqic for formatting (nvim-ts-textobjects)
     {
         "nvim-treesitter/nvim-treesitter",
         version = "*",

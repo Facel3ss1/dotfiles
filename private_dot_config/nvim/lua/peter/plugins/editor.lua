@@ -1,3 +1,5 @@
+---@module "lazy"
+---@type LazySpec
 return {
     { "tpope/vim-abolish", event = "VeryLazy" },
     {
@@ -40,6 +42,7 @@ return {
             highlight = {
                 keyword = "fg",
                 after = "",
+                -- FIXME: This GitHub issue has been closed
                 -- This matches a todo with an author in brackets, as well as a todo on its own without a colon
                 -- See https://github.com/folke/todo-comments.nvim/issues/10
                 pattern = [=[.*<(KEYWORDS)(\([^\)]*\))?(:|$)]=],

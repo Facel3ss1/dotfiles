@@ -1,9 +1,12 @@
 local icons = require("peter.util.icons")
 
+-- TODO: Add on_click telescope prompts
+-- TODO: Add attached LSP
+-- TODO: Add git blame to bottom right
+
+---@module "lazy"
+---@type LazySpec
 return {
-    -- TODO: Add on_click telescope prompts
-    -- TODO: Add attached LSP
-    -- TODO: Add git blame to bottom right
     {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",

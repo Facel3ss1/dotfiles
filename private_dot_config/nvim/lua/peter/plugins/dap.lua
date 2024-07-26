@@ -5,6 +5,9 @@ local util = require("peter.util")
 -- TODO: mason-nvim-dap?
 -- TODO: telescope-dap
 -- TODO: one-small-step-for-vimkind
+
+---@module "lazy"
+---@type LazySpec
 return {
     {
         "mfussenegger/nvim-dap",

@@ -25,6 +25,8 @@ local function blend(foreground, background, alpha)
     return rgb_to_hex { blend_channel(1), blend_channel(2), blend_channel(3) }
 end
 
+---@module "lazy"
+---@type LazySpec
 return {
     {
         "Shatur/neovim-ayu",
