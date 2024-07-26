@@ -107,6 +107,10 @@ return {
                     return
                 end
 
+                ---@param mode string|string[]
+                ---@param lhs string
+                ---@param rhs string|function
+                ---@param opts vim.keymap.set.Opts?
                 local function map(mode, lhs, rhs, opts)
                     opts.buffer = buf
                     vim.keymap.set(mode, lhs, rhs, opts)
@@ -240,7 +244,6 @@ return {
                             comparators = {
                                 cmp.config.compare.offset,
                                 cmp.config.compare.exact,
-                                ---@diagnostic disable-next-line: assign-type-mismatch
                                 cmp.config.compare.recently_used,
                                 require("clangd_extensions.cmp_scores"),
                                 cmp.config.compare.kind,
@@ -248,6 +251,7 @@ return {
                                 cmp.config.compare.length,
                                 cmp.config.compare.order,
                             },
+                            priority_weight = 1,
                         },
                     })
                 end,

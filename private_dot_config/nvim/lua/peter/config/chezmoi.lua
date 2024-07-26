@@ -7,6 +7,8 @@ M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 -- TODO: Keymap to jump to target path file
 -- TODO: Use vim.filetype.add() to register filetypes
 
+---@param args string[]
+---@param success_message string
 local function chezmoi(args, success_message)
     vim.system({ "chezmoi", unpack(args) }, { text = true }, function(out)
         if out.code == 0 then

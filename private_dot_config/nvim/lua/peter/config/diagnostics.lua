@@ -7,10 +7,14 @@ local icon_mapping = {
     [vim.diagnostic.severity.HINT] = icons.diagnostics.HINT,
 }
 
+---@param diagnostic vim.Diagnostic
+---@return string
 local function icon_prefix(diagnostic)
     return icon_mapping[diagnostic.severity] .. " "
 end
 
+---@param diagnostic vim.Diagnostic
+---@return string
 local function error_code_suffix(diagnostic)
     if not diagnostic.code then
         return string.format(" %s", diagnostic.source)
