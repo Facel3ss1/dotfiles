@@ -12,7 +12,7 @@ return {
                 function()
                     local opts = {}
                     local builtin = "find_files"
-                    if vim.loop.fs_stat(vim.loop.cwd() .. "/.git") then
+                    if vim.uv.fs_stat(vim.uv.cwd() .. "/.git") then
                         opts.show_untracked = true
                         -- FIXME: Don't show deleted files?
                         builtin = "git_files"
