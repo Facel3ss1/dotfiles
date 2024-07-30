@@ -5,28 +5,6 @@ local icons = require("peter.util.icons")
 ---@module "lazy"
 ---@type LazySpec
 return {
-    -- TODO: Would ]c etc. be possible?
-    {
-        "NeogitOrg/neogit",
-        cmd = "Neogit",
-        keys = {
-            { "<leader>gs", "<Cmd>Neogit<CR>", desc = "Open Neogit status" },
-            { "<leader>gc", "<Cmd>Neogit commit<CR>", desc = "Commit" },
-        },
-        opts = {
-            disable_builtin_notifications = true,
-            signs = {
-                section = { icons.ui.collapsed, icons.ui.expanded },
-                item = { icons.ui.collapsed, icons.ui.expanded },
-            },
-            remember_settings = false,
-            integrations = {
-                diffview = true,
-            },
-        },
-        dependencies = "nvim-lua/plenary.nvim",
-        config = true,
-    },
     -- TODO: Use mini.diff?
     {
         "lewis6991/gitsigns.nvim",

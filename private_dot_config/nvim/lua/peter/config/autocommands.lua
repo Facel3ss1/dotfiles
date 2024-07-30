@@ -78,7 +78,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("GitCommitColorcolumn", { clear = true }),
-    pattern = { "gitcommit", "NeogitCommitMessage" },
+    pattern = "gitcommit",
     callback = function()
         vim.wo.colorcolumn = "50,72"
     end,
