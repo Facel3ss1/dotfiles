@@ -158,7 +158,7 @@ return {
                             group = codelens_group,
                             buffer = args.buf,
                             callback = function()
-                                vim.lsp.codelens.refresh()
+                                vim.lsp.codelens.refresh { bufnr = args.buf }
                             end,
                             desc = "Call vim.lsp.codelens.refresh()",
                         })
