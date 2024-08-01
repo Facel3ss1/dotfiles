@@ -27,6 +27,7 @@ vim.o.autoindent = true -- Continue indentation from previous line
 vim.o.smartindent = true -- Smartly add indentation when starting new line
 
 vim.o.ignorecase = true -- Searching is case-insensitive by default. Use \C to make it case-sensitive
+vim.o.smartcase = true -- But, if the search contains uppercase characters, make it case-sensitive
 
 vim.o.undofile = true -- Save/Restore undo history to the undo directory when I save/load a file
 -- FIXME: Change backupdir
@@ -48,7 +49,7 @@ vim.o.virtualedit = "block" -- Let me move to non-existent characters with <C-v>
 
 vim.o.splitright = true -- Split windows to the right...
 vim.o.splitbelow = true -- ...and downwards
-vim.o.splitkeep = "screen" -- Don't move text when splitting
+vim.o.splitkeep = "topline" -- Don't move text when splitting
 
 -- Use powershell on Windows (see :h shell-powershell)
 if util.has("win32") then
@@ -65,5 +66,3 @@ end
 vim.o.keywordprg = ":help" -- Check internal help when using K
 
 vim.o.exrc = true -- Run .exrc, .nvimrc and .nvim.lua files in the current directory (See :h trust)
-
--- vim.o.guifont = "JetBrainsMono NF:h10"
