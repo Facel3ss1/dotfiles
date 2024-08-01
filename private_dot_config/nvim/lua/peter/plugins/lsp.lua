@@ -273,6 +273,8 @@ return {
                     package_pending = icons.packages.pending,
                     package_uninstalled = icons.packages.uninstalled,
                 },
+                width = 0.8,
+                height = 0.8,
             },
         },
         config = function(_, opts)
