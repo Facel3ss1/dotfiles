@@ -114,19 +114,22 @@ return {
         "akinsho/bufferline.nvim",
         version = "*",
         event = "VeryLazy",
-        opts = {
-            options = {
-                mode = "tabs",
-                always_show_bufferline = false,
-                separator_style = "thick",
-                buffer_close_icon = icons.ui.close,
-                close_icon = icons.ui.close_box,
-                modified_icon = icons.ui.dot,
-                indicator = {
-                    style = "none",
+        opts = function()
+            return {
+                options = {
+                    mode = "tabs",
+                    always_show_bufferline = false,
+                    separator_style = "thick",
+                    buffer_close_icon = icons.ui.close,
+                    close_icon = icons.ui.close_box,
+                    modified_icon = icons.ui.dot,
+                    indicator = {
+                        style = "none",
+                    },
                 },
-            },
-        },
+                highlights = require("catppuccin.groups.integrations.bufferline").get(),
+            }
+        end,
         dependencies = "nvim-tree/nvim-web-devicons",
     },
     {

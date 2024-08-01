@@ -359,6 +359,11 @@ return {
                     done_icon = icons.ui.done,
                 },
             },
+            notification = {
+                window = {
+                    winblend = 0,
+                },
+            },
         },
     },
     {

@@ -53,7 +53,7 @@ require("lazy").setup("peter.plugins", {
     },
     change_detection = { notify = false },
     install = {
-        colorscheme = { "ayu-mirage", "habamax" },
+        colorscheme = { "catppuccin", "default" },
     },
     performance = {
         rtp = {
