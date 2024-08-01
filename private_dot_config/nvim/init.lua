@@ -1,6 +1,6 @@
 -- Map the leaders first so that mappings from now on are set correctly
-vim.g.mapleader = " " -- <Space>
-vim.g.maplocalleader = "  " -- <Space><Space>
+vim.g.mapleader = vim.keycode("<Space>")
+vim.g.maplocalleader = vim.keycode("<Space><Space>")
 
 local util = require("peter.util")
 
