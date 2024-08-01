@@ -135,6 +135,7 @@ return {
     {
         "rcarriga/nvim-notify",
         version = "*",
+        lazy = false,
         keys = {
             {
                 "<leader>un",
@@ -157,6 +158,7 @@ return {
     },
     {
         "stevearc/dressing.nvim",
+        lazy = false,
         init = function()
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.ui.select = function(...)

@@ -393,7 +393,7 @@ return {
     {
         "mrcjkb/rustaceanvim",
         version = "*",
-        ft = { "rust" },
+        lazy = false, -- This plugin is already lazy
         opts = {
             server = {
                 settings = lsp_settings["rust_analyzer"],
@@ -411,7 +411,7 @@ return {
     {
         "mrcjkb/haskell-tools.nvim",
         version = "*",
-        ft = { "haskell", "lhaskell", "cabal", "cabalproject " },
+        lazy = false, -- This plugin is already lazy
         config = function(_, opts)
             vim.g.haskell_tools = vim.tbl_deep_extend("force", {}, opts or {})
         end,
