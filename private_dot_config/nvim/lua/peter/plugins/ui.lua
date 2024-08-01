@@ -2,11 +2,122 @@ local icons = require("peter.util.icons")
 
 -- TODO: Add on_click telescope prompts
 -- TODO: Add attached LSP
--- TODO: Add git blame to bottom right
+-- TODO: blamer.nvim?
 
 ---@module "lazy"
 ---@type LazySpec
 return {
+    {
+        "echasnovski/mini.starter",
+        version = "*",
+        event = "VimEnter",
+        opts = function()
+            local starter = require("mini.starter")
+
+            ---@param content any
+            ---@param buf integer
+            ---@return any
+            local function autocommands_hook(content, buf)
+                local refresh_group = vim.api.nvim_create_augroup("RefreshMiniStarter", { clear = true })
+
+                -- Refresh every time lazy loads a plugin
+                vim.api.nvim_create_autocmd("User", {
+                    group = refresh_group,
+                    pattern = "LazyLoad",
+                    callback = function()
+                        starter.refresh(buf)
+                    end,
+                    desc = "Refresh mini.starter",
+                })
+
+                -- Refresh 0.5s after startup to catch any plugin updates
+                vim.api.nvim_create_autocmd("User", {
+                    group = refresh_group,
+                    pattern = "VeryLazy",
+                    callback = function()
+                        vim.defer_fn(function()
+                            starter.refresh(buf)
+                        end, 500)
+                    end,
+                    desc = "Refresh mini.starter after 0.5s",
+                })
+
+                -- Ensure that starter window is centered when it is focused
+                vim.api.nvim_create_autocmd("BufEnter", {
+                    group = refresh_group,
+                    buffer = buf,
+                    callback = function()
+                        starter.refresh(buf)
+                    end,
+                    desc = "Refresh mini.starter",
+                })
+
+                return content
+            end
+
+            return {
+                silent = true,
+                items = {
+                    starter.sections.recent_files(5, false),
+                    {
+                        { name = "Lazy", action = "Lazy", section = "Actions" },
+                        { name = "Mason", action = "Mason", section = "Actions" },
+                        { name = "Edit new buffer", action = "enew", section = "Actions" },
+                        { name = "Quit Neovim", action = "qall", section = "Actions" },
+                    },
+                },
+                content_hooks = {
+                    starter.gen_hook.adding_bullet(),
+                    starter.gen_hook.aligning("center", "center"),
+                    autocommands_hook,
+                },
+                header = function()
+                    local ascii_art_lines = {
+                        [[            _           ]],
+                        [[ _ ____   _(_)_ __ ___  ]],
+                        [[| '_ \ \ / / | '_ ` _ \ ]],
+                        [[| | | \ V /| | | | | | |]],
+                        [[|_| |_|\_/ |_|_| |_| |_|]],
+                    }
+
+                    return vim.iter(ascii_art_lines):join("\n")
+                end,
+                footer = function()
+                    ---@type vim.Version
+                    local vim_version = vim.version()
+                    -- Only show commit hash in prerelease builds
+                    if not vim_version.prerelease then
+                        vim_version.build = nil
+                    end
+                    local vim_version_string = string.format("nvim v%s", tostring(vim_version))
+
+                    local lazy_stats = require("lazy").stats()
+                    local plugins_string = string.format("%d/%d plugins loaded", lazy_stats.loaded, lazy_stats.count)
+
+                    local lazy_status = require("lazy.status")
+                    if lazy_status.has_updates() then
+                        -- Extract the number of updates from the lazy statusline string
+                        local num_updates_string = lazy_status.updates():gsub(".+(%d+)$", "%1")
+                        local num_updates = tonumber(num_updates_string)
+
+                        if num_updates > 0 then
+                            local updates_pluralised = num_updates > 1 and "updates" or "update"
+                            plugins_string =
+                                string.format("%s, %d %s available", plugins_string, num_updates, updates_pluralised)
+                        end
+                    end
+
+                    local footer_lines = {
+                        plugins_string,
+                        "",
+                        vim_version_string,
+                    }
+
+                    return vim.iter(footer_lines):join("\n")
+                end,
+            }
+        end,
+    },
     {
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",

@@ -50,6 +50,7 @@ require("lazy").setup("peter.plugins", {
     defaults = { lazy = true },
     checker = {
         enabled = not util.has("win32"),
+        notify = false,
     },
     change_detection = { notify = false },
     install = {
