@@ -11,6 +11,9 @@ local lsp_settings = {
             diagnostics = {
                 libraryFiles = "Disable",
                 unusedLocalExclude = { "_*" },
+                groupSeverity = {
+                    ["unused"] = "Warning",
+                },
             },
             format = {
                 enable = false,
