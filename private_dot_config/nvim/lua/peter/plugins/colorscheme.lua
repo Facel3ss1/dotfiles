@@ -31,7 +31,15 @@ return {
                     enabled = true,
                 },
                 native_lsp = {
-                    enabled = false,
+                    enabled = true,
+                    virtual_text = {},
+                    underlines = {
+                        errors = { "undercurl" },
+                        warnings = { "undercurl" },
+                        information = { "undercurl" },
+                        hints = { "underline" },
+                        ok = { "underline" },
+                    },
                     inlay_hints = {
                         background = false,
                     },
