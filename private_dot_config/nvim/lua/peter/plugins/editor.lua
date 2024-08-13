@@ -18,7 +18,7 @@ return {
     -- TODO: Respect cwd in terminal buffers
     {
         "stevearc/oil.nvim",
-        lazy = false,
+        lazy = false, -- Load at startup so oil opens whenever nvim opens a directory
         -- stylua: ignore
         keys = {
             { "-", function() require("oil").open() end, desc = "Open parent directory" },
