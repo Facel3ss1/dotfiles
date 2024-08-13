@@ -53,39 +53,4 @@ return {
             end,
         },
     },
-    {
-        "sindrets/diffview.nvim",
-        cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-        keys = {
-            { "<leader>gd", "<Cmd>DiffviewOpen<CR>", desc = "Open diff view" },
-            { "<leader>gh", "<Cmd>DiffviewFileHistory %<CR>", desc = "Open file history" },
-            { "<leader>gh", ":DiffviewFileHistory %<CR>", mode = "x", silent = true, desc = "Open history for range" },
-            { "<leader>gH", "<Cmd>DiffviewFileHistory<CR>", desc = "Open commit history" },
-        },
-        opts = {
-            enhanced_diff_hl = true,
-            signs = {
-                done = icons.ui.done,
-            },
-            -- TODO
-            keymaps = {
-                file_panel = {
-                    ["q"] = "<Cmd>DiffviewClose<CR>",
-                },
-                file_history_panel = {
-                    ["q"] = "<Cmd>DiffviewClose<CR>",
-                },
-                view = {
-                    ["q"] = "<Cmd>DiffviewClose<CR>",
-                },
-            },
-            -- TODO
-            -- view = {
-            --     merge_tool = {
-            --         layout = "diff4_mixed",
-            --     },
-            -- },
-        },
-        dependencies = "nvim-lua/plenary.nvim",
-    },
 }

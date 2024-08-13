@@ -72,9 +72,6 @@ require("lazy").setup("peter.plugins", {
         border = "rounded",
         backdrop = 100,
     },
-    diff = {
-        cmd = "diffview.nvim",
-    },
 })
 
 -- TODO: health check for my config

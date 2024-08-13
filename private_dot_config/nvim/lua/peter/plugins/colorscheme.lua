@@ -20,7 +20,6 @@ return {
                 cmp = true,
                 dap = true,
                 dap_ui = true,
-                diffview = true,
                 fidget = true,
                 gitsigns = true,
                 indent_blankline = {
