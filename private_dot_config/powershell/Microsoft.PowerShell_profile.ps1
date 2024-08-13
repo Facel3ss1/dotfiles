@@ -1,4 +1,3 @@
-# TODO: Add ls aliases (using eza)
 New-Alias which Get-Command
 
 if (Get-Command starship -ErrorAction SilentlyContinue) {
@@ -9,6 +8,37 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Remove-Alias cd
     New-Alias cd z
     Invoke-Expression (& { (zoxide init powershell --hook prompt | Out-String) })
+}
+
+if (Get-Command eza -ErrorAction SilentlyContinue) {
+    Remove-Alias ls
+
+    <#
+    Unlike other shells, you cannot create PowerShell aliases for commands with
+    multiple parameters:
+
+    ```powershell
+    New-Alias ls eza # Does work
+    New-Alias la "eza -la" # Does not work
+    ```
+
+    'Aliases' in PowerShell are literally that: another name for a command or
+    function. So, for each alias that runs a command with multiple parameters,
+    we have to create a new function that runs the command we want.
+
+    Each function uses the call operator (`&`) and the `$args` variable to
+    ensure that any extra parameters (e.g. the directory, or flags) get passed
+    through correctly.
+    #>
+    New-Alias ls eza
+    function Eza-La { & eza -la --git $args }
+    New-Alias la Eza-La
+    function Eza-Ll { & eza -l --git $args }
+    New-Alias ll Eza-Ll
+    function Eza-Lat { & eza -la --git --tree $args }
+    New-Alias lat Eza-Lat
+    function Eza-Llt { & eza -l --git --tree $args }
+    New-Alias llt Eza-Llt
 }
 
 if (Get-Command lazygit -ErrorAction SilentlyContinue) {
