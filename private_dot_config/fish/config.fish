@@ -56,6 +56,10 @@ if status is-interactive
         abbr --add --global la 'ls -lA --color=auto'
         abbr --add --global ll 'ls -l --color=auto'
     end
+
+    if type -q lazygit
+        abbr --add --global lg lazygit
+    end
 end
 
 if type -q starship
