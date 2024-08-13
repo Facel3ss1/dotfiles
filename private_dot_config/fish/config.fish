@@ -46,11 +46,11 @@ if status is-interactive
     end
 
     if type -q eza
-        abbr --add --global ls eza
-        abbr --add --global la 'eza -la --git'
-        abbr --add --global ll 'eza -l --git'
-        abbr --add --global lat 'eza -la --git --tree'
-        abbr --add --global llt 'eza -l --git --tree'
+        abbr --add --global ls 'eza --icons'
+        abbr --add --global la 'eza -la --git --icons'
+        abbr --add --global ll 'eza -l --git --icons'
+        abbr --add --global lat 'eza -la --git --tree --icons'
+        abbr --add --global llt 'eza -l --git --tree --icons'
     else
         abbr --add --global ls 'ls --color=auto'
         abbr --add --global la 'ls -lA --color=auto'
