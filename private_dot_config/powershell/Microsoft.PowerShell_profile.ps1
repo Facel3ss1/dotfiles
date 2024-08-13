@@ -10,3 +10,7 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     New-Alias cd z
     Invoke-Expression (& { (zoxide init powershell --hook prompt | Out-String) })
 }
+
+if (Get-Command lazygit -ErrorAction SilentlyContinue) {
+    New-Alias lg lazygit
+}
