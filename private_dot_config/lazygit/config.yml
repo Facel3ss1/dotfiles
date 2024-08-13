@@ -3,6 +3,16 @@ gui:
   sidePanelWidth: 0.25
   scrollHeight: 10
   showFileTree: false
+  nerdFontsVersion: "3"
+  filterMode: fuzzy
   theme:
     selectedLineBgColor:
       - reverse
+
+keybinding:
+  files:
+    commitChangesWithEditor: c
+    commitChanges: C
+  commits:
+    renameCommitWithEditor: r
+    renameCommit: R
