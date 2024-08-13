@@ -30,14 +30,15 @@ if (Get-Command eza -ErrorAction SilentlyContinue) {
     ensure that any extra parameters (e.g. the directory, or flags) get passed
     through correctly.
     #>
-    New-Alias ls eza
-    function Eza-La { & eza -la --git $args }
+    function Eza-Ls { & eza --icons $args }
+    New-Alias ls Eza-Ls
+    function Eza-La { & eza -la --git --icons $args }
     New-Alias la Eza-La
-    function Eza-Ll { & eza -l --git $args }
+    function Eza-Ll { & eza -l --git --icons $args }
     New-Alias ll Eza-Ll
-    function Eza-Lat { & eza -la --git --tree $args }
+    function Eza-Lat { & eza -la --git --tree --icons $args }
     New-Alias lat Eza-Lat
-    function Eza-Llt { & eza -l --git --tree $args }
+    function Eza-Llt { & eza -l --git --tree --icons $args }
     New-Alias llt Eza-Llt
 }
 
