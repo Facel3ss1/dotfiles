@@ -4,6 +4,7 @@ typos.toml
 {{- if ne .chezmoi.os "windows" }}
 AppData/
 Documents/
+.vsvimrc
 {{- end }}
 
 {{- if not .uni.enabled }}
