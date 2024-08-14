@@ -15,13 +15,24 @@ return {
             return {
                 mapping = {
                     -- :h ins-completion and :h ins-completion-menu
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-n>"] = cmp.mapping(function()
+                        if cmp.visible() then
+                            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+                        else
+                            cmp.complete()
+                        end
+                    end),
+                    ["<C-p>"] = cmp.mapping(function()
+                        if cmp.visible() then
+                            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+                        else
+                            cmp.complete()
+                        end
+                    end),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-e>"] = cmp.mapping.abort(),
                     ["<C-y>"] = cmp.mapping.confirm { select = true },
-                    ["<C-Space>"] = cmp.mapping.complete(),
                 },
                 sources = cmp.config.sources {
                     { name = "nvim_lsp" },
