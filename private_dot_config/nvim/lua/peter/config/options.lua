@@ -3,6 +3,7 @@ local util = require("peter.util")
 vim.o.mouse = "a" -- Let me use the mouse for scrolling etc.
 vim.o.confirm = true -- Open confirm dialog when there are unsaved changes
 vim.o.updatetime = 250 -- Trigger CursorHold etc. after 250ms
+vim.o.title = true -- Display filename etc. in the title of the window
 
 vim.o.relativenumber = true -- Show relative line numbers...
 vim.o.number = true -- ...and show the current line number
@@ -61,7 +62,6 @@ if util.has("win32") then
     vim.o.shellquote = ""
     vim.o.shellxquote = ""
 end
-
 
 vim.o.keywordprg = ":help" -- Check internal help when using K
 
