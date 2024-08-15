@@ -61,11 +61,6 @@ end, { expr = true, silent = true })
 
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
-vim.keymap.set("n", "<leader>uc", function()
-    -- TODO: Delete all the buffers when we close the tab (mini.bufremove)?
-    vim.cmd.tabnew()
-    vim.cmd.tcd { require("peter.config.chezmoi").source_dir }
-end, { desc = "Open chezmoi directory in new tab" })
 vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 
 vim.keymap.set("n", "<leader>hi", "<Cmd>Inspect<CR>", { desc = "Inspect at cursor" })
