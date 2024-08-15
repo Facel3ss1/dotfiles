@@ -76,7 +76,7 @@ config.keys = {
         action = wezterm.action.SplitHorizontal { domain = "CurrentPaneDomain" },
     },
     {
-        key = "h",
+        key = "s",
         mods = "LEADER",
         action = wezterm.action.SplitVertical { domain = "CurrentPaneDomain" },
     },
