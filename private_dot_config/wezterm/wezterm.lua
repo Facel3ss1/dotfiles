@@ -85,11 +85,36 @@ config.keys = {
         mods = "LEADER",
         action = wezterm.action.TogglePaneZoomState,
     },
+
     -- In case we ever want to type Ctrl-Space
     {
         key = " ",
         mods = "LEADER|CTRL",
         action = wezterm.action.SendKey { key = " ", mods = "CTRL" },
+    },
+
+    {
+        key = ",",
+        mods = "CTRL",
+        action = wezterm.action_callback(function(window, pane)
+            -- We can't just use "~", since it doesn't work for PowerShell 😒
+            local domain_home_dir = wezterm.home_dir
+
+            -- If this isn't the local domain, use "~", as we cannot determine the domain's home directory ourselves
+            if pane:get_domain_name() ~= "local" then
+                domain_home_dir = "~"
+            end
+
+            window:perform_action(
+                wezterm.action.SwitchToWorkspace {
+                    name = "dotfiles",
+                    spawn = {
+                        cwd = domain_home_dir .. "/.local/share/chezmoi",
+                    },
+                },
+                pane
+            )
+        end),
     },
 }
 
