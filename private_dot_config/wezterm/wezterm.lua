@@ -23,6 +23,7 @@ config.font = wezterm.font_with_fallback {
 config.font_size = 12
 
 -- Window
+config.window_close_confirmation = "NeverPrompt"
 config.initial_rows = 30
 config.initial_cols = 120
 config.scrollback_lines = 100000
@@ -35,6 +36,14 @@ config.window_frame = {
         { family = "JetBrains Mono" },
     },
 }
+
+-- Focus window on startup
+wezterm.on("gui-startup", function(cmd)
+    local _tab, _pane, window = wezterm.mux.spawn_window(cmd or {})
+
+    wezterm.mux.set_active_workspace("default")
+    window:gui_window():focus()
+end)
 
 -- Tab Bar
 config.tab_bar_at_bottom = true
