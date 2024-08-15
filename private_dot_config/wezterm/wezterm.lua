@@ -76,20 +76,17 @@ config.keys = {
         mods = "LEADER",
         action = wezterm.action.TogglePaneZoomState,
     },
-    -- Ctrl-L is used by the splits keybinds, but it is still a useful shortcut for clearing the screen
-    {
-        key = "l",
-        mods = "LEADER|CTRL",
-        action = wezterm.action.SendKey { key = "l", mods = "CTRL" },
-    },
     -- In case we ever want to type Ctrl-Space
     {
         key = " ",
         mods = "LEADER|CTRL",
         action = wezterm.action.SendKey { key = " ", mods = "CTRL" },
     },
-    table.unpack(splits.keys),
 }
+
+for _, key in ipairs(splits.keys) do
+    table.insert(config.keys, key)
+end
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
     -- Set the default shell for the local domain to be PowerShell

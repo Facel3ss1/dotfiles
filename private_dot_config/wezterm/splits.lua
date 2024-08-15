@@ -40,6 +40,14 @@ local function resize_split(key)
     }
 end
 
+local function send_key(key, mod)
+    return {
+        key = key,
+        mods = "LEADER|" .. mod,
+        action = wezterm.action.SendKey { key = key, mods = mod },
+    }
+end
+
 return {
     keys = {
         move_to_split("h"),
@@ -51,5 +59,16 @@ return {
         resize_split("j"),
         resize_split("k"),
         resize_split("l"),
+
+        -- Allow typing the original shortcut using the leader key
+        send_key("h", "CTRL"),
+        send_key("j", "CTRL"),
+        send_key("k", "CTRL"),
+        send_key("l", "CTRL"),
+
+        send_key("h", "ALT"),
+        send_key("j", "ALT"),
+        send_key("k", "ALT"),
+        send_key("l", "ALT"),
     },
 }
