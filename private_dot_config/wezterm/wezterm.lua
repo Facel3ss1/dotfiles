@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 
-local splits = require("splits")
+local splits = require("peter.splits")
 
 -- TODO: Visual bell
 
