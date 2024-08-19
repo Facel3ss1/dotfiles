@@ -10,6 +10,8 @@
 	{{- else if eq .git.editor "code" -}}
 	editor = code --wait
 	{{- end }}
+[commit]
+	verbose = true
 [branch]
 	sort = -committerdate
 [fetch]
