@@ -17,4 +17,14 @@ function M.platform()
     return ""
 end
 
+M.string = {}
+
+---Returns `true` if `s` starts with `prefix`.
+---@param s string
+---@param prefix string
+---@return boolean
+function M.string.starts_with(s, prefix)
+    return string.sub(s, 1, string.len(prefix)) == prefix
+end
+
 return M

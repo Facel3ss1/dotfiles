@@ -46,10 +46,10 @@ end)
 -- Tab Bar
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
-config.tab_max_width = 32
+config.show_new_tab_button_in_tab_bar = false
+config.tab_max_width = 48
 
--- TODO: wezterm.on format-tab-title? e.g. show zoom status? domain name?
-
+wezterm.on("format-tab-title", tabbar.format_tab_title)
 wezterm.on("update-status", tabbar.update_status)
 
 -- Keybinds
