@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 local splits = require("peter.splits")
+local tabbar = require("peter.tabbar")
 local utils = require("peter.utils")
 
 -- TODO: Visual bell
@@ -49,20 +50,7 @@ config.tab_max_width = 32
 
 -- TODO: wezterm.on format-tab-title? e.g. show zoom status? domain name?
 
-wezterm.on("update-status", function(window)
-    local color_scheme = window:effective_config().resolved_palette
-    local tab_bar_colors = color_scheme.tab_bar
-    local bg = tab_bar_colors.active_tab.bg_color
-    local fg = tab_bar_colors.active_tab.fg_color
-
-    -- TODO: Set left status if leader key is active?
-
-    window:set_right_status(wezterm.format {
-        { Background = { Color = bg } },
-        { Foreground = { Color = fg } },
-        { Text = " " .. wezterm.mux.get_active_workspace() .. " " },
-    })
-end)
+wezterm.on("update-status", tabbar.update_status)
 
 -- Keybinds
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 } -- Ctrl-Space
