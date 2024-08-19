@@ -70,6 +70,11 @@ config.keys = {
         mods = "LEADER",
         action = wezterm.action.TogglePaneZoomState,
     },
+    {
+        key = "w",
+        mods = "LEADER",
+        action = wezterm.action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" },
+    },
 
     -- In case we ever want to type Ctrl-Space
     {
