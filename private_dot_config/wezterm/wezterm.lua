@@ -7,20 +7,22 @@ local splits = require("splits")
 local config = wezterm.config_builder()
 
 -- Appearance
-local commit_mono_features = { "calt=1", "liga=1", "ss01=1", "ss02=1" }
 
-config.color_scheme = "Catppuccin Macchiato"
-config.font = wezterm.font_with_fallback {
+local font = wezterm.font_with_fallback {
     {
         family = "CommitMono Nerd Font",
         -- See the "Features" section in the docs for Commit Mono
-        harfbuzz_features = commit_mono_features,
+        harfbuzz_features = { "calt=1", "liga=1", "ss01=1", "ss02=1" },
     },
+    { family = "CommitMono" },
     { family = "JetBrains Mono" },
     { family = "Noto Color Emoji" },
     { family = "Symbols Nerd Font Mono" },
 }
+
+config.font = font
 config.font_size = 12
+config.color_scheme = "Catppuccin Macchiato"
 
 -- Window
 config.window_close_confirmation = "NeverPrompt"
@@ -28,13 +30,7 @@ config.initial_rows = 30
 config.initial_cols = 120
 config.scrollback_lines = 100000
 config.window_frame = {
-    font = wezterm.font_with_fallback {
-        {
-            family = "CommitMono",
-            harfbuzz_features = commit_mono_features,
-        },
-        { family = "JetBrains Mono" },
-    },
+    font = font,
 }
 
 -- Focus window on startup
