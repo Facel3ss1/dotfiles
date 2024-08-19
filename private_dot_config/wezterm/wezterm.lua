@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 local splits = require("peter.splits")
+local utils = require("peter.utils")
 
 -- TODO: Visual bell
 
@@ -118,7 +119,8 @@ for _, key in ipairs(splits.keys) do
     table.insert(config.keys, key)
 end
 
-if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+-- Windows specific settings
+if utils.platform() == "windows" then
     -- Set the default shell for the local domain to be PowerShell
     local pwsh_exists = pcall(function()
         wezterm.run_child_process { "pwsh.exe", "--version" }
