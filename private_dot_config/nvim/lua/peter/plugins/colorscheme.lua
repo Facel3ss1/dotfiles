@@ -51,6 +51,11 @@ return {
                 treesitter_context = true,
                 which_key = true,
             },
+            custom_highlights = function(colors)
+                return {
+                    WinSeparator = { fg = colors.overlay0 },
+                }
+            end,
         },
         config = function(_, opts)
             require("catppuccin").setup(opts)
