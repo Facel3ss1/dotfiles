@@ -1,4 +1,7 @@
 return {
+    arrows = {
+        right = "󰁔",
+    },
     diagnostics = {
         HINT = "󰌶",
         INFO = "󰋽",
