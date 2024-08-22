@@ -7,6 +7,9 @@ return {
     },
     git = {
         branch = "󰘬",
+        added_sign = "┃",
+        modified_sign = "┋",
+        deleted_sign = "_",
     },
     packages = {
         installed = "●",

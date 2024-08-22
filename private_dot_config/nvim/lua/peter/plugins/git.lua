@@ -5,52 +5,34 @@ local icons = require("peter.util.icons")
 ---@module "lazy"
 ---@type LazySpec
 return {
-    -- TODO: Use mini.diff?
     {
-        "lewis6991/gitsigns.nvim",
+        "echasnovski/mini.diff",
+        version = "*",
         event = "BufReadPre",
-        opts = {
-            preview_config = {
-                border = "rounded",
+        keys = {
+            {
+                "<leader>gp",
+                function()
+                    require("mini.diff").toggle_overlay(0)
+                end,
+                desc = "Preview changes",
             },
-            on_attach = function(bufnr)
-                -- TODO: hunk text objects
-
-                local gs = package.loaded.gitsigns
-
-                local function map(mode, lhs, rhs, opts)
-                    opts.buffer = bufnr
-                    vim.keymap.set(mode, lhs, rhs, opts)
-                end
-
-                map("n", "]c", function()
-                    if vim.wo.diff then
-                        return "]c"
-                    end
-                    vim.schedule(function()
-                        gs.next_hunk()
-                    end)
-                    return "<Ignore>"
-                end, { expr = true, desc = "Next change" })
-
-                map("n", "[c", function()
-                    if vim.wo.diff then
-                        return "[c"
-                    end
-                    vim.schedule(function()
-                        gs.prev_hunk()
-                    end)
-                    return "<Ignore>"
-                end, { expr = true, desc = "Previous change" })
-
-                map({ "n", "x" }, "<leader>ga", ":Gitsigns stage_hunk<CR>", { desc = "Stage change" })
-                map({ "n", "x" }, "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "Reset change" })
-
-                map("n", "<leader>gA", gs.stage_buffer, { desc = "Stage buffer" })
-                map("n", "<leader>gR", gs.reset_buffer, { desc = "Reset buffer" })
-                map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "Undo stage change" })
-                map("n", "<leader>gp", gs.preview_hunk, { desc = "Preview change" })
-            end,
+        },
+        opts = {
+            view = {
+                style = "sign",
+                signs = {
+                    add = icons.git.added_sign,
+                    change = icons.git.modified_sign,
+                    delete = icons.git.deleted_sign,
+                },
+            },
+            mappings = {
+                goto_first = "[C",
+                goto_prev = "[c",
+                goto_next = "]c",
+                goto_last = "]C",
+            },
         },
     },
 }

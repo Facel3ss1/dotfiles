@@ -21,7 +21,6 @@ return {
                 dap = true,
                 dap_ui = true,
                 fidget = true,
-                gitsigns = true,
                 indent_blankline = {
                     enabled = true,
                 },
