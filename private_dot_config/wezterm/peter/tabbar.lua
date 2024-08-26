@@ -37,6 +37,8 @@ end
 ---@param tab peter.TabInformation
 ---@return string
 local function tab_domain_icon(tab)
+    -- TODO: Show bell icon in tab title using "bell" event
+
     local title = tab_title(tab)
     if title == "wezterm" then
         return ""

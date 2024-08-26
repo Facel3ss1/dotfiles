@@ -12,7 +12,12 @@
 ---@field on peter.On
 
 ---@class peter.Config :Config
+---@field audible_bell peter.AudibleBell
 ---@field window_close_confirmation peter.WindowCloseConfirmation
+
+---@alias peter.AudibleBell
+---| "SystemBeep"
+---| "Disabled"
 
 ---@alias peter.WindowCloseConfirmation
 ---| "AlwaysPrompt"

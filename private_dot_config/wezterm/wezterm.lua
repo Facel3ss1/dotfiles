@@ -6,8 +6,6 @@ local splits = require("peter.splits")
 local tabbar = require("peter.tabbar")
 local utils = require("peter.utils")
 
--- TODO: Visual bell
-
 local config = wezterm.config_builder()
 
 -- Appearance
@@ -29,6 +27,14 @@ local font = wezterm.font_with_fallback {
 config.font = font
 config.font_size = 12
 config.color_scheme = "Catppuccin Macchiato"
+
+config.visual_bell = {
+    fade_in_function = "Constant",
+    fade_in_duration_ms = 0,
+    fade_out_function = "EaseOut",
+    fade_out_duration_ms = 300,
+}
+config.audible_bell = "Disabled"
 
 -- Window
 
