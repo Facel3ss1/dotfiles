@@ -11,6 +11,10 @@ return {
         "echasnovski/mini.starter",
         version = "*",
         event = "VimEnter",
+        -- stylua: ignore
+        keys = {
+            { "<leader>us", function() require("mini.starter").open() end, desc = "Open Starter" }
+        },
         opts = function()
             local starter = require("mini.starter")
 
@@ -30,6 +34,7 @@ return {
                     desc = "Refresh mini.starter",
                 })
 
+                -- FIXME: This is too flaky
                 -- Refresh 0.5s after startup to catch any plugin updates
                 vim.api.nvim_create_autocmd("User", {
                     group = refresh_group,
@@ -58,8 +63,9 @@ return {
             return {
                 silent = true,
                 items = {
-                    starter.sections.recent_files(5, false),
+                    starter.sections.recent_files(5, true),
                     {
+                        { name = "Oil", action = "Oil", section = "Actions" },
                         { name = "Lazy", action = "Lazy", section = "Actions" },
                         { name = "Mason", action = "Mason", section = "Actions" },
                         { name = "Edit new buffer", action = "enew", section = "Actions" },

@@ -19,6 +19,7 @@ return {
     {
         "stevearc/oil.nvim",
         lazy = false, -- Load at startup so oil opens whenever nvim opens a directory
+        cmd = { "Oil" },
         -- stylua: ignore
         keys = {
             { "-", function() require("oil").open() end, desc = "Open parent directory" },
