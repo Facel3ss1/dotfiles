@@ -1,10 +1,10 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as peter.Wezterm]]
 
 local M = {}
 
 ---Returns the platform wezterm is running on, such as `"linux"`, `"windows"`, or `"mac"`.
 ---Returns an empty string if the platform cannot be determined.
----@return string
+---@return ""|"linux"|"windows"|"mac"|
 function M.platform()
     if wezterm.target_triple == "x86_64-unknown-linux-gnu" then
         return "linux"

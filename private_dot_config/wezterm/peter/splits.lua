@@ -1,5 +1,7 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as peter.Wezterm]]
 
+---@param pane Pane
+---@return boolean
 local function is_nvim(pane)
     -- This is set/unset by the smart-splits.nvim plugin
     return pane:get_user_vars().IS_NVIM == "true"
@@ -12,7 +14,10 @@ local direction_keys = {
     l = "Right",
 }
 
+---@param key string
+---@return Key
 local function move_to_split(key)
+    ---@type Key
     return {
         key = key,
         mods = "CTRL",
@@ -26,7 +31,10 @@ local function move_to_split(key)
     }
 end
 
+---@param key string
+---@return Key
 local function resize_split(key)
+    ---@type Key
     return {
         key = key,
         mods = "ALT",
@@ -40,7 +48,11 @@ local function resize_split(key)
     }
 end
 
+---@param key string
+---@param mod string
+---@return Key
 local function send_key(key, mod)
+    ---@type Key
     return {
         key = key,
         mods = "LEADER|" .. mod,

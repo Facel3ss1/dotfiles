@@ -1,4 +1,6 @@
-local wezterm = require("wezterm")
+-- I use `@as` instead of `@type` here because the wezterm types erroneously set
+-- the return type of `require("wezterm")` to `Config`, which causes a type error.
+local wezterm = require("wezterm") --[[@as peter.Wezterm]]
 
 local splits = require("peter.splits")
 local tabbar = require("peter.tabbar")
@@ -10,6 +12,7 @@ local config = wezterm.config_builder()
 
 -- Appearance
 
+---@diagnostic disable: missing-fields
 local font = wezterm.font_with_fallback {
     {
         family = "CommitMono Nerd Font",
@@ -21,29 +24,34 @@ local font = wezterm.font_with_fallback {
     { family = "Noto Color Emoji" },
     { family = "Symbols Nerd Font Mono" },
 }
+---@diagnostic enable: missing-fields
 
 config.font = font
 config.font_size = 12
 config.color_scheme = "Catppuccin Macchiato"
 
 -- Window
+
 config.window_close_confirmation = "NeverPrompt"
 config.initial_rows = 30
 config.initial_cols = 120
 config.scrollback_lines = 100000
+
+---@diagnostic disable: missing-fields
 config.window_frame = {
     font = font,
 }
+---@diagnostic enable: missing-fields
 
 -- Focus window on startup
 wezterm.on("gui-startup", function(cmd)
     local _tab, _pane, window = wezterm.mux.spawn_window(cmd or {})
 
-    wezterm.mux.set_active_workspace("default")
     window:gui_window():focus()
 end)
 
 -- Tab Bar
+
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
@@ -53,6 +61,7 @@ wezterm.on("format-tab-title", tabbar.format_tab_title)
 wezterm.on("update-status", tabbar.update_status)
 
 -- Keybinds
+
 config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 } -- Ctrl-Space
 config.keys = {
     {
@@ -121,6 +130,7 @@ for _, key in ipairs(splits.keys) do
 end
 
 -- Windows specific settings
+
 if utils.platform() == "windows" then
     -- Set the default shell for the local domain to be PowerShell
     local pwsh_exists = pcall(function()
