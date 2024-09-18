@@ -2,6 +2,32 @@ local util = require("peter.util")
 
 -- TODO: Change horizontal split to <C-s>
 
+---@param show_ignored boolean
+---@return function
+local function find_files(show_ignored)
+    return function()
+        local builtin = "find_files"
+        local opts = {
+            hidden = true,
+            no_ignore = show_ignored,
+            prompt_title = show_ignored and "Find Files (including ignored)" or nil,
+        }
+
+        if show_ignored then
+            require("telescope.builtin")[builtin](opts)
+            return
+        end
+
+        if vim.uv.fs_stat(vim.uv.cwd() .. "/.git") then
+            -- FIXME: Don't show deleted files?
+            builtin = "git_files"
+            opts = { show_untracked = true }
+        end
+
+        require("telescope.builtin")[builtin](opts)
+    end
+end
+
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -10,21 +36,8 @@ return {
         version = "*",
         cmd = "Telescope",
         keys = {
-            {
-                "<leader>fd",
-                function()
-                    local opts = {}
-                    local builtin = "find_files"
-                    if vim.uv.fs_stat(vim.uv.cwd() .. "/.git") then
-                        opts.show_untracked = true
-                        -- FIXME: Don't show deleted files?
-                        builtin = "git_files"
-                    end
-
-                    require("telescope.builtin")[builtin](opts)
-                end,
-                desc = "Find file",
-            },
+            { "<leader>fd", find_files(false), desc = "Find file" },
+            { "<leader>fD", find_files(true), desc = "Find file (including ignored)" },
             { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Find buffer" },
             { "<leader>fg", "<Cmd>Telescope live_grep<CR>", desc = "Live grep" },
             {
@@ -39,7 +52,6 @@ return {
                 desc = "Grep prompt",
             },
             { "<leader>fo", "<Cmd>Telescope oldfiles<CR>", desc = "Open recent file" },
-            { "<leader>ff", "<Cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Fuzzy find in buffer" },
             {
                 "<leader>f/",
                 function()
