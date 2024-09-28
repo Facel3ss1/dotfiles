@@ -32,6 +32,12 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
+        "echasnovski/mini.trailspace",
+        version = "*",
+        event = "BufReadPre",
+        config = true,
+    },
+    {
         "folke/todo-comments.nvim",
         cmd = { "TodoQuickFix", "TodoLocList", "TodoTrouble", "TodoTelescope" },
         event = { "BufReadPost", "BufNewFile" },
