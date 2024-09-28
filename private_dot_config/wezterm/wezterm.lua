@@ -15,7 +15,7 @@ local font = wezterm.font_with_fallback {
     {
         family = "CommitMono Nerd Font",
         -- See the "Features" section in the docs for Commit Mono
-        harfbuzz_features = { "calt=1", "liga=1", "ss01=1", "ss02=1" },
+        harfbuzz_features = { "calt=1", "liga=1" },
     },
     { family = "CommitMono" },
     { family = "JetBrains Mono" },
