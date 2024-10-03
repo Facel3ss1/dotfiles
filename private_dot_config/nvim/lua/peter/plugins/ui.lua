@@ -301,7 +301,6 @@ return {
                 get_config = function(opts)
                     if opts.kind == "grepprompt" then
                         return {
-                            insert_only = true,
                             relative = "editor",
                         }
                     end

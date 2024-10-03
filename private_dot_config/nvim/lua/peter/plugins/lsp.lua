@@ -224,7 +224,7 @@ return {
                 end,
                 -- rustaceanvim sets up rust-analyzer for us
                 ["rust_analyzer"] = function() end,
-                ["tsserver"] = function(server_name)
+                ["ts_ls"] = function(server_name)
                     local config = default_config(server_name)
                     config.on_attach = function(_client, buf)
                         vim.keymap.set(
@@ -351,13 +351,14 @@ return {
                 mode = { "n" },
             },
         },
+        ---@type conform.setupOpts
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
-                javascript = { { "prettierd", "prettier" } },
-                javascriptreact = { { "prettierd", "prettier" } },
-                typescript = { { "prettierd", "prettier" } },
-                typescriptreact = { { "prettierd", "prettier" } },
+                javascript = { "prettierd", "prettier", stop_after_first = true },
+                javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+                typescript = { "prettierd", "prettier", stop_after_first = true },
+                typescriptreact = { "prettierd", "prettier", stop_after_first = true },
                 -- TODO: Use ruff for formatting
                 python = { "isort", "black" },
             },
