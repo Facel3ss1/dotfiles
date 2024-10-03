@@ -48,7 +48,7 @@ return {
         "neovim/nvim-lspconfig",
         -- FIXME: Make it work when I :e myfile
         event = "BufReadPre",
-        cmd = { "LspInfo" },
+        cmd = { "LspInfo", "LspLog" },
         keys = {
             {
                 "<leader>ts",
@@ -82,11 +82,12 @@ return {
         },
         config = function()
             -- Add a rounded border to docs hovers
-            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+            local hover_handler = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+            vim.lsp.handlers["textDocument/hover"] = hover_handler
 
             -- TODO: Keybind to see all the definitions?
             -- Always jump to the first definition when we go to definition
-            vim.lsp.handlers["textDocument/definition"] = function(_, result)
+            local function definition_handler(_, result)
                 if not result or vim.tbl_isempty(result) then
                     util.info("[LSP] No results from textDocument/definition", { title = "LSP" })
                     return
@@ -98,18 +99,14 @@ return {
 
                 vim.lsp.util.jump_to_location(result, "utf-8", false)
             end
+            vim.lsp.handlers["textDocument/definition"] = definition_handler
 
             -- Enable inlay hints by default
             vim.lsp.inlay_hint.enable()
 
-            local function on_attach(args)
-                local buf = args.buf
-                local client = vim.lsp.get_client_by_id(args.data.client_id)
-                if client == nil then
-                    util.error("[LSP] Could not find client with id " .. args.data.client_id, { title = "LSP" })
-                    return
-                end
-
+            ---@param client vim.lsp.Client
+            ---@param buf integer
+            local function on_attach(client, buf)
                 ---@param mode string|string[]
                 ---@param lhs string
                 ---@param rhs string|function
@@ -153,91 +150,113 @@ return {
 
                 if client.server_capabilities.codeLensProvider then
                     local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
-                    if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = args.buf } == 0 then
+                    if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = buf } == 0 then
                         vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                             group = codelens_group,
-                            buffer = args.buf,
+                            buffer = buf,
                             callback = function()
-                                vim.lsp.codelens.refresh { bufnr = args.buf }
+                                vim.lsp.codelens.refresh { bufnr = buf }
                             end,
                             desc = "Call vim.lsp.codelens.refresh()",
                         })
                     end
                 end
-
-                -- Set initial state of typos-lsp diagnostics
-                if client.name == "typos_lsp" then
-                    local typos_ns = vim.lsp.diagnostic.get_namespace(client.id)
-                    vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
-                end
             end
 
+            local lsp_attach_group = vim.api.nvim_create_augroup("PeterLspAttach", { clear = true })
             vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("PeterLspAttach", { clear = true }),
-                callback = on_attach,
-                desc = "Call LSP on_attach()",
+                group = lsp_attach_group,
+                callback = function(args)
+                    local buf = args.buf
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client == nil then
+                        util.error("[LSP] Could not find client with id " .. args.data.client_id, { title = "LSP" })
+                        return
+                    end
+
+                    on_attach(client, buf)
+                end,
+                desc = "Call on_attach()",
             })
 
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            ---@param server_name string
+            ---@return lspconfig.Config
+            local function default_config(server_name)
+                local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            local function default_handler(server_name)
-                require("lspconfig")[server_name].setup {
+                ---@type lspconfig.Config
+                local config = {
                     capabilities = capabilities,
                     settings = lsp_settings[server_name],
                 }
+
+                return config
             end
 
             require("mason-lspconfig").setup {
                 -- TODO: jsonls
                 ensure_installed = { "lua_ls" },
             }
+
+            local lspconfig = require("lspconfig")
             require("mason-lspconfig").setup_handlers {
-                default_handler,
+                -- Default handler
+                function(server_name)
+                    local config = default_config(server_name)
+                    lspconfig[server_name].setup(config)
+                end,
                 ["typos_lsp"] = function(server_name)
-                    require("lspconfig")[server_name].setup {
-                        capabilities = capabilities,
-                        init_options = lsp_settings[server_name],
-                    }
+                    local config = default_config(server_name)
+
+                    --- typos_lsp uses init_options instead of settings for configuration
+                    config.init_options = config.settings
+                    config.settings = nil
+
+                    config.on_attach = function(client, _buf)
+                        -- TODO: Make the typos_lsp code actions do an LSP rename?
+
+                        -- Set initial state of typos-lsp diagnostics
+                        local typos_ns = vim.lsp.diagnostic.get_namespace(client.id)
+                        vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
+                    end
+
+                    lspconfig[server_name].setup(config)
                 end,
                 -- rustaceanvim sets up rust-analyzer for us
                 ["rust_analyzer"] = function() end,
                 ["tsserver"] = function(server_name)
-                    require("typescript-tools").setup {
-                        capabilities = capabilities,
-                        settings = lsp_settings[server_name],
-                        on_attach = function(_, buf)
-                            vim.keymap.set(
-                                "n",
-                                "gs",
-                                "<Cmd>TSToolsGoToSourceDefinition<CR>",
-                                { buffer = buf, desc = "Go to source definition" }
-                            )
+                    local config = default_config(server_name)
+                    config.on_attach = function(_client, buf)
+                        vim.keymap.set(
+                            "n",
+                            "gs",
+                            "<Cmd>TSToolsGoToSourceDefinition<CR>",
+                            { buffer = buf, desc = "Go to source definition" }
+                        )
 
-                            vim.api.nvim_create_autocmd("BufWritePre", {
-                                group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
-                                command = "TSToolsOrganizeImports",
-                                desc = "Organize typescript imports",
-                            })
-                        end,
-                    }
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
+                            command = "TSToolsOrganizeImports",
+                            desc = "Organize typescript imports",
+                        })
+                    end
+
+                    require("typescript-tools").setup(config)
                 end,
                 -- haskell-tools sets up hls for us
                 ["hls"] = function() end,
                 ["clangd"] = function(server_name)
-                    require("clangd_extensions").setup {
-                        server = {
-                            capabilities = capabilities,
-                            settings = lsp_settings[server_name],
-                            on_attach = function(_, buf)
-                                vim.keymap.set(
-                                    "n",
-                                    "<leader>ch",
-                                    "<Cmd>ClangdSwitchSourceHeader<CR>",
-                                    { buffer = buf, desc = "Switch between source/header" }
-                                )
-                            end,
-                        },
-                    }
+                    local config = default_config(server_name)
+                    config.on_attach = function(_client, buf)
+                        vim.keymap.set(
+                            "n",
+                            "<leader>ch",
+                            "<Cmd>ClangdSwitchSourceHeader<CR>",
+                            { buffer = buf, desc = "Switch between source/header" }
+                        )
+                    end
+
+                    require("clangd_extensions").setup { server = config }
 
                     local cmp = require("cmp")
 
