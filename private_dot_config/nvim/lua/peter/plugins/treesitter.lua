@@ -10,7 +10,6 @@ local util = require("peter.util")
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        version = "*",
         build = ":TSUpdate",
         event = "BufReadPre",
         cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
