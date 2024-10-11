@@ -39,10 +39,4 @@ return {
             -- "mfussenegger/nvim-dap-python",
         },
     },
-    -- TODO: typst.nvim or treesitter parser? They were both WIP when I added this
-    {
-        "kaarmu/typst.vim",
-        ft = "typst",
-        lazy = false,
-    },
 }
