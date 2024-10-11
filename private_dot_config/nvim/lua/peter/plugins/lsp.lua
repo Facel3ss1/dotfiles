@@ -31,6 +31,11 @@ local lsp_settings = {
             },
         },
     },
+    ["typst_lsp"] = {
+        ["typst-lsp"] = {
+            exportPdf = "never",
+        },
+    },
     ["typos_lsp"] = {
         diagnosticSeverity = "Hint",
     },
