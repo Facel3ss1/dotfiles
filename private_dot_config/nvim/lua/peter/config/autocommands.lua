@@ -85,6 +85,15 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Set colorcolumn = 50,72",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("EnableWrap", { clear = true }),
+    pattern = { "markdown", "typst" },
+    callback = function()
+        vim.wo.wrap = true
+    end,
+    desc = "Set wrap = true",
+})
+
 -- TODO: Quit certain filetypes when I press q
 
 vim.api.nvim_create_autocmd("FileType", {
