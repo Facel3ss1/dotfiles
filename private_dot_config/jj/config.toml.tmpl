@@ -1,0 +1,13 @@
+[user]
+name = {{ .git.name | quote }}
+email = {{ .git.email | quote }}
+
+[ui]
+default-command = "log"
+
+diff.tool = ["difft", "--color=always", "$left", "$right"]
+diff-editor = ":builtin"
+
+[template-aliases]
+"format_short_signature(signature)" = "signature.name()"
+"format_timestamp(timestamp)" = "timestamp.ago()"
