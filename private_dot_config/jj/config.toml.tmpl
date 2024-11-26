@@ -5,6 +5,16 @@ email = {{ .git.email | quote }}
 [ui]
 default-command = "log"
 
+{{ if eq .git.editor "nvim" -}}
+editor = "nvim"
+{{- else if eq .git.editor "code" -}}
+{{ if eq .chezmoi.os "windows" -}}
+editor = "code.cmd -w"
+{{- else -}}
+editor = "code -w"
+{{ end -}}
+{{- end }}
+
 diff.tool = ["difft", "--color=always", "$left", "$right"]
 diff-editor = ":builtin"
 
