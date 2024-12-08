@@ -43,6 +43,11 @@ return {
         "chomosuke/typst-preview.nvim",
         version = "*",
         ft = "typst",
+        cmd = {
+            "TypstPreview",
+            "TypstPreviewFollowCursorToggle",
+            "TypstPreviewSyncCursor",
+        },
         keys = {
             { "<leader>cp", "<Cmd>TypstPreview<CR>", desc = "Open typst preview", ft = "typst" },
         },
