@@ -18,6 +18,9 @@ editor = "code -w"
 diff.tool = ["difft", "--color=always", "$left", "$right"]
 diff-editor = ":builtin"
 
+[aliases]
+before = ["new", "-B", "@", "-A", "@-", "--no-edit"]
+
 [template-aliases]
 "format_short_signature(signature)" = "signature.name()"
 "format_timestamp(timestamp)" = "timestamp.ago()"
