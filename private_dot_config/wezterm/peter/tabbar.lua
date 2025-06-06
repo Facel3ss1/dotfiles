@@ -65,7 +65,13 @@ local function tab_domain_icon(tab)
         if domain_name == "local" then
             return "󰨊 "
         elseif utils.string.starts_with(domain_name, "WSL") then
-            return "󰌽 "
+            if string.find(domain_name, "[Uu]buntu") ~= nil then
+                return " "
+            elseif string.find(domain_name, "[Nn]ix[Oo][Ss]") ~= nil then
+                return " "
+            else
+                return "󰌽 "
+            end
         end
     end
 
