@@ -52,6 +52,7 @@ bw lock
 - [wezterm](https://wezfurlong.org/wezterm/index.html)
 - [fish](https://fishshell.com)
 - [starship](https://starship.rs)
+- [jj](https://jj-vcs.github.io/jj/latest/)
+- [difftastic](https://difftastic.wilfred.me.uk/)
 - [eza](https://eza.rocks)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
-- [difftastic](https://difftastic.wilfred.me.uk/)
