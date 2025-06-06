@@ -75,7 +75,7 @@ return {
                     floating = { border = "rounded" },
                 },
                 dependencies = {
-                    "nvim-neotest/nvim-nio",
+                    { "nvim-neotest/nvim-nio", version = "*" },
                 },
             },
             {
