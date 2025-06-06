@@ -149,12 +149,12 @@ if utils.platform() == "windows" then
         config.default_prog = { "powershell.exe" }
     end
 
-    -- Remove Docker's WSL from the list of WSL domains
+    -- Remove Docker Desktop's WSL from the list of WSL domains
     local default_wsl_domains = wezterm.default_wsl_domains()
     local wsl_domains = {}
 
     for _, wsl_domain in ipairs(default_wsl_domains) do
-        if wsl_domain.distribution ~= "docker-desktop-data" then
+        if string.find(wsl_domain.distribution, "docker%-desktop") == nil then
             table.insert(wsl_domains, wsl_domain)
         end
     end
