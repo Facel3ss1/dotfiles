@@ -1,27 +1,7 @@
-set fish_greeting
-
 # TODO: ctrl+y to autocomplete
 
-# Vi mode
-set -g fish_key_bindings fish_vi_key_bindings
-set -g fish_cursor_default block
-set -g fish_cursor_insert line
-set -g fish_cursor_replace_one underscore
-
-# Set LS_COLORS to ~/.dircolors
-# fish has a shim for csh setenv commands
-# eval (dircolors -c ~/.dircolors)
-
-if type -q nvim
-    set -gx EDITOR nvim
-    set -gx VISUAL nvim
-    set -gx MANPAGER 'nvim +Man!'
-end
-
-# Make less support colors and scrolling w/ the mouse
-set -gx LESS '-R --mouse --wheel-lines=3'
-set -gx PAGER less
-
+# Make sure everything is in the PATH before setting environment variables
+# This means the `if type -q` queries below will work properly
 fish_add_path -g ~/.local/bin
 fish_add_path -g ~/.cargo/bin
 # elan is a fork of rustup but for installations of the Lean theorem prover
@@ -36,9 +16,30 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 
+# Disable the fish greeting (https://fishshell.com/docs/current/faq.html#how-do-i-change-the-greeting-message)
+set -g fish_greeting
+
+# Vi mode
+set -g fish_key_bindings fish_vi_key_bindings
+set -g fish_cursor_default block
+set -g fish_cursor_insert line
+set -g fish_cursor_replace_one underscore
+
+if type -q nvim
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+    set -gx MANPAGER 'nvim +Man!'
+    set -gx MANWIDTH 80
+    # Let Neovim handle the text wrapping
+    # set -gx MANWIDTH 999
+end
+
+# Make less support colors and scrolling with the mouse
+set -gx LESS '-R --mouse --wheel-lines=3'
+set -gx PAGER less
+
 if status is-interactive
     # TODO: Move to abbreviations file
-    # TODO: Add git abbreviations
 
     if type -q nvim
         abbr --add --global vim nvim
