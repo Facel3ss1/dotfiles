@@ -70,3 +70,7 @@ end
 if type -q zoxide
     zoxide init fish --hook prompt | source
 end
+
+if type -q jj
+    jj util completion fish | source
+end
