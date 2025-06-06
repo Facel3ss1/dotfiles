@@ -5,8 +5,8 @@ vim.o.confirm = true -- Open confirm dialog when there are unsaved changes
 vim.o.updatetime = 250 -- Trigger CursorHold etc. after 250ms
 vim.o.title = true -- Display filename etc. in the title of the window
 
-vim.o.relativenumber = true -- Show relative line numbers...
-vim.o.number = true -- ...and show the current line number
+vim.o.number = true -- Show line numbers
+vim.o.relativenumber = false -- Don't use relative line numbers
 
 -- Wrapping
 vim.o.wrap = false -- Turn off line wrapping. However, if we do wrap...
@@ -19,6 +19,8 @@ vim.o.sidescrolloff = 5 -- 5 columns to the side of my cursor when horizontally 
 vim.o.scrollback = 100000 -- 100,000 line scrollback in terminal buffers
 
 -- Indentation defaults
+-- Note that an .editorconfig file in the current directory can override these settings for configured file types
+-- See :h editorconfig.indent_size and :h editorconfig.ident_style
 vim.o.tabstop = 4 -- <Tab> characters will be displayed as 4 characters wide
 vim.o.shiftwidth = 4 -- >, <, and = will work in increments of 4 characters
 vim.o.softtabstop = -1 -- Always indent shiftwidth characters when we press <Tab>, even if tabstop > shiftwidth
