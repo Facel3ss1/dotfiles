@@ -70,4 +70,8 @@ return {
             require("typst-preview").update()
         end,
     },
+    {
+        "tpope/vim-abolish",
+        cmd = { "Abolish", "Subvert", "S" },
+    },
 }
