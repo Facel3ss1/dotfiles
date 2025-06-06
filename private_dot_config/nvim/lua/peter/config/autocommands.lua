@@ -137,10 +137,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
     desc = "Disable line numbers",
 })
-
-vim.filetype.add {
-    filename = {
-        [".clang-format"] = "yaml",
-        [".clang-tidy"] = "yaml",
-    },
-}
