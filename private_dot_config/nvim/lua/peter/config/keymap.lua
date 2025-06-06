@@ -29,6 +29,12 @@ vim.keymap.set("n", "N", "Nzz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
+-- Create undo points in insert mode
+vim.keymap.set("i", ",", ",<C-g>u")
+vim.keymap.set("i", ".", ".<C-g>u")
+vim.keymap.set("i", "!", "!<C-g>u")
+vim.keymap.set("i", "?", "?<C-g>u")
+
 -- Snippet jumping
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
     if vim.snippet.active { direction = 1 } then
@@ -75,5 +81,7 @@ vim.keymap.set("n", "<leader>td", function()
         util.info("Disabled diagnostics", { title = "Diagnostics" })
     end
 end, { desc = "Toggle diagnostics" })
+
+-- TODO: Toggle treesitter using vim.treesitter.stop(), in case it goes haywire
 
 -- TODO: dd in quickfix list (quickfix reflector)
