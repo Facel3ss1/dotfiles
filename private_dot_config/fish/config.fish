@@ -61,6 +61,10 @@ if status is-interactive
     if type -q lazygit
         abbr --add --global lg lazygit
     end
+
+    if type -q atuin
+        atuin init fish | source
+    end
 end
 
 if type -q starship
