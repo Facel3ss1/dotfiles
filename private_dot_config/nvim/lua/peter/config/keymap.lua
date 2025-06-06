@@ -16,13 +16,6 @@ vim.keymap.set("n", "<Esc>", "<Cmd>nohl<CR>")
 
 vim.keymap.set({ "n", "x" }, "gw", "*N", { desc = "Search word under cursor" })
 
-vim.keymap.set("n", "<A-j>", ":.m .+1<CR>==", { desc = "Move line up", silent = true })
-vim.keymap.set("n", "<A-k>", ":.m .-2<CR>==", { desc = "Move line down", silent = true })
-vim.keymap.set("x", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line up", silent = true })
-vim.keymap.set("x", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line down", silent = true })
-vim.keymap.set("i", "<A-j>", "<Esc>:.m .+1<CR>==gi", { desc = "Move line up", silent = true })
-vim.keymap.set("i", "<A-k>", "<Esc>:.m .-2<CR>==gi", { desc = "Move line down", silent = true })
-
 -- Backspace in select mode changes instead of deletes
 vim.keymap.set("s", "<BS>", "<C-g>c")
 
