@@ -48,9 +48,6 @@ return {
             "TypstPreviewFollowCursorToggle",
             "TypstPreviewSyncCursor",
         },
-        keys = {
-            { "<leader>cp", "<Cmd>TypstPreview<CR>", desc = "Open typst preview", ft = "typst" },
-        },
         opts = function()
             -- We want to use the mason tinymist binary
             local tinymist_package = require("mason-registry").get_package("tinymist")
