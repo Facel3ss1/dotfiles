@@ -299,10 +299,10 @@ return {
         lazy = false, -- It is recommended to not lazy load this plugin
         -- stylua: ignore
         keys = {
-            { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Go to the left window" },
-            { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Go to the down window" },
-            { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Go to the up window" },
-            { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Go to the right window" },
+            { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move cursor to left window" },
+            { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move cursor to down window" },
+            { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Move cursor to up window" },
+            { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move cursor to right window" },
 
             { "<A-h>", function() require("smart-splits").resize_left() end, desc = "Resize window left" },
             { "<A-j>", function() require("smart-splits").resize_down() end, desc = "Resize window down" },
