@@ -18,6 +18,7 @@ return {
     -- TODO: Respect cwd in terminal buffers
     {
         "stevearc/oil.nvim",
+        version = "*",
         lazy = false, -- Load at startup so oil opens whenever nvim opens a directory
         cmd = { "Oil" },
         -- stylua: ignore

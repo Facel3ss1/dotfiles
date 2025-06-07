@@ -46,6 +46,7 @@ local enable_typos_lsp_diagnostics = true
 return {
     {
         "neovim/nvim-lspconfig",
+        version = "*",
         -- FIXME: Make it work when I :e myfile
         event = "BufReadPre",
         cmd = { "LspInfo", "LspLog" },
@@ -77,7 +78,7 @@ return {
         },
         dependencies = {
             "mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            { "williamboman/mason-lspconfig.nvim", version = "*" },
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
@@ -282,7 +283,8 @@ return {
     },
     {
         "williamboman/mason.nvim",
-        cmd = "Mason",
+        version = "*",
+        cmd = { "Mason", "MasonInstall", "MasonUninstall" },
         keys = {
             { "<leader>um", "<Cmd>Mason<CR>", desc = "Open Mason" },
         },
@@ -317,6 +319,7 @@ return {
     },
     {
         "stevearc/conform.nvim",
+        version = "*",
         event = "BufWritePre",
         cmd = "ConformInfo",
         keys = {

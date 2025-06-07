@@ -10,6 +10,7 @@ local icons = require("peter.util.icons")
 return {
     {
         "mfussenegger/nvim-dap",
+        version = "*",
         -- stylua: ignore
         keys = {
             { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
