@@ -23,6 +23,12 @@ local lsp_settings = {
             },
         },
     },
+    ["pyright"] = {
+        pyright = {
+            -- We are using Ruff's import organizer instead
+            disableOrganizeImports = true,
+        },
+    },
     ["rust_analyzer"] = {
         ["rust-analyzer"] = {
             check = {
@@ -145,8 +151,8 @@ return {
                     end
                 end, { desc = "Toggle inlay hints" })
 
-                -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq works
-                -- See https://github.com/neovim/neovim/pull/19677
+                -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq rewraps text instead of LSP formatting
+                -- See :h lsp-defaults
                 vim.bo[buf].formatexpr = nil
 
                 if client.server_capabilities.codeLensProvider then
@@ -362,8 +368,7 @@ return {
                 javascriptreact = { "prettierd", "prettier", stop_after_first = true },
                 typescript = { "prettierd", "prettier", stop_after_first = true },
                 typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-                -- TODO: Use ruff for formatting
-                python = { "isort", "black" },
+                python = { "ruff_format", "ruff_organize_imports" },
             },
             format_on_save = function(_buf)
                 if not enable_format_on_save then
