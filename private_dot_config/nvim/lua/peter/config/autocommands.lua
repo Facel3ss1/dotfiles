@@ -1,4 +1,4 @@
--- Brief highlight when we yank something
+-- Show a brief highlight when I yank something
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
     pattern = "*",
@@ -8,7 +8,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Call vim.highlight.on_yank()",
 })
 
--- Only have cursorline on in the current window
+-- Only enable the cursorline in the current window
+
 local function set_cursorline(value)
     return function()
         vim.wo.cursorline = value
@@ -33,7 +34,7 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Disable cursorline",
 })
 
--- Resize splits if the window got resized
+-- Resize splits if the overall window got resized
 vim.api.nvim_create_autocmd("VimResized", {
     group = vim.api.nvim_create_augroup("ResizeSplits", { clear = true }),
     callback = function()
@@ -42,37 +43,8 @@ vim.api.nvim_create_autocmd("VimResized", {
     desc = "Run :tabdo wincmd =",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("CommitMessageColorColumn", { clear = true }),
-    pattern = { "gitcommit", "jj" },
-    callback = function()
-        vim.wo.colorcolumn = "50,72"
-    end,
-    desc = "Set colorcolumn = 50,72",
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("EnableWrap", { clear = true }),
-    pattern = { "markdown", "typst" },
-    callback = function()
-        vim.wo.wrap = true
-    end,
-    desc = "Set wrap = true",
-})
-
--- TODO: Quit certain filetypes when I press q
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("SetCommentString", { clear = true }),
-    pattern = "gitconfig",
-    callback = function()
-        vim.bo.commentstring = "# %s"
-    end,
-    desc = 'Set commentstring = "# %s"',
-})
-
+-- Modify the formatoptions for every filetype
 -- TODO: Should we just set a default formatoptions?
--- Each filetype will have it's own formatoptions which we need to override
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SetFormatOptions", { clear = true }),
     pattern = "*",
@@ -86,15 +58,8 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Change formatoptions: +rjq -o",
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("HelpConcealLevel", { clear = true }),
-    pattern = "help",
-    callback = function()
-        vim.wo.conceallevel = 0
-    end,
-    desc = "Set conceallevel = 0",
-})
-
+-- FIXME: Remove in 0.11
+-- Disable line numbers in terminal windows
 vim.api.nvim_create_autocmd("TermOpen", {
     group = vim.api.nvim_create_augroup("SetTerminalOptions", { clear = true }),
     callback = function()
