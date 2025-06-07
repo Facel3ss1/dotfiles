@@ -8,9 +8,10 @@ Uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 nvim
 ├── init.lua           // Entry point for the configuration. Automatically sourced by Neovim.
 └── lua                // Not automatically sourced, but require()'d by `init.lua` and lazy.nvim.
-    └── peter          // Contains any utility modules that are used throughout the config.
-        ├── config     // Basic config of builtin Neovim functionality.
-        └── plugins    // Plugin configuration, loaded by lazy.nvim.
+    └── peter          // All of my config is namespaced under `peter` to prevent potential name clashes.
+        ├── config     // Configuration of built-in Neovim functionality.
+        ├── plugins    // Plugin configuration, loaded by lazy.nvim.
+        └── util       // Contains any utility functions/modules that are used throughout the config.
 ```
 
 ## Requirements
@@ -21,7 +22,7 @@ Running `:checkhealth` can also show you what is needed by the plugins.
 
 | Name | Reason |
 |------|--------|
-| A [Nerd Font](https://www.nerdfonts.com/) | Required so we can draw fancy icons and shapes. |
+| A [Nerd Font](https://www.nerdfonts.com/) | Required so we can draw fancy icons and shapes. (I like the Nerd Font of [Commit Mono](https://commitmono.com/)) |
 | A C Compiler | Needed by [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) to install the parsers. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements). |
 | [`ripgrep`](https://github.com/BurntSushi/ripgrep) (optional) | Used by [telescope](https://github.com/nvim-telescope/telescope.nvim) and others for fast file searching. |
 | `make` (optional) | If installed, it will be used to build [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) to make telescope pickers faster. |
@@ -32,3 +33,5 @@ LSPs and other tools are installed and managed by
 tools for a language, you will need the package manager for that language
 (e.g. `cargo`, `pip`, `npm`). You can run `:checkhealth mason` to see what
 package managers you have installed.
+
+<!-- TODO: List the main LSPs I want installed -->

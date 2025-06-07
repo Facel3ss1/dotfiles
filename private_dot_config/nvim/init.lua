@@ -1,14 +1,7 @@
--- Map the leaders first so that mappings from now on are set correctly
-vim.g.mapleader = vim.keycode("<Space>")
-vim.g.maplocalleader = vim.keycode("<Space><Space>")
-
 local util = require("peter.util")
 
-require("peter.config.autocommands")
-require("peter.config.options")
-require("peter.config.diagnostics")
-require("peter.config.keymap")
-require("peter.config.chezmoi")
+-- Apply my config settings - this must be the very first thing we do
+require("peter.config")
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -45,6 +38,7 @@ vim.api.nvim_create_autocmd("User", {
     desc = "Run :packadd cfilter",
 })
 
+-- Install and apply my plugin settings
 require("lazy").setup("peter.plugins", {
     -- TODO: version = "*" to always use latest semver version
     defaults = { lazy = true },
