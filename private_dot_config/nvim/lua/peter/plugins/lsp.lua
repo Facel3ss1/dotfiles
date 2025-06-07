@@ -18,6 +18,11 @@ local lsp_settings = {
             format = {
                 enable = false,
             },
+            hint = {
+                enable = true,
+                arrayIndex = "Disable",
+                setType = true,
+            },
             workspace = {
                 checkThirdParty = false,
             },
