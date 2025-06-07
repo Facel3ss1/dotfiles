@@ -255,40 +255,6 @@ return {
 
                     require("typescript-tools").setup(config)
                 end,
-                -- haskell-tools sets up hls for us
-                ["hls"] = function() end,
-                ["clangd"] = function(server_name)
-                    local config = default_config(server_name)
-                    config.on_attach = function(_client, buf)
-                        vim.keymap.set(
-                            "n",
-                            "<leader>ch",
-                            "<Cmd>ClangdSwitchSourceHeader<CR>",
-                            { buffer = buf, desc = "Switch between source/header" }
-                        )
-                    end
-
-                    require("clangd_extensions").setup { server = config }
-
-                    local cmp = require("cmp")
-
-                    -- FIXME: clangd completion entries have a space/bullet before
-                    cmp.setup.filetype({ "c", "cpp" }, {
-                        sorting = {
-                            comparators = {
-                                cmp.config.compare.offset,
-                                cmp.config.compare.exact,
-                                cmp.config.compare.recently_used,
-                                require("clangd_extensions.cmp_scores"),
-                                cmp.config.compare.kind,
-                                cmp.config.compare.sort_text,
-                                cmp.config.compare.length,
-                                cmp.config.compare.order,
-                            },
-                            priority_weight = 1,
-                        },
-                    })
-                end,
             }
         end,
     },
@@ -446,14 +412,5 @@ return {
     {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    },
-    { url = "https://git.sr.ht/~p00f/clangd_extensions.nvim" },
-    {
-        "mrcjkb/haskell-tools.nvim",
-        version = "*",
-        lazy = false, -- This plugin is already lazy
-        config = function(_, opts)
-            vim.g.haskell_tools = vim.tbl_deep_extend("force", {}, opts or {})
-        end,
     },
 }

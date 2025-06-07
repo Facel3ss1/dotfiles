@@ -63,6 +63,7 @@ return {
         end,
     },
     {
+        -- TODO: lsp_status component?
         "nvim-lualine/lualine.nvim",
         event = "VimEnter",
         opts = function()
@@ -170,28 +171,6 @@ return {
         },
     },
     {
-        "akinsho/bufferline.nvim",
-        version = "*",
-        event = "VeryLazy",
-        opts = function()
-            return {
-                options = {
-                    mode = "tabs",
-                    always_show_bufferline = false,
-                    separator_style = "thick",
-                    buffer_close_icon = icons.ui.close,
-                    close_icon = icons.ui.close_box,
-                    modified_icon = icons.ui.dot,
-                    indicator = {
-                        style = "none",
-                    },
-                },
-                highlights = require("catppuccin.groups.integrations.bufferline").get(),
-            }
-        end,
-        dependencies = "nvim-tree/nvim-web-devicons",
-    },
-    {
         "rcarriga/nvim-notify",
         version = "*",
         lazy = false,
@@ -254,13 +233,6 @@ return {
                 end,
             },
         },
-    },
-    -- Disable hlsearch when I move the cursor
-    {
-        "asiryk/auto-hlsearch.nvim",
-        version = "*",
-        event = "VeryLazy",
-        config = true,
     },
     {
         "lukas-reineke/indent-blankline.nvim",

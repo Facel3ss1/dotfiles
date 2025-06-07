@@ -52,30 +52,6 @@ return {
                 desc = "Grep prompt",
             },
             { "<leader>fo", "<Cmd>Telescope oldfiles<CR>", desc = "Open recent file" },
-            {
-                "<leader>f/",
-                function()
-                    local actions = require("telescope.actions")
-                    local action_state = require("telescope.actions.state")
-
-                    -- Open folder in oil.nvim
-                    require("telescope").extensions.file_browser.file_browser {
-                        files = false,
-                        attach_mappings = function(_, map)
-                            map({ "i", "n" }, "<CR>", function(prompt_bufnr)
-                                local entry = action_state.get_selected_entry()
-                                vim.schedule(function()
-                                    vim.cmd.edit { entry.value }
-                                end)
-                                actions.close(prompt_bufnr)
-                            end)
-
-                            return true
-                        end,
-                    }
-                end,
-                desc = "Open folder browser",
-            },
             { "<leader>fx", "<Cmd>Telescope diagnostics<CR>", desc = "Find diagnostic" },
 
             { "<leader>hh", "<Cmd>Telescope help_tags<CR>", desc = "Help pages" },
@@ -132,16 +108,14 @@ return {
             local telescope = require("telescope")
             telescope.setup(opts)
 
-            -- The fzf plugin is only loaded when `make` is installed, so may not be available
+            -- The fzf plugin is only loaded when `make` is installed, so it may not be available
             pcall(telescope.load_extension, "fzf")
             telescope.load_extension("notify")
-            telescope.load_extension("file_browser")
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = util.executable("make") },
-            "nvim-telescope/telescope-file-browser.nvim",
         },
     },
 }
