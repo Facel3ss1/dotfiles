@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 if not util.has("win32") then
     vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("ChezmoiAddLazyLock", { clear = true }),
-        pattern = "LazyUpdate",
+        pattern = { "LazyInstall", "LazyUpdate", "LazyClean" },
         callback = function()
             local lockfile = vim.fs.normalize(vim.fn.stdpath("config") .. "/lazy-lock.json")
             chezmoi({ "add", lockfile }, "chezmoi add: lazy-lock.json")
