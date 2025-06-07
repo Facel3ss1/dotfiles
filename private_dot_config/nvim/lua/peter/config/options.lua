@@ -25,6 +25,7 @@ vim.o.tabstop = 4 -- <Tab> characters will be displayed as 4 characters wide
 vim.o.shiftwidth = 4 -- >, <, and = will work in increments of 4 characters
 vim.o.softtabstop = -1 -- Always indent shiftwidth characters when we press <Tab>, even if tabstop > shiftwidth
 vim.o.expandtab = true -- Use spaces instead of tabs for indentation
+vim.o.shiftround = true -- Round indent to multiple of shiftwidth to prevent an off-by-one number of spaces
 
 vim.o.autoindent = true -- Continue indentation from previous line
 vim.o.smartindent = true -- Smartly add indentation when starting new line
