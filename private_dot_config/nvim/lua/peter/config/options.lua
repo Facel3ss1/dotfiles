@@ -69,3 +69,9 @@ end
 vim.o.keywordprg = ":help" -- Check internal help when using K
 
 vim.o.exrc = true -- Run .exrc, .nvimrc and .nvim.lua files in the current directory (See :h trust)
+
+-- Disable providers to remove clutter from checkhealth (See :h provider)
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
