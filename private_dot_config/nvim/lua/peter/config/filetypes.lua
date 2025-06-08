@@ -40,3 +40,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     desc = "Set conceallevel = 0",
 })
+
+-- Enable cfilter plugin for quickfix list (See :h cfilter-plugin)
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf",
+    group = vim.api.nvim_create_augroup("PackaddCfilter", { clear = true }),
+    callback = function()
+        -- :h pack-add says we need a bang, but this doesn't load the plugin,
+        -- it only adds the files to 'runtimepath' - given that lazy.nvim is
+        -- managing the runtimepath lets just add it normally.
+        vim.cmd.packadd { "cfilter" }
+    end,
+    desc = "Run :packadd cfilter",
+})

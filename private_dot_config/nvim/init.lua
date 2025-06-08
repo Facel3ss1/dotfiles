@@ -26,18 +26,6 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_create_autocmd("User", {
-    pattern = "VeryLazy",
-    group = vim.api.nvim_create_augroup("LazyPackadd", { clear = true }),
-    callback = function()
-        -- :h pack-add says we need a bang, but this doesn't load the plugin,
-        -- it only adds the files to 'runtimepath' - given that lazy.nvim is
-        -- managing the runtimepath lets just add it normally.
-        vim.cmd.packadd { "cfilter" }
-    end,
-    desc = "Run :packadd cfilter",
-})
-
 -- Install and apply my plugin settings
 require("lazy").setup("peter.plugins", {
     -- TODO: version = "*" to always use latest semver version
