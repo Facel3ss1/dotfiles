@@ -26,12 +26,18 @@ Running `:checkhealth` can also show you what is needed by the plugins.
 | A C Compiler | Needed by [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) to install the parsers. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements). |
 | [`ripgrep`](https://github.com/BurntSushi/ripgrep) (optional) | Used by [telescope](https://github.com/nvim-telescope/telescope.nvim) and others for fast file searching. |
 | `make` (optional) | If installed, it will be used to build [telescope-fzf-native](https://github.com/nvim-telescope/telescope-fzf-native.nvim) to make telescope pickers faster. |
-| [The Tree-sitter CLI](https://github.com/tree-sitter/tree-sitter/blob/master/cli/README.md) (optional) | If installed, then nvim-treesitter can automatically install parsers for you. |
+
+### Language LSPs and Tools
 
 LSPs and other tools are installed and managed by
 [Mason](https://github.com/williamboman/mason.nvim). In general, to install
-tools for a language, you will need the package manager for that language
-(e.g. `cargo`, `pip`, `npm`). You can run `:checkhealth mason` to see what
-package managers you have installed.
+tools for a language, you will need a package manager for that language (e.g.
+`cargo`, `uv`, `pnpm`). You can run `:checkhealth mason` to see what package
+managers you have installed.
 
-<!-- TODO: List the main LSPs I want installed -->
+Each language is configured to use the LSPs/Tools listed below, and these
+should be installed in order to get the full editor functionality:
+
+| Language | Tools |
+|----------|-------|
+| [Typst](https://typst.app/) | [`tinymist`](https://github.com/Myriad-Dreamin/tinymist) and [`websocat`](https://github.com/vi/websocat) for [typst-preview](https://github.com/chomosuke/typst-preview.nvim)

@@ -1,3 +1,5 @@
+local util = require("peter.util")
+
 -- TODO: glow.nvim
 
 ---@module "lazy"
@@ -48,24 +50,15 @@ return {
             "TypstPreviewFollowCursorToggle",
             "TypstPreviewSyncCursor",
         },
-        opts = function()
-            -- We want to use the mason tinymist binary
-            local tinymist_package = require("mason-registry").get_package("tinymist")
-            local tinymist_path = vim.fs.normalize(tinymist_package:get_install_path())
-                .. "/"
-                .. require("typst-preview.fetch").get_tinymist_bin_name()
-
-            return {
-                dependencies_bin = {
-                    ["tinymist"] = tinymist_path,
-                },
-            }
-        end,
+        opts = {
+            -- Skip download of tinymist and websocat by the plugin, they must be installed manually
+            dependencies_bin = {
+                ["tinymist"] = "tinymist",
+                ["websocat"] = "websocat",
+            },
+        },
         config = true,
-        build = function()
-            -- This will install the websocat binary, but not tinymist, since we specified the tinymist mason binary above
-            require("typst-preview").update()
-        end,
+        cond = util.executable("tinymist") and util.executable("websocat"),
     },
     {
         "tpope/vim-abolish",
