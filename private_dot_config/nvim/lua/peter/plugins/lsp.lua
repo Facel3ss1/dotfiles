@@ -47,6 +47,7 @@ local lsp_settings = {
     },
 }
 
+-- TODO: Use vim.g variables for these
 local enable_format_on_save = true
 local enable_typos_lsp_diagnostics = true
 
@@ -56,6 +57,7 @@ local enable_typos_lsp_diagnostics = true
 ---@type LazySpec
 return {
     {
+        -- FIXME: Migrate to vim.lsp.config in 0.11
         "neovim/nvim-lspconfig",
         version = "*",
         -- FIXME: Make it work when I :e myfile
@@ -93,11 +95,14 @@ return {
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
+            -- TODO: Move config into peter.config.lsp
+
             -- Add a rounded border to docs hovers
             local hover_handler = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
             vim.lsp.handlers["textDocument/hover"] = hover_handler
 
-            -- TODO: Keybind to see all the definitions?
+            -- FIXME: Will this break on nvim 0.11?
+            -- TODO: Keybind to see all the definitions? e.g. 1gd?
             -- Always jump to the first definition when we go to definition
             local function definition_handler(_, result)
                 if not result or vim.tbl_isempty(result) then
@@ -133,7 +138,7 @@ return {
                 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
                 map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
                 map("n", "go", "<Cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
-                map("n", "gI", "<Cmd>Telescop lsp_implementations<CR>", { desc = "Go to implementations" })
+                map("n", "gI", "<Cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementations" })
                 map("n", "gr", "<Cmd>Telescope lsp_references<CR>", { desc = "Go to references" })
 
                 map("n", "<leader>fs", "<Cmd>Telescope lsp_document_symbols<CR>", { desc = "Find document symbol" })
@@ -160,6 +165,7 @@ return {
                 -- See :h lsp-defaults
                 vim.bo[buf].formatexpr = nil
 
+                -- Show codelenses and refresh them intermittently
                 if client.server_capabilities.codeLensProvider then
                     local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
                     if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = buf } == 0 then

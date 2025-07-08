@@ -9,7 +9,9 @@ local util = require("peter.util")
 ---@type LazySpec
 return {
     {
+        -- FIXME: Switch to `main` branch and add version field
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         build = ":TSUpdate",
         event = "BufReadPre",
         cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
@@ -90,11 +92,13 @@ return {
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
+        version = "*",
         module = false,
         event = "BufReadPre",
         config = true,
         dependencies = { "nvim-treesitter" },
     },
+    -- FIXME: This won't work with `main` branch of nvim-treesitter, either replace with fork or remove
     {
         "RRethy/nvim-treesitter-endwise",
         event = "InsertEnter",

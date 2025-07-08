@@ -114,12 +114,7 @@ return {
         event = "InsertEnter",
         -- TODO: Fix ``` in lua comments, disable `?
         -- TODO: Fix turbofish in rust
-        config = function()
-            require("nvim-autopairs").setup {}
-            require("cmp").event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-
-            table.insert(require("nvim-autopairs").get_rules("```")[1].filetypes, "typst")
-        end,
+        config = true,
     },
     {
         -- ALTERNATIVE: vim-wordmotion
