@@ -95,108 +95,6 @@ return {
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            -- TODO: Move config into peter.config.lsp
-
-            -- Add a rounded border to docs hovers
-            local hover_handler = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-            vim.lsp.handlers["textDocument/hover"] = hover_handler
-
-            -- FIXME: Will this break on nvim 0.11?
-            -- TODO: Keybind to see all the definitions? e.g. 1gd?
-            -- Always jump to the first definition when we go to definition
-            local function definition_handler(_, result)
-                if not result or vim.tbl_isempty(result) then
-                    util.info("[LSP] No results from textDocument/definition", { title = "LSP" })
-                    return
-                end
-
-                if vim.islist(result) then
-                    result = result[1]
-                end
-
-                vim.lsp.util.jump_to_location(result, "utf-8", false)
-            end
-            vim.lsp.handlers["textDocument/definition"] = definition_handler
-
-            -- Enable inlay hints by default
-            vim.lsp.inlay_hint.enable()
-
-            ---@param client vim.lsp.Client
-            ---@param buf integer
-            local function on_attach(client, buf)
-                ---@param mode string|string[]
-                ---@param lhs string
-                ---@param rhs string|function
-                ---@param opts vim.keymap.set.Opts?
-                local function map(mode, lhs, rhs, opts)
-                    opts.buffer = buf
-                    vim.keymap.set(mode, lhs, rhs, opts)
-                end
-
-                -- TODO: Add floating border to this
-                -- map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "View signature help" })
-                map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-                map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-                map("n", "go", "<Cmd>Telescope lsp_type_definitions<CR>", { desc = "Go to type definition" })
-                map("n", "gI", "<Cmd>Telescope lsp_implementations<CR>", { desc = "Go to implementations" })
-                map("n", "gr", "<Cmd>Telescope lsp_references<CR>", { desc = "Go to references" })
-
-                map("n", "<leader>fs", "<Cmd>Telescope lsp_document_symbols<CR>", { desc = "Find document symbol" })
-                map("n", "<leader>fS", "<Cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Find workspace symbol" })
-
-                map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
-                map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
-                map("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
-
-                map("n", "<leader>th", function()
-                    local inlay_hints_enabled = vim.lsp.inlay_hint.is_enabled()
-                    inlay_hints_enabled = not inlay_hints_enabled
-
-                    vim.lsp.inlay_hint.enable(inlay_hints_enabled)
-
-                    if inlay_hints_enabled then
-                        util.info("Enabled inlay hints", { title = "Inlay hints" })
-                    else
-                        util.info("Disabled inlay hints", { title = "Inlay hints" })
-                    end
-                end, { desc = "Toggle inlay hints" })
-
-                -- Use internal formatting instead of `vim.lsp.formatexpr()` so that gq rewraps text instead of LSP formatting
-                -- See :h lsp-defaults
-                vim.bo[buf].formatexpr = nil
-
-                -- Show codelenses and refresh them intermittently
-                if client.server_capabilities.codeLensProvider then
-                    local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
-                    if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = buf } == 0 then
-                        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-                            group = codelens_group,
-                            buffer = buf,
-                            callback = function()
-                                vim.lsp.codelens.refresh { bufnr = buf }
-                            end,
-                            desc = "Call vim.lsp.codelens.refresh()",
-                        })
-                    end
-                end
-            end
-
-            local lsp_attach_group = vim.api.nvim_create_augroup("PeterLspAttach", { clear = true })
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = lsp_attach_group,
-                callback = function(args)
-                    local buf = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client == nil then
-                        util.error("[LSP] Could not find client with id " .. args.data.client_id, { title = "LSP" })
-                        return
-                    end
-
-                    on_attach(client, buf)
-                end,
-                desc = "Call on_attach()",
-            })
-
             ---@param server_name string
             ---@return lspconfig.Config
             local function default_config(server_name)
@@ -264,6 +162,7 @@ return {
             }
         end,
     },
+    -- FIXME: Remove, including note in README
     {
         "williamboman/mason.nvim",
         version = "*",
@@ -359,6 +258,7 @@ return {
             end,
         },
     },
+    -- TODO: Replace with mini.notify?
     {
         "j-hui/fidget.nvim",
         event = { "LspAttach" },

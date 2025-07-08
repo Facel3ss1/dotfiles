@@ -35,6 +35,7 @@ vim.keymap.set("i", ".", ".<C-g>u")
 vim.keymap.set("i", "!", "!<C-g>u")
 vim.keymap.set("i", "?", "?<C-g>u")
 
+-- FIXME: Snippet jumping keymaps are defaults in 0.11
 -- Snippet jumping
 vim.keymap.set({ "i", "s" }, "<Tab>", function()
     if vim.snippet.active { direction = 1 } then
@@ -58,6 +59,15 @@ vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
     return "<S-Tab>"
 end, { expr = true, silent = true })
 
+-- LSP keymaps
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
+vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+-- FIXME: Signature help keybind is a default in 0.11
+vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "View signature help" })
+
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 
 vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
@@ -65,10 +75,12 @@ vim.keymap.set("n", "<leader>ul", "<Cmd>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>hi", "<Cmd>Inspect<CR>", { desc = "Inspect at cursor" })
 vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter syntax tree" })
 
+-- Toggle soft (i.e. UI only) word wrapping
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
 -- stylua: ignore end
 
+-- Toggle diagnostics
 vim.keymap.set("n", "<leader>td", function()
     local diagnostics_enabled = vim.diagnostic.is_enabled()
     diagnostics_enabled = not diagnostics_enabled
@@ -81,6 +93,20 @@ vim.keymap.set("n", "<leader>td", function()
         util.info("Disabled diagnostics", { title = "Diagnostics" })
     end
 end, { desc = "Toggle diagnostics" })
+
+-- Toggle LSP inlay hints
+vim.keymap.set("n", "<leader>th", function()
+    local inlay_hints_enabled = vim.lsp.inlay_hint.is_enabled()
+    inlay_hints_enabled = not inlay_hints_enabled
+
+    vim.lsp.inlay_hint.enable(inlay_hints_enabled)
+
+    if inlay_hints_enabled then
+        util.info("Enabled inlay hints", { title = "Inlay hints" })
+    else
+        util.info("Disabled inlay hints", { title = "Inlay hints" })
+    end
+end, { desc = "Toggle inlay hints" })
 
 -- TODO: Toggle treesitter using vim.treesitter.stop(), in case it goes haywire
 

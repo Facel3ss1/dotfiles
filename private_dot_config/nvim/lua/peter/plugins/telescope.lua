@@ -36,6 +36,12 @@ return {
         version = "*",
         cmd = "Telescope",
         keys = {
+            -- FIXME: Based on `:h lsp-defaults` in 0.11
+            { "grr", "<Cmd>Telescope lsp_references<CR>", desc = "Go to references" },
+            { "gri", "<Cmd>Telescope lsp_implementations<CR>", desc = "Go to implementations" },
+            { "grt", "<Cmd>Telescope lsp_type_definitions<CR>", desc = "Go to type definition" },
+            { "gO", "<Cmd>Telescope lsp_document_symbols<CR>", desc = "Find document symbol" },
+
             { "<leader>fd", find_files(false), desc = "Find file" },
             { "<leader>fD", find_files(true), desc = "Find file (including ignored)" },
             { "<leader>fb", "<Cmd>Telescope buffers<CR>", desc = "Find buffer" },
@@ -53,6 +59,7 @@ return {
             },
             { "<leader>fo", "<Cmd>Telescope oldfiles<CR>", desc = "Open recent file" },
             { "<leader>fx", "<Cmd>Telescope diagnostics<CR>", desc = "Find diagnostic" },
+            { "<leader>fs", "<Cmd>Telescope lsp_workspace_symbols<CR>", desc = "Find workspace symbol" },
 
             { "<leader>hh", "<Cmd>Telescope help_tags<CR>", desc = "Help pages" },
             { "<leader>hc", "<Cmd>Telescope commands<CR>", desc = "Commands" },

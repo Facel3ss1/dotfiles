@@ -165,6 +165,7 @@ return {
                     { "[", group = "prev" },
                     { "]", group = "next" },
                     { "g", group = "goto" },
+                    { "gr", group = "LSP actions" },
                     { "z", group = "fold" },
                 },
             },
@@ -194,6 +195,7 @@ return {
             end
         end,
     },
+    -- FIXME: Replace, as it is archived
     {
         "stevearc/dressing.nvim",
         lazy = false,
