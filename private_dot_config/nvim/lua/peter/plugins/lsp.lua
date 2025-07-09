@@ -1,52 +1,6 @@
 local util = require("peter.util")
 local icons = require("peter.util.icons")
 
-local lsp_settings = {
-    ["lua_ls"] = {
-        Lua = {
-            completion = {
-                callSnippet = "Replace",
-                postfix = ".",
-            },
-            diagnostics = {
-                libraryFiles = "Disable",
-                unusedLocalExclude = { "_*" },
-                groupSeverity = {
-                    ["unused"] = "Warning",
-                },
-            },
-            format = {
-                enable = false,
-            },
-            hint = {
-                enable = true,
-                arrayIndex = "Disable",
-                setType = true,
-            },
-            workspace = {
-                checkThirdParty = false,
-            },
-        },
-    },
-    ["pyright"] = {
-        pyright = {
-            -- We are using Ruff's import organizer instead
-            disableOrganizeImports = true,
-        },
-    },
-    ["rust_analyzer"] = {
-        ["rust-analyzer"] = {
-            check = {
-                command = "clippy",
-                extraArgs = { "--no-deps" },
-            },
-        },
-    },
-    ["typos_lsp"] = {
-        diagnosticSeverity = "Hint",
-    },
-}
-
 -- TODO: Use vim.g variables for these
 local enable_format_on_save = true
 local enable_typos_lsp_diagnostics = true
@@ -91,75 +45,74 @@ return {
         },
         dependencies = {
             "mason.nvim",
-            { "williamboman/mason-lspconfig.nvim", version = "*" },
             "hrsh7th/cmp-nvim-lsp",
         },
         config = function()
-            ---@param server_name string
-            ---@return lspconfig.Config
-            local function default_config(server_name)
-                local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-                ---@type lspconfig.Config
-                local config = {
-                    capabilities = capabilities,
-                    settings = lsp_settings[server_name],
-                }
-
-                return config
-            end
-
-            require("mason-lspconfig").setup {
-                -- TODO: jsonls
-                ensure_installed = { "lua_ls" },
-            }
-
             local lspconfig = require("lspconfig")
-            require("mason-lspconfig").setup_handlers {
-                -- Default handler
-                function(server_name)
-                    local config = default_config(server_name)
-                    lspconfig[server_name].setup(config)
-                end,
-                ["typos_lsp"] = function(server_name)
-                    local config = default_config(server_name)
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-                    --- typos_lsp uses init_options instead of settings for configuration
-                    config.init_options = config.settings
-                    config.settings = nil
+            lspconfig.lua_ls.setup {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        completion = {
+                            callSnippet = "Replace",
+                            postfix = ".",
+                        },
+                        diagnostics = {
+                            libraryFiles = "Disable",
+                            unusedLocalExclude = { "_*" },
+                            groupSeverity = {
+                                ["unused"] = "Warning",
+                            },
+                        },
+                        format = {
+                            enable = false,
+                        },
+                        hint = {
+                            enable = true,
+                            arrayIndex = "Disable",
+                            setType = true,
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                        },
+                    },
+                },
+            }
 
-                    config.on_attach = function(client, _buf)
-                        -- TODO: Make the typos_lsp code actions do an LSP rename?
-
-                        -- Set initial state of typos-lsp diagnostics
-                        local typos_ns = vim.lsp.diagnostic.get_namespace(client.id)
-                        vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
-                    end
-
-                    lspconfig[server_name].setup(config)
-                end,
-                -- rustaceanvim sets up rust-analyzer for us
-                ["rust_analyzer"] = function() end,
-                ["ts_ls"] = function(server_name)
-                    local config = default_config(server_name)
-                    config.on_attach = function(_client, buf)
-                        vim.keymap.set(
-                            "n",
-                            "gs",
-                            "<Cmd>TSToolsGoToSourceDefinition<CR>",
-                            { buffer = buf, desc = "Go to source definition" }
-                        )
-
-                        vim.api.nvim_create_autocmd("BufWritePre", {
-                            group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
-                            command = "TSToolsOrganizeImports",
-                            desc = "Organize typescript imports",
-                        })
-                    end
-
-                    require("typescript-tools").setup(config)
+            lspconfig.typos_lsp.setup {
+                capabilities = capabilities,
+                -- typos-lsp uses `init_options` instead of `settings` for configuration
+                init_options = {
+                    diagnosticSeverity = "Hint",
+                },
+                -- Set initial state of typos-lsp diagnostics
+                on_attach = function(client, _buf)
+                    -- TODO: Make the typos_lsp code actions do an LSP rename?
+                    local typos_ns = vim.lsp.diagnostic.get_namespace(client.id)
+                    vim.diagnostic.enable(enable_typos_lsp_diagnostics, { ns_id = typos_ns })
                 end,
             }
+
+            lspconfig.basedpyright.setup {
+                capabilities = capabilities,
+                settings = {
+                    basedpyright = {
+                        -- We are using Ruff's import organizer instead
+                        disableOrganizeImports = true,
+                    },
+                },
+            }
+
+            lspconfig.ruff.setup {
+                capabilities = capabilities,
+            }
+
+            -- rust_analyzer is configured using the rustaceanvim plugin below
+
+            -- tsserver is configured using the typescript-tools plugin below
+            -- Note that tsserver is included already within a typescript installation and is not the same thing as typescript-language-server
         end,
     },
     -- FIXME: Remove, including note in README
@@ -308,7 +261,14 @@ return {
         lazy = false, -- This plugin is already lazy
         opts = {
             server = {
-                settings = lsp_settings["rust_analyzer"],
+                settings = {
+                    ["rust-analyzer"] = {
+                        check = {
+                            command = "clippy",
+                            extraArgs = { "--no-deps" },
+                        },
+                    },
+                },
             },
         },
         config = function(_, opts)
@@ -317,6 +277,29 @@ return {
     },
     {
         "pmizio/typescript-tools.nvim",
+        ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+        opts = function()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+            return {
+                capabilities = capabilities,
+                on_attach = function(_client, buf)
+                    vim.keymap.set(
+                        "n",
+                        "gs",
+                        "<Cmd>TSToolsGoToSourceDefinition<CR>",
+                        { buffer = buf, desc = "Go to source definition" }
+                    )
+
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
+                        command = "TSToolsOrganizeImports",
+                        desc = "Organize typescript imports",
+                    })
+                end,
+            }
+        end,
+        config = true,
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     },
 }
