@@ -51,14 +51,15 @@ return {
             "TypstPreviewSyncCursor",
         },
         opts = {
-            -- Skip download of tinymist and websocat by the plugin, they must be installed manually
+            -- Skip download of tinymist by the plugin, it must be installed manually
+            -- websocat will be automatically downloaded by the plugin
             dependencies_bin = {
                 ["tinymist"] = "tinymist",
-                ["websocat"] = "websocat",
+                ["websocat"] = nil,
             },
         },
         config = true,
-        cond = util.executable("tinymist") and util.executable("websocat"),
+        cond = util.executable("tinymist"),
     },
     {
         "tpope/vim-abolish",

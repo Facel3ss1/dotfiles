@@ -1,7 +1,6 @@
 local icons = require("peter.util.icons")
 
 -- TODO: Breakpoint icons
--- TODO: mason-nvim-dap?
 -- TODO: telescope-dap?
 -- TODO: one-small-step-for-vimkind
 
@@ -83,7 +82,6 @@ return {
                 "theHamsta/nvim-dap-virtual-text",
                 config = true,
             },
-            "williamboman/mason.nvim",
         },
     },
 }

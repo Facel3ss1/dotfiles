@@ -24,7 +24,6 @@ return {
                     {
                         { name = "Oil", action = "Oil", section = "Actions" },
                         { name = "Lazy", action = "Lazy", section = "Actions" },
-                        { name = "Mason", action = "Mason", section = "Actions" },
                         { name = "Edit new buffer", action = "enew", section = "Actions" },
                         { name = "Quit Neovim", action = "qall", section = "Actions" },
                     },
@@ -131,7 +130,6 @@ return {
                 extensions = {
                     "lazy",
                     "man",
-                    "mason",
                     "quickfix",
                     "nvim-dap-ui",
                     "oil",

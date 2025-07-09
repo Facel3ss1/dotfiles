@@ -25,7 +25,6 @@ return {
                 indent_blankline = {
                     enabled = true,
                 },
-                mason = true,
                 mini = {
                     enabled = true,
                 },

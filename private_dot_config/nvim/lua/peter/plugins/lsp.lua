@@ -43,10 +43,7 @@ return {
                 mode = { "n" },
             },
         },
-        dependencies = {
-            "mason.nvim",
-            "hrsh7th/cmp-nvim-lsp",
-        },
+        dependencies = { "hrsh7th/cmp-nvim-lsp" },
         config = function()
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -113,43 +110,6 @@ return {
 
             -- tsserver is configured using the typescript-tools plugin below
             -- Note that tsserver is included already within a typescript installation and is not the same thing as typescript-language-server
-        end,
-    },
-    -- FIXME: Remove, including note in README
-    {
-        "williamboman/mason.nvim",
-        version = "*",
-        cmd = { "Mason", "MasonInstall", "MasonUninstall" },
-        keys = {
-            { "<leader>um", "<Cmd>Mason<CR>", desc = "Open Mason" },
-        },
-        -- TODO: Automatically update installed packages
-        opts = {
-            ui = {
-                border = "rounded",
-                icons = {
-                    package_installed = icons.packages.installed,
-                    package_pending = icons.packages.pending,
-                    package_uninstalled = icons.packages.uninstalled,
-                },
-                width = 0.8,
-                height = 0.8,
-            },
-        },
-        config = function(_, opts)
-            require("mason").setup(opts)
-
-            local ensure_installed = {
-                "stylua",
-                "typos-lsp",
-            }
-            local mason_registry = require("mason-registry")
-            for _, package_name in ipairs(ensure_installed) do
-                local package = mason_registry.get_package(package_name)
-                if not package:is_installed() then
-                    package:install()
-                end
-            end
         end,
     },
     {

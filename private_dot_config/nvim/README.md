@@ -17,8 +17,8 @@ nvim
 ## Requirements
 
 Below are the requirements for the plugins in my config. You will need these in
-addition to the software you needed to install these dotfiles (`git` etc.).
-Running `:checkhealth` can also show you what is needed by the plugins.
+addition to the software you needed to install these dotfiles (`git`, `curl`,
+etc.). Running `:checkhealth` can also show you what is needed by the plugins.
 
 | Name | Reason |
 |------|--------|
@@ -29,15 +29,25 @@ Running `:checkhealth` can also show you what is needed by the plugins.
 
 ### Language LSPs and Tools
 
-LSPs and other tools are installed and managed by
-[Mason](https://github.com/williamboman/mason.nvim). In general, to install
-tools for a language, you will need a package manager for that language (e.g.
-`cargo`, `uv`, `pnpm`). You can run `:checkhealth mason` to see what package
-managers you have installed.
+LSPs and other tools must be installed before using them with Neovim. In
+general, to install tools for a language, you will need a package manager for
+that language (e.g. `cargo`, `uv`, `pnpm`). Ideally, you'd use a holistic
+solution like [`mise`](https://mise.jdx.dev/) or [`nix`](https://nixos.org/) to
+do tool installation consistently.
 
 Each language is configured to use the LSPs/Tools listed below, and these
-should be installed in order to get the full editor functionality:
+should be installed in order to get the full editor functionality. At a
+minimum, you should install the tools for Lua to make editing Neovim's
+configuration easier.
 
 | Language | Tools |
 |----------|-------|
-| [Typst](https://typst.app/) | [`tinymist`](https://github.com/Myriad-Dreamin/tinymist) and [`websocat`](https://github.com/vi/websocat) for [typst-preview](https://github.com/chomosuke/typst-preview.nvim)
+| [Lua](https://www.lua.org/) | [`lua-language-server`](https://github.com/LuaLS/lua-language-server) and [`stylua`](https://github.com/JohnnyMorganz/StyLua) |
+| [Rust](https://www.rust-lang.org/) | [`rust-analyzer`](https://github.com/rust-lang/rust-analyzer) |
+| [Python](https://www.python.org/) | [`basedpyright`](https://github.com/DetachHead/basedpyright) and [`ruff`](https://github.com/astral-sh/ruff) |
+| [TypeScript](https://www.typescriptlang.org/) (and JavaScript) | [`prettier`](https://prettier.io/) (Note that the `typescript` binary comes with the `tsserver` 'LSP') |
+| [Typst](https://typst.app/) | [`tinymist`](https://github.com/Myriad-Dreamin/tinymist) |
+
+Other useful tools to install are:
+
+- [`typos-lsp`](https://github.com/tekumara/typos-lsp) for low false-positive spell checking in source code
