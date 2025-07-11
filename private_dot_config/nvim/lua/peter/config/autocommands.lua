@@ -1,3 +1,5 @@
+-- TODO: Namespace my augroups e.g. peter.cursor_line_toggle, peter.yank_highlight etc.
+
 -- Show a brief highlight when I yank something
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("YankHighlight", { clear = true }),
@@ -56,15 +58,4 @@ vim.api.nvim_create_autocmd("FileType", {
             + "q" -- Let me wrap comments with gq
     end,
     desc = "Change formatoptions: +rjq -o",
-})
-
--- FIXME: Remove in 0.11
--- Disable line numbers in terminal windows
-vim.api.nvim_create_autocmd("TermOpen", {
-    group = vim.api.nvim_create_augroup("SetTerminalOptions", { clear = true }),
-    callback = function()
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-    end,
-    desc = "Disable line numbers",
 })

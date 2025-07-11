@@ -35,38 +35,24 @@ vim.keymap.set("i", ".", ".<C-g>u")
 vim.keymap.set("i", "!", "!<C-g>u")
 vim.keymap.set("i", "?", "?<C-g>u")
 
--- FIXME: Snippet jumping keymaps are defaults in 0.11
--- Snippet jumping
-vim.keymap.set({ "i", "s" }, "<Tab>", function()
-    if vim.snippet.active { direction = 1 } then
-        vim.schedule(function()
-            vim.snippet.jump(1)
-        end)
-        return
-    end
-
-    return "<Tab>"
-end, { expr = true, silent = true })
-
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-    if vim.snippet.active { direction = -1 } then
-        vim.schedule(function()
-            vim.snippet.jump(-1)
-        end)
-        return
-    end
-
-    return "<S-Tab>"
-end, { expr = true, silent = true })
-
 -- LSP keymaps
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action" })
 vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run code lens" })
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+
+-- TODO: Keybind to see all the definitions? e.g. 1gd?
+-- Go to definition should always jump to the first definition
+vim.keymap.set("n", "gd", function()
+    vim.lsp.buf.definition {
+        on_list = function(options)
+            ---@type vim.quickfix.entry
+            local first_item = options.items[1]
+            -- The `user_data` is an lsp.LocationLink, since `on_list` calls vim.lsp.util.locations_to_items() beforehand for us
+            vim.lsp.util.show_document(first_item.user_data, "utf-8", { focus = true })
+        end,
+    }
+end, { desc = "Go to definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
--- FIXME: Signature help keybind is a default in 0.11
-vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "View signature help" })
 
 vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 

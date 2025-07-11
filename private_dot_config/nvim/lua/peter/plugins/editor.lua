@@ -1,20 +1,6 @@
 ---@module "lazy"
 ---@type LazySpec
 return {
-    {
-        "echasnovski/mini.bracketed",
-        version = "*",
-        event = "VeryLazy",
-        opts = {
-            -- Disable ]c and ]t keybinds, as they are used by mini.diff and todo-comments
-            comment = { suffix = "" },
-            treesitter = { suffix = "" },
-        },
-        config = function(_, opts)
-            require("mini.bracketed").setup(opts)
-        end,
-    },
-    -- TODO: Make this lazy
     -- TODO: Respect cwd in terminal buffers
     {
         "stevearc/oil.nvim",

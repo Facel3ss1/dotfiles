@@ -36,7 +36,7 @@ return {
         version = "*",
         cmd = "Telescope",
         keys = {
-            -- FIXME: Based on `:h lsp-defaults` in 0.11
+            -- Based on `:h lsp-defaults`
             { "grr", "<Cmd>Telescope lsp_references<CR>", desc = "Go to references" },
             { "gri", "<Cmd>Telescope lsp_implementations<CR>", desc = "Go to implementations" },
             { "grt", "<Cmd>Telescope lsp_type_definitions<CR>", desc = "Go to type definition" },

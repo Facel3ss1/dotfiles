@@ -82,12 +82,6 @@ return {
         end,
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
-
-            -- FIXME: https://github.com/nvim-telescope/telescope.nvim/issues/699
-            -- TODO: vim.treesitter.foldexpr() or just use foldexpr = indent as we use treesitter indent already
-            -- vim.o.foldmethod = "expr"
-            -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-            -- vim.o.foldenable = false
         end,
     },
     {
