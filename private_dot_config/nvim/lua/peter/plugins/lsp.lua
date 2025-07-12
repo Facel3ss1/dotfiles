@@ -145,9 +145,9 @@ return {
                     )
 
                     vim.api.nvim_create_autocmd("BufWritePre", {
-                        group = vim.api.nvim_create_augroup("OrganizeImportsOnSave", { clear = true }),
+                        group = vim.api.nvim_create_augroup("peter.organize_ts_imports_on_save", { clear = true }),
                         command = "TSToolsOrganizeImports",
-                        desc = "Organize typescript imports",
+                        desc = "Organize TypeScript imports",
                     })
                 end,
             }

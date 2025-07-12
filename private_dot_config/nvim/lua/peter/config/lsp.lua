@@ -4,9 +4,8 @@ local util = require("peter.util")
 vim.lsp.inlay_hint.enable()
 
 -- Buffer-local LSP settings
-local lsp_attach_group = vim.api.nvim_create_augroup("PeterLspAttach", { clear = true })
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = lsp_attach_group,
+    group = vim.api.nvim_create_augroup("peter.lsp.attach", { clear = true }),
     callback = function(args)
         ---@type integer
         local buf = args.buf
@@ -30,7 +29,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         -- Show codelenses and refresh them intermittently
         if client.server_capabilities.codeLensProvider then
-            local codelens_group = vim.api.nvim_create_augroup("PeterLspCodelens", { clear = false })
+            local codelens_group = vim.api.nvim_create_augroup("peter.lsp.codelens", { clear = false })
             if #vim.api.nvim_get_autocmds { group = codelens_group, buffer = buf } == 0 then
                 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                     group = codelens_group,

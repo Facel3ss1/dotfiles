@@ -51,13 +51,13 @@ return {
             end
 
             -- Attempt to start treesitter for every file type
-            local start_treesitter_group = vim.api.nvim_create_augroup("PeterStartTreesitter", { clear = true })
             vim.api.nvim_create_autocmd("FileType", {
-                group = start_treesitter_group,
+                group = vim.api.nvim_create_augroup("peter.start_treesitter", { clear = true }),
                 callback = function()
                     -- Will be false for filetypes with no treesitter parser installed
                     local _has_started = pcall(vim.treesitter.start)
                 end,
+                desc = "Attempt to call vim.treesitter.start()",
             })
         end,
         cond = util.executable("tree-sitter"),

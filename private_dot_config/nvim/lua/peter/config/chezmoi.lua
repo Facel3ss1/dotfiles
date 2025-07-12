@@ -21,7 +21,7 @@ local function chezmoi(args, success_message)
 end
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("ChezmoiApplyOnSave", { clear = true }),
+    group = vim.api.nvim_create_augroup("peter.chezmoi.apply", { clear = true }),
     pattern = M.source_dir .. "/*",
     callback = function(opts)
         -- TODO: Exclude certain filetypes?
@@ -46,7 +46,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 -- This only works in WSL, and I primarily change the config in WSL anyway
 if not util.has("win32") then
     vim.api.nvim_create_autocmd("User", {
-        group = vim.api.nvim_create_augroup("ChezmoiAddLazyLock", { clear = true }),
+        group = vim.api.nvim_create_augroup("peter.chezmoi.add_lazy_lock", { clear = true }),
         pattern = { "LazyInstall", "LazyUpdate", "LazyClean" },
         callback = function()
             local lockfile = vim.fs.normalize(vim.fn.stdpath("config") .. "/lazy-lock.json")
