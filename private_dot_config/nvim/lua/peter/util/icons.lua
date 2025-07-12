@@ -19,7 +19,7 @@ return {
         pending = "󰁔",
         uninstalled = "○",
     },
-    notifications = {
+    logs = {
         DEBUG = "󰃤",
         TRACE = "󰅍",
         INFO = "󰋼",

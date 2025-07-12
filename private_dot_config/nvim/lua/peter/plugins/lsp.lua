@@ -79,24 +79,6 @@ return {
             end,
         },
     },
-    -- TODO: Replace with mini.notify?
-    {
-        "j-hui/fidget.nvim",
-        event = { "LspAttach" },
-        version = "*",
-        opts = {
-            progress = {
-                display = {
-                    done_icon = icons.ui.done,
-                },
-            },
-            notification = {
-                window = {
-                    winblend = 0,
-                },
-            },
-        },
-    },
     {
         "kosayoda/nvim-lightbulb",
         event = { "LspAttach" },

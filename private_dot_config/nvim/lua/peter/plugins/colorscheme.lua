@@ -21,7 +21,6 @@ return {
                 cmp = true,
                 dap = true,
                 dap_ui = true,
-                fidget = true,
                 indent_blankline = {
                     enabled = true,
                 },
@@ -42,7 +41,6 @@ return {
                         background = false,
                     },
                 },
-                notify = true,
                 nvim_surround = true,
                 telescope = {
                     enabled = true,

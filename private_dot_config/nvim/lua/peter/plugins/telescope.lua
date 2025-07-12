@@ -71,7 +71,6 @@ return {
             { "<leader>hf", "<Cmd>Telescope filetypes<CR>", desc = "File types" },
             { "<leader>ho", "<Cmd>Telescope vim_options<CR>", desc = "Options" },
             { "<leader>ha", "<Cmd>Telescope autocommands<CR>", desc = "Autocommands" },
-            { "<leader>hn", "<Cmd>Telescope notify<CR>", desc = "Notifications" },
 
             { "<leader>gb", "<Cmd>Telescope git_branches<CR>", desc = "Branches" },
         },
@@ -125,7 +124,6 @@ return {
 
             -- The fzf plugin is only loaded when `make` is installed, so it may not be available
             pcall(telescope.load_extension, "fzf")
-            telescope.load_extension("notify")
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
