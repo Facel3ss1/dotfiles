@@ -68,7 +68,7 @@ wezterm.on("update-status", tabbar.update_status)
 
 -- Keybinds
 
-config.leader = { key = " ", mods = "CTRL", timeout_milliseconds = 1000 } -- Ctrl-Space
+config.leader = { key = "m", mods = "ALT", timeout_milliseconds = 1000 }
 config.keys = {
     {
         key = "v",
@@ -91,11 +91,11 @@ config.keys = {
         action = wezterm.action.ShowLauncherArgs { flags = "FUZZY|WORKSPACES" },
     },
 
-    -- In case we ever want to type Ctrl-Space
+    -- In case we ever want to type Alt-m
     {
-        key = " ",
-        mods = "LEADER|CTRL",
-        action = wezterm.action.SendKey { key = " ", mods = "CTRL" },
+        key = "m",
+        mods = "LEADER|ALT",
+        action = wezterm.action.SendKey { key = "m", mods = "ALT" },
     },
 
     {
