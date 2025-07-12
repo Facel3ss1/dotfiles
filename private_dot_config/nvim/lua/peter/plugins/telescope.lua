@@ -104,7 +104,14 @@ return {
                             changed = "M",
                         },
                     },
-                    help_tags = { theme = "ivy" },
+                    help_tags = {
+                        theme = "ivy",
+                        mappings = {
+                            ["i"] = {
+                                ["<CR>"] = actions.select_vertical,
+                            },
+                        },
+                    },
                     man_pages = {
                         theme = "ivy",
                         sections = { "ALL" },
