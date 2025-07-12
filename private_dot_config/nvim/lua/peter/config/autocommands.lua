@@ -3,9 +3,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("peter.yank_highlight", { clear = true }),
     pattern = "*",
     callback = function()
-        pcall(vim.highlight.on_yank)
+        pcall(vim.hl.on_yank)
     end,
-    desc = "Call vim.highlight.on_yank()",
+    desc = "Call vim.hl.on_yank()",
 })
 
 -- Only enable the cursorline in the current window
