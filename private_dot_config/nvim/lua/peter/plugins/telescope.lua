@@ -33,7 +33,8 @@ end
 return {
     {
         "nvim-telescope/telescope.nvim",
-        version = "*",
+        -- Despite what the README says, the latest telescope version is very outdated, so use the master branch instead
+        -- version = "*"
         cmd = "Telescope",
         keys = {
             -- Based on `:h lsp-defaults`

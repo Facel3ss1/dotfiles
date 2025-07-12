@@ -1,88 +1,66 @@
 local util = require("peter.util")
 
--- TODO: neogen
--- TODO: nvim-ts-context-commentstring with lua help comments?
--- TODO: nvim-ts-autotag
--- TODO: "in comment" e.g. gqic for formatting (nvim-ts-textobjects)
-
 ---@module "lazy"
 ---@type LazySpec
 return {
     {
-        -- FIXME: Switch to `main` branch and add version field
         "nvim-treesitter/nvim-treesitter",
-        branch = "master",
+        branch = "main", -- FIXME: Remove once main is the default
+        lazy = false, -- This plugin does not support lazy loading
         build = ":TSUpdate",
-        event = "BufReadPre",
-        cmd = { "TSInstall", "TSInstallInfo", "TSUpdate" },
-        opts = function()
-            return {
-                -- See :h treesitter-parsers and :TSInstallInfo to see the parsers that are built in to Neovim.
-                ensure_installed = {
-                    "c_sharp",
-                    "cmake",
-                    "cpp",
-                    "css",
-                    "diff",
-                    "dockerfile",
-                    "fish",
-                    "git_config",
-                    "git_rebase",
-                    "gitattributes",
-                    "gitcommit",
-                    "gitignore",
-                    "haskell",
-                    "html",
-                    "java",
-                    "javascript",
-                    "jsdoc",
-                    "json",
-                    "jsonc",
-                    "just",
-                    -- "kdl",
-                    "latex",
-                    "make",
-                    "meson",
-                    "ninja",
-                    -- "nix",
-                    "powershell",
-                    "regex",
-                    "rust",
-                    "sql",
-                    -- "terraform",
-                    "toml",
-                    "tsx",
-                    "typescript",
-                    "typst",
-                    "xml",
-                    "yaml",
-                },
-                sync_install = false,
-                auto_install = util.executable("tree-sitter"),
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = false,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<CR>",
-                        node_incremental = "<CR>",
-                        scope_incremental = false,
-                        node_decremental = "<BS>",
-                    },
-                },
-                endwise = {
-                    enable = true,
-                },
-                indent = {
-                    enable = true,
-                },
+        config = function()
+            local nvim_treesitter = require("nvim-treesitter")
+
+            local ensure_installed = {
+                "css",
+                "diff",
+                "dockerfile",
+                "fish",
+                "git_config",
+                "git_rebase",
+                "gitattributes",
+                "gitcommit",
+                "gitignore",
+                "html",
+                "javascript",
+                "jsdoc",
+                "json",
+                "jsonc",
+                "just",
+                "nix",
+                "powershell",
+                "regex",
+                "rust",
+                "sql",
+                "toml",
+                "tsx",
+                "typescript",
+                "xml",
+                "yaml",
             }
+
+            local already_installed = nvim_treesitter.get_installed()
+            local parsers_to_install = vim.iter(ensure_installed)
+                :filter(function(parser)
+                    return not vim.tbl_contains(already_installed, parser)
+                end)
+                :totable()
+
+            if #parsers_to_install > 0 then
+                nvim_treesitter.install(parsers_to_install)
+            end
+
+            -- Attempt to start treesitter for every file type
+            local start_treesitter_group = vim.api.nvim_create_augroup("PeterStartTreesitter", { clear = true })
+            vim.api.nvim_create_autocmd("FileType", {
+                group = start_treesitter_group,
+                callback = function()
+                    -- Will be false for filetypes with no treesitter parser installed
+                    local _has_started = pcall(vim.treesitter.start)
+                end,
+            })
         end,
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
-        end,
+        cond = util.executable("tree-sitter"),
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
@@ -90,12 +68,6 @@ return {
         module = false,
         event = "BufReadPre",
         config = true,
-        dependencies = { "nvim-treesitter" },
-    },
-    -- FIXME: This won't work with `main` branch of nvim-treesitter, either replace with fork or remove
-    {
-        "RRethy/nvim-treesitter-endwise",
-        event = "InsertEnter",
-        dependencies = { "nvim-treesitter" },
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
     },
 }
