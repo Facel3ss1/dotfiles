@@ -5,101 +5,34 @@ return {
     -- TODO: vim-splitjoin, or treesj
     -- TODO: dial.nvim
     {
-        -- TODO: nvim-cmp-emoji
-        "hrsh7th/nvim-cmp",
+        "Saghen/blink.cmp",
+        version = "*",
         event = { "InsertEnter", "CmdlineEnter" },
-        opts = function()
-            local cmp = require("cmp")
-
-            return {
-                mapping = {
-                    -- :h ins-completion and :h ins-completion-menu
-                    ["<C-n>"] = cmp.mapping(function()
-                        if cmp.visible() then
-                            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
-                        else
-                            cmp.complete()
-                        end
-                    end),
-                    ["<C-p>"] = cmp.mapping(function()
-                        if cmp.visible() then
-                            cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
-                        else
-                            cmp.complete()
-                        end
-                    end),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-y>"] = cmp.mapping.confirm { select = true },
+        ---@module "blink.cmp"
+        ---@type blink.cmp.Config
+        opts = {
+            -- See `:h ins-completion`
+            keymap = { preset = "default" },
+            completion = {
+                documentation = { auto_show = true },
+                menu = {
+                    draw = { treesitter = { "lsp" } },
                 },
-                sources = cmp.config.sources {
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "buffer" },
+            },
+            sources = {
+                per_filetype = {
+                    lua = { inherit_defaults = true, "lazydev" },
                 },
-                snippet = {
-                    expand = function(args)
-                        vim.snippet.expand(args.body)
-                    end,
-                },
-                formatting = {
-                    format = require("lspkind").cmp_format {
-                        mode = "symbol_text",
-                        menu = {
-                            buffer = "[buf]",
-                            nvim_lsp = "[lsp]",
-                            path = "[path]",
-                            cmdline = "[cmd]",
-                            cmdline_history = "[hist]",
-                        },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        score_offset = 100, -- Show at higher priority than lsp source
                     },
                 },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-            }
-        end,
-        config = function(_, opts)
-            local cmp = require("cmp")
-
-            vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
-            cmp.setup(opts)
-
-            cmp.setup.cmdline({ "/", "?" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "buffer" },
-                }, {
-                    { name = "cmdline_history" },
-                }),
-            })
-
-            -- TODO: gitcommit completions
-
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                }, {
-                    { name = "cmdline" },
-                }, {
-                    { name = "cmdline_history" },
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-        end,
-        dependencies = {
-            "onsails/lspkind.nvim",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-cmdline",
-            "dmitmel/cmp-cmdline-history",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
+            },
         },
+        config = true,
     },
     {
         "kylechui/nvim-surround",

@@ -12,13 +12,6 @@ return {
         version = "*",
         event = "BufReadPre",
         cmd = { "LspRestart", "LspLog" },
-        dependencies = { "hrsh7th/cmp-nvim-lsp" },
-        config = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            vim.lsp.config("*", {
-                capabilities = capabilities,
-            })
-        end,
     },
     {
         "stevearc/conform.nvim",
@@ -91,7 +84,6 @@ return {
             },
         },
     },
-    -- FIXME: The nvim-cmp source for require() module names doesn't seem to work
     {
         "folke/lazydev.nvim",
         version = "*",
@@ -114,7 +106,7 @@ return {
         "pmizio/typescript-tools.nvim",
         ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         opts = function()
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
 
             return {
                 capabilities = capabilities,

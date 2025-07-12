@@ -15,6 +15,7 @@ vim.o.number = true -- Show line numbers
 vim.o.relativenumber = false -- Don't use relative line numbers
 vim.o.cursorline = true -- Highlight current line cursor is on
 vim.o.signcolumn = "yes" -- Always show the sign column
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup", "fuzzy" } -- Better defaults for the built-in completion
 
 -- Window splits
 vim.o.splitright = true -- Split windows to the right...
