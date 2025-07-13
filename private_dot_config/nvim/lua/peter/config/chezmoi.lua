@@ -7,6 +7,9 @@ M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 -- TODO: Keymap to jump to target path file
 -- TODO: Use vim.filetype.add() to register filetypes
 
+---Runs `chezmoi {args}` and notifies the user with `success_message` if successful.
+---
+---If the command fails, the user is notified with the stderr output.
 ---@param args string[]
 ---@param success_message string
 local function chezmoi(args, success_message)
@@ -20,6 +23,7 @@ local function chezmoi(args, success_message)
     end)
 end
 
+-- Automatically run `chezmoi apply` on save for files in the source state
 vim.api.nvim_create_autocmd("BufWritePost", {
     group = vim.api.nvim_create_augroup("peter.chezmoi.apply", { clear = true }),
     pattern = M.source_dir .. "/*",
@@ -43,7 +47,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "Run chezmoi apply",
 })
 
--- This only works in WSL, and I primarily change the config in WSL anyway
+-- Run `chezmoi add lazy-lock.json` whenever a plugin is installed, updated, or removed
+-- On Windows, this will only work in WSL
 if not util.has("win32") then
     vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("peter.chezmoi.add_lazy_lock", { clear = true }),
