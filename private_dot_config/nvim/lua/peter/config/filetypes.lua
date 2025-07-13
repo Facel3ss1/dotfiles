@@ -32,6 +32,16 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = 'Set commentstring = "# %s"',
 })
 
+-- Let me use K in man pages
+vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("peter.set_keywordprg", { clear = true }),
+    pattern = "man",
+    callback = function()
+        vim.bo.keywordprg = ":Man"
+    end,
+    desc = 'Set keywordprg = ":Man"',
+})
+
 -- Enable cfilter plugin for quickfix list (See `:h cfilter-plugin`)
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
