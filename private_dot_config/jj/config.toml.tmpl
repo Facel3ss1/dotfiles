@@ -15,8 +15,15 @@ editor = "code -w"
 {{ end -}}
 {{- end }}
 
-diff.tool = "difft"
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
 diff-editor = ":builtin"
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+    "-c", "let g:jj_diffconflicts_marker_length=$marker_length",
+    "-c", "JJDiffConflicts!", "$output", "$base", "$left", "$right",
+]
 
 [aliases]
 before = ["new", "-B", "@", "-A", "@-", "--no-edit"]
