@@ -3,6 +3,7 @@ local icons = require("peter.util.icons")
 -- TODO: Breakpoint icons
 -- TODO: telescope-dap?
 -- TODO: one-small-step-for-vimkind
+-- TODO: nvim-dap-view?
 
 ---@module "lazy"
 ---@type LazySpec

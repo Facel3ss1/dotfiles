@@ -1,7 +1,5 @@
 local icons = require("peter.util.icons")
 
--- TODO: diffconflicts?
-
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -28,15 +26,11 @@ return {
                 },
             },
             mappings = {
-                goto_first = "[C",
                 goto_prev = "[c",
                 goto_next = "]c",
+                goto_first = "[C",
                 goto_last = "]C",
             },
         },
-    },
-    {
-        "rafikdraoui/jj-diffconflicts",
-        cmd = { "JJDiffConflicts" },
     },
 }

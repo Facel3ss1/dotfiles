@@ -1,9 +1,6 @@
 ---@module "lazy"
 ---@type LazySpec
 return {
-    -- TODO: vim-matchup
-    -- TODO: vim-splitjoin, or treesj
-    -- TODO: dial.nvim
     {
         "Saghen/blink.cmp",
         version = "*",
@@ -33,29 +30,5 @@ return {
             },
         },
         config = true,
-    },
-    {
-        "kylechui/nvim-surround",
-        version = "*",
-        event = "BufReadPre",
-        -- TODO: keys
-        -- TODO: Surround with braces on new line?
-        config = true,
-    },
-    {
-        "windwp/nvim-autopairs",
-        event = "InsertEnter",
-        -- TODO: Fix ``` in lua comments, disable `?
-        -- TODO: Fix turbofish in rust
-        config = true,
-    },
-    {
-        -- ALTERNATIVE: vim-wordmotion
-        -- ALTERNATIVE: vim-textobj-variable-segment
-        "bkad/CamelCaseMotion",
-        event = "VeryLazy",
-        init = function()
-            vim.g.camelcasemotion_key = [[\]]
-        end,
     },
 }

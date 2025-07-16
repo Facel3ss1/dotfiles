@@ -26,6 +26,8 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- TODO: blamer.nvim?
+
 -- Install and apply my plugin settings
 require("lazy").setup("peter.plugins", {
     -- TODO: version = "*" to always use latest semver version

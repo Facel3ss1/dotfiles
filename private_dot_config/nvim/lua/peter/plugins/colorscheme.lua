@@ -7,6 +7,7 @@ return {
         version = "*",
         lazy = false,
         priority = 1000,
+        ---@module "catppuccin"
         ---@type CatppuccinOptions
         opts = {
             background = {

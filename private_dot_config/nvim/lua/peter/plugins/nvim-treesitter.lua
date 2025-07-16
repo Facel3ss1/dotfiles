@@ -1,5 +1,7 @@
 local util = require("peter.util")
 
+-- TODO: nvim-ts-autotag
+
 ---@module "lazy"
 ---@type LazySpec
 return {
