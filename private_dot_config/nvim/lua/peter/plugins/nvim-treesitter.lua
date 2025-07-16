@@ -1,7 +1,5 @@
 local util = require("peter.util")
 
--- TODO: nvim-ts-autotag
-
 ---@module "lazy"
 ---@type LazySpec
 return {
@@ -71,5 +69,10 @@ return {
         event = "BufReadPre",
         config = true,
         dependencies = { "nvim-treesitter/nvim-treesitter" },
+    },
+    {
+        "windwp/nvim-ts-autotag",
+        event = "InsertEnter",
+        config = true,
     },
 }

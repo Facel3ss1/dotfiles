@@ -13,9 +13,12 @@ return {
 
             -- Autoclosing angle brackets
             nvim_autopairs.add_rule(
-                Rule("<", ">"):with_pair(conds.before_regex("%a+:?:?$", 3)):with_move(function(cond_opts)
-                    return cond_opts.char == ">"
-                end)
+                -- This rule is disabled for HTML, JSX etc. to avoid conflicts with nvim-ts-autotag
+                Rule("<", ">", { "-html", "-xml", "-markdown", "-javascriptreact", "-typescriptreact" })
+                    :with_pair(conds.before_regex("%a+:?:?$", 3))
+                    :with_move(function(cond_opts)
+                        return cond_opts.char == ">"
+                    end)
             )
         end,
     },
