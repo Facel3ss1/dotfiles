@@ -81,7 +81,7 @@ if util.has("win32") then
 end
 
 -- Misc
-vim.o.keywordprg = ":help" -- Check internal help instead of man pages when using K
+vim.o.keywordprg = ":vert help" -- Check internal help (in a vertical split) instead of man pages when using K
 vim.o.exrc = true -- Run .exrc, .nvimrc and .nvim.lua files in the current directory (See `:h trust`)
 
 -- Disable providers to remove clutter from checkhealth (See `:h provider`)
