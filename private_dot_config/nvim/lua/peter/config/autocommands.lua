@@ -9,28 +9,19 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Only enable the cursorline in the current window
-
-local function set_cursorline_callback(value)
-    return function()
-        vim.wo.cursorline = value
-    end
-end
-
 local cursorline_group = vim.api.nvim_create_augroup("peter.cursorline_toggle", { clear = true })
 vim.api.nvim_create_autocmd("WinEnter", {
     group = cursorline_group,
-    callback = set_cursorline_callback(true),
+    callback = function()
+        vim.wo.cursorline = true
+    end,
     desc = "Enable cursorline",
 })
 vim.api.nvim_create_autocmd("WinLeave", {
     group = cursorline_group,
-    callback = set_cursorline_callback(false),
-    desc = "Disable cursorline",
-})
-vim.api.nvim_create_autocmd("FileType", {
-    group = cursorline_group,
-    pattern = "TelescopePrompt",
-    callback = set_cursorline_callback(false),
+    callback = function()
+        vim.wo.cursorline = false
+    end,
     desc = "Disable cursorline",
 })
 

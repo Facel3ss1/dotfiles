@@ -13,7 +13,6 @@ return {
         },
         dependencies = {
             "neovim/nvim-lspconfig",
-            "nvim-telescope/telescope.nvim",
             -- TODO
             -- "mfussenegger/nvim-dap",
             -- "mfussenegger/nvim-dap-python",

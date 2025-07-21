@@ -23,7 +23,6 @@ return {
                     "diff",
                     "git",
                     "checkhealth",
-                    "TelescopePrompt",
                 },
                 buftypes = {
                     "terminal",

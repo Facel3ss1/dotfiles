@@ -22,6 +22,7 @@ return {
                 blink_cmp = true,
                 dap = true,
                 dap_ui = true,
+                fzf = true,
                 indent_blankline = {
                     enabled = true,
                 },
@@ -43,9 +44,6 @@ return {
                     },
                 },
                 nvim_surround = true,
-                telescope = {
-                    enabled = true,
-                },
                 treesitter = true,
                 treesitter_context = true,
                 which_key = true,
