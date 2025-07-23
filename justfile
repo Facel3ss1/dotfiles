@@ -1,4 +1,4 @@
-# Justfile for managing nvim config
+# justfile for managing nvim config
 
 set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 remove-dir := if os_family() == "windows" { "Remove-Item -Recurse -Force" } else { "rm -rf" }

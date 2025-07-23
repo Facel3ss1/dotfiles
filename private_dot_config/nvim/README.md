@@ -2,9 +2,9 @@
 
 Uses [lazy.nvim](https://github.com/folke/lazy.nvim) to manage plugins.
 
-## `Justfile`
+## `justfile`
 
-At the root of the repository, there is a `Justfile` containing tasks for
+At the root of the repository, there is a `justfile` containing tasks for
 managing the Neovim configuration. You can install
 [`just`](https://github.com/casey/just) to run these tasks. To see a list of
 the tasks, run `just` at the root of the repository.

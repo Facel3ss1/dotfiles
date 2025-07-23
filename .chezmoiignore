@@ -1,6 +1,6 @@
 README.md
 typos.toml
-Justfile
+[jJ]ustfile
 
 {{- if ne .chezmoi.os "windows" }}
 AppData/
