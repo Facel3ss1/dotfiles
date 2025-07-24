@@ -1,18 +1,18 @@
 local M = {}
 
----Returns true if `feature` is supported.
+---Returns true if `feature` is supported by Neovim.
 ---See `:h feature-list` and `:h has()`.
 ---@param feature string
 ---@return boolean
-function M.has(feature)
+function M.has_feature(feature)
     return vim.fn.has(feature) == 1
 end
 
----Returns true if an executable called `name` exists.
----See `:h executable()`.
+---Returns true if `name` is an executable file in Neovim's PATH.
+---See `:h executable()` and `:h vim.env`.
 ---@param name string
 ---@return boolean
-function M.executable(name)
+function M.is_executable(name)
     return vim.fn.executable(name) == 1
 end
 
@@ -21,8 +21,7 @@ end
 ---@param msg string
 ---@param opts table
 function M.info(msg, opts)
-    opts = opts or {}
-    vim.notify(msg, vim.log.levels.INFO, opts)
+    vim.notify(msg, vim.log.levels.INFO, opts or {})
 end
 
 ---Displays a notification using the `WARN` log level.
@@ -30,8 +29,7 @@ end
 ---@param msg string
 ---@param opts table
 function M.warn(msg, opts)
-    opts = opts or {}
-    vim.notify(msg, vim.log.levels.WARN, opts)
+    vim.notify(msg, vim.log.levels.WARN, opts or {})
 end
 
 ---Displays a notification using the `ERROR` log level.
@@ -39,18 +37,18 @@ end
 ---@param msg string
 ---@param opts table
 function M.error(msg, opts)
-    opts = opts or {}
-    vim.notify(msg, vim.log.levels.ERROR, opts)
+    vim.notify(msg, vim.log.levels.ERROR, opts or {})
 end
 
 ---Toggles the given vim boolean `option` locally, and displays a notification.
+---See `:h vim.opt_local`
 ---@param option string
-function M.toggle(option)
+function M.toggle_option(option)
     vim.opt_local[option] = not vim.opt_local[option]:get()
     if vim.opt_local[option]:get() then
-        M.info("Enabled " .. option, { title = "Option" })
+        M.info(string.format("Enabled '%s'", option), { title = "Option" })
     else
-        M.info("Disabled " .. option, { title = "Option" })
+        M.info(string.format("Disabled '%s'", option), { title = "Option" })
     end
 end
 

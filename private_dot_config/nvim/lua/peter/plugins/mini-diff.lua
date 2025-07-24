@@ -1,4 +1,4 @@
-local icons = require("peter.util.icons")
+local icons = require("peter.lib.icons")
 
 ---@module "lazy"
 ---@type LazySpec

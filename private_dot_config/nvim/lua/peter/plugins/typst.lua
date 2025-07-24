@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 ---@module "lazy"
 ---@type LazySpec
@@ -21,6 +21,6 @@ return {
             },
         },
         config = true,
-        cond = util.executable("tinymist"),
+        cond = lib.is_executable("tinymist"),
     },
 }

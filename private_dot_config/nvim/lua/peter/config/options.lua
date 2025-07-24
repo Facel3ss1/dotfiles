@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 -- Global UI
 vim.opt.shortmess:append("I") -- Don't show the intro on startup
@@ -70,8 +70,8 @@ vim.opt.fillchars = {
 }
 
 -- Use PowerShell on Windows (See `:h shell-powershell`)
-if util.has("win32") then
-    vim.o.shell = util.executable("pwsh") and "pwsh" or "powershell"
+if lib.has_feature("win32") then
+    vim.o.shell = lib.is_executable("pwsh") and "pwsh" or "powershell"
     vim.o.shellcmdflag =
         "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
     vim.o.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"

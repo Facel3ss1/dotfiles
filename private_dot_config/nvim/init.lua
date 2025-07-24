@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 -- Apply my config settings - this must be the very first thing we do
 require("peter.config")
@@ -33,7 +33,7 @@ require("lazy").setup("peter.plugins", {
     -- TODO: version = "*" to always use latest semver version
     defaults = { lazy = true },
     checker = {
-        enabled = not util.has("win32"),
+        enabled = not lib.has_feature("win32"),
         notify = false,
     },
     change_detection = { notify = false },

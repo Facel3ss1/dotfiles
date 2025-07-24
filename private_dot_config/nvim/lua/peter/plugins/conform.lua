@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 ---@module "lazy"
 ---@type LazySpec
@@ -31,9 +31,9 @@ return {
                     vim.g.enable_format_on_save = not vim.g.enable_format_on_save
 
                     if vim.g.enable_format_on_save then
-                        util.info("Enabled format on save", { title = "Formatting" })
+                        lib.info("Enabled format on save", { title = "Formatting" })
                     else
-                        util.info("Disabled format on save", { title = "Formatting" })
+                        lib.info("Disabled format on save", { title = "Formatting" })
                     end
                 end,
                 desc = "Toggle format on save",

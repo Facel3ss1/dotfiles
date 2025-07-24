@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 ---@module "lazy"
 ---@type LazySpec
@@ -60,7 +60,7 @@ return {
                 desc = "Attempt to call vim.treesitter.start()",
             })
         end,
-        cond = util.executable("tree-sitter"),
+        cond = lib.is_executable("tree-sitter"),
     },
     {
         "nvim-treesitter/nvim-treesitter-context",

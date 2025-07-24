@@ -1,4 +1,4 @@
-local icons = require("peter.util.icons")
+local icons = require("peter.lib.icons")
 
 -- TODO: Breakpoint icons
 -- TODO: one-small-step-for-vimkind

@@ -1,4 +1,4 @@
-local icons = require("peter.util.icons")
+local icons = require("peter.lib.icons")
 
 local icon_mapping = {
     [vim.diagnostic.severity.ERROR] = icons.diagnostics.ERROR,

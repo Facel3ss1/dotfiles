@@ -1,6 +1,6 @@
 local M = {}
 
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 
@@ -15,10 +15,10 @@ M.source_dir = vim.fs.normalize("~/.local/share/chezmoi")
 local function chezmoi(args, success_message)
     vim.system({ "chezmoi", unpack(args) }, { text = true }, function(out)
         if out.code == 0 then
-            util.info(success_message, { title = "chezmoi" })
+            lib.info(success_message, { title = "chezmoi" })
         else
             -- Trim trailing \n from stderr
-            util.warn(out.stderr:gsub("%s+$", ""), { title = "chezmoi" })
+            lib.warn(out.stderr:gsub("%s+$", ""), { title = "chezmoi" })
         end
     end)
 end
@@ -49,7 +49,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 -- Run `chezmoi add lazy-lock.json` whenever a plugin is installed, updated, or removed
 -- On Windows, this will only work in WSL
-if not util.has("win32") then
+if not lib.has_feature("win32") then
     vim.api.nvim_create_autocmd("User", {
         group = vim.api.nvim_create_augroup("peter.chezmoi.add_lazy_lock", { clear = true }),
         pattern = { "LazyInstall", "LazyUpdate", "LazyClean" },

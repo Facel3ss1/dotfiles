@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 -- Enable inlay hints by default
 vim.lsp.inlay_hint.enable()
@@ -86,7 +86,7 @@ vim.lsp.config("lua_ls", {
 vim.keymap.set("n", "<leader>ts", function()
     local clients = vim.lsp.get_clients { name = "typos_lsp" }
     if #clients ~= 1 then
-        util.error("typos-lsp is not active", { name = "typos" })
+        lib.error("typos-lsp is not active", { name = "typos" })
         return
     end
 
@@ -96,9 +96,9 @@ vim.keymap.set("n", "<leader>ts", function()
     diagnostics_enabled = not diagnostics_enabled
 
     if diagnostics_enabled then
-        util.info("Enabled spell checking", { title = "typos" })
+        lib.info("Enabled spell checking", { title = "typos" })
     else
-        util.info("Disabled spell checking", { title = "typos" })
+        lib.info("Disabled spell checking", { title = "typos" })
     end
 
     vim.diagnostic.enable(diagnostics_enabled, { ns_id = typos_ns })

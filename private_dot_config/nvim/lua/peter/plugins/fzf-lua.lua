@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 -- Find TODOs etc in a project by pre-populating a grep search with a regex
 local function grep_todos()
@@ -108,6 +108,6 @@ return {
             end
         end,
         dependencies = { "nvim-tree/nvim-web-devicons" },
-        cond = util.executable("fzf"),
+        cond = lib.is_executable("fzf"),
     },
 }

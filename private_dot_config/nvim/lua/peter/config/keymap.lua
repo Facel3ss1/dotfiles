@@ -1,4 +1,4 @@
-local util = require("peter.util")
+local lib = require("peter.lib")
 
 -- Space is the leader key, so remove the default behaviour
 vim.keymap.set("n", "<Space>", "<Nop>")
@@ -63,7 +63,7 @@ vim.keymap.set("n", "<leader>ht", "<Cmd>InspectTree<CR>", { desc = "Treesitter s
 
 -- Toggle soft (i.e. UI only) word wrapping
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>tw", function() util.toggle("wrap") end, { desc = "Toggle word wrap" })
+vim.keymap.set("n", "<leader>tw", function() lib.toggle_option("wrap") end, { desc = "Toggle word wrap" })
 -- stylua: ignore end
 
 -- Toggle diagnostics
@@ -74,9 +74,9 @@ vim.keymap.set("n", "<leader>td", function()
     vim.diagnostic.enable(diagnostics_enabled)
 
     if diagnostics_enabled then
-        util.info("Enabled diagnostics", { title = "Diagnostics" })
+        lib.info("Enabled diagnostics", { title = "Diagnostics" })
     else
-        util.info("Disabled diagnostics", { title = "Diagnostics" })
+        lib.info("Disabled diagnostics", { title = "Diagnostics" })
     end
 end, { desc = "Toggle diagnostics" })
 
@@ -88,9 +88,9 @@ vim.keymap.set("n", "<leader>th", function()
     vim.lsp.inlay_hint.enable(inlay_hints_enabled)
 
     if inlay_hints_enabled then
-        util.info("Enabled inlay hints", { title = "Inlay hints" })
+        lib.info("Enabled inlay hints", { title = "Inlay hints" })
     else
-        util.info("Disabled inlay hints", { title = "Inlay hints" })
+        lib.info("Disabled inlay hints", { title = "Inlay hints" })
     end
 end, { desc = "Toggle inlay hints" })
 

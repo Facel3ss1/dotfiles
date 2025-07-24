@@ -11,8 +11,8 @@ nvim
 └── lua                // Not automatically sourced, but require()'d by `init.lua`.
     └── peter          // All of my config is namespaced under `peter` to prevent potential name clashes.
         ├── config     // Configuration of built-in Neovim functionality.
-        ├── plugins    // Plugin configuration, loaded by lazy.nvim.
-        └── util       // Contains any utility functions/modules that are used throughout the config.
+        ├── lib        // Contains functions/modules that are used throughout the config.
+        └── plugins    // Plugin configuration, loaded by lazy.nvim.
 ```
 
 ## Installing Plugins and Updating Configuration
