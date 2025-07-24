@@ -1,7 +1,6 @@
-{{- $gitName := promptStringOnce (. | dig "git" dict) "name" "What is your Git name" "Peter Medus" -}}
-{{- $gitEmail := promptStringOnce (. | dig "git" dict) "email" "What is your Git email" "16763503+Facel3ss1@users.noreply.github.com" -}}
-{{- $gitEditor := promptChoiceOnce (. | dig "git" dict) "editor" "What is your Git editor" (list "nvim" "code" "none") -}}
-{{- $uniEnabled := and (lookPath "bw" | isExecutable) (promptBoolOnce (. | dig "uni" dict) "enabled" "Do you want to initialise configuration for university") -}}
+{{- $gitName := promptStringOnce (. | dig "git" dict) "name" "What is your git name" "Peter Medus" -}}
+{{- $gitEmail := promptStringOnce (. | dig "git" dict) "email" "What is your git email" "16763503+Facel3ss1@users.noreply.github.com" -}}
+{{- $gitEditor := promptChoiceOnce (. | dig "git" dict) "editor" "What is your git editor" (list "nvim" "code" "none") -}}
 
 [data.git]
 name = {{ $gitName | quote }}
@@ -13,19 +12,6 @@ editor = {{ $gitEditor | quote }}
 {{- $isWSL := and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 powershellExecutable = {{ $powershellExecutable | quote }}
 isWSL = {{ $isWSL | toToml }}
-
-[data.uni]
-enabled = {{ $uniEnabled | toToml }}
-
-{{ if $uniEnabled }}
-[data.uni.git]
-{{ $bwUniGitUuid := "2f29a8d3-199a-4dfb-9927-af3801388a31" -}}
-{{- $bwUniGitFields := (bitwardenFields "item" $bwUniGitUuid) -}}
-email = {{ $bwUniGitFields.Email.value | quote }}
-remote = {{ $bwUniGitFields.Remote.value | quote }}
-GitLabDevClientId = {{ $bwUniGitFields.GitLabDevClientId.value | quote }}
-GitLabDevClientSecret = {{ $bwUniGitFields.GitLabDevClientSecret.value | quote }}
-{{- end }}
 
 {{ if eq .chezmoi.os "windows" }}
 [cd]

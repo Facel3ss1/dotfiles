@@ -7,7 +7,3 @@ AppData/
 Documents/
 .vsvimrc
 {{- end }}
-
-{{- if not .uni.enabled }}
-.config/git/uni
-{{- end }}

@@ -66,15 +66,3 @@
 	helper = manager
 	{{- end -}}
 	{{- end }}
-{{ if .uni.enabled -}}
-# This requires Git 2.36+
-[includeIf "hasconfig:remote.*.url:{{ .uni.git.remote }}/**"]
-	# This file overrides the email for university repositories
-	path = uni
-[credential "{{ .uni.git.remote }}"]
-	# See https://github.com/GitCredentialManager/git-credential-manager/blob/main/docs/gitlab.md
-	GitLabDevClientId = {{ .uni.git.GitLabDevClientId }}
-	GitLabDevClientSecret = {{ .uni.git.GitLabDevClientSecret }}
-	gitLabAuthModes = browser
-	provider = gitlab
-{{- end }}
