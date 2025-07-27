@@ -13,6 +13,7 @@
 
 ---@class peter.Config :Config
 ---@field audible_bell peter.AudibleBell
+---@field mux_enable_ssh_agent boolean
 ---@field window_close_confirmation peter.WindowCloseConfirmation
 
 ---@alias peter.AudibleBell

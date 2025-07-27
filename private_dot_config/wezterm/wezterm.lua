@@ -143,6 +143,12 @@ if utils.platform() == "windows" then
         wezterm.run_child_process { "pwsh.exe", "--version" }
     end)
 
+    -- Use Windows' SSH Agent for `wezterm ssh`
+    -- See https://github.com/wezterm/wezterm/discussions/3772
+    config.ssh_backend = "Ssh2"
+    -- Don't modify SSH_AUTH_SOCK for the SSH agent on the local domain (i.e. PowerShell)
+    config.mux_enable_ssh_agent = false
+
     if pwsh_exists then
         config.default_prog = { "pwsh.exe" }
     else
