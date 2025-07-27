@@ -21,12 +21,12 @@ Below is a non-exhaustive list of software that these dotfiles have configs for.
 
 ## Installation
 
-First, you need to [install `chezmoi`](https://chezmoi.io/install/). You can use a package manager or the one-line install script. You should install Git if it isn't installed already. On Windows, you should also [enable Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development), which allows `chezmoi` to create symbolic links without needing to elevate to administrator.
+First, you need to [install `chezmoi`](https://chezmoi.io/install/). You can use a package manager or the one-line install script. You should install Git and [set up an SSH key along with `ssh-agent`](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) (consider using the [`AddKeysToAgent`](https://man.openbsd.org/ssh_config#AddKeysToAgent) option) if you haven't already. On Windows, you should also [enable Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development), which allows `chezmoi` to create symbolic links without needing to elevate to administrator.
 
-Next, we need to clone the dotfiles into chezmoi's source directory (`~/.local/share/chezmoi/`), generate chezmoi's config file (`~/.config/chezmoi/chezmoi.toml`), and then apply the dotfiles. To do this, run the commands below. When you run [`chezmoi init`](https://www.chezmoi.io/reference/commands/init/), it will ask for information that is used to populate the dotfiles (e.g. git name/email, code editor) - some of these options will indicate a default which you can press <kbd>Enter</kbd> to use.
+Next, we need to `git clone` the dotfiles into chezmoi's source directory (`~/.local/share/chezmoi/`), generate chezmoi's config file (`~/.config/chezmoi/chezmoi.toml`), and then apply the dotfiles. To do this, run the commands below. When you run [`chezmoi init`](https://www.chezmoi.io/reference/commands/init/), it will ask for information that is used to populate the dotfiles (e.g. git name/email, code editor) - some of these options will indicate a default which you can press <kbd>Enter</kbd> to use.
 
 ```bash
-chezmoi init github.com/Facel3ss1/dotfiles
+chezmoi init github.com/Facel3ss1/dotfiles --ssh # The --ssh option performs the git clone using an SSH URL instead of a HTTPS URL
 chezmoi apply
 ```
 

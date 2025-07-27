@@ -5,10 +5,14 @@
 [init]
 	defaultBranch = main
 [core]
-	{{ if eq .git.editor "nvim" -}}
+	{{- if eq .git.editor "nvim" }}
 	editor = nvim
-	{{- else if eq .git.editor "code" -}}
+	{{- else if eq .git.editor "code" }}
 	editor = code --wait
+	{{- end -}}
+	{{- if eq .chezmoi.os "windows" }}
+	# Use the system SSH instead of Git Bash's SSH so the ssh-agent works correctly
+	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 	{{- end }}
 [commit]
 	verbose = true
@@ -38,9 +42,9 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
 	algorithm = histogram
-	{{ if eq .git.editor "nvim" -}}
+	{{- if eq .git.editor "nvim" }}
 	tool = nvimdiff
-	{{- else if eq .git.editor "code" -}}
+	{{- else if eq .git.editor "code" }}
 	tool = code
 	{{- end }}
 	external = difft
@@ -49,20 +53,9 @@
 [alias]
 	st = status
 	l = log --graph --decorate --pretty=oneline --abbrev-commit
-{{ if eq .chezmoi.os "windows" -}}
+{{- if eq .chezmoi.os "windows" }}
 [http]
 	# Use Windows' SSL so Visual Studio doesn't complain about missing certificates
 	# See https://github.com/scalingexcellence/scrapybook/issues/36
 	sslBackend = schannel
-{{ end -}}
-[credential]
-	{{ with .windows -}}
-	{{- if .isWSL -}}
-	# Use Windows' credential manager from WSL
-	{{ $scoopPath := or (output .powershellExecutable "-Command" "$env:SCOOP" | trim) (print (output .powershellExecutable "-Command" "$env:USERPROFILE" | trim) "\\scoop") -}}
-	{{ $scoopPathWsl := output "wslpath" "-u" $scoopPath | trim -}}
-	helper = {{ $scoopPathWsl }}/apps/git/current/mingw64/bin/git-credential-manager.exe
-	{{- else -}}
-	helper = manager
-	{{- end -}}
-	{{- end }}
+{{- end }}

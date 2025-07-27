@@ -7,17 +7,12 @@ name = {{ $gitName | quote }}
 email = {{ $gitEmail | quote }}
 editor = {{ $gitEditor | quote }}
 
-[data.windows]
-{{ $powershellExecutable := or (lookPath "pwsh.exe") "powershell.exe" -}}
-{{- $isWSL := and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-powershellExecutable = {{ $powershellExecutable | quote }}
-isWSL = {{ $isWSL | toToml }}
-
-{{ if eq .chezmoi.os "windows" }}
+{{ if eq .chezmoi.os "windows" -}}
 [cd]
+{{ $powershellExecutable := ne (lookPath "pwsh.exe") "" | ternary "pwsh.exe" "powershell.exe" -}}
 command = {{ $powershellExecutable | quote }}
 args = ["-NoLogo"]
-{{- end }}
 
+{{ end -}}
 [diff]
 command = "difft"
