@@ -1,20 +1,7 @@
 # TODO: ctrl+y to autocomplete
 
-# Make sure everything is in the PATH before setting environment variables
-# This means the `if type -q` queries below will work properly
-fish_add_path -g ~/.local/bin
-fish_add_path -g ~/.cargo/bin
-# elan is a fork of rustup but for installations of the Lean theorem prover
-fish_add_path -g ~/.elan/bin
-# ghcup-env
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin $HOME/.ghcup/bin $PATH
-
-# pnpm
-set -gx PNPM_HOME $HOME/.local/share/pnpm
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
+# Consider adding directories to PATH using `fish_add_path` in a conf.d fish file
+# TODO: Move rest of config into conf.d?
 
 # Disable the fish greeting (https://fishshell.com/docs/current/faq.html#how-do-i-change-the-greeting-message)
 set -g fish_greeting
