@@ -9,6 +9,10 @@ gui:
     selectedLineBgColor:
       - reverse
 
+git:
+  paging:
+    externalDiffCommand: difft --color=always
+
 keybinding:
   files:
     commitChangesWithEditor: c
