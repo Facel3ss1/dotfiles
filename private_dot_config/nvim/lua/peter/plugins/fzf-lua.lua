@@ -55,7 +55,6 @@ return {
             local actions = require("fzf-lua.actions")
 
             return {
-                { "border-fused" },
                 fzf_colors = true, -- Set fzf's colors based on nvim colorscheme
                 winopts = {
                     backdrop = 100, -- Don't fade out background
