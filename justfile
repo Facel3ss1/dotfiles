@@ -4,7 +4,8 @@ set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
 remove-dir := if os_family() == "windows" { "Remove-Item -Recurse -Force" } else { "rm -rf" }
 nvim-target-dir := home_directory() / ".config" / "nvim"
 
-_default:
+[private]
+default:
     @just --list
 
 # The exact_ attribute in chezmoi isn't good enough for this because it doesn't recursively apply to subdirectories.
