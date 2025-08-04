@@ -39,7 +39,8 @@ private-commits = "blacklist()"
 "blacklist()" = "wip() | private()"
 
 [aliases]
-before = ["new", "-B", "@", "-A", "@-", "--no-edit"]
+# Find the closest ancestor with a bookmark, and move the bookmark to the parent of the working copy
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
 [template-aliases]
 "format_short_signature(signature)" = "signature.name()"
