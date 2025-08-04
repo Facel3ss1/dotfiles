@@ -2,7 +2,7 @@
 ---@type LazySpec
 return {
     {
-        "echasnovski/mini.notify",
+        "nvim-mini/mini.notify",
         version = "*",
         lazy = false,
         -- stylua: ignore

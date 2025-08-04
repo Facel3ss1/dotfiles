@@ -4,7 +4,7 @@ local icons = require("peter.lib.icons")
 ---@type LazySpec
 return {
     {
-        "echasnovski/mini.diff",
+        "nvim-mini/mini.diff",
         version = "*",
         event = "BufReadPre",
         keys = {
