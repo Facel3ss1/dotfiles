@@ -12,14 +12,15 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Set wrap = true",
 })
 
--- Add two coloured columns at 50 and 72 characters when writing commit messages
+-- Add two coloured columns at 50 and 72 characters and hard-wrap at 72 characters when writing commit messages
 vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("peter.set_colorcolumn", { clear = true }),
-    pattern = { "gitcommit", "jj" },
+    group = vim.api.nvim_create_augroup("peter.commit_message", { clear = true }),
+    pattern = { "gitcommit", "jjdescription" },
     callback = function()
         vim.opt_local.colorcolumn = "50,72"
+        vim.bo.textwidth = 72
     end,
-    desc = "Set colorcolumn = 50,72",
+    desc = "Set colorcolumn = 50,72 and textwidth = 72",
 })
 
 -- Add a comment string to git config files so I can comment things out
