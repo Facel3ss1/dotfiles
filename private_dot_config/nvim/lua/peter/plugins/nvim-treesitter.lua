@@ -12,6 +12,11 @@ return {
             local nvim_treesitter = require("nvim-treesitter")
 
             local ensure_installed = {
+                -- These are built-in to Neovim but we install the nvim-treesitter ones so that the indentexpr works for these filetypes
+                "lua",
+                "vimdoc",
+                "markdown",
+
                 "css",
                 "diff",
                 "dockerfile",
@@ -55,9 +60,12 @@ return {
                 group = vim.api.nvim_create_augroup("peter.start_treesitter", { clear = true }),
                 callback = function()
                     -- Will be false for filetypes with no treesitter parser installed
-                    local _has_started = pcall(vim.treesitter.start)
+                    local has_started = pcall(vim.treesitter.start)
+                    if has_started then
+                        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
                 end,
-                desc = "Attempt to call vim.treesitter.start()",
+                desc = "Attempt to call vim.treesitter.start() and set indentexpr",
             })
         end,
         cond = lib.is_executable("tree-sitter"),

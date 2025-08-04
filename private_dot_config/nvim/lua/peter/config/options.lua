@@ -50,9 +50,12 @@ vim.o.softtabstop = -1 -- Always indent shiftwidth characters when we press <Tab
 vim.o.expandtab = true -- Use spaces instead of tabs for indentation
 
 -- Smarter indentation
-vim.o.shiftround = true -- Round indent to multiple of shiftwidth to prevent an off-by-one number of spaces
+-- Note that if indentexpr is set (i.e. by nvim-treesitter), it will take priority over cindent and autoindent
+-- Likewise, cindent takes priority over autoindent, meaning autoindent will only take effect if cindent has been disabled and indentexpr isn't set
+-- See `:h indent.txt`
+vim.o.cindent = true -- Increase/Decrease indent when pressing enter after certain characters
 vim.o.autoindent = true -- Continue indentation from previous line
-vim.o.smartindent = true -- Smartly add indentation when starting new line
+vim.o.shiftround = true -- Round indent to multiple of shiftwidth to prevent an off-by-one number of spaces
 
 -- Searching
 vim.o.ignorecase = true -- Searching is case-insensitive by default. Use \C to make it case-sensitive
