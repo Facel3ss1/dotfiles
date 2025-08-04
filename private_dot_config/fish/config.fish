@@ -52,16 +52,20 @@ if status is-interactive
     if type -q atuin
         atuin init fish | source
     end
-end
 
-if type -q starship
-    starship init fish | source
-end
+    if type -q starship
+        starship init fish | source
+    end
 
-if type -q zoxide
-    zoxide init fish --hook prompt | source
-end
+    if type -q zoxide
+        zoxide init fish --hook prompt | source
+    end
 
-if type -q jj
-    jj util completion fish | source
+    if type -q jj
+        jj util completion fish | source
+    end
+
+    if type -q direnv
+        direnv hook fish | source
+    end
 end
