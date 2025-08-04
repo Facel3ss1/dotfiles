@@ -1,4 +1,5 @@
 # This is a good article about git config options: https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+# As is this one: https://blog.gitbutler.com/how-git-core-devs-configure-git/
 [user]
 	name = {{ .git.name }}
 	email = {{ .git.email }}
@@ -14,16 +15,30 @@
 	# Use the system SSH instead of Git Bash's SSH so the ssh-agent works correctly
 	sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 	{{- end }}
+[help]
+	autocorrect = prompt
 [commit]
 	verbose = true
 [branch]
 	sort = -committerdate
+[tag]
+	sort = version:refname
 [fetch]
 	prune = true
+	pruneTags = true
+	all = true
 [pull]
 	ff = only
+[push]
+	autoSetupRemote = true
+	followTags = true
+[rerere]
+	enabled = true
+	autoupdate = true
 [rebase]
 	autoSquash = true
+	autoStash = true
+	updateRefs = true
 [merge]
 	conflictStyle = zdiff3
 	{{ if eq .git.editor "nvim" -}}
@@ -42,12 +57,13 @@
 	cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [diff]
 	algorithm = histogram
+	mnemonicPrefix = true
 	{{- if eq .git.editor "nvim" }}
 	tool = nvimdiff
 	{{- else if eq .git.editor "code" }}
 	tool = code
 	{{- end }}
-	external = difft
+	external = difft --color=always
 [difftool "code"]
 	cmd = code --wait --diff $LOCAL $REMOTE
 [alias]
