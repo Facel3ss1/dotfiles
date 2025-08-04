@@ -21,9 +21,10 @@ if type -q nvim
     # set -gx MANWIDTH 999
 end
 
-# Make less support colors and scrolling with the mouse
-set -gx LESS '-R --mouse --wheel-lines=3'
-set -gx PAGER less
+# Make less support colors and scrolling with the mouse by default
+set -gx LESS '-RX --mouse --wheel-lines=3'
+# Ensure less quits if the output is shorter than one screen
+set -gx PAGER 'less -F'
 
 if status is-interactive
     # TODO: Move to abbreviations file
