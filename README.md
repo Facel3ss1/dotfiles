@@ -18,6 +18,7 @@ Below is a non-exhaustive list of software that these dotfiles have configs for.
 - [Difftastic](https://difftastic.wilfred.me.uk/)
 - [`eza`](https://eza.rocks)
 - [`zoxide`](https://github.com/ajeetdsouza/zoxide)
+- [`tealdeer`](https://github.com/tealdeer-rs/tealdeer)
 
 ## Installation
 
