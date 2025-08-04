@@ -49,6 +49,7 @@ return {
                 typescript = { "prettierd", "prettier", stop_after_first = true },
                 typescriptreact = { "prettierd", "prettier", stop_after_first = true },
                 python = { "ruff_format", "ruff_organize_imports" },
+                nix = { "nixfmt" },
             },
             format_on_save = function(_buf)
                 if not vim.g.enable_format_on_save then
