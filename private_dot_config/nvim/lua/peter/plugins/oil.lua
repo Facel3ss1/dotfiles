@@ -16,6 +16,14 @@ return {
             view_options = {
                 show_hidden = true,
             },
+            keymaps = {
+                -- These keymaps conflicted with smart-splits.nvim
+                ["<C-h>"] = false, -- Use <C-s> to horizontal split instead
+                ["<C-l>"] = false, -- Use `:e` to refresh instead
+
+                ["<C-s>"] = { "actions.select", opts = { horizontal = true } },
+                ["<C-v>"] = { "actions.select", opts = { vertical = true } },
+            },
         },
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
