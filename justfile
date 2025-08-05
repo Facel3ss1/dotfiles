@@ -1,6 +1,6 @@
 # justfile for managing nvim config
 
-set windows-shell := ["pwsh.exe", "-NoLogo", "-Command"]
+set windows-shell := ["pwsh.exe", "-NoLogo", "-NoProfile", "-Command"]
 remove-dir := if os_family() == "windows" { "Remove-Item -Recurse -Force" } else { "rm -rf" }
 nvim-target-dir := home_directory() / ".config" / "nvim"
 
