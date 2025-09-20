@@ -28,6 +28,15 @@ merge-tool-edits-conflict-markers = true
 
 [git]
 colocate = true
+private-commits = "blacklist()"
+
+[revset-aliases]
+"at" = "@"
+
+# Prevent Private and WIP commits from being pushed
+"wip()" = "description(glob:'wip:*')"
+"private()" = "description(glob:'private:*')"
+"blacklist()" = "wip() | private()"
 
 [aliases]
 before = ["new", "-B", "@", "-A", "@-", "--no-edit"]
@@ -35,6 +44,3 @@ before = ["new", "-B", "@", "-A", "@-", "--no-edit"]
 [template-aliases]
 "format_short_signature(signature)" = "signature.name()"
 "format_timestamp(timestamp)" = "timestamp.ago()"
-
-[revset-aliases]
-at = "@"
