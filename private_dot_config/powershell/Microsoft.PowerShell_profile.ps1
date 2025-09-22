@@ -1,4 +1,5 @@
 New-Alias which Get-Command
+New-Alias touch New-Item
 
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     # See https://wezfurlong.org/wezterm/shell-integration.html#osc-7-on-windows-with-powershell-with-starship
