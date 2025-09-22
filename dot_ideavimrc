@@ -18,9 +18,9 @@ set scrolloff=10
 set sidescrolloff=5
 set hlsearch
 set ignorecase
+set smartcase
 set incsearch
 set number
-" set relativenumber
 set visualbell
 
 """ Idea specific settings ------------------
@@ -34,8 +34,6 @@ map Y y$
 nnoremap <Esc> :nohl<CR>
 map gw *N
 map gJ J"_x
-map <A-k> <Action>(MoveStatementUp)
-map <A-j> <Action>(MoveStatementDown)
 map \w [w
 map \b [b
 map \e ]w
@@ -51,39 +49,33 @@ map - <Action>(ShowNavBar)
 map <leader>fd <Action>(GotoFile)
 map <leader>fc <Action>(GotoClass)
 map <leader>fg <Action>(FindInPath)
-map <leader>fs <Action>(ActivateStructureToolWindow)
-map <leader>fS <Action>(GotoSymbol)
-nnoremap <leader>ft :NERDTree<CR>
+map <leader>fs <Action>(GotoSymbol)
 
 map <leader>hb <Action>(SearchEverywhere)
 map <leader>hc <Action>(GotoAction)
 map <leader>hn <Action>(ActivateNotificationsToolWindow)
 
-map gr <Action>(FindUsages)
-map gI <Action>(GotoImplementation)
-map go <Action>(GotoTypeDeclaration)
+map grr <Action>(FindUsages)
+map grR <Action>(ReSharperNavigateTo)
+map gri <Action>(GotoImplementation)
+map grt <Action>(GotoTypeDeclaration)
+map grn <Action>(RenameElement)
+map grf <Action>(Refactorings.QuickListPopupAction)
+map gra <Action>(ShowIntentionActions)
+map grg <Action>(Generate)
+map gO <Action>(ActivateStructureToolWindow)
 map gx <Action>(ClickLink)
 
-" map <leader>d <Action>(Debug)
 map <leader>cd <Action>(ShowErrorDescription)
-map <leader>cr <Action>(RenameElement)
-map <leader>cR <Action>(Refactorings.QuickListPopupAction)
-map <leader>ca <Action>(ShowIntentionActions)
-map <leader>cg <Action>(Generate)
 map <leader>cf <Action>(SilentCodeCleanup)
-map <leader>cn <Action>(ReSharperNavigateTo)
 map <leader>ch <Action>(CIDR.Lang.SwitchHeaderSource)
-" map <leader>cF <Action>(com.github.ragurney.spotless.actions.ReformatAllFilesAction)
-" map <leader>c <Action>(Stop)
 map <leader>z <Action>(ToggleDistractionFreeMode)
 
 map <leader>b <Action>(BuildSolutionAction)
 
 map <leader>tt <Action>(RiderDotCoverTriggerContinuousTestingAction)
 map <leader>th <Action>(ToggleInlayHintsGloballyAction)
-"
-" map <leader>s <Action>(SelectInProjectView)
-" map <leader>a <Action>(Annotate)
+
 map <leader>gs <Action>(ActivateVersionControlToolWindow)
 map <leader>gc <Action>(ActivateCommitToolWindow)
 map <leader>gb <Action>(Git.Branches)
@@ -97,5 +89,3 @@ map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 map ]m <Action>(MethodDown)
 map [m <Action>(MethodUp)
-
-" map <leader>b <Action>(ToggleLineBreakpoint)
