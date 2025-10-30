@@ -1,5 +1,5 @@
 {{- $gitName := promptStringOnce (. | dig "git" dict) "name" "What is your git name" "Peter Medus" -}}
-{{- $gitEmail := promptStringOnce (. | dig "git" dict) "email" "What is your git email" "16763503+Facel3ss1@users.noreply.github.com" -}}
+{{- $gitEmail := promptStringOnce (. | dig "git" dict) "email" "What is your git email" "16763503+petermused@users.noreply.github.com" -}}
 {{- $gitEditor := promptChoiceOnce (. | dig "git" dict) "editor" "What is your git editor" (list "nvim" "code" "none") -}}
 
 [data.git]

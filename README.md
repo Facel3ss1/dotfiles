@@ -26,7 +26,7 @@ First, you need to [install `chezmoi`](https://chezmoi.io/install/). You can use
 Next, we need to `git clone` the dotfiles into chezmoi's source directory (`~/.local/share/chezmoi/`), generate chezmoi's config file (`~/.config/chezmoi/chezmoi.toml`), and then apply the dotfiles. To do this, run the commands below. When you run [`chezmoi init`](https://www.chezmoi.io/reference/commands/init/), it will ask for information that is used to populate the dotfiles (e.g. git name/email, code editor) - some of these options will indicate a default which you can press <kbd>Enter</kbd> to use.
 
 ```bash
-chezmoi init github.com/Facel3ss1/dotfiles --ssh # The --ssh option performs the git clone using an SSH URL instead of a HTTPS URL
+chezmoi init github.com/petermused/dotfiles --ssh # The --ssh option performs the git clone using an SSH URL instead of a HTTPS URL
 chezmoi apply
 ```
 
